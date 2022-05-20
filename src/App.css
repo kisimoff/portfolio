@@ -1,0 +1,368 @@
+/* font-family: 'Montserrat', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+font-family: 'Ubuntu Mono', monospace; */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+:focus,
+:hover,
+:active {
+  outline: none;
+}
+body {
+  margin: 0;
+  overflow: hidden;
+}
+#app {
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Ubuntu Mono", monospace;
+}
+#terminal {
+  width: 90vw;
+  max-width: 1000px;
+  height: 65vh;
+  transition: 0.2s;
+}
+#window {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  cursor: default;
+}
+.btn {
+  margin-right: 10px;
+  border: none;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+  box-shadow: 0 2px 2px #33333375;
+}
+.red {
+  background-color: #ff4136;
+}
+.error {
+  color: #ff4136;
+}
+.yellow {
+  background-color: #ffdc00;
+}
+.info {
+  color: #ffdc00;
+}
+.green {
+  background-color: #2ecc40;
+}
+#title,
+#field {
+  font-size: 0.85rem;
+}
+#title {
+  margin-left: auto;
+}
+#field {
+  height: calc(100% - 40px);
+  padding: 5px;
+  overflow: auto;
+  /* 	I'd like to get white-space: break-spaces to work
+		but it won't for some reason. In the meantime,
+		overflow-wrap: break-word will have to do. */
+  overflow-wrap: break-word;
+}
+#field::-webkit-scrollbar {
+  width: 10px;
+}
+#field.dark::-webkit-scrollbar-thumb {
+  background-color: #333444;
+}
+#field.light::-webkit-scrollbar-thumb {
+  background-color: #aca9bb;
+}
+#field > div {
+  min-height: 20px;
+  width: 100%;
+  cursor: default;
+}
+#input-container {
+  display: flex;
+}
+#query,
+#cursor {
+  display: inline-block;
+}
+#query {
+  margin-right: 10px;
+  white-space: pre-line;
+}
+#cursor {
+  position: relative;
+  bottom: -2px;
+  left: 2px;
+  width: 0.5rem;
+  height: 3px;
+}
+
+@keyframes blink-dark {
+  0%,
+  100% {
+    background-color: #f4f4f4;
+  }
+  50% {
+    background-color: transparent;
+  }
+}
+@keyframes blink-light {
+  0%,
+  100% {
+    background-color: #ae3100;
+  }
+  50% {
+    background-color: transparent;
+  }
+}
+@media only screen and (max-width: 600px), (max-height: 400px) {
+  #terminal {
+    margin-top: -50px;
+    height: 32vh;
+    max-height: 300px;
+    width: 95vw;
+    min-width: 95vw;
+  }
+  #field {
+    height: 32vh;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0px;
+    margin: 0;
+    margin-top: 3vh;
+  }
+
+  .nav-heading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nav-socials {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .navbar p {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.wrg-toggle {
+  touch-action: pan-x;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.wrg-toggle-input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.wrg-toggle-check,
+.wrg-toggle-uncheck {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.wrg-toggle-check {
+  left: 8px;
+}
+.wrg-toggle-uncheck {
+  opacity: 1;
+  right: 10px;
+}
+
+.wrg-toggle-uncheck span,
+.wrg-toggle-check span {
+  align-items: center;
+  display: flex;
+  height: 10px;
+  justify-content: center;
+  position: relative;
+  width: 10px;
+}
+
+.wrg-toggle-container {
+  width: 50px;
+  height: 24px;
+  border-radius: 30px;
+  background-color: #575757;
+  transition: all 0.2s ease;
+}
+
+.wrg-toggle-circle {
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #4d4d4d;
+  border-radius: 50%;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+.virtualKey {
+  color: #000000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.wrg-toggle--checked .wrg-toggle-check {
+  opacity: 1;
+}
+.wrg-toggle--checked .wrg-toggle-uncheck {
+  opacity: 0;
+}
+.wrg-toggle--checked .wrg-toggle-circle {
+  left: 27px;
+  background-color: #000000;
+}
+.wrg-toggle--checked .wrg-toggle-container {
+  left: 27px;
+  border-width: 0.01%;
+  background-color: #cfceff;
+}
+
+.wrg-toggle--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.25s;
+  transition: opacity 0.25s;
+}
+
+/* wrg.toggle to control the spacing on the toggle btn*/
+
+.nav-heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 42px;
+}
+
+#github {
+  width: 36px;
+  height: 36px;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 10px;
+  transition: all 0.2s linear;
+}
+#github:hover {
+  transform: scale(1.15);
+}
+
+#linkedin {
+  width: 29px;
+  height: 29px;
+  margin-left: 8px;
+  margin-right: 0px;
+  margin-top: 13px;
+  transition: all 0.2s linear;
+}
+#linkedin:hover {
+  transform: scale(1.15);
+}
+
+#download {
+  width: 28px;
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+#linkedin:hover {
+  transform: scale(1.15);
+}
+
+.active {
+  background-color: #04aa6d;
+}
+
+#right {
+  float: right;
+}
+
+.navbar {
+  display: flex;
+  height: 25%;
+  width: 90vw;
+  max-width: 1000px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-socials {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-download-button {
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  transition: all 0.35s;
+  margin-top: 10px;
+  margin-right: 7px;
+  transition: all 0.2s linear;
+}
+
+.nav-download-button:active {
+  transition-duration: 0.3s;
+  color: rgb(0, 0, 0);
+  transform: scale(0.95);
+}
+
+.nav-download-button:hover {
+  transform: scale(1.08);
+}

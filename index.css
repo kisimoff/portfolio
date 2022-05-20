@@ -1,0 +1,4 @@
+@font-face {
+  font-family: "monmed";
+  src: local("monmed"), url(./fonts/Montserrat-Medium.ttf) format("woff");
+}

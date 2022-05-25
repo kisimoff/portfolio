@@ -142,7 +142,7 @@ class Field extends React.Component {
         isMobile: true,
         fieldHistory: [
           {
-            text: "Hello, world! Im Valentin, Software Developer. This is my portfolio.",
+            text: "Hello, world! I'm Valentin, Software Developer. This is my portfolio.",
             hasBuffer: true,
           },
           {
@@ -525,12 +525,12 @@ class Field extends React.Component {
             text: [
               "Hello there!",
 
-              "I'm Valentin, a software developer based in Edinbrugh, Soctland. I've just finished my 3rd year at Napier University, Computing Major. Im currently looking for a internship or a job oppurtunity, where i can learn and  improve my skills as a developer.",
+              "I'm Valentin, a software developer based in Edinburgh, Scotland. I've just finished my 3rd year at Napier University as, Computing Major. I'm currently looking for an internship or a job opportunity, where I can learn and improve my skills as a developer.",
 
               "",
-              "Tech is my passion and hobby since my earliest memories, from modding games to building and preinstalling PCs, i have been around technology as far as i can remember.",
+              "Tech is my passion and hobby since my earliest memories, from modding games to building and preinstalling PCs, I have been around technology as far as I can remember.",
               "",
-              "If you take a look at my projects (execute: PROJECTS) you can easily spot one thing - i have been involved in a wide variety of programming languages and technologies. From  UI and design to Assembly language and Neural Networks. Im not limiting my exposure and im willing to explore, innovate and learn.",
+              "If you take a look at my projects (execute: PROJECTS) you can easily spot one thing - I have been involved in a wide variety of programming languages and technologies. From UI and design to Assembly language and Neural Networks. I'm not limiting my exposure and I'm willing to explore, innovate and learn.",
               "",
               "Execute CONTACT if you'd like to get in touch! ",
             ],

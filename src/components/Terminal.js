@@ -44,7 +44,7 @@ class Field extends React.Component {
 
       fieldHistory: [
         {
-          text: "Hello, world! Im Valentin, Software Developer. This is my portfolio.",
+          text: "Hello, world! I'm Valentin, Software Developer. This is my portfolio.",
         },
         {
           text: "Type HELP to see the full list of commands.",

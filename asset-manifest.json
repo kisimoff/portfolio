@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.2000e0d8.css",
-    "main.js": "/static/js/main.61d3f6ad.js",
+    "main.js": "/static/js/main.cf115152.js",
     "static/media/valentin-kisimov-resume.pdf": "/static/media/valentin-kisimov-resume.7d5e139fece87977b941.pdf",
     "static/media/dark.jpg": "/static/media/dark.2e3fbe7f1f50d79f112f.jpg",
     "static/media/light.jpg": "/static/media/light.85486029f9c64a3b183d.jpg",
     "index.html": "/index.html",
     "main.2000e0d8.css.map": "/static/css/main.2000e0d8.css.map",
-    "main.61d3f6ad.js.map": "/static/js/main.61d3f6ad.js.map"
+    "main.cf115152.js.map": "/static/js/main.cf115152.js.map"
   },
   "entrypoints": [
     "static/css/main.2000e0d8.css",
-    "static/js/main.61d3f6ad.js"
+    "static/js/main.cf115152.js"
   ]
 }

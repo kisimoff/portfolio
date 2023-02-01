@@ -7,6 +7,22 @@ font-family: 'Ubuntu Mono', monospace; */
 *::after {
   box-sizing: border-box;
 }
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
 :focus,
 :hover,
 :active {
@@ -15,27 +31,158 @@ font-family: 'Ubuntu Mono', monospace; */
 body {
   margin: 0;
   overflow: hidden;
+  background: rgb(239, 63, 123);
+  background: linear-gradient(
+    0deg,
+    rgba(239, 63, 123, 1) -33%,
+    rgba(83, 44, 140, 1) 18%,
+    rgba(21, 13, 50, 1) 63%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
-#app {
-  height: 100vh;
+.app {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: column-reverse;
   font-family: "Ubuntu Mono", monospace;
 }
+.navbar {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding-left: 7vw;
+  padding-right: 7vw;
+  max-height: 10vh;
+  background-color: #00000052;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-heading {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 42px;
+}
+
+.nav-socials {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-download-button {
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  transition: all 0.35s;
+  margin-top: 10px;
+  margin-right: 7px;
+  transition: all 0.2s linear;
+}
+
+.nav-download-button:active {
+  transition-duration: 0.3s;
+  color: rgb(0, 0, 0);
+  transform: scale(0.95);
+}
+
+.nav-download-button:hover {
+  transform: scale(1.08);
+}
+
+.windowArea {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icons {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  /* background-color: #a309097e; */
+  gap: 1rem;
+}
+
+.icon {
+  width: 3rem;
+  height: auto;
+  justify-self: center;
+}
+
+.iconWrapper:hover {
+  transform: scale(1.08);
+  transition: all 0.2s linear;
+}
+.iconWrapper {
+  color: white;
+}
+
+.caption {
+  display: block;
+
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  padding-top: 4px;
+}
+
+.logorotate {
+  /* animation: App-logo-spin infinite 6s linear reverse; */
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191,
+    1px 4px 1px #919191, 1px 5px 1px #919191, 1px 6px 1px #919191,
+    1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191,
+    1px 10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4),
+    1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
+    1px 30px 60px rgba(16, 16, 16, 0.4);
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotatey(0deg);
+  }
+  to {
+    transform: rotatey(360deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: logorotate(0deg);
+  }
+  to {
+    transform: logorotate(359deg);
+  }
+}
+
+.about {
+  max-width: 40vw;
+}
+
+.aboutText {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 #terminal {
-  width: 90vw;
+  /* width: 90vw;
   max-width: 1000px;
-  height: 65vh;
-  transition: 0.2s;
+  height: 65vh; */
+  height: 70vh;
+  min-width: 65vw;
 }
 #window {
   height: 40px;
   display: flex;
   align-items: center;
   padding: 0 15px;
-  cursor: default;
+  cursor: move;
 }
 .btn {
   margin-right: 10px;
@@ -62,10 +209,10 @@ body {
 }
 #title,
 #field {
-  font-size: 0.85rem;
+  font-size: 1.23rem;
 }
 #title {
-  margin-left: auto;
+  margin-right: auto;
 }
 #field {
   height: calc(100% - 40px);
@@ -107,60 +254,6 @@ body {
   left: 2px;
   width: 0.5rem;
   height: 3px;
-}
-
-@keyframes blink-dark {
-  0%,
-  100% {
-    background-color: #f4f4f4;
-  }
-  50% {
-    background-color: transparent;
-  }
-}
-@keyframes blink-light {
-  0%,
-  100% {
-    background-color: #ae3100;
-  }
-  50% {
-    background-color: transparent;
-  }
-}
-@media only screen and (max-width: 600px), (max-height: 400px) {
-  #terminal {
-    margin-top: -50px;
-    height: 32vh;
-    max-height: 300px;
-    width: 95vw;
-    min-width: 95vw;
-  }
-  #field {
-    height: 32vh;
-  }
-
-  .navbar {
-    flex-wrap: wrap;
-    align-content: flex-start;
-    padding: 0px;
-    margin: 0;
-    margin-top: 3vh;
-  }
-
-  .nav-heading {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .nav-socials {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .navbar p {
-    padding: 0px;
-    margin: 0px;
-  }
 }
 
 .wrg-toggle {
@@ -281,12 +374,6 @@ body {
 
 /* wrg.toggle to control the spacing on the toggle btn*/
 
-.nav-heading {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 42px;
-}
-
 #github {
   width: 36px;
   height: 36px;
@@ -330,39 +417,135 @@ body {
   float: right;
 }
 
-.navbar {
+:root {
+  --lowlight: #111;
+  --side: #c80000;
+  --side-dark: #ffffff;
+  --coin-size: 7rem;
+  --coin-face: url("./img/logoRotate.png");
+}
+.coinWrapper {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: 1rem;
+  right: 1rem;
+}
+
+.coin {
   display: flex;
-  height: 25%;
-  width: 90vw;
-  max-width: 1000px;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.nav-socials {
-  display: flex;
-  flex-direction: row;
+.coin::before {
+  content: "";
+  display: block;
+  position: relative;
+  height: var(--coin-size);
+  width: var(--coin-size);
+  border-radius: 50%;
+  background-color: var(--face);
+  animation: spin 2.3s linear infinite;
+  background-image: var(--coin-face);
+  background-size: 100% 100%;
+  background-position: center;
+  background-blend-mode: overlay;
 }
 
-.nav-download-button {
-  font-family: "Montserrat", sans-serif;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
-  color: rgb(255, 255, 255);
-  transition: all 0.35s;
-  margin-top: 10px;
-  margin-right: 7px;
-  transition: all 0.2s linear;
+@keyframes spin {
+  0% {
+    width: var(--coin-size);
+    box-shadow: 0 0 0 var(--side-dark);
+    animation-timing-function: ease-in;
+  }
+
+  49.999% {
+    width: 0.1rem;
+    box-shadow: 0.05rem 0 0 var(--side), 0.1rem 0 0 var(--side),
+      0.15rem 0 0 var(--side), 0.2rem 0 0 var(--side), 0.25rem 0 0 var(--side),
+      0.3rem 0 0 var(--side), 0.35rem 0 0 var(--side), 0.4rem 0 0 var(--side),
+      0.45rem 0 0 var(--side), 0.5rem 0 0 var(--side), 0.55rem 0 0 var(--side),
+      0.6rem 0 0 var(--side), 0.65rem 0 0 var(--side), 0.7rem 0 0 var(--side),
+      0.75rem 0 0 var(--side);
+    transform: translateX(-0.375rem);
+    background-color: var(--lowlight);
+    animation-timing-function: linear;
+  }
+
+  50.001% {
+    width: 0.1rem;
+    box-shadow: -0.05rem 0 0 var(--side), -0.1rem 0 0 var(--side),
+      -0.15rem 0 0 var(--side), -0.2rem 0 0 var(--side),
+      -0.25rem 0 0 var(--side), -0.3rem 0 0 var(--side),
+      -0.35rem 0 0 var(--side), -0.4rem 0 0 var(--side),
+      -0.45rem 0 0 var(--side), -0.5rem 0 0 var(--side),
+      -0.55rem 0 0 var(--side), -0.6rem 0 0 var(--side),
+      -0.65rem 0 0 var(--side), -0.7rem 0 0 var(--side),
+      -0.75rem 0 0 var(--side);
+    transform: translateX(0.375rem);
+    background-color: var(--lowlight);
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    width: var(--coin-size);
+    box-shadow: 0 0 0 var(--side-dark);
+  }
 }
 
-.nav-download-button:active {
-  transition-duration: 0.3s;
-  color: rgb(0, 0, 0);
-  transform: scale(0.95);
+@keyframes blink-dark {
+  0%,
+  100% {
+    background-color: #f4f4f4;
+  }
+  50% {
+    background-color: transparent;
+  }
+}
+@keyframes blink-light {
+  0%,
+  100% {
+    background-color: #ae3100;
+  }
+  50% {
+    background-color: transparent;
+  }
 }
 
-.nav-download-button:hover {
-  transform: scale(1.08);
+@media only screen and (max-width: 600px), (max-height: 400px) {
+  #terminal {
+    margin-top: -50px;
+    height: 32vh;
+    max-height: 300px;
+    width: 95vw;
+    min-width: 95vw;
+  }
+  #field {
+    height: 32vh;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 0px;
+    margin: 0;
+    margin-top: 3vh;
+  }
+
+  .nav-heading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .nav-socials {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .navbar p {
+    padding: 0px;
+    margin: 0px;
+  }
 }

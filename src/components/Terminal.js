@@ -2,36 +2,43 @@ import React from "react";
 import math from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
+import Draggable from "react-draggable";
 
 const Terminal = ({ theme, setTheme }) => {
   const [maximized, setMaximized] = React.useState(false);
   const [title, setTitle] = React.useState("Terminal");
-  const handleClose = () =>
-    (window.location.href = "https://github.com/vtwenty3");
+
   const handleMinMax = () => {
     setMaximized(!maximized);
     document.querySelector("#field").focus();
   };
 
   return (
-    <div
-      id="terminal"
-      style={
-        maximized
-          ? { height: "100vh", width: "100vw", maxWidth: "100vw" }
-          : theme.terminal
-      }
-    >
-      <div id="window" style={theme.window}>
-        <button className="btn red" onClick={handleClose} />
-        <button id="useless-btn" className="btn yellow" />
-        <button className="btn green" onClick={handleMinMax} />
-        <span id="title" style={{ color: theme.window.color }}>
-          {title}
-        </span>
+    <Draggable>
+      <div
+        id="terminal"
+        style={
+          maximized
+            ? { height: "100vh", width: "100vw", maxWidth: "100vw" }
+            : theme.terminal
+        }
+      >
+        <div id="window" style={theme.window}>
+          <span id="title" style={{ color: theme.window.color }}>
+            {title}
+          </span>
+          <button id="useless-btn" className="btn yellow" />
+          <button
+            className="btn red"
+            text="X"
+            onClick={() => {
+              document.getElementById("terminal").style.display = "none";
+            }}
+          />
+        </div>
+        <Field theme={theme} setTheme={setTheme} setTitle={setTitle} />
       </div>
-      <Field theme={theme} setTheme={setTheme} setTitle={setTitle} />
-    </div>
+    </Draggable>
   );
 };
 class Field extends React.Component {
@@ -177,7 +184,7 @@ class Field extends React.Component {
             ...state.fieldHistory,
             { isCommand: true },
             {
-              text: "That button doesn't do anything.",
+              text: "That button doesn't do much.",
               hasBuffer: true,
             },
           ],

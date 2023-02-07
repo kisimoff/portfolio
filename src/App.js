@@ -1,20 +1,38 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Document } from "react-pdf";
+import { GiTechnoHeart } from "react-icons/gi";
 
 import "./App.css";
 import ToggleButton from "./components/ToggleButton";
-import Terminal from "./components/Terminal";
-import About from "./components/About";
+import Terminal from "./components/windows/Terminal";
+import { BsPersonCircle } from "react-icons/bs";
+import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+import { BsJournalCode } from "react-icons/bs";
+import { BsVinyl } from "react-icons/bs";
+import { VscFilePdf } from "react-icons/vsc";
+import { BsTerminal } from "react-icons/bs";
+import About from "./components/windows/About";
+import DeviceInfo from "./components/windows/DeviceInfo";
+import Projects from "./components/windows/Projects";
+import Player from "./components/windows/Player";
+import logo_white from "./img/logo_white.png";
+import logo_black from "./img/logo_black.png";
+import circuit from "./background/circuit.mp4";
+import abstract from "./background/abstract.mp4";
+import board from "./background/board.mp4";
+import board2 from "./background/board2.mp4";
+import electronic from "./background/electronic.mp4";
+import electronic2 from "./background/electronic2.mp4";
+import electronic3 from "./background/electronic3.mp4";
+import IconTask from "./components/IconTask";
+import network from "./background/network.mp4";
 
-import TrIcon from "./components/TrIcon";
-import AbIcon from "./components/AbIcon";
-
+import Icon from "./components/Icon";
 import PlayListProvider2 from "./components/Player";
 import Player23 from "./components/Player2";
 import github_light from "./socials/github-light.png";
 import logoRotate from "./img/logoRotate.png";
 import Draggable from "react-draggable";
-
 import github_dark from "./socials/github-dark.png";
 import linkedin_light from "./socials/linkedin-light.png";
 import linkedin_dark from "./socials/linkedin-dark.png";
@@ -25,10 +43,21 @@ import background_light from "./background/light.jpg";
 import resumePdf from "./files/valentin-kisimov-resume.pdf";
 const App = () => {
   const [theme, setTheme] = useState(true);
+
   const [active, setActive] = useState(true);
   const onPress = () => {
     console.log("Hi");
     setTheme(!theme);
+  };
+
+  const videoEl = useRef(null);
+
+  const attemptPlay = () => {
+    videoEl &&
+      videoEl.current &&
+      videoEl.current.play().catch((error) => {
+        console.error("Error attempting to play", error);
+      });
   };
 
   const themeVars =
@@ -44,14 +73,28 @@ const App = () => {
             transition: "all 1s ease",
           },
           window: {
-            backgroundColor: "#141732",
-            color: "#F4F4F4",
+            // backgroundColor: "#2424248e",
+            // backgroundColor: "#360133b5",
+            // backgroundColor: "#52004e75",
+
+            // backgroundColor: "#65032dc3",
+
+            // backgroundColor: "#4a0147a7",
+            // backgroundColor: "#77014ea0",
+            // backgroundColor: "#77014ea0",
+            backgroundColor: "#cfcfcf46",
+
+            backdropFilter: "blur(23px)",
+            color: "white",
+            //color: "black",
             transition: "all 1s ease",
           },
           field: {
-            backgroundColor: "#222333",
+            // backgroundColor: "#1f1b26fa",
+            // backdropFilter: "blur(3px)",
             color: "#F4F4F4",
             fontWeight: "normal",
+            backgroundColor: "#0f0e0ff3",
             // transition: "all 1s ease",
             boxShadow: "0 2px 5px #111",
           },
@@ -84,6 +127,18 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
+      <video
+        className="video-background"
+        playsinline
+        loop
+        muted
+        autoPlay
+        src={electronic3}
+        ref={videoEl}
+        type="video/mp4"
+      />
+      {/* abstract board network circuit */}
+
       <div className="navbar">
         <div
           className="nav-heading"
@@ -94,6 +149,8 @@ const App = () => {
               : { color: "black", transition: "all 1.5s ease" }
           }
         >
+          <img id="logo" alt="logo" src={theme ? logo_white : logo_black} />
+
           <p>
             Kisim
             <ToggleButton onChange={onPress} />
@@ -101,7 +158,33 @@ const App = () => {
             &nbsp;OS
           </p>
         </div>
-
+        <div className="nav-icon-task">
+          <IconTask
+            icon={BsTerminal}
+            caption="Terminal"
+            elementId="terminal"
+            selfId="task-terminal-icon"
+          />
+          <IconTask
+            icon={BsPersonCircle}
+            caption="About"
+            elementId="about"
+            selfId="task-about-icon"
+          />
+          <IconTask
+            icon={TbDeviceDesktopAnalytics}
+            caption="Device"
+            line2="Info"
+            elementId="deviceInfo"
+            selfId="task-deviceInfo-icon"
+          />
+          <IconTask
+            icon={BsJournalCode}
+            caption="Projects"
+            elementId="projects"
+            selfId="task-projects-icon"
+          />
+        </div>
         <div className="nav-socials">
           <a
             className="nav-download-button"
@@ -138,23 +221,34 @@ const App = () => {
           </a>
         </div>
       </div>
-      <div className="coinWrapper">
+
+      {/* <div className="coinWrapper">
         <div className="coin copper"></div>
-      </div>
+      </div> */}
       <div className="icons">
-        <TrIcon />
-        <AbIcon />
+        <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" />
+        <Icon icon={BsPersonCircle} caption="About" elementId="about" />
+        <Icon
+          icon={TbDeviceDesktopAnalytics}
+          caption="Device"
+          line2="Info"
+          elementId="deviceInfo"
+        />
+        <Icon icon={BsJournalCode} caption="Projects" elementId="projects" />
+        {/* <Icon
+          icon={BsVinyl}
+          caption="Music"
+          line2="Player"
+          elementId="player"
+        /> */}
+        {/* <Icon icon={VscFilePdf} caption="Pdf" line2="Viewer" elementId="pdf" /> */}
       </div>
-      <div className="windowArea">
-        <div>
-          <Terminal theme={themeVars} setTheme={setTheme} />
-          <About theme={themeVars} setTheme={setTheme}></About>
-        </div>
-      </div>
-      <div>
-        {/* <PlayListProvider2 /> */}
-        {/* <Player23 /> */}
-      </div>
+
+      <Terminal theme={themeVars} setTheme={setTheme} />
+      <About theme={themeVars} setTheme={setTheme}></About>
+      <Projects theme={themeVars} setTheme={setTheme}></Projects>
+      <DeviceInfo theme={themeVars} setTheme={setTheme}></DeviceInfo>
+      {/* <Player theme={themeVars} setTheme={setTheme}></Player> */}
     </div>
   );
 };

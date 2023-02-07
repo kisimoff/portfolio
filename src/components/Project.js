@@ -17,10 +17,8 @@ function Project(props) {
   }, []);
   return (
     <div class="container">
-      {/* <img className="image" src={props.image} /> */}
-      {/* <div className="video-heading-overlay"> */}
       <video
-        className="image"
+        className="project-animation"
         playsinline
         loop
         muted
@@ -29,18 +27,12 @@ function Project(props) {
         ref={videoEl}
         type="video/mp4"
       />
-      {/* <h1>{props.title}</h1> */}
-      {/* </div> */}
-      <div class="overflow">
-        <div class="overlay2">
-          <span> {props.title}</span>
-        </div>
+      <div class="project-title-overlay">
+        <span> {props.title}</span>
       </div>
-
-      <div class="overlay">
+      <div class="project-description-overlay">
         <div class="text">
           <p>{props.description}</p>
-
           <div className="text-bottom-row">
             <p>
               <b> Technologies used:</b> <br></br>

@@ -32,6 +32,32 @@ a:active {
   outline: none;
 }
 
+:root {
+  /* 
+font-size: var(fs-text)
+clamp(min, target, max)
+*/
+
+  /* Test project-height on mobile! */
+  --projects-height: clamp(12rem, 60vmin, 65vh);
+
+  --project-width: clamp(30vw, 50vmin, 40vw);
+  --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem);
+
+  --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
+  --f-text-color: white;
+
+  --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
+  --fs-window-title: clamp(1rem, 0.4vw + 0.8rem, 1.8rem);
+  --fs-project-title: clamp(0.6rem, 0.95vw + 0.2rem, 1.8rem);
+  --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
+
+  --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
+  --fs-icon-task-caption: clamp(1rem, 2vw + 1rem, 2rem);
+  --fs-icon: clamp(1rem, 2vw + 1rem, 2rem);
+  --fs-icon-caption: clamp(1rem, 2vw + 1rem, 2rem);
+}
+
 body {
   overflow: hidden;
   /* background: rgb(239, 63, 123);
@@ -81,7 +107,7 @@ body {
 .nav-heading {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  font-size: 42px;
+  font-size: var(--fs-navbar);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -198,75 +224,64 @@ body {
 }
 .container {
   position: relative;
-  width: 25vw;
 }
 
-.image {
+.project-animation {
   display: block;
-  width: 25vw;
-  height: auto;
+  width: var(--project-width);
   box-shadow: 13px 13px 3px 2px rgba(0, 0, 0, 0.341);
 }
 
-/* .video-heading-overlay {
-  position: absolute;
-  top: 0;
-} */
-
-.overlay {
+.project-description-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #000000cf;
-  backdrop-filter: blur(2px);
+  background-color: #000000f5;
   overflow: hidden;
-  width: 25vw;
   height: 0;
   transition: 0.5s ease;
-  /* transition-delay: 0.18s; */
+  transition-delay: 0.18s;
 }
 
-.overlay2 {
+.project-title-overlay {
   position: absolute;
   color: white;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #000000ac;
-  backdrop-filter: blur(3px);
+  background-color: #000000f5;
   overflow: hidden;
-  height: 10%;
-  font-size: 1.5rem;
+  font-size: var(--fs-project-title);
   transition: 0.5s ease;
   text-align: center;
 }
 
-.container:hover .overlay {
+.container:hover .project-description-overlay {
   height: 100%;
 }
-.container:hover .overlay2 {
-  height: 100%;
+.container:hover .project-title-overlay {
   color: #dc000000;
   background-color: #00000000;
 }
 
 .text {
-  color: white;
-  font-size: 20px;
+  color: var(--f-text-color);
   position: absolute;
-  width: 25vw;
-  padding: 1vw;
+  font-size: var(--fs-text);
+  width: var(--project-width);
+  height: 100%;
+  padding: var(--padding);
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.text h1 {
-  text-align: left;
-}
 .text p {
   text-align: left;
 }
@@ -282,7 +297,7 @@ body {
 }
 
 .text-bottom-row-icon {
-  font-size: 2vw;
+  font-size: calc(1vw + 0.9rem);
 }
 .text-bottom-row-icons-wrapper {
   display: flex;
@@ -290,6 +305,12 @@ body {
   justify-content: center;
   gap: 1vw;
 }
+
+.hover :hover {
+  transform: scale(1.1);
+  transition: all 0.1s linear;
+}
+
 .text-bottom-row-singleicon-wrapper {
   text-decoration: none;
   color: rgb(255, 255, 255);
@@ -302,6 +323,7 @@ body {
   transform: scale(1.1);
   transition: all 0.1s linear;
 }
+
 .projects {
   position: absolute;
   right: 0;
@@ -310,29 +332,31 @@ body {
   bottom: 0;
   margin: auto;
   width: fit-content;
-  height: fit-content;
+  /* height: fit-content; */
   z-index: 5;
 
   /* background-color: #222333; */
   /* box-shadow: 13px 13px 3px 2px rgba(70, 1, 34, 0.341);
   box-shadow: 13px 13px 3px 2px rgba(70, 1, 34, 0.341); */
 }
+
 .projectsScroll {
   flex: 1;
   display: flex;
   overflow: auto;
-  padding: 2rem;
+  padding: var(--padding);
 }
+
 .projectsField {
   display: flex;
-  min-height: min-content;
   flex-direction: column;
-  gap: 2rem;
-  height: 60vh;
+  gap: var(--padding);
+  height: var(--projects-height);
+  /* min-height: min-content; */
 }
 .projectsRow {
   display: flex;
-  gap: 2rem;
+  gap: var(--padding);
 }
 
 .deviceInfo {
@@ -447,15 +471,16 @@ body {
 .aboutText {
   max-width: 70ch;
   padding: 1rem;
-  line-height: 1.32rem;
+  /* line-height: 1.32rem; */
 }
 
 .aboutText h1 {
+  font-size: var(--fs-navbar);
   padding-bottom: 1rem;
 }
 
 .aboutText p {
-  font-size: 1.2rem;
+  font-size: var(--fs-text);
 }
 
 #terminal {
@@ -502,12 +527,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 3rem;
-  width: 4rem;
+  /* height: var(--fs-navbar); */
+  width: 3em;
   text-align: center;
   color: white;
   font-weight: 900;
-  font-size: large;
+  font-size: var(--fs-window-title);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .close-window:hover {
@@ -526,7 +553,7 @@ body {
   background-color: #2ecc40;
 }
 
-.titleWrapper {
+.title-wrapper {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -537,10 +564,10 @@ body {
   width: 1.6rem;
   height: 1.6rem;
 }
-#title,
-#field {
-  font-size: 1.4rem;
+#title {
+  font-size: var(--fs-window-title);
 }
+/* #field  */
 
 #window {
   /* background: rgb(239, 63, 123);
@@ -568,7 +595,6 @@ body {
   justify-content: space-between;
   padding-left: 1rem;
   cursor: move;
-  height: 3rem;
 }
 
 #field {

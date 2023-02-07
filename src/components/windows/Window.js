@@ -4,7 +4,7 @@ import { CgClose } from "react-icons/cg";
 function Window({ theme, title, elementId }) {
   return (
     <div id="window" style={theme.window}>
-      <div className="titleWrapper">
+      <div className="title-wrapper">
         <span id="title" style={{ color: theme.window.color }}>
           {title}
         </span>

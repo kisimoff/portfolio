@@ -41,6 +41,7 @@ const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   }, []);
   return (
     <Draggable
+      cancel=".close-window, .projectsScroll"
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("projects").style.zIndex = zIndexxx;

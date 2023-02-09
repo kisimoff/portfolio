@@ -25,6 +25,7 @@ const About = ({
   }, []);
   return (
     <Draggable
+      cancel=".close-window"
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("about").style.zIndex = zIndexxx;

@@ -23,6 +23,7 @@ const Terminal = ({
 
   return (
     <Draggable
+      cancel=".close-window"
       onStop={() => {
         document.querySelector("#field").focus();
       }}

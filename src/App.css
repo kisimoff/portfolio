@@ -541,7 +541,7 @@ body {
   /* height: 70vh; */
   height: 45%;
   font-size: var(--fs-text);
-  width: 95ch;
+  width: 45%;
   z-index: 2;
   box-shadow: var(--window-shadow);
 }

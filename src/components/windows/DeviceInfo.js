@@ -38,6 +38,7 @@ const DeviceInfo = ({
 
   return (
     <Draggable
+      cancel=".close-window"
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("deviceInfo").style.zIndex = zIndexxx;

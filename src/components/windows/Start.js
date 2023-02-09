@@ -13,7 +13,7 @@ const Start = ({ theme, setVisibility }) => {
   const [zIndexD, setzIndexD] = useState(100);
 
   return (
-    <Draggable>
+    <Draggable cancel=".close-window">
       <div className="start" id="start">
         <Window
           title="Start"

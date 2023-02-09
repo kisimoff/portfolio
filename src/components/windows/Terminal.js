@@ -21,11 +21,11 @@ const Terminal = ({
     setZindexxx(zIndexxx + 1);
   }, []);
 
-  // const handleMinMax = () => {
-  // };
-
   return (
     <Draggable
+      onStop={() => {
+        document.querySelector("#field").focus();
+      }}
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("terminal").style.zIndex = zIndexxx;

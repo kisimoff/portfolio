@@ -2,6 +2,13 @@ import React, { useState, useRef, useEffect } from "react";
 
 import Draggable from "react-draggable";
 import Window from "./Window";
+import {
+  useWindupString,
+  WindupChildren,
+  Pause,
+  Linebreaker,
+  Pace,
+} from "windups";
 
 const About = ({
   theme,
@@ -49,23 +56,31 @@ const About = ({
           setVisibilityWindow={setVisibility}
         />
         <div style={theme.field}>
-          <div className="aboutText">
-            <h1>My Story</h1>
-            <p>
-              When I was 7, I saw how my father was cooling an overlocked GPU
-              with Carbon-dioxide. This marked the start of my tech passion.
-              Growing up I've spent most of my time tinkering – modding games,
-              flashing custom ROMs on Androids, RC modelling, overclocking…
-              These hobbies and my desire to create led me to pursue a career as
-              a developer. Nowadays I have experience in many different tech
-              fields – machine learning, front-end, back-end, mobile
-              development, blockchain etc. This is a strength and a weakness,
-              firstly as I can identify and approach a problem from various
-              perspectives, secondly as I lack a high-proficiency in a
-              particular field, which makes it hard to be a valuable candidate.
-              <br></br> <br></br>
-              Play with the terminal to learn more. :&#41;
-            </p>
+          <div id="aboutField" className="aboutText">
+            <WindupChildren
+            //   onFinished={() => {
+            //     document.getElementById("start").style.display = "none";
+            //   }}
+            >
+              {" "}
+              <h1>My Story</h1>
+              <p>
+                When I was 7, I saw how my father was cooling an overlocked GPU
+                with Carbon-dioxide. This marked the start of my tech passion.
+                Growing up I've spent most of my time tinkering – modding games,
+                flashing custom ROMs on Android Phones, RC modelling,
+                overclocking GPUs… These hobbies and my desire to create led me
+                to pursue a career as a developer. Nowadays I have experience in
+                many different tech fields – machine learning, front-end,
+                back-end, mobile development, blockchain etc. This is a strength
+                and a weakness, firstly as I can identify and approach a problem
+                from various perspectives, secondly as I lack a high-proficiency
+                in a particular field, which makes it hard to be a valuable
+                candidate.
+                <br></br> <br></br>
+                Play with the terminal to learn more. :&#41;
+              </p>
+            </WindupChildren>
           </div>
         </div>
       </div>

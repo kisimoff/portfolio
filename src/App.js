@@ -81,7 +81,7 @@ const App = () => {
             backgroundRepeat: "no-repeat",
             width: "100vw",
             height: "100vh",
-            transition: "all 1s ease",
+            transition: "all 0.4s ease",
           },
           window: {
             // backgroundColor: "#2424248e",
@@ -98,7 +98,7 @@ const App = () => {
             backdropFilter: "blur(23px)",
             color: "white",
             //color: "black",
-            transition: "all 1s ease",
+            // transition: "all 1s ease",
           },
           field: {
             // backgroundColor: "#1f1b26fa",
@@ -106,7 +106,10 @@ const App = () => {
             color: "#F4F4F4",
             fontWeight: "normal",
             backgroundColor: "#0f0e0ff3",
-            // transition: "all 1s ease",
+            borderBottom: "1px solid #cfcfcf46",
+            borderLeft: "1px solid #cfcfcf46",
+            borderRight: "1px solid #cfcfcf46",
+            boxSizing: "border-box",
             boxShadow: "0 2px 5px #111",
           },
           cursor: { animation: "1.02s blink-dark step-end infinite" },
@@ -124,7 +127,7 @@ const App = () => {
           window: {
             backgroundColor: "#5F5C6D",
             color: "#E3E3E3",
-            transition: "all 1.5s ease",
+            // transition: "all 1.5s ease",
           },
           field: {
             backgroundColor: "#E3E3E3",

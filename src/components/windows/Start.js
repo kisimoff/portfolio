@@ -12,13 +12,6 @@ import {
 const Start = ({ theme, setVisibility }) => {
   const [zIndexD, setzIndexD] = useState(100);
 
-  const StringyWindup = () => {
-    const [text] = useWindupString(
-      "When I was 7, I saw how my father was cooling an overlocked GPU with Carbon-dioxide."
-    );
-    return <div>{text}</div>;
-  };
-
   return (
     <Draggable>
       <div className="start" id="start">

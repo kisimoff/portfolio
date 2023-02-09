@@ -43,20 +43,24 @@ clamp(min, target, max)
 
   --project-width: clamp(30vw, 50vmin, 40vw);
 
-  --window-shadow: rgba(126, 126, 126, 0.371) 0px 0px 2px 1px;
-  --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem);
+  --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
+
+  /* --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem); */
+  --fs-navbar: 2rem;
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
   --f-text-color: white;
+
+  --fs-icon: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
 
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-window-title: clamp(1rem, 0.4vw + 0.8rem, 1.8rem);
   --fs-project-title: clamp(0.6rem, 0.95vw + 0.2rem, 1.8rem);
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
+  --padding-small: clamp(0.2rem, 0.6vw + 0.2rem, 1.5rem);
 
   --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-task-caption: clamp(1rem, 2vw + 1rem, 2rem);
-  --fs-icon: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-caption: clamp(1rem, 2vw + 1rem, 2rem);
 }
 
@@ -93,7 +97,7 @@ body {
   display: flex;
   width: 100%;
   flex-direction: row;
-  padding: 1rem;
+  padding: var(--padding-small);
   /* background-color: rgba(37, 37, 37, 0.314); */
   background: rgb(37, 37, 37);
   background: linear-gradient(
@@ -118,8 +122,7 @@ body {
 }
 
 #logo {
-  width: 3vw;
-  height: 3vw;
+  height: var(--fs-icon);
 }
 .nav-socials {
   display: flex;
@@ -226,12 +229,14 @@ body {
 }
 .container {
   position: relative;
+  border: 2px solid rgba(207, 207, 207, 0.155);
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px #111;
 }
 
 .project-animation {
   display: block;
   width: var(--project-width);
-  box-shadow: 13px 13px 3px 2px rgba(0, 0, 0, 0.341);
 }
 
 .project-description-overlay {
@@ -533,8 +538,10 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
-  height: 70vh;
-  width: 65vw;
+  /* height: 70vh; */
+  height: 45%;
+  font-size: var(--fs-text);
+  width: 95ch;
   z-index: 2;
   box-shadow: var(--window-shadow);
 }

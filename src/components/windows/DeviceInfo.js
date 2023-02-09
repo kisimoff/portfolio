@@ -52,7 +52,6 @@ const DeviceInfo = ({ theme, setTheme }) => {
         </div> */}
 
         <Window title="Device Info" elementId="deviceInfo" theme={theme} />
-
         <div style={theme.field}>
           <div className="aboutText">
             Viewing from: {deviceType} <br></br>

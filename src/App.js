@@ -8,10 +8,13 @@ import Terminal from "./components/windows/Terminal";
 import { BsPersonCircle } from "react-icons/bs";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
 import { BsJournalCode } from "react-icons/bs";
+import { GiHourglass } from "react-icons/gi";
 import { BsVinyl } from "react-icons/bs";
 import { VscFilePdf } from "react-icons/vsc";
 import { BsTerminal } from "react-icons/bs";
 import About from "./components/windows/About";
+import Start from "./components/windows/Start";
+
 import DeviceInfo from "./components/windows/DeviceInfo";
 import Projects from "./components/windows/Projects";
 import Player from "./components/windows/Player";
@@ -43,6 +46,7 @@ import background_light from "./background/light.jpg";
 import resumePdf from "./files/valentin-kisimov-resume.pdf";
 const App = () => {
   const [theme, setTheme] = useState(true);
+  const [terminal, setTerminal] = useState(false);
 
   const [active, setActive] = useState(true);
   const onPress = () => {
@@ -227,6 +231,9 @@ const App = () => {
       </div> */}
       <div className="icons">
         <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" />
+
+        {/* <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" /> */}
+
         <Icon icon={BsPersonCircle} caption="About" elementId="about" />
         <Icon
           icon={TbDeviceDesktopAnalytics}
@@ -235,6 +242,8 @@ const App = () => {
           elementId="deviceInfo"
         />
         <Icon icon={BsJournalCode} caption="Projects" elementId="projects" />
+        {/* <Icon icon={GiHourglass} caption="Start" elementId="start" /> */}
+
         {/* <Icon
           icon={BsVinyl}
           caption="Music"
@@ -245,9 +254,14 @@ const App = () => {
       </div>
 
       <Terminal theme={themeVars} setTheme={setTheme} />
-      <About theme={themeVars} setTheme={setTheme}></About>
+      <About
+        theme={themeVars}
+        setTheme={setTheme}
+        textToWrite={"Alabala Alabala"}
+      ></About>
       <Projects theme={themeVars} setTheme={setTheme}></Projects>
       <DeviceInfo theme={themeVars} setTheme={setTheme}></DeviceInfo>
+      <Start theme={themeVars} setTheme={setTheme}></Start>
       {/* <Player theme={themeVars} setTheme={setTheme}></Player> */}
     </div>
   );

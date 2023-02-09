@@ -13,14 +13,14 @@ function Icon(props) {
             var y = document.getElementById(
               "task-" + props.elementId + "-icon"
             );
-            if (x.style.display === "none") {
-              x.style.zIndex = "10";
-              x.style.display = "block";
-              y.style.display = "block";
-            } else {
-              x.style.display = "none";
-              y.style.display = "none";
-            }
+            // if (x.style.display === "none") {
+            x.style.zIndex = "10";
+            x.style.display = "block";
+            y.style.display = "block";
+            // } else {
+            //   x.style.display = "none";
+            //   y.style.display = "none";
+            // }
           }}
         >
           <props.icon className="icon" />

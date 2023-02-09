@@ -3,8 +3,9 @@ import React, { useState, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import Window from "./Window";
 
-const About = ({ theme, setTheme }) => {
+const About = ({ theme, textToWrite }) => {
   const [zIndexD, setzIndexD] = useState(100);
+  // Make a new component
 
   return (
     <Draggable

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import math from "react";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
@@ -9,10 +9,12 @@ const Terminal = ({ theme, setTheme }) => {
   const [maximized, setMaximized] = React.useState(false);
   const [title, setTitle] = React.useState("Terminal");
 
-  const handleMinMax = () => {
-    setMaximized(!maximized);
+  useEffect(() => {
     document.querySelector("#field").focus();
-  };
+  }, []);
+
+  // const handleMinMax = () => {
+  // };
 
   return (
     <Draggable
@@ -171,11 +173,7 @@ class Field extends React.Component {
             hasBuffer: true,
           },
           {
-            text: "Mobile Device Detected!",
-            isError: true,
-          },
-          {
-            text: "Some features may not work properly!",
+            text: "Visit from desktop for full experience.",
             isError: true,
             hasBuffer: true,
           },
@@ -186,7 +184,7 @@ class Field extends React.Component {
       const themePref = window.localStorage.getItem("reactTerminalThemePref");
 
       // Disable this if you're working on a fork with auto run enabled... trust me.
-      userElem.focus();
+      // userElem.focus();
 
       if (themePref) {
         this.props.setTheme(themePref);
@@ -283,7 +281,7 @@ class Field extends React.Component {
   }
 
   handleTypingMobile(e) {
-    console.log("button pressed:", e);
+    // console.log("button pressed:", e);
     const { key, ctrlKey, altKey } = e;
     const forbidden = [
       ...Array.from({ length: 12 }, (x, y) => `F${y + 1}`),

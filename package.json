@@ -23,7 +23,8 @@
     "react-simple-keyboard": "^3.4.131",
     "simple-keyboard": "^3.4.100",
     "simple-react-pdf": "^1.0.9",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "windups": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

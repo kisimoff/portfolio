@@ -42,6 +42,8 @@ clamp(min, target, max)
   --projects-height: clamp(12rem, 60vmin, 65vh);
 
   --project-width: clamp(30vw, 50vmin, 40vw);
+
+  --window-shadow: rgba(126, 126, 126, 0.371) 0px 0px 2px 1px;
   --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem);
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
@@ -240,8 +242,7 @@ body {
   background-color: #000000f5;
   overflow: hidden;
   height: 0;
-  transition: 0.5s ease;
-  transition-delay: 0.18s;
+  transition: 0.4s ease-in;
 }
 
 .project-title-overlay {
@@ -253,7 +254,7 @@ body {
   background-color: #000000f5;
   overflow: hidden;
   font-size: var(--fs-project-title);
-  transition: 0.5s ease;
+  transition: 0.2s ease;
   text-align: center;
 }
 
@@ -334,6 +335,8 @@ body {
   width: fit-content;
   /* height: fit-content; */
   z-index: 5;
+  height: var(--projects-height);
+  box-shadow: var(--window-shadow);
 
   /* background-color: #222333; */
   /* box-shadow: 13px 13px 3px 2px rgba(70, 1, 34, 0.341);
@@ -351,8 +354,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--padding);
-  height: var(--projects-height);
   /* min-height: min-content; */
+  height: var(--projects-height);
 }
 .projectsRow {
   display: flex;
@@ -360,6 +363,7 @@ body {
 }
 
 .deviceInfo {
+  box-shadow: var(--window-shadow);
   position: absolute;
   right: 0;
   left: 0;
@@ -369,6 +373,7 @@ body {
   width: fit-content;
   height: fit-content;
   z-index: 4;
+  font-size: var(--fs-text);
 }
 
 .imageW:hover {
@@ -457,6 +462,39 @@ body {
   display: none;
 }
 
+#projects {
+  display: none;
+}
+#deviceInfo {
+  display: none;
+}
+
+.start {
+  position: absolute;
+  /* right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0; */
+  top: 5%;
+  margin-left: 15%;
+  z-index: 3;
+  max-width: fit-content;
+  /* box-shadow: rgba(101, 41, 141, 0.467) 0px 5px 23px 0px,
+    rgba(126, 126, 126, 0.181) 0px 0px 0px 1px; */
+  box-shadow: var(--window-shadow);
+}
+
+.startText {
+  max-width: 50ch;
+  padding: 1rem;
+  font-size: var(--fs-text);
+
+  line-height: 1.1rem;
+}
+
+.nav-icon-task > * {
+  display: none;
+}
 .about {
   position: absolute;
   right: 0;
@@ -466,6 +504,8 @@ body {
   margin: auto;
   z-index: 3;
   max-width: fit-content;
+  height: fit-content;
+  box-shadow: var(--window-shadow);
 }
 
 .aboutText {
@@ -497,6 +537,7 @@ body {
   height: 70vh;
   width: 65vw;
   z-index: 2;
+  box-shadow: var(--window-shadow);
 }
 
 #audioPlayer2 {

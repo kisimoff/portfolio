@@ -51,13 +51,17 @@ clamp(min, target, max)
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
   --f-text-color: white;
 
-  --fs-icon: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
+  --SlSocialLinkedin: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
+
+  --sz-logo-nav: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
+
+  --sz-icon-social: clamp(1.8rem, 1.4vw + 1rem, 2.5rem);
 
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-window-title: clamp(1rem, 0.4vw + 0.8rem, 1.8rem);
   --fs-project-title: clamp(0.6rem, 0.95vw + 0.2rem, 1.8rem);
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
-  --padding-small: clamp(0.2rem, 0.6vw + 0.2rem, 1.5rem);
+  --padding-small: clamp(0.35rem, 0.3vw + 0.12rem, 1.5rem);
 
   --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-task-caption: clamp(1rem, 2vw + 1rem, 2rem);
@@ -122,33 +126,81 @@ body {
 }
 
 #logo {
-  height: var(--fs-icon);
+  height: var(--sz-logo-nav);
 }
 .nav-socials {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}
+.nav-social-svg {
+  font-size: var(--sz-icon-social);
 }
 
+.nav-socials a {
+  color: white;
+  transition: all 0.2s linear;
+}
+
+/* #github {
+  width: 2rem;
+
+  transition: all 0.2s linear;
+}
+#github:hover {
+  transform: scale(1.15);
+}
+
+#linkedin {
+  width: 2rem;
+
+  transition: all 0.2s linear;
+}
+#linkedin:hover {
+  transform: scale(1.15);
+}
+
+#download {
+  width: 2rem;
+}
+
+#linkedin:hover {
+  transform: scale(1.15);
+} */
+
 .nav-download-button {
+  font-weight: 500;
   font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* display: hidden; */
+  /* font-family: "Montserrat", sans-serif;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;
+
   color: rgb(255, 255, 255);
   transition: all 0.35s;
   margin-top: 10px;
   margin-right: 7px;
-  transition: all 0.2s linear;
+  transition: all 0.2s linear; */
 }
-
+.nav-download-button-text {
+  /* display: none; */
+}
 .nav-download-button:active {
-  transition-duration: 0.3s;
+  /* transition-duration: 0.3s;
   color: rgb(0, 0, 0);
-  transform: scale(0.95);
+  transform: scale(0.95); */
 }
 
 .nav-download-button:hover {
-  transform: scale(1.08);
+  /* transform: scale(1.08); */
 }
 
 .nav-icon-task {
@@ -825,41 +877,6 @@ body {
 
 /* wrg.toggle to control the spacing on the toggle btn*/
 
-#github {
-  width: 36px;
-  height: 36px;
-  margin-left: 8px;
-  margin-right: 8px;
-  margin-top: 10px;
-  transition: all 0.2s linear;
-}
-#github:hover {
-  transform: scale(1.15);
-}
-
-#linkedin {
-  width: 29px;
-  height: 29px;
-  margin-left: 8px;
-  margin-right: 0px;
-  margin-top: 13px;
-  transition: all 0.2s linear;
-}
-#linkedin:hover {
-  transform: scale(1.15);
-}
-
-#download {
-  width: 28px;
-  height: 28px;
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-#linkedin:hover {
-  transform: scale(1.15);
-}
-
 .active {
   background-color: #04aa6d;
 }
@@ -966,7 +983,41 @@ body {
 }
 
 @media only screen and (max-width: 600px), (max-height: 400px) {
-  #terminal {
+  .app {
+    flex-direction: column;
+  }
+
+  .nav-heading {
+    gap: 0.5rem;
+  }
+
+  .nav-socials {
+    gap: 0.5rem;
+  }
+
+  .nav-download-button {
+    display: none;
+  }
+  .navbar {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icons {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    width: auto;
+  }
+
+  /* #terminal {
     margin-top: -50px;
     height: 32vh;
     max-height: 300px;
@@ -998,5 +1049,5 @@ body {
   .navbar p {
     padding: 0px;
     margin: 0px;
-  }
+  } */
 }

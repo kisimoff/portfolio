@@ -5,12 +5,16 @@ import { GiTechnoHeart } from "react-icons/gi";
 import "./App.css";
 import ToggleButton from "./components/ToggleButton";
 import Terminal from "./components/windows/Terminal";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsLinkedin, BsPersonCircle } from "react-icons/bs";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+
+import { VscFilePdf } from "react-icons/vsc";
+import { VscGithubAlt } from "react-icons/vsc";
+import { SlSocialLinkedin } from "react-icons/sl";
+
 import { BsJournalCode } from "react-icons/bs";
 import { GiHourglass } from "react-icons/gi";
 import { BsVinyl } from "react-icons/bs";
-import { VscFilePdf } from "react-icons/vsc";
 import { BsTerminal } from "react-icons/bs";
 import About from "./components/windows/About";
 import Start from "./components/windows/Start";
@@ -44,6 +48,7 @@ import download_dark from "./socials/download-dark.png";
 import background_dark from "./background/dark.jpg";
 import background_light from "./background/light.jpg";
 import resumePdf from "./files/valentin-kisimov-resume.pdf";
+import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
 const App = () => {
   const [theme, setTheme] = useState(true);
   const [terminal, setTerminal] = useState(false);
@@ -221,38 +226,21 @@ const App = () => {
           ) : null}
         </div>
         <div className="nav-socials">
-          <a
-            className="nav-download-button"
-            href={resumePdf}
-            download="valentin-kisimov-resume.pdf"
-          >
-            <span
-              className="nav-download-button-text"
-              style={theme ? { color: "white" } : { color: "black" }}
-            >
-              <img
-                style={{ marginRight: "10px", marginBottom: "10px" }}
-                alt="download"
-                src={theme ? download_light : download_dark}
-                id="download"
-              />
-              resume.pdf
-            </span>
-          </a>
-
-          <a href="https://github.com/vtwenty3">
-            <img
-              alt="github"
-              src={theme ? github_light : github_dark}
-              id="github"
-            />
-          </a>
           <a href="https://www.linkedin.com/in/valentin-kisimov-2719b41a1/">
-            <img
+            <SlSocialLinkedin className="nav-social-svg" />
+            {/* <img
               alt="linkedin"
               src={theme ? linkedin_light : linkedin_dark}
               id="linkedin"
-            />
+            /> */}
+          </a>
+          <a href="https://github.com/vtwenty3">
+            <VscGithubAlt className="nav-social-svg" />
+            {/* <img
+              alt="github"
+              src={theme ? github_light : github_dark}
+              id="github"
+            /> */}
           </a>
         </div>
       </div>
@@ -285,7 +273,6 @@ const App = () => {
         <Icon
           icon={TbDeviceDesktopAnalytics}
           caption="Device"
-          line2="Info"
           elementId="deviceInfo"
           setVisibility={setDevice}
           zIndexxx={zIndexxx}
@@ -301,6 +288,29 @@ const App = () => {
           visibility={projects}
           setZindexxx={setZindexxx}
         />
+        <div className="hoverIcon">
+          <a
+            className="iconWrapper"
+            href={resumePdf}
+            download="valentin-kisimov-resume.pdf"
+          >
+            {" "}
+            <VscFilePdf className="icon" />
+            <span
+              className="caption"
+              style={theme ? { color: "white" } : { color: "black" }}
+            >
+              {/* <img
+                style={{ marginRight: "10px", marginBottom: "10px" }}
+                alt="download"
+                src={theme ? download_light : download_dark}
+                id="download"
+              /> */}
+              Resume
+            </span>
+          </a>
+        </div>
+
         {/* <Icon icon={GiHourglass} caption="Start" elementId="start" /> */}
 
         {/* <Icon

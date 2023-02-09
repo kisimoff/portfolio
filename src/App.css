@@ -46,7 +46,7 @@ clamp(min, target, max)
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
 
   /* --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem); */
-  --fs-navbar: 2rem;
+  --fs-navbar: clamp(1.3rem, 1vw + 1.2rem, 2.6rem);
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
   --f-text-color: white;
@@ -271,8 +271,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 1vh;
-  padding-left: 1vh;
+  padding-top: 1%;
+  padding-left: 1%;
   height: 90vh;
   width: auto;
 }
@@ -999,7 +999,7 @@ body {
     display: none;
   }
   .navbar {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 
@@ -1019,6 +1019,8 @@ body {
     align-items: flex-end;
     height: 100%;
     width: auto;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
   }
 
   /* #terminal {

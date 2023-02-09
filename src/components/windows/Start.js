@@ -24,9 +24,9 @@ const Start = ({ theme, setVisibility }) => {
         <div style={theme.field}>
           <div className="startText">
             <WindupChildren
-            //   onFinished={() => {
-            //     document.getElementById("start").style.display = "none";
-            //   }}
+              onFinished={() => {
+                document.getElementById("start").style.display = "none";
+              }}
             >
               <Pause ms={1000} />
               <Pace ms={80}>{"Hello,"}</Pace>

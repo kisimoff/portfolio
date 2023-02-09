@@ -454,31 +454,31 @@ body {
   }
 }
 
-#about {
+/* #about {
   display: none;
-}
+} */
 
-#terminal {
+/* #terminal {
   display: none;
-}
+} */
 
-#projects {
+/* #projects {
   display: none;
 }
 #deviceInfo {
   display: none;
-}
+} */
 
 .start {
   position: absolute;
-  /* right: 0;
+  right: 0;
   left: 0;
   top: 0;
-  bottom: 0; */
-  top: 5%;
-  margin-left: 15%;
+  bottom: 0;
+  margin: auto;
   z-index: 3;
   max-width: fit-content;
+  height: fit-content;
   /* box-shadow: rgba(101, 41, 141, 0.467) 0px 5px 23px 0px,
     rgba(126, 126, 126, 0.181) 0px 0px 0px 1px; */
   box-shadow: var(--window-shadow);
@@ -488,13 +488,12 @@ body {
   max-width: 50ch;
   padding: 1rem;
   font-size: var(--fs-text);
-
   line-height: 1.1rem;
 }
 
-.nav-icon-task > * {
+/* .nav-icon-task > * {
   display: none;
-}
+} */
 .about {
   position: absolute;
   right: 0;

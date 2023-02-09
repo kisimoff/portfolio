@@ -21,7 +21,7 @@ import Project from "../Project";
 import { CgClose } from "react-icons/cg";
 import { BsJournalCode } from "react-icons/bs";
 
-const Projects = ({ theme }) => {
+const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   const [z, setZ] = useState(4);
   const videoEl = useRef(null);
 
@@ -35,18 +35,25 @@ const Projects = ({ theme }) => {
 
   useEffect(() => {
     attemptPlay();
+    document.getElementById("projects").style.zIndex = zIndexxx;
+    setZindexxx(zIndexxx + 1);
+    console.log(zIndexxx);
   }, []);
   return (
     <Draggable
-      onMouseDown={() => {
-        document.getElementById("projects").style.zIndex = "6";
-        document.getElementById("deviceInfo").style.zIndex = "4";
-        document.getElementById("about").style.zIndex = "3";
-        document.getElementById("terminal").style.zIndex = "2";
+      onStart={() => {
+        setZindexxx(zIndexxx + 1);
+        document.getElementById("projects").style.zIndex = zIndexxx;
+        console.log(zIndexxx);
       }}
     >
       <div className="projects" id="projects">
-        <Window title="Projects" elementId="projects" theme={theme} />
+        <Window
+          title="Projects"
+          elementId="projects"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
+        />
         <div style={theme.field}>
           <div className="projectsScroll">
             <div className="projectsField">

@@ -3,18 +3,31 @@ import React, { useState, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import Window from "./Window";
 
-const About = ({ theme, textToWrite }) => {
+const About = ({
+  theme,
+  textToWrite,
+  setVisibility,
+  zIndexxx,
+  setZindexxx,
+}) => {
   const [zIndexD, setzIndexD] = useState(100);
   // Make a new component
-
+  useEffect(() => {
+    document.getElementById("about").style.zIndex = zIndexxx;
+    setZindexxx(zIndexxx + 1);
+  }, []);
   return (
     <Draggable
-      onMouseDown={() => {
-        document.getElementById("projects").style.zIndex = "5";
-        document.getElementById("deviceInfo").style.zIndex = "4";
-        document.getElementById("about").style.zIndex = "6";
-        document.getElementById("terminal").style.zIndex = "2";
+      onStart={() => {
+        setZindexxx(zIndexxx + 1);
+        document.getElementById("about").style.zIndex = zIndexxx;
       }}
+      // onMouseDown={() => {
+      //   document.getElementById("projects").style.zIndex = "5";
+      //   document.getElementById("deviceInfo").style.zIndex = "4";
+      //   document.getElementById("about").style.zIndex = 6;
+      //   document.getElementById("terminal").style.zIndex = "2";
+      // }}
     >
       <div className="about" id="about">
         {/* <div id="window" style={theme.window}>
@@ -29,7 +42,12 @@ const About = ({ theme, textToWrite }) => {
             }}
           />
         </div> */}
-        <Window title="About" elementId="about" theme={theme} />
+        <Window
+          title="About"
+          elementId="about"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
+        />
         <div style={theme.field}>
           <div className="aboutText">
             <h1>My Story</h1>

@@ -47,6 +47,13 @@ import resumePdf from "./files/valentin-kisimov-resume.pdf";
 const App = () => {
   const [theme, setTheme] = useState(true);
   const [terminal, setTerminal] = useState(false);
+  const [about, setAbout] = useState(false);
+  const [start, setStart] = useState(true);
+
+  const [zIndexxx, setZindexxx] = useState(6);
+
+  const [device, setDevice] = useState(false);
+  const [projects, setProjects] = useState(false);
 
   const [active, setActive] = useState(true);
   const onPress = () => {
@@ -163,31 +170,52 @@ const App = () => {
           </p>
         </div>
         <div className="nav-icon-task">
-          <IconTask
-            icon={BsTerminal}
-            caption="Terminal"
-            elementId="terminal"
-            selfId="task-terminal-icon"
-          />
-          <IconTask
-            icon={BsPersonCircle}
-            caption="About"
-            elementId="about"
-            selfId="task-about-icon"
-          />
-          <IconTask
-            icon={TbDeviceDesktopAnalytics}
-            caption="Device"
-            line2="Info"
-            elementId="deviceInfo"
-            selfId="task-deviceInfo-icon"
-          />
-          <IconTask
-            icon={BsJournalCode}
-            caption="Projects"
-            elementId="projects"
-            selfId="task-projects-icon"
-          />
+          {terminal ? (
+            <IconTask
+              icon={BsTerminal}
+              caption="Terminal"
+              elementId="terminal"
+              selfId="task-terminal-icon"
+              setVisibility={setTerminal}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null}
+          {about ? (
+            <IconTask
+              icon={BsPersonCircle}
+              caption="About"
+              elementId="about"
+              selfId="task-about-icon"
+              setVisibility={setAbout}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null}
+          {device ? (
+            <IconTask
+              icon={TbDeviceDesktopAnalytics}
+              caption="Device"
+              line2="Info"
+              elementId="deviceInfo"
+              selfId="task-deviceInfo-icon"
+              setVisibility={setDevice}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null}
+
+          {projects ? (
+            <IconTask
+              icon={BsJournalCode}
+              caption="Projects"
+              elementId="projects"
+              selfId="task-projects-icon"
+              setVisibility={setProjects}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null}
         </div>
         <div className="nav-socials">
           <a
@@ -230,18 +258,46 @@ const App = () => {
         <div className="coin copper"></div>
       </div> */}
       <div className="icons">
-        <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" />
+        <Icon
+          icon={BsTerminal}
+          caption="Terminal"
+          elementId="terminal"
+          setVisibility={setTerminal}
+          zIndexxx={zIndexxx}
+          visibility={terminal}
+          setZindexxx={setZindexxx}
+        />
 
         {/* <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" /> */}
 
-        <Icon icon={BsPersonCircle} caption="About" elementId="about" />
+        <Icon
+          icon={BsPersonCircle}
+          caption="About"
+          elementId="about"
+          setVisibility={setAbout}
+          visibility={about}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+        />
         <Icon
           icon={TbDeviceDesktopAnalytics}
           caption="Device"
           line2="Info"
           elementId="deviceInfo"
+          setVisibility={setDevice}
+          zIndexxx={zIndexxx}
+          visibility={device}
+          setZindexxx={setZindexxx}
         />
-        <Icon icon={BsJournalCode} caption="Projects" elementId="projects" />
+        <Icon
+          icon={BsJournalCode}
+          caption="Projects"
+          elementId="projects"
+          setVisibility={setProjects}
+          zIndexxx={zIndexxx}
+          visibility={projects}
+          setZindexxx={setZindexxx}
+        />
         {/* <Icon icon={GiHourglass} caption="Start" elementId="start" /> */}
 
         {/* <Icon
@@ -252,16 +308,47 @@ const App = () => {
         /> */}
         {/* <Icon icon={VscFilePdf} caption="Pdf" line2="Viewer" elementId="pdf" /> */}
       </div>
+      {terminal ? (
+        <Terminal
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setTerminal}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+          elementId="terminal"
+        />
+      ) : null}
+      {about ? (
+        <About
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setAbout}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+        />
+      ) : null}
+      {projects ? (
+        <Projects
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setProjects}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+        />
+      ) : null}
+      {device ? (
+        <DeviceInfo
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setDevice}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+        />
+      ) : null}
 
-      <Terminal theme={themeVars} setTheme={setTheme} />
-      <About
-        theme={themeVars}
-        setTheme={setTheme}
-        textToWrite={"Alabala Alabala"}
-      ></About>
-      <Projects theme={themeVars} setTheme={setTheme}></Projects>
-      <DeviceInfo theme={themeVars} setTheme={setTheme}></DeviceInfo>
-      <Start theme={themeVars} setTheme={setTheme}></Start>
+      {start ? (
+        <Start theme={themeVars} setTheme={setTheme} setVisibility={setStart} />
+      ) : null}
       {/* <Player theme={themeVars} setTheme={setTheme}></Player> */}
     </div>
   );

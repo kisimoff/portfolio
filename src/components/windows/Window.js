@@ -1,7 +1,7 @@
 import React from "react";
 import { CgClose } from "react-icons/cg";
 
-function Window({ theme, title, elementId }) {
+function Window({ theme, title, elementId, setVisibilityWindow }) {
   return (
     <div id="window" style={theme.window}>
       <div className="title-wrapper">
@@ -13,9 +13,11 @@ function Window({ theme, title, elementId }) {
         href="#"
         className="close-window"
         onClick={() => {
-          document.getElementById(elementId).style.display = "none";
-          document.getElementById("task-" + elementId + "-icon").style.display =
-            "none";
+          setVisibilityWindow(false);
+
+          // document.getElementById(elementId).style.display = "none";
+          // document.getElementById("task-" + elementId + "-icon").style.display =
+          //   "none";
         }}
       >
         <CgClose />

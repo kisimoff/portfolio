@@ -9,13 +9,9 @@ function IconTask(props) {
         <a
           href="#"
           onClick={() => {
-            var x = document.getElementById(props.elementId);
-            if (x.style.display === "block") {
-              x.style.zIndex = "11";
-              x.style.display = "block";
-            } else {
-              x.style.display = "none";
-            }
+            props.setZindexxx(props.zIndexxx + 1);
+            document.getElementById(props.elementId).style.zIndex =
+              props.zIndexxx;
           }}
         >
           {" "}
@@ -28,8 +24,9 @@ function IconTask(props) {
           href="#"
           className="close-window-task"
           onClick={() => {
-            document.getElementById(props.elementId).style.display = "none";
-            document.getElementById(props.selfId).style.display = "none";
+            // document.getElementById(props.elementId).style.display = "none";
+            // document.getElementById(props.selfId).style.display = "none";
+            props.setVisibility(false);
           }}
         >
           <CgClose />

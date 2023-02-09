@@ -11,7 +11,13 @@ import {
   deviceType,
 } from "react-device-detect";
 
-const DeviceInfo = ({ theme, setTheme }) => {
+const DeviceInfo = ({
+  theme,
+  setTheme,
+  setVisibility,
+  zIndexxx,
+  setZindexxx,
+}) => {
   const [ip, setIP] = useState("");
   const [contry, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -24,17 +30,18 @@ const DeviceInfo = ({ theme, setTheme }) => {
     setCountry(res.data.country_name);
   };
   useEffect(() => {
-    //passing getData method to the lifecycle method
+    document.getElementById("deviceInfo").style.zIndex = zIndexxx;
+    setZindexxx(zIndexxx + 1);
+    console.log(zIndexxx);
     getData();
   }, []);
 
   return (
     <Draggable
-      onMouseDown={() => {
-        document.getElementById("projects").style.zIndex = "4";
-        document.getElementById("deviceInfo").style.zIndex = "6";
-        document.getElementById("about").style.zIndex = "3";
-        document.getElementById("terminal").style.zIndex = "2";
+      onStart={() => {
+        setZindexxx(zIndexxx + 1);
+        document.getElementById("deviceInfo").style.zIndex = zIndexxx;
+        console.log(zIndexxx);
       }}
     >
       <div className="deviceInfo" id="deviceInfo" style={theme.field}>
@@ -51,7 +58,17 @@ const DeviceInfo = ({ theme, setTheme }) => {
           />
         </div> */}
 
-        <Window title="Device Info" elementId="deviceInfo" theme={theme} />
+        <Window
+          title="Device Info"
+          elementId="deviceInfo"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
+          onStart={() => {
+            setZindexxx(zIndexxx + 1);
+            document.getElementById("deviceinfo").style.zIndex = zIndexxx;
+            console.log(zIndexxx);
+          }}
+        />
         <div style={theme.field}>
           <div className="aboutText">
             Viewing from: {deviceType} <br></br>

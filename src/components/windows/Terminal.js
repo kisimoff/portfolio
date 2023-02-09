@@ -5,12 +5,20 @@ import "react-simple-keyboard/build/css/index.css";
 import Draggable from "react-draggable";
 import Window from "./Window";
 
-const Terminal = ({ theme, setTheme }) => {
+const Terminal = ({
+  theme,
+  setTheme,
+  setVisibility,
+  zIndexxx,
+  setZindexxx,
+}) => {
   const [maximized, setMaximized] = React.useState(false);
   const [title, setTitle] = React.useState("Terminal");
 
   useEffect(() => {
     document.querySelector("#field").focus();
+    document.getElementById("terminal").style.zIndex = zIndexxx;
+    setZindexxx(zIndexxx + 1);
   }, []);
 
   // const handleMinMax = () => {
@@ -18,11 +26,9 @@ const Terminal = ({ theme, setTheme }) => {
 
   return (
     <Draggable
-      onMouseDown={() => {
-        document.getElementById("projects").style.zIndex = "5";
-        document.getElementById("deviceInfo").style.zIndex = "4";
-        document.getElementById("about").style.zIndex = "3";
-        document.getElementById("terminal").style.zIndex = "6";
+      onStart={() => {
+        setZindexxx(zIndexxx + 1);
+        document.getElementById("terminal").style.zIndex = zIndexxx;
       }}
     >
       <div
@@ -46,7 +52,12 @@ const Terminal = ({ theme, setTheme }) => {
             }}
           />
         </div> */}
-        <Window title="Terminal" elementId="terminal" theme={theme} />
+        <Window
+          title="Terminal"
+          elementId="terminal"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
+        />
 
         <Field theme={theme} setTheme={setTheme} setTitle={setTitle} />
       </div>
@@ -821,11 +832,9 @@ class Field extends React.Component {
 
   onChange = (input) => {
     this.setState({ input });
-    console.log("Input changed", input);
   };
 
   onKeyPress = (button) => {
-    console.log("Button pressed", button);
     if (button === "{shift}" || button === "{lock}") this.handleShift();
   };
 

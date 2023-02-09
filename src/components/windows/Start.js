@@ -9,7 +9,7 @@ import {
   Pace,
 } from "windups";
 
-const Start = ({ theme }) => {
+const Start = ({ theme, setVisibility }) => {
   const [zIndexD, setzIndexD] = useState(100);
 
   const StringyWindup = () => {
@@ -20,16 +20,14 @@ const Start = ({ theme }) => {
   };
 
   return (
-    <Draggable
-      onMouseDown={() => {
-        document.getElementById("projects").style.zIndex = "5";
-        document.getElementById("deviceInfo").style.zIndex = "4";
-        document.getElementById("about").style.zIndex = "6";
-        document.getElementById("terminal").style.zIndex = "2";
-      }}
-    >
+    <Draggable>
       <div className="start" id="start">
-        <Window title="Start" elementId="start" theme={theme} />
+        <Window
+          title="Start"
+          elementId="start"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
+        />
         <div style={theme.field}>
           <div className="startText">
             <WindupChildren

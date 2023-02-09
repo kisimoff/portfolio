@@ -40,28 +40,23 @@ clamp(min, target, max)
 
   /* Test project-height on mobile! */
   --projects-height: clamp(12rem, 60vmin, 65vh);
-
   --project-width: clamp(30vw, 50vmin, 40vw);
-
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
 
-  /* --fs-navbar: clamp(1rem, 1.2vw + 0.8rem, 4rem); */
   --fs-navbar: clamp(1.3rem, 1vw + 1.2rem, 2.6rem);
+  --sz-logo-nav: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
+  --sz-icon-social: clamp(1.8rem, 1.4vw + 1rem, 2.5rem);
+  --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
   --f-text-color: white;
 
-  --SlSocialLinkedin: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
-
-  --sz-logo-nav: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
-
-  --sz-icon-social: clamp(1.8rem, 1.4vw + 1rem, 2.5rem);
-
-  --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-window-title: clamp(1rem, 0.4vw + 0.8rem, 1.8rem);
   --fs-project-title: clamp(0.6rem, 0.95vw + 0.2rem, 1.8rem);
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
   --padding-small: clamp(0.35rem, 0.3vw + 0.12rem, 1.5rem);
+
+  --SlSocialLinkedin: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
 
   --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-task-caption: clamp(1rem, 2vw + 1rem, 2rem);
@@ -564,6 +559,49 @@ body {
   box-shadow: var(--window-shadow);
 }
 
+.editor {
+  text-align: right;
+  height: calc(100% - 46px);
+  padding: 10px 15px;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  outline: none;
+  font-family: "Source Code Pro", monospace;
+  font-size: 18px;
+  line-height: 22px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.mobileInput {
+  position: absolute;
+  top: -2000px;
+  left: -2000px;
+}
+
+.lineText {
+  display: inline;
+  position: relative;
+  top: -1px;
+  margin-left: 8px;
+}
+
+.preWhiteSpace {
+  white-space: pre;
+}
+
+.terminal2 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 3;
+  width: 40%;
+  height: 40%;
+  box-shadow: var(--window-shadow);
+}
+
 .aboutText {
   max-width: 70ch;
   padding: 1rem;
@@ -985,6 +1023,7 @@ body {
 @media only screen and (max-width: 600px), (max-height: 400px) {
   .app {
     flex-direction: column;
+    overflow: hidden;
   }
 
   .nav-heading {
@@ -1015,12 +1054,13 @@ body {
 
   .icons {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: flex-end;
     height: 100%;
-    width: auto;
-    padding-left: 0.2rem;
-    padding-right: 0.2rem;
+  }
+
+  .iconWrapper {
+    width: fit-content;
   }
 
   /* #terminal {

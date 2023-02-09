@@ -209,7 +209,7 @@ class Field extends React.Component {
     userElem.scrollTop = userElem.scrollHeight;
   }
   handleTyping(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
     const { key, ctrlKey, altKey } = e;
     const forbidden = [

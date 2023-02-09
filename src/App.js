@@ -5,6 +5,9 @@ import { GiTechnoHeart } from "react-icons/gi";
 import "./App.css";
 import ToggleButton from "./components/ToggleButton";
 import Terminal from "./components/windows/Terminal";
+import Terminal2 from "./components/windows/Terminal2";
+import { TerminalContextProvider } from "react-terminal";
+
 import { BsLinkedin, BsPersonCircle } from "react-icons/bs";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
 
@@ -54,8 +57,8 @@ const App = () => {
   const [terminal, setTerminal] = useState(false);
   const [about, setAbout] = useState(false);
   const [start, setStart] = useState(true);
-
   const [zIndexxx, setZindexxx] = useState(6);
+  const [terminal2, setTerminal2] = useState(false);
 
   const [device, setDevice] = useState(false);
   const [projects, setProjects] = useState(false);
@@ -259,6 +262,16 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
 
+        <Icon
+          icon={BsTerminal}
+          caption="Terminal2"
+          elementId="terminal2"
+          setVisibility={setTerminal2}
+          zIndexxx={zIndexxx}
+          visibility={terminal2}
+          setZindexxx={setZindexxx}
+        />
+
         {/* <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" /> */}
 
         <Icon
@@ -330,6 +343,18 @@ const App = () => {
           setZindexxx={setZindexxx}
           elementId="terminal"
         />
+      ) : null}
+      {terminal2 ? (
+        <TerminalContextProvider>
+          <Terminal2
+            theme={themeVars}
+            setTheme={setTheme}
+            setVisibility={setTerminal2}
+            zIndexxx={zIndexxx}
+            setZindexxx={setZindexxx}
+            elementId="terminal2"
+          />
+        </TerminalContextProvider>
       ) : null}
       {about ? (
         <About

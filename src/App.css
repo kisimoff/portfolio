@@ -1003,6 +1003,10 @@ body {
     align-items: center;
   }
 
+  .nav-icon-task {
+    display: none;
+  }
+
   .nav-socials {
     display: flex;
     align-items: center;

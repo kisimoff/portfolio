@@ -893,7 +893,7 @@ class Field extends React.Component {
         })}
         <UserText input={userInput} theme={theme.cursor} />
         {/* <UserText input={this.state.input} theme={theme.cursor} /> */}
-        {ismobile && (
+        {/* {ismobile && (
           <div class="virtualKey">
             <Keyboard
               keyboardRef={(r) => (this.keyboard = r)}
@@ -924,7 +924,7 @@ class Field extends React.Component {
               onKeyPress={(e) => this.handleTypingMobile(e)}
             />
           </div>
-        )}
+        )} */}
       </div>
     );
   }

@@ -31,13 +31,13 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
       },
     },
 
-    whoami: {
+    whomadewho: {
       description: "Optional description",
       usage: "Optional usage instruction",
       fn: () => {
         return (
           <span>
-            I am a React component!<br></br> <br></br>
+            I made you<br></br>
           </span>
         );
       },
@@ -49,39 +49,51 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   }, []);
 
   return (
-    // <Draggable
-    //   cancel=".close-window"
-    //   onStart={() => {
-    //     setZindexxx(zIndexxx + 1);
-    //     document.getElementById("terminal2").style.zIndex = zIndexxx;
-    //   }}
-    // >
-    <div id="terminal2" className="terminal2">
-      <Window
-        title="Terminal"
-        elementId="terminal2"
-        theme={theme}
-        setVisibilityWindow={setVisibility}
-      />
-      <div style={theme.field}>
-        <Terminal
-          noEchoBack
-          contentStyle={{ color: "#FF8E00" }} // Text colour
-          promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
-          inputTextStyle={{ color: "red" }} // Prompt text colour
-          promptLabel={
-            <span>
-              <b>root@KisimoffOS:~$</b>
-            </span>
-          }
-          commands={commands}
-          welcomeMessage={
-            "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
-          }
+    <Draggable
+      cancel=".close-window, .no-drag"
+      onStart={() => {
+        setZindexxx(zIndexxx + 1);
+        document.getElementById("terminal2").style.zIndex = zIndexxx;
+      }}
+    >
+      <div id="terminal2" className="terminal2">
+        <Window
+          title="Terminal"
+          elementId="terminal2"
+          theme={theme}
+          setVisibilityWindow={setVisibility}
         />
+        <div style={theme.field} className="terminal-wrapper">
+          <Terminal
+            className="no-drag"
+            ignoreCommandCase={true}
+            autoFocus={true}
+            style={{ backgroundColor: "#000000", maxHeight: "500px" }}
+            contentStyle={{
+              color: "#FFFFFF",
+              fontSize: "calc(0.5vw + 0.6rem)",
+              height: "60%",
+            }} // Text colour
+            promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
+            inputTextStyle={{ color: "red" }} // Prompt text colour
+            promptLabel={
+              <div id="query">
+                <span style={{ color: "#26a269" }}>root@user</span>:
+                <span style={{ color: "#08458f" }}>
+                  <strong>~</strong>
+                </span>
+                $
+              </div>
+            }
+            messageStyle={{ color: "#FFFFFF" }} // Message colour
+            commands={commands}
+            welcomeMessage={
+              "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
+            }
+          />
+        </div>
       </div>
-    </div>
-    /* </Draggable> */
+    </Draggable>
   );
 };
 

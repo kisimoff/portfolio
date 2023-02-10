@@ -69,9 +69,15 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
             contentStyle={{ color: "#FF8E00" }} // Text colour
             promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
             inputTextStyle={{ color: "red" }} // Prompt text colour
-            promptLabel={<b>root@KisimoffOS:~$</b>}
+            promptLabel={
+              <span>
+                <b>root@KisimoffOS:~$</b>
+              </span>
+            }
             commands={commands}
-            welcomeMessage={"Welcome to the React terminal!"}
+            welcomeMessage={
+              "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
+            }
           />
         </div>
       </div>

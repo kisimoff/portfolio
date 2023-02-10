@@ -1,7 +1,7 @@
 {
   "homepage": "https://vtwenty3.github.io/kisimoffos",
   "name": "kisimoff2",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",

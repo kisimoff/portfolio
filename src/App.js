@@ -252,7 +252,7 @@ const App = () => {
         <div className="coin copper"></div>
       </div> */}
       <div className="icons">
-        <Icon
+        {/* <Icon
           icon={BsTerminal}
           caption="Terminal"
           elementId="terminal"
@@ -260,7 +260,7 @@ const App = () => {
           zIndexxx={zIndexxx}
           visibility={terminal}
           setZindexxx={setZindexxx}
-        />
+        /> */}
 
         <Icon
           icon={BsTerminal}
@@ -345,16 +345,14 @@ const App = () => {
         />
       ) : null}
       {terminal2 ? (
-        <TerminalContextProvider>
-          <Terminal2
-            theme={themeVars}
-            setTheme={setTheme}
-            setVisibility={setTerminal2}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-            elementId="terminal2"
-          />
-        </TerminalContextProvider>
+        <Terminal2
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setTerminal2}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+          elementId="terminal2"
+        />
       ) : null}
       {about ? (
         <About

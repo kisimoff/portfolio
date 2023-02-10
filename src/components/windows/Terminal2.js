@@ -31,14 +31,76 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
       },
     },
 
-    whomadewho: {
-      description: "Optional description",
-      usage: "Optional usage instruction",
+    whoami: {
       fn: () => {
         return (
           <span>
             I made you<br></br>
           </span>
+        );
+      },
+    },
+    whoami: {
+      fn: () => {
+        return (
+          <span>
+            I made you<br></br>
+          </span>
+        );
+      },
+    },
+    whoami: {
+      fn: () => {
+        return (
+          <span>
+            I made you<br></br>
+          </span>
+        );
+      },
+    },
+    skills: {
+      fn: () => {
+        return (
+          <p>
+            <b>Programming Languages: </b> C, C++, C#, Java, Python, Bash,
+            JavaScript, TypreScript, Haskell, R, GoLang <br></br> <br></br>
+            <b> Web Dev: </b> React, HTML, CSS, Node, Flask, WordPress,
+            Firebase, Nginx <br></br> <br></br>
+            <b> Experience with: </b>
+            React-Native, MySQL, Git, Docker, Travis-Ci, NPM, Docker, Ubuntu
+            Server, Hyperledger Fabric, IPFS, Tensorflow, Keras <br></br>{" "}
+            <br></br>
+            <b>Design: </b>
+            Adobe Photoshop, Adobe Premiere Pro, Figma
+          </p>
+        );
+      },
+    },
+    contact: {
+      fn: () => {
+        return (
+          <p>
+            <b>Phone Number:</b> <a href="tel:+447423533367"> +447423533367 </a>{" "}
+            <br></br> <br></br>
+            <b>Email:</b>
+            <a href="mailto:kisimovvalentin@gmail.com">
+              {" "}
+              kisimovvalentin@gmail.com{" "}
+            </a>{" "}
+            <br></br> <br></br>
+            <b>GitHub:</b>{" "}
+            <a href="https://github.com/vtwenty3">
+              {" "}
+              https://github.com/vtwenty3{" "}
+            </a>{" "}
+            <br></br> <br></br>
+            <b>LinkedIn:</b>{" "}
+            <a href="https://www.linkedin.com/in/valentin-kisimov-2719b41a1/">
+              {" "}
+              https://www.linkedin.com/in/valentin-kisimov-2719b41a1/{" "}
+            </a>
+            <br></br> <br></br>
+          </p>
         );
       },
     },
@@ -68,14 +130,31 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
             className="no-drag"
             ignoreCommandCase={true}
             autoFocus={true}
-            style={{ backgroundColor: "#000000", maxHeight: "500px" }}
+            style={{
+              backgroundColor: "#000000",
+              minHeight: "200px",
+              height: "35vh",
+              fontSize: "16px",
+              // fontSize: "calc(0.5vw + 0.6rem)",
+            }}
             contentStyle={{
               color: "#FFFFFF",
-              fontSize: "calc(0.5vw + 0.6rem)",
+              // fontSize: "calc(0.5vw + 0.6rem)",
+              fontSize: "16px",
               height: "60%",
             }} // Text colour
-            promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
-            inputTextStyle={{ color: "red" }} // Prompt text colour
+            promptLabelStyle={{
+              color: "#FFFFFF",
+              // fontSize: "calc(0.6rem)",
+              fontSize: "16px",
+            }} // Prompt label colour
+            inputTextStyle={{
+              color: "red",
+              // fontSize: "calc(0.5vw + 0.6rem)",
+              fontSize: "16px",
+
+              // marginTop: "2px",
+            }} // Prompt text colour
             promptLabel={
               <div id="query">
                 <span style={{ color: "#26a269" }}>root@user</span>:

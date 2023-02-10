@@ -49,13 +49,13 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   }, []);
 
   return (
-    <Draggable
-      cancel=".close-window"
-      onStart={() => {
-        setZindexxx(zIndexxx + 1);
-        document.getElementById("terminal2").style.zIndex = zIndexxx;
-      }}
-    >
+    // <Draggable
+    //   cancel=".close-window"
+    //   onStart={() => {
+    //     setZindexxx(zIndexxx + 1);
+    //     document.getElementById("terminal2").style.zIndex = zIndexxx;
+    //   }}
+    // >
       <div id="terminal2" className="terminal2">
         <Window
           title="Terminal"
@@ -81,7 +81,7 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
           />
         </div>
       </div>
-    </Draggable>
+    {/* </Draggable> */}
   );
 };
 

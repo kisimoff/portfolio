@@ -56,32 +56,32 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
     //     document.getElementById("terminal2").style.zIndex = zIndexxx;
     //   }}
     // >
-      <div id="terminal2" className="terminal2">
-        <Window
-          title="Terminal"
-          elementId="terminal2"
-          theme={theme}
-          setVisibilityWindow={setVisibility}
+    <div id="terminal2" className="terminal2">
+      <Window
+        title="Terminal"
+        elementId="terminal2"
+        theme={theme}
+        setVisibilityWindow={setVisibility}
+      />
+      <div style={theme.field}>
+        <Terminal
+          noEchoBack
+          contentStyle={{ color: "#FF8E00" }} // Text colour
+          promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
+          inputTextStyle={{ color: "red" }} // Prompt text colour
+          promptLabel={
+            <span>
+              <b>root@KisimoffOS:~$</b>
+            </span>
+          }
+          commands={commands}
+          welcomeMessage={
+            "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
+          }
         />
-        <div style={theme.field}>
-          <Terminal
-            noEchoBack
-            contentStyle={{ color: "#FF8E00" }} // Text colour
-            promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
-            inputTextStyle={{ color: "red" }} // Prompt text colour
-            promptLabel={
-              <span>
-                <b>root@KisimoffOS:~$</b>
-              </span>
-            }
-            commands={commands}
-            welcomeMessage={
-              "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
-            }
-          />
-        </div>
       </div>
-    {/* </Draggable> */}
+    </div>
+    /* </Draggable> */
   );
 };
 

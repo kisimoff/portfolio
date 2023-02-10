@@ -559,47 +559,17 @@ body {
   box-shadow: var(--window-shadow);
 }
 
-.editor {
-  text-align: right;
-  height: calc(100% - 46px);
-  padding: 10px 15px;
-  overflow-wrap: break-word;
-  overflow-y: scroll;
-  outline: none;
-  font-family: "Source Code Pro", monospace;
-  font-size: 18px;
-  line-height: 22px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-.mobileInput {
-  position: absolute;
-  top: -2000px;
-  left: -2000px;
-}
-
-.lineText {
-  display: inline;
-  position: relative;
-  top: -1px;
-  margin-left: 8px;
-}
-
-.preWhiteSpace {
-  white-space: pre;
-}
-
 .terminal2 {
   position: absolute;
   right: 0;
   left: 0;
   top: 0;
   bottom: 0;
+  width: 65%;
   margin: auto;
   z-index: 3;
-  width: 40%;
-  height: 40%;
   box-shadow: var(--window-shadow);
+  font-size: var(--fs-text);
 }
 
 .aboutText {

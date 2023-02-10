@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { ReactTerminal } from "react-terminal";
+import Terminal from "react-console-emulator";
 
 import Draggable from "react-draggable";
 import Window from "./Window";
@@ -16,8 +16,32 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
 
   // Define commands here
   const commands = {
-    whoami: "jackharper",
-    cd: (directory) => `changed path to ${directory}`,
+    echo: {
+      description: "Echo a passed string.",
+      usage: "echo <string>",
+      fn: (...args) => args.join(" "),
+    },
+
+    delay: {
+      description: "Delays return of value by 1000 ms.",
+      fn: () => {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve("Finished!"), 1000);
+        });
+      },
+    },
+
+    whoami: {
+      description: "Optional description",
+      usage: "Optional usage instruction",
+      fn: () => {
+        return (
+          <span>
+            I am a React component!<br></br> <br></br>
+          </span>
+        );
+      },
+    },
   };
   useEffect(() => {
     document.getElementById("terminal2").style.zIndex = zIndexxx;
@@ -40,14 +64,15 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
           setVisibilityWindow={setVisibility}
         />
         <div style={theme.field}>
-          <div>
-            <ReactTerminal
-              showControlButtons={false}
-              showControlBar={false}
-              prompt="user@kisimoffOS:-$"
-              commands={commands}
-            />
-          </div>
+          <Terminal
+            noEchoBack
+            contentStyle={{ color: "#FF8E00" }} // Text colour
+            promptLabelStyle={{ color: "#FFFFFF" }} // Prompt label colour
+            inputTextStyle={{ color: "red" }} // Prompt text colour
+            promptLabel={<b>root@KisimoffOS:~$</b>}
+            commands={commands}
+            welcomeMessage={"Welcome to the React terminal!"}
+          />
         </div>
       </div>
     </Draggable>

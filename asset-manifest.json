@@ -1,16 +1,45 @@
 {
   "files": {
-    "main.css": "/static/css/main.2000e0d8.css",
-    "main.js": "/static/js/main.cf115152.js",
+    "main.css": "/static/css/main.60d4cd30.css",
+    "main.js": "/static/js/main.f8a926ab.js",
+    "static/media/abstract.mp4": "/static/media/abstract.6eeedf84460ecfdbf05c.mp4",
+    "static/media/network.mp4": "/static/media/network.3808b860030e796337c8.mp4",
+    "static/media/electronic.mp4": "/static/media/electronic.25dfbea3259bc5da8e22.mp4",
+    "static/media/circuit.mp4": "/static/media/circuit.de6c3a11e1066baa6874.mp4",
+    "static/media/board.mp4": "/static/media/board.816dc813b26c7bbe5d1d.mp4",
+    "static/media/God.mp3": "/static/media/God.81d6c238163e45eaf721.mp3",
+    "static/media/electronic3.mp4": "/static/media/electronic3.b4d6950058d83b2edac6.mp4",
+    "static/media/electronic2.mp4": "/static/media/electronic2.1d2c41b1b9a3a9715b2e.mp4",
+    "static/media/kisimoff.mp4": "/static/media/kisimoff.42bdf7efba4b657c1b5f.mp4",
+    "static/media/board2.mp4": "/static/media/board2.0300e8d520018f6e911e.mp4",
+    "static/media/trackandtrace.mp4": "/static/media/trackandtrace.8c25e2a5344ea6db9f62.mp4",
+    "static/media/tasks2.mp4": "/static/media/tasks2.7ca04b21f04fac4f3c50.mp4",
+    "static/media/data.mp4": "/static/media/data.75bba091a40803204275.mp4",
+    "static/media/kwik.mp4": "/static/media/kwik.dd1091b5601e303dcb99.mp4",
+    "static/media/ai.mp4": "/static/media/ai.1a615d0531a653038aa8.mp4",
+    "static/media/setup.mp4": "/static/media/setup.982b9ff2760cb9f800cf.mp4",
+    "static/media/xp.jpg": "/static/media/xp.81cfbea4977dd15af6d1.jpg",
+    "static/media/mas.mp4": "/static/media/mas.bceaf73a4a209943b6b0.mp4",
+    "static/media/labyrinth.mp4": "/static/media/labyrinth.7a329b791327672be90d.mp4",
+    "static/media/asse.mp4": "/static/media/asse.b315dd3344ebd6248db6.mp4",
+    "static/media/connect.mp4": "/static/media/connect.1ddad58d622f7f385b7a.mp4",
+    "static/media/glass.mp4": "/static/media/glass.ceaf58efa8bf69e41eb1.mp4",
     "static/media/valentin-kisimov-resume.pdf": "/static/media/valentin-kisimov-resume.7d5e139fece87977b941.pdf",
     "static/media/dark.jpg": "/static/media/dark.2e3fbe7f1f50d79f112f.jpg",
     "static/media/light.jpg": "/static/media/light.85486029f9c64a3b183d.jpg",
+    "static/media/2pac.png": "/static/media/2pac.a536e8cf5312fae1ea6f.png",
+    "static/media/logoRotate.png": "/static/media/logoRotate.7b712989997d1390d676.png",
+    "static/media/logo_white.png": "/static/media/logo_white.8f52157ef8f2aa2c816c.png",
+    "static/media/logo_black.png": "/static/media/logo_black.5a54ff0a1756248439d4.png",
+    "static/media/app.txt": "/static/media/app.9cd0831f8898e69928ad.txt",
+    "static/media/css.txt": "/static/media/css.358964a44a82e3027afd.txt",
     "index.html": "/index.html",
-    "main.2000e0d8.css.map": "/static/css/main.2000e0d8.css.map",
-    "main.cf115152.js.map": "/static/js/main.cf115152.js.map"
+    "static/media/index.txt": "/static/media/index.95dc2499edef038cecd1.txt",
+    "main.60d4cd30.css.map": "/static/css/main.60d4cd30.css.map",
+    "main.f8a926ab.js.map": "/static/js/main.f8a926ab.js.map"
   },
   "entrypoints": [
-    "static/css/main.2000e0d8.css",
-    "static/js/main.cf115152.js"
+    "static/css/main.60d4cd30.css",
+    "static/js/main.f8a926ab.js"
   ]
 }

@@ -12,14 +12,15 @@ function Project(props) {
       });
   };
 
-  useEffect(() => {
-    attemptPlay();
-  }, []);
+  // useEffect(() => {
+  //   attemptPlay();
+  // }, []);
+
   return (
     <div class="container">
       <video
         className="project-animation"
-        playsinline
+        playsInline
         loop
         muted
         autoPlay

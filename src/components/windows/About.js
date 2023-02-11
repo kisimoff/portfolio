@@ -65,22 +65,33 @@ const About = ({
             >
               {" "}
               <h1>My Story</h1>
-              <p>
-                When I was 7, I saw how my father was cooling an overlocked GPU
-                with Carbon-dioxide. This marked the start of my tech passion.
-                Growing up I've spent most of my time tinkering – modding games,
-                flashing custom ROMs on Android Phones, RC modelling,
-                overclocking GPUs… These hobbies and my desire to create led me
-                to pursue a career as a developer. Nowadays I have experience in
-                many different tech fields – machine learning, front-end,
-                back-end, mobile development, blockchain etc. This is a strength
-                and a weakness, firstly as I can identify and approach a problem
-                from various perspectives, secondly as I lack a high-proficiency
-                in a particular field, which makes it hard to be a valuable
-                candidate.
-                <br></br> <br></br>
-                Play with the terminal to learn more. :&#41;
-              </p>
+              <Pace getPace={(char) => (char === "." ? 400 : 25)}>
+                <p>
+                  My tech journey began at the age of 7, when I saw my father
+                  cool an overclocked GPU with dry ice. From that moment on, I
+                  was hooked. As I grew up,I spent my time tinkering - modding
+                  games, flashing custom ROMs on Android phones, building RC
+                  models, overclocking etc.
+                  <Pause ms={600} />
+                  <br></br> <br></br>
+                  This hands-on experience, combined with my desire to create,
+                  led me to pursue a career as a developer.
+                  <Pause ms={1000} />
+                  <br></br> <br></br>
+                  Nowdays, I have a broad background in multiple tech fields,
+                  including machine learning, front-end, back-end, mobile
+                  development, and blockchain. This allows me to tackle problems
+                  from a variety of angles and bring a unique perspective to any
+                  project. While this can be seen as a strength, it may also
+                  limit my ability to demonstrate a deep level of expertise in
+                  any one particular area, making it harder for me to stand out
+                  as a highly-valued candidate.
+                  <br></br> <br></br>
+                  <Pause ms={2000} />
+                  For the curious mind, there's always more to discover. The
+                  terminal awaits.
+                </p>
+              </Pace>
             </WindupChildren>
           </div>
         </div>

@@ -9,19 +9,23 @@ function Window({ theme, title, elementId, setVisibilityWindow }) {
           {title}
         </span>
       </div>
-      <a
-        href="#"
-        className="close-window"
-        onClick={() => {
-          setVisibilityWindow(false);
+      <div>
+        <a
+          className="close-window"
+          style={theme.closeBtn}
+          href="#"
+          onClick={() => {
+            setVisibilityWindow(false);
 
-          // document.getElementById(elementId).style.display = "none";
-          // document.getElementById("task-" + elementId + "-icon").style.display =
-          //   "none";
-        }}
-      >
-        <CgClose />
-      </a>
+            // document.getElementById(elementId).style.display = "none";
+            // document.getElementById("task-" + elementId + "-icon").style.display =
+            //   "none";
+          }}
+          // style={{ color: "white", marginTop: "3px" }}
+        >
+          <CgClose />
+        </a>
+      </div>
     </div>
   );
 }

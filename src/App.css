@@ -40,6 +40,8 @@ clamp(min, target, max)
 
   /* Test project-height on mobile! */
   --projects-height: clamp(12rem, 60vmin, 65vh);
+  --projects-height-mobile: clamp(20rem, 80vmin, 65vh);
+
   --project-width: clamp(30vw, 50vmin, 40vw);
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
 
@@ -47,12 +49,19 @@ clamp(min, target, max)
   --sz-logo-nav: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
   --sz-icon-social: clamp(1.8rem, 1.4vw + 1rem, 2.5rem);
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
+  --bottom-row-icon-size: clamp(1.5rem, 1vw + 0.9rem, 2.5rem);
+  --bottom-row-icon-size-mobile: clamp(1.8rem, 1.1vw + 1rem, 3rem);
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
+
+  --fs-bigger-text-mobile: clamp(1rem, 0.4vw + 0.8rem, 2rem);
+
+  --fs-text-mobile: clamp(0.9rem, 0.4vw + 0.7rem, 1.8rem);
+
   --f-text-color: white;
 
-  --fs-window-title: clamp(1rem, 0.4vw + 0.8rem, 1.8rem);
-  --fs-project-title: clamp(0.6rem, 0.95vw + 0.2rem, 1.8rem);
+  --fs-window-title: clamp(1rem, 0.25vw + 0.9rem, 1.8rem);
+  --fs-project-title: clamp(1rem, 0.95vw + 0.3rem, 1.8rem);
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
   --padding-small: clamp(0.35rem, 0.3vw + 0.12rem, 1.5rem);
 
@@ -350,13 +359,13 @@ body {
 }
 
 .text-bottom-row-icon {
-  font-size: calc(1vw + 0.9rem);
+  font-size: var(--bottom-row-icon-size);
 }
 .text-bottom-row-icons-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 1vw;
+  gap: var(--padding);
 }
 
 .hover :hover {
@@ -650,10 +659,10 @@ body {
   background-color: rgba(210, 46, 46, 0.423);
 }
 .error {
-  color: #ff4136;
+  color: #ffffff00;
 }
 .yellow {
-  background-color: #ffdc00;
+  background-color: #ffffff85;
 }
 .info {
   color: #ffdc00;
@@ -704,6 +713,7 @@ body {
   justify-content: space-between;
   padding-left: 1rem;
   cursor: move;
+  backdrop-filter: blur(23px);
 }
 
 #field {
@@ -758,8 +768,6 @@ body {
   display: inline-block;
 }
 #query {
-  margin-right: 10px;
-  white-space: pre-line;
 }
 #cursor {
   position: relative;
@@ -844,7 +852,7 @@ body {
   left: 1px;
   width: 22px;
   height: 22px;
-  border: 1px solid #4d4d4d;
+  /* border: 1px solid #4d4d4d; */
   border-radius: 50%;
   background-color: #fafafa;
   box-sizing: border-box;
@@ -870,12 +878,12 @@ body {
 }
 .wrg-toggle--checked .wrg-toggle-circle {
   left: 27px;
-  background-color: #000000;
+  background-color: #fffefe;
 }
 .wrg-toggle--checked .wrg-toggle-container {
   left: 27px;
   border-width: 0.01%;
-  background-color: #cfceff;
+  background-color: #77b477;
 }
 
 .wrg-toggle--disabled {
@@ -991,7 +999,6 @@ body {
     background-color: transparent;
   }
 }
-
 @media only screen and (max-width: 600px), (max-height: 400px) {
   .app {
     flex-direction: column;
@@ -1030,7 +1037,7 @@ body {
     justify-content: space-evenly;
     align-items: flex-end;
     padding: 0;
-    padding-bottom: 5vh;
+    padding-bottom: 6vh;
   }
 
   .iconWrapper {
@@ -1044,6 +1051,51 @@ body {
   .terminal2 {
     width: 90%;
     margin-top: 20%;
+  }
+
+  .nothing {
+    color: #e2725b; /* good*/
+    color: #12be46;
+    color: #995cdb;
+
+    color: #180a14;
+    color: #e3e3e3;
+
+    color: #0f0e0f;
+  }
+
+  .projects {
+    height: var(--projects-height-mobile);
+  }
+
+  .projectsField {
+    height: var(--projects-height-mobile);
+    gap: 1.5rem;
+  }
+
+  .projectsRow {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .project-animation {
+    width: 100%;
+    height: auto;
+  }
+  .text {
+    width: 100%;
+    font-size: var(--fs-text-mobile);
+  }
+  .text-bottom-row {
+    font-size: var(--fs-bigger-text-mobile);
+  }
+
+  .text-bottom-row-icon {
+    font-size: var(--bottom-row-icon-size-mobile);
+  }
+
+  .text-bottom-row-icons-wrapper {
+    gap: 1.5rem;
   }
 
   /* #terminal {

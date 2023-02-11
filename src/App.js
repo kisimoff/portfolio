@@ -1,6 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Document } from "react-pdf";
-import { GiTechnoHeart } from "react-icons/gi";
 
 import "./App.css";
 import ToggleButton from "./components/ToggleButton";
@@ -16,8 +14,7 @@ import { VscGithubAlt } from "react-icons/vsc";
 import { SlSocialLinkedin } from "react-icons/sl";
 
 import { BsJournalCode } from "react-icons/bs";
-import { GiHourglass } from "react-icons/gi";
-import { BsVinyl } from "react-icons/bs";
+
 import { BsTerminal } from "react-icons/bs";
 import About from "./components/windows/About";
 import Start from "./components/windows/Start";
@@ -50,6 +47,8 @@ import download_light from "./socials/download-light.png";
 import download_dark from "./socials/download-dark.png";
 import background_dark from "./background/dark.jpg";
 import background_light from "./background/light.jpg";
+import xp from "./background/xp.jpg";
+
 import resumePdf from "./files/valentin-kisimov-resume.pdf";
 import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
 const App = () => {
@@ -64,11 +63,16 @@ const App = () => {
   const [projects, setProjects] = useState(false);
 
   const [active, setActive] = useState(true);
+
+  const isSafari = () => {
+    const ua = navigator.userAgent.toLowerCase();
+    return ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
+  };
+
   const onPress = () => {
     console.log("Hi");
     setTheme(!theme);
   };
-
   const videoEl = useRef(null);
 
   const attemptPlay = () => {
@@ -78,6 +82,47 @@ const App = () => {
         console.error("Error attempting to play", error);
       });
   };
+
+  // useEffect(() => {
+  //   attemptPlay();
+  // }, []);
+
+  // const videoParentRef = useRef();
+
+  // useEffect(() => {
+  //   // check if user agent is safari and we have the ref to the container <div />
+  //   if (isSafari() && videoParentRef.current) {
+  //     // obtain reference to the video element
+  //     const player = videoParentRef.current.children[0];
+
+  //     // if the reference to video player has been obtained
+  //     if (player) {
+  //       // set the video attributes using javascript as per the
+  //       // webkit Policy
+  //       player.controls = false;
+  //       player.playsinline = true;
+  //       player.muted = true;
+  //       player.setAttribute("muted", ""); // leave no stones unturned :)
+  //       player.autoplay = true;
+
+  //       // Let's wait for an event loop tick and be async.
+  //       setTimeout(() => {
+  //         // player.play() might return a promise but it's not guaranteed crossbrowser.
+  //         const promise = player.play();
+  //         // let's play safe to ensure that if we do have a promise
+  //         if (promise.then) {
+  //           promise
+  //             .then(() => {})
+  //             .catch(() => {
+  //               // if promise fails, hide the video and fallback to <img> tag
+  //               videoParentRef.current.style.display = "none";
+  //               // setShouldUseImage(true);
+  //             });
+  //         }
+  //       }, 0);
+  //     }
+  //   }
+  // }, []);
 
   const themeVars =
     theme === true
@@ -89,28 +134,14 @@ const App = () => {
             backgroundRepeat: "no-repeat",
             width: "100vw",
             height: "100vh",
-            transition: "all 0.4s ease",
+            transition: "all 1s ease-in",
           },
           window: {
-            // backgroundColor: "#2424248e",
-            // backgroundColor: "#360133b5",
-            // backgroundColor: "#52004e75",
-
-            // backgroundColor: "#65032dc3",
-
-            // backgroundColor: "#4a0147a7",
-            // backgroundColor: "#77014ea0",
-            // backgroundColor: "#77014ea0",
             backgroundColor: "#cfcfcf46",
-
-            backdropFilter: "blur(23px)",
             color: "white",
-            //color: "black",
-            // transition: "all 1s ease",
+            transition: "all 1s ease-in",
           },
           field: {
-            // backgroundColor: "#1f1b26fa",
-            // backdropFilter: "blur(3px)",
             color: "#F4F4F4",
             fontWeight: "normal",
             backgroundColor: "#0f0e0ff3",
@@ -119,12 +150,14 @@ const App = () => {
             borderRight: "1px solid #cfcfcf46",
             boxSizing: "border-box",
             boxShadow: "0 2px 5px #111",
+            transition: "all 1s ease-in",
           },
-          cursor: { animation: "1.02s blink-dark step-end infinite" },
+          // cursor: { animation: "1.02s blink-dark step-end infinite" },
+          closeBtn: { color: "white" },
         }
       : {
           app: {
-            backgroundImage: `url(${background_light})`,
+            backgroundImage: `url(${xp})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -133,9 +166,17 @@ const App = () => {
             transition: "all 1s ease",
           },
           window: {
-            backgroundColor: "#5F5C6D",
+            background: "rgb(19,60,156)",
+            background:
+              "linear-gradient(0deg, rgba(0,59,214,1) 4%, rgba(0,102,253,1) 9%, rgba(0,100,253,1) 15%, rgba(0,88,230,1) 77%, rgba(54,143,252,1) 91%, rgba(13,96,232,1) 95%)",
             color: "#E3E3E3",
             // transition: "all 1.5s ease",
+            borderTopRightRadius: "8px",
+            borderTopLeftRadius: "8px",
+            transition: "all 1s ease-in",
+            fontFamily: "Segoe UI",
+            fontWeight: "600",
+            textShadow: "1px 2px 2px rgba(0, 0, 0, 0.4)",
           },
           field: {
             backgroundColor: "#E3E3E3",
@@ -143,15 +184,33 @@ const App = () => {
             fontWeight: "normal",
             // transition: "all 1.5s ease",
             boxShadow: "0 2px 5px #33333375",
+            boxSizing: "border-box",
+            // borderTop: "0px solid #0528b3",
+            // borderLeft: "4px solid #1a4bbe",
+            borderRight: "4px solid #003bd6",
+            borderBottom: "4px solid #003bd6",
+            borderLeft: "4px solid #003bd6",
+            transition: "all 1s ease-in",
           },
-          cursor: { animation: "1.02s blink-light step-end infinite" },
+          // cursor: { animation: "1.02s blink-light step-end infinite" },
+          closeBtn: {
+            color: "white",
+            backgroundColor: "#ee6247",
+            height: "25px",
+            width: "25px",
+            margin: "6px",
+            border: "2px solid #ffffff85",
+            borderRadius: "4px",
+            fontSize: "22px",
+            transition: "all 0.8s ease-in",
+          },
         };
 
   return (
     <div id="app" className="app" style={themeVars.app}>
       <video
         className="video-background"
-        playsinline
+        playsInline
         loop
         muted
         autoPlay
@@ -159,19 +218,54 @@ const App = () => {
         ref={videoEl}
         type="video/mp4"
       />
+
+      {/* <div
+        className="video-background"
+        ref={videoParentRef}
+        dangerouslySetInnerHTML={{
+          __html: `
+        <video
+          loop
+          muted
+          autoplay
+          playsinline
+          preload="metadata"
+        >
+        <source src="${electronic3}" type="video/mp4" />
+        </video>`,
+        }}
+      /> */}
+
       {/* abstract board network circuit */}
 
-      <div className="navbar">
+      <div
+        className="navbar"
+        style={
+          theme
+            ? { color: "white", transition: "all 1.5s ease" }
+            : {
+                background: "rgb(23,65,163",
+                background:
+                  "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
+                transition: "all 1.5s ease",
+              } //light theme
+        }
+      >
         <div
           className="nav-heading"
           id="test"
           style={
             theme
               ? { color: "white", transition: "all 1.5s ease" }
-              : { color: "black", transition: "all 1.5s ease" }
+              : {
+                  color: "white",
+                  height: "100%",
+                  borderBottomRightRadius: "10px",
+                  borderTopRightRadius: "10px",
+                }
           }
         >
-          <img id="logo" alt="logo" src={theme ? logo_white : logo_black} />
+          <img id="logo" alt="logo" src={logo_white} />
 
           <p>
             Kisim
@@ -229,7 +323,13 @@ const App = () => {
           ) : null}
         </div>
         <div className="nav-socials">
-          <a href="https://www.linkedin.com/in/valentin-kisimov-2719b41a1/">
+          <a
+            onClick={() => {
+              window.open(
+                "https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
+              );
+            }}
+          >
             <SlSocialLinkedin className="nav-social-svg" />
             {/* <img
               alt="linkedin"
@@ -237,7 +337,11 @@ const App = () => {
               id="linkedin"
             /> */}
           </a>
-          <a href="https://github.com/vtwenty3">
+          <a
+            onClick={() => {
+              window.open("https://github.com/vtwenty3");
+            }}
+          >
             <VscGithubAlt className="nav-social-svg" />
             {/* <img
               alt="github"
@@ -304,15 +408,18 @@ const App = () => {
         <div className="hoverIcon">
           <a
             className="iconWrapper"
-            href={resumePdf}
-            download="valentin-kisimov-resume.pdf"
+            onClick={() => {
+              window.open(
+                "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
+              );
+            }}
+            // href={
+            //   "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
+            // }
           >
             {" "}
             <VscFilePdf className="icon" />
-            <span
-              className="caption"
-              style={theme ? { color: "white" } : { color: "black" }}
-            >
+            <span className="caption">
               {/* <img
                 style={{ marginRight: "10px", marginBottom: "10px" }}
                 alt="download"
@@ -339,6 +446,7 @@ const App = () => {
           theme={themeVars}
           setTheme={setTheme}
           setVisibility={setTerminal}
+          alabala={setProjects}
           zIndexxx={zIndexxx}
           setZindexxx={setZindexxx}
           elementId="terminal"

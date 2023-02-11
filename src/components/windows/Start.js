@@ -63,8 +63,18 @@ const Start = ({ theme, setVisibility }) => {
                   {"Welcome to my world. "}
                   <Pause ms={1300} />
                   <br></br>
-                  {"I'll self destruct shortly... "}
-                  <Pause ms={2300} />
+                  {"I'll self destruct in..."} <br></br>
+                  <Pause ms={500} />
+                  {"4 "}
+                  <Pause ms={1000} />
+                  {"3 "}
+                  <Pause ms={1000} />
+                  {"2 "}
+                  <Pause ms={1000} />
+                  {"1 "}
+                  <Pause ms={1000} />
+                  {"Boom."}
+                  <Pause ms={200} />
                 </Pace>
               </p>
             </WindupChildren>

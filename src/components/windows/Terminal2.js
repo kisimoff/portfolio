@@ -1,5 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import Terminal from "react-console-emulator";
+import axios from "axios";
+import app from "./app.txt";
+import css from "./css.txt";
+import index from "./index.txt";
 
 import Draggable from "react-draggable";
 import Window from "./Window";
@@ -11,17 +15,19 @@ import {
   Pace,
 } from "windups";
 
-const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
-  const [zIndexD, setzIndexD] = useState(100);
-
+const Terminal2 = ({
+  theme,
+  setVisibility,
+  zIndexxx,
+  setZindexxx,
+  alabala,
+  dark,
+}) => {
+  const [ip, setIP] = useState("");
+  const [contry, setCountry] = useState("");
+  const [city, setCity] = useState("");
   // Define commands here
   const commands = {
-    echo: {
-      description: "Echo a passed string.",
-      usage: "echo <string>",
-      fn: (...args) => args.join(" "),
-    },
-
     delay: {
       description: "Delays return of value by 1000 ms.",
       fn: () => {
@@ -31,34 +37,8 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
       },
     },
 
-    whoami: {
-      fn: () => {
-        return (
-          <span>
-            I made you<br></br>
-          </span>
-        );
-      },
-    },
-    whoami: {
-      fn: () => {
-        return (
-          <span>
-            I made you<br></br>
-          </span>
-        );
-      },
-    },
-    whoami: {
-      fn: () => {
-        return (
-          <span>
-            I made you<br></br>
-          </span>
-        );
-      },
-    },
     skills: {
+      description: "Lists my skills",
       fn: () => {
         return (
           <p>
@@ -77,37 +57,144 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
       },
     },
     contact: {
+      description: "Displays all contact information",
+
+      fn: () => {
+        return (
+          <div style={{ textDecoration: "none" }}>
+            <p>
+              <b>Phone Number:</b>{" "}
+              <a style={{ color: "#995cdb" }} href="tel:+447423533367">
+                {" "}
+                +447423533367{" "}
+              </a>{" "}
+              <br></br> <br></br>
+              <b>Email:</b>
+              <a
+                style={{ color: "#995cdb" }}
+                href="mailto:kisimovvalentin@gmail.com"
+              >
+                {" "}
+                kisimovvalentin@gmail.com{" "}
+              </a>{" "}
+              <br></br> <br></br>
+              <b>GitHub:</b>{" "}
+              <a
+                style={{ color: "#995cdb" }}
+                href="https://github.com/vtwenty3"
+              >
+                {" "}
+                https://github.com/vtwenty3{" "}
+              </a>{" "}
+              <br></br> <br></br>
+              <b>LinkedIn:</b>{" "}
+              <a
+                style={{ color: "#995cdb" }}
+                href="https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
+              >
+                {" "}
+                https://www.linkedin.com/in/valentin-kisimov-2719b41a1/{" "}
+              </a>
+              <br></br> <br></br>
+            </p>
+          </div>
+        );
+      },
+    },
+
+    ipconfig: {
+      description: "Displays your ip address",
+      fn: () => {
+        return <span>Your IP Address is {ip} </span>;
+      },
+    },
+
+    whereami: {
+      description: "Displays your location ",
+      fn: () => {
+        return (
+          <span>
+            Based on your ip you are in {contry}, {city}.{" "}
+          </span>
+        );
+      },
+    },
+    resume: {
+      description: "Downloads my resume ",
+      fn: () => {
+        window.open(
+          "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
+        );
+        return (
+          <span>
+            Your are in {contry}, {city}{" "}
+          </span>
+        );
+      },
+    },
+    tellmemore: {
+      description: "Tells you more about me",
+      fn: () => {
+        return <span>Under Construction...</span>;
+      },
+    },
+    ls: {
+      description: "lists all files and folders of the current directory",
       fn: () => {
         return (
           <p>
-            <b>Phone Number:</b> <a href="tel:+447423533367"> +447423533367 </a>{" "}
-            <br></br> <br></br>
-            <b>Email:</b>
-            <a href="mailto:kisimovvalentin@gmail.com">
-              {" "}
-              kisimovvalentin@gmail.com{" "}
-            </a>{" "}
-            <br></br> <br></br>
-            <b>GitHub:</b>{" "}
-            <a href="https://github.com/vtwenty3">
-              {" "}
-              https://github.com/vtwenty3{" "}
-            </a>{" "}
-            <br></br> <br></br>
-            <b>LinkedIn:</b>{" "}
-            <a href="https://www.linkedin.com/in/valentin-kisimov-2719b41a1/">
-              {" "}
-              https://www.linkedin.com/in/valentin-kisimov-2719b41a1/{" "}
-            </a>
-            <br></br> <br></br>
+            App.js App.css index.js <br></br> animated components img
+            <br></br>
           </p>
         );
       },
     },
+    pwd: {
+      description: "shows current directory",
+      fn: () => {
+        return <p>home/kisimoffOS/app</p>;
+      },
+    },
+    cd: {
+      description: "changes directory",
+      fn: () => {
+        return <p>Premission denied</p>;
+      },
+    },
+    cat: {
+      description: "reads a file",
+      fn: (args) => {
+        return (
+          <div>
+            {args == "app.js" ? <embed src={app}></embed> : null}
+            {args == "app.css" ? <embed src={css}></embed> : null}
+            {args == "index.js" ? <embed src={index}></embed> : null}
+          </div>
+        );
+      },
+    },
+    minios: {
+      description: "runs mini kisimoffos in the console",
+      fn: () => {
+        return (
+          <div>
+            <embed src="file.txt"></embed>
+          </div>
+        );
+      },
+    },
+  };
+  const getData = async () => {
+    const res = await axios.get("https://geolocation-db.com/json/");
+    console.log(res.data);
+    setIP(res.data.IPv4);
+    setCity(res.data.city);
+    setCountry(res.data.country_name);
   };
   useEffect(() => {
     document.getElementById("terminal2").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
+    getData();
   }, []);
 
   return (
@@ -120,6 +207,7 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
     >
       <div id="terminal2" className="terminal2">
         <Window
+          dark={dark}
           title="Terminal"
           elementId="terminal2"
           theme={theme}
@@ -131,43 +219,42 @@ const Terminal2 = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
             ignoreCommandCase={true}
             autoFocus={true}
             style={{
-              backgroundColor: "#000000",
+              backgroundColor: "#0f0e0f",
               minHeight: "200px",
+              borderRadius: "0px",
               height: "35vh",
               fontSize: "16px",
-              // fontSize: "calc(0.5vw + 0.6rem)",
             }}
+            messageStyle={{ color: "#12be46" }}
             contentStyle={{
-              color: "#FFFFFF",
-              // fontSize: "calc(0.5vw + 0.6rem)",
+              fontFamily: "Ubuntu Mono",
+              color: "#e3e3e3",
               fontSize: "16px",
               height: "60%",
-            }} // Text colour
+            }}
             promptLabelStyle={{
-              color: "#FFFFFF",
-              // fontSize: "calc(0.6rem)",
+              color: "white",
               fontSize: "16px",
-            }} // Prompt label colour
+            }}
             inputTextStyle={{
-              color: "red",
-              // fontSize: "calc(0.5vw + 0.6rem)",
-              fontSize: "16px",
-
-              // marginTop: "2px",
-            }} // Prompt text colour
+              color: "#acacac",
+              fontSize: "15px",
+            }}
             promptLabel={
               <div id="query">
-                <span style={{ color: "#26a269" }}>root@user</span>:
-                <span style={{ color: "#08458f" }}>
+                <span style={{ color: "#e3e3e3" }}>root@user</span>:
+                <span style={{ color: "#6590e0" }}>
                   <strong>~</strong>
                 </span>
                 $
               </div>
             }
-            messageStyle={{ color: "#FFFFFF" }} // Message colour
             commands={commands}
             welcomeMessage={
-              "KisimoffOS [Version 2.3.1] \n (c) All rights reserved. \n Type help to list commands. \n \n"
+              <div>
+                Kisimoff OS [Version 2.3.1] \n (c) All rights reserved. \n
+                <span> Type help to list commands. \n \n</span> <br></br>
+              </div>
             }
           />
         </div>

@@ -52,19 +52,6 @@ const DeviceInfo = ({
       console.log(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
       setGpu(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
     }
-    if ("getBattery" in navigator) {
-      const battery = navigator.getBattery();
-
-      battery.then((battery) => {
-        setBatteryLevel(battery.level * 100);
-        console.log(battery.level * 100);
-        console.log(battery);
-
-        battery.addEventListener("levelchange", () => {
-          setBatteryLevel(battery.level * 100);
-        });
-      });
-    }
 
     getData();
   }, []);
@@ -78,7 +65,7 @@ const DeviceInfo = ({
         console.log(zIndexxx);
       }}
     >
-      <div className="deviceInfo" id="deviceInfo" style={theme.field}>
+      <div className="deviceInfo" id="deviceInfo">
         {/* <div id="window" style={theme.window}>
           <span id="title" style={{ color: theme.window.color }}>
             Device Info

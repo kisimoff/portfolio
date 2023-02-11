@@ -54,9 +54,9 @@ clamp(min, target, max)
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
 
-  --fs-bigger-text-mobile: clamp(1rem, 0.4vw + 0.8rem, 2rem);
+  --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
 
-  --fs-text-mobile: clamp(0.9rem, 0.4vw + 0.7rem, 1.8rem);
+  --fs-text-mobile: clamp(0.73rem, 0.4vw + 0.6rem, 1.8rem);
 
   --f-text-color: white;
 
@@ -1080,17 +1080,9 @@ body {
     margin-top: 20%;
   }
 
-  .nothing {
-    color: #e2725b; /* good*/
-    color: #12be46;
-    color: #995cdb;
-    color: #180a14;
-    color: #e3e3e3;
-    color: #0f0e0f;
-  }
-
   .projects {
     height: var(--projects-height-mobile);
+    margin-top: 15%;
   }
 
   .projectsField {

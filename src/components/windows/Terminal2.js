@@ -223,22 +223,22 @@ const Terminal2 = ({
               minHeight: "200px",
               borderRadius: "0px",
               height: "35vh",
-              fontSize: "16px",
+              fontSize: "17px",
             }}
             messageStyle={{ color: "#12be46" }}
             contentStyle={{
               fontFamily: "Ubuntu Mono",
               color: "#e3e3e3",
-              fontSize: "16px",
+              fontSize: "17px",
               height: "60%",
             }}
             promptLabelStyle={{
               color: "white",
-              fontSize: "16px",
+              fontSize: "17px",
             }}
             inputTextStyle={{
               color: "#acacac",
-              fontSize: "15px",
+              fontSize: "16px",
             }}
             promptLabel={
               <div id="query">

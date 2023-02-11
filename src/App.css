@@ -42,7 +42,7 @@ clamp(min, target, max)
   --projects-height: clamp(12rem, 60vmin, 65vh);
   --projects-height-mobile: clamp(20rem, 80vmin, 65vh);
 
-  --project-width: clamp(30vw, 50vmin, 40vw);
+  --project-width: clamp(30vw, 50vmin, 44vw);
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
 
   --fs-navbar: clamp(1.3rem, 1vw + 1.2rem, 2.6rem);
@@ -74,6 +74,7 @@ clamp(min, target, max)
 
 body {
   overflow: hidden;
+
   /* background: rgb(239, 63, 123);
   background: linear-gradient(
     0deg,
@@ -97,6 +98,16 @@ body {
 
 .app {
   display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column-reverse;
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.appTablet {
+  display: flex;
+  width: 100vw;
+  height: -webkit-fill-available;
   flex-direction: column-reverse;
   font-family: "Ubuntu Mono", monospace;
 }
@@ -104,6 +115,7 @@ body {
 .navbar {
   display: flex;
   width: 100%;
+
   flex-direction: row;
   padding: var(--padding-small);
   /* background-color: rgba(37, 37, 37, 0.314); */
@@ -408,7 +420,9 @@ body {
   flex: 1;
   display: flex;
   overflow: auto;
-  padding: var(--padding);
+  flex-direction: column;
+  padding-left: var(--padding);
+  padding-right: var(--padding);
 }
 
 .projectsField {
@@ -421,6 +435,15 @@ body {
 .projectsRow {
   display: flex;
   gap: var(--padding);
+}
+
+.projectsExplain {
+  padding: 1rem;
+  font-size: var(--fs-text);
+  max-width: 60vw;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .deviceInfo {
@@ -999,7 +1022,7 @@ body {
     background-color: transparent;
   }
 }
-@media only screen and (max-width: 600px), (max-height: 400px) {
+@media only screen and (max-width: 800px), (max-height: 400px) {
   .app {
     flex-direction: column;
     overflow: hidden;
@@ -1057,10 +1080,8 @@ body {
     color: #e2725b; /* good*/
     color: #12be46;
     color: #995cdb;
-
     color: #180a14;
     color: #e3e3e3;
-
     color: #0f0e0f;
   }
 

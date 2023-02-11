@@ -12,6 +12,7 @@ import {
   deviceType,
   mobileModel,
   mobileVendor,
+  isTablet,
   deviceDetect,
   isMobile,
 } from "react-device-detect";
@@ -96,6 +97,12 @@ const DeviceInfo = ({
             {isMobile ? (
               <span>
                 Device: {mobileVendor} {mobileModel}
+                <br></br>
+              </span>
+            ) : null}{" "}
+            {isTablet ? (
+              <span>
+                Tablet: true
                 <br></br>
               </span>
             ) : null}{" "}

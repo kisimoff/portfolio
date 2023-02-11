@@ -8,6 +8,7 @@ import { TerminalContextProvider } from "react-terminal";
 
 import { BsLinkedin, BsPersonCircle } from "react-icons/bs";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+import { isSafari, isTablet, isMobile } from "react-device-detect";
 
 import { VscFilePdf } from "react-icons/vsc";
 import { VscGithubAlt } from "react-icons/vsc";
@@ -63,11 +64,6 @@ const App = () => {
   const [projects, setProjects] = useState(false);
 
   const [active, setActive] = useState(true);
-
-  const isSafari = () => {
-    const ua = navigator.userAgent.toLowerCase();
-    return ua.indexOf("safari") > -1 && ua.indexOf("chrome") < 0;
-  };
 
   const onPress = () => {
     console.log("Hi");
@@ -132,9 +128,9 @@ const App = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            width: "100vw",
-            height: "100vh",
-            transition: "all 1s ease-in",
+            // width: "100vw",
+            // height: "100vh",
+            // transition: "all 1s ease-in",
           },
           window: {
             backgroundColor: "#cfcfcf46",
@@ -161,9 +157,9 @@ const App = () => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-            width: "100vw",
-            height: "100vh",
-            transition: "all 1s ease",
+            // width: "100%",
+            // height: "100%",
+            // transition: "all 1s ease",
           },
           window: {
             background: "rgb(19,60,156)",
@@ -207,7 +203,11 @@ const App = () => {
         };
 
   return (
-    <div id="app" className="app" style={themeVars.app}>
+    <div
+      id="app"
+      className={isTablet ? "appTablet" : "app"}
+      style={themeVars.app}
+    >
       <video
         className="video-background"
         playsInline
@@ -267,21 +267,24 @@ const App = () => {
         >
           <img id="logo" alt="logo" src={logo_white} />
 
-          <p>
+          <span style={isTablet ? { width: "350px" } : null}>
             Kisim
             <ToggleButton onChange={onPress} />
             {theme ? "ff" : "n"}
             &nbsp;OS
-          </p>
+          </span>
         </div>
-        <div className="nav-icon-task">
-          {terminal ? (
+        <div
+          className="nav-icon-task"
+          style={isTablet ? { display: "none" } : null}
+        >
+          {terminal2 ? (
             <IconTask
               icon={BsTerminal}
               caption="Terminal"
-              elementId="terminal"
+              elementId="terminal2"
               selfId="task-terminal-icon"
-              setVisibility={setTerminal}
+              setVisibility={setTerminal2}
               zIndexxx={zIndexxx}
               setZindexxx={setZindexxx}
             />
@@ -368,7 +371,7 @@ const App = () => {
 
         <Icon
           icon={BsTerminal}
-          caption="Terminal2"
+          caption="Terminal"
           elementId="terminal2"
           setVisibility={setTerminal2}
           zIndexxx={zIndexxx}
@@ -441,7 +444,7 @@ const App = () => {
         /> */}
         {/* <Icon icon={VscFilePdf} caption="Pdf" line2="Viewer" elementId="pdf" /> */}
       </div>
-      {terminal ? (
+      {/* {terminal ? (
         <Terminal
           theme={themeVars}
           setTheme={setTheme}
@@ -451,7 +454,7 @@ const App = () => {
           setZindexxx={setZindexxx}
           elementId="terminal"
         />
-      ) : null}
+      ) : null} */}
       {terminal2 ? (
         <Terminal2
           theme={themeVars}

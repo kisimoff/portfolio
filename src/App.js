@@ -327,6 +327,7 @@ const App = () => {
         </div>
         <div className="nav-socials">
           <a
+            href="#"
             onClick={() => {
               window.open(
                 "https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
@@ -341,6 +342,7 @@ const App = () => {
             /> */}
           </a>
           <a
+            href="#"
             onClick={() => {
               window.open("https://github.com/vtwenty3");
             }}
@@ -411,6 +413,7 @@ const App = () => {
         <div className="hoverIcon">
           <a
             className="iconWrapper"
+            href="#"
             onClick={() => {
               window.open(
                 "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Terminal from "react-console-emulator";
 import axios from "axios";
 import app from "./app.txt";
@@ -7,13 +7,13 @@ import index from "./index.txt";
 
 import Draggable from "react-draggable";
 import Window from "./Window";
-import {
-  useWindupString,
-  WindupChildren,
-  Pause,
-  Linebreaker,
-  Pace,
-} from "windups";
+// import {
+//   useWindupString,
+//   WindupChildren,
+//   Pause,
+//   Linebreaker,
+//   Pace,
+// } from "windups";
 
 const Terminal2 = ({
   theme,
@@ -143,7 +143,7 @@ const Terminal2 = ({
       fn: () => {
         return (
           <p>
-            App.js App.css index.js <br></br> animated components img
+            app.js app.css index.js <br></br> animated components img
             <br></br>
           </p>
         );
@@ -166,9 +166,33 @@ const Terminal2 = ({
       fn: (args) => {
         return (
           <div>
-            {args == "app.js" ? <embed src={app}></embed> : null}
-            {args == "app.css" ? <embed src={css}></embed> : null}
-            {args == "index.js" ? <embed src={index}></embed> : null}
+            {args === "app.js" ? (
+              <object
+                width="270"
+                height="200"
+                type="text/plain"
+                data={app}
+                border="0"
+              ></object>
+            ) : null}
+            {args === "app.css" ? (
+              <object
+                width="270"
+                height="200"
+                type="text/plain"
+                data={css}
+                border="0"
+              ></object>
+            ) : null}
+            {args === "index.js" ? (
+              <object
+                width="270"
+                height="200"
+                type="text/plain"
+                data={index}
+                border="0"
+              ></object>
+            ) : null}
           </div>
         );
       },

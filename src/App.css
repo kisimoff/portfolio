@@ -158,7 +158,11 @@ body {
 
 .nav-socials a {
   color: white;
-  transition: all 0.2s linear;
+}
+
+.nav-social-svg:hover {
+  transform: scale(1.07);
+  transition: all 0.1s linear;
 }
 
 /* #github {

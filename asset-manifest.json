@@ -1,9 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.d6d53f27.css",
-    "main.js": "/static/js/main.6a2a5954.js",
+    "main.css": "/static/css/main.9219f79d.css",
+    "main.js": "/static/js/main.4b1ee3ce.js",
     "static/media/abstract.mp4": "/static/media/abstract.6eeedf84460ecfdbf05c.mp4",
     "static/media/network.mp4": "/static/media/network.3808b860030e796337c8.mp4",
+    "static/media/portal.mp4": "/static/media/portal.eb1976eed766def70454.mp4",
     "static/media/electronic.mp4": "/static/media/electronic.25dfbea3259bc5da8e22.mp4",
     "static/media/circuit.mp4": "/static/media/circuit.de6c3a11e1066baa6874.mp4",
     "static/media/board.mp4": "/static/media/board.816dc813b26c7bbe5d1d.mp4",
@@ -25,21 +26,22 @@
     "static/media/connect.mp4": "/static/media/connect.1ddad58d622f7f385b7a.mp4",
     "static/media/glass.mp4": "/static/media/glass.ceaf58efa8bf69e41eb1.mp4",
     "static/media/valentin-kisimov-resume.pdf": "/static/media/valentin-kisimov-resume.7d5e139fece87977b941.pdf",
+    "static/media/logoboot.png": "/static/media/logoboot.3742751ba098c3084a63.png",
     "static/media/dark.jpg": "/static/media/dark.2e3fbe7f1f50d79f112f.jpg",
     "static/media/light.jpg": "/static/media/light.85486029f9c64a3b183d.jpg",
     "static/media/2pac.png": "/static/media/2pac.a536e8cf5312fae1ea6f.png",
-    "static/media/logoRotate.png": "/static/media/logoRotate.7b712989997d1390d676.png",
+    "static/media/logoboot1.png": "/static/media/logoboot1.7b712989997d1390d676.png",
     "static/media/logo_white.png": "/static/media/logo_white.8f52157ef8f2aa2c816c.png",
     "static/media/logo_black.png": "/static/media/logo_black.5a54ff0a1756248439d4.png",
     "static/media/app.txt": "/static/media/app.9cd0831f8898e69928ad.txt",
     "static/media/css.txt": "/static/media/css.358964a44a82e3027afd.txt",
     "index.html": "/index.html",
     "static/media/index.txt": "/static/media/index.95dc2499edef038cecd1.txt",
-    "main.d6d53f27.css.map": "/static/css/main.d6d53f27.css.map",
-    "main.6a2a5954.js.map": "/static/js/main.6a2a5954.js.map"
+    "main.9219f79d.css.map": "/static/css/main.9219f79d.css.map",
+    "main.4b1ee3ce.js.map": "/static/js/main.4b1ee3ce.js.map"
   },
   "entrypoints": [
-    "static/css/main.d6d53f27.css",
-    "static/js/main.6a2a5954.js"
+    "static/css/main.9219f79d.css",
+    "static/js/main.4b1ee3ce.js"
   ]
 }

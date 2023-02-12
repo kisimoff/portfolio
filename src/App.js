@@ -278,18 +278,18 @@ const App = () => {
               setLogovis(true);
             }}
           >
-            <Pace ms={3}>
+            <Pace ms={2}>
               Kisimoff OS v2.3.2 <br></br> <br></br>
               Loading system components...
-              <Pause ms={300} /> OK <br></br> <br></br> <Pause ms={150} />
+              <Pause ms={200} /> OK <br></br> <br></br> <Pause ms={150} />
               Initializing BIOS...
-              <Pause ms={500} /> OK <br></br> <br></br> <Pause ms={220} />
+              <Pause ms={300} /> OK <br></br> <br></br> <Pause ms={120} />
               Checking hardware configuration... <br></br>
-              <br></br> <Pause ms={450} />
+              <br></br> <Pause ms={350} />
               Root OS: {osName} {osVersion}...
-              <Pause ms={350} /> OK <br></br> <br></br> <Pause ms={200} />
+              <Pause ms={350} /> OK <br></br> <br></br> <Pause ms={400} />
               Starting system services...
-              <Pause ms={750} /> OK <br></br> <br></br> <Pause ms={300} />
+              <Pause ms={550} /> OK <br></br> <br></br> <Pause ms={150} />
               Initializing security protocols...
               <Pause ms={400} /> OK
               {/* System time: [insert current time here] <br></br> <br></br> */}

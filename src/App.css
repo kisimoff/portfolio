@@ -1125,7 +1125,7 @@ body {
     justify-content: space-evenly;
     align-items: flex-end;
     padding: 0;
-    /* padding-bottom: 6vh; */
+    padding-bottom: 0.5rem;
   }
 
   .iconWrapper {

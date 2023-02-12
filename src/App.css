@@ -84,6 +84,7 @@ body {
     rgba(0, 0, 0, 1) 100%
   ); */
 }
+
 .video-background {
   width: 100vw;
   height: 100vh;
@@ -104,13 +105,92 @@ body {
   font-family: "Ubuntu Mono", monospace;
 }
 
-.appTablet {
+.boot-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  z-index: 20;
+}
+
+.boot-screen-text {
+  color: white;
+}
+.spinner {
+  position: absolute;
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  transform: translate(-50%, -50%);
+  z-index: 50;
+}
+
+.logoBoot img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.logoBoot img {
+  position: absolute;
+  height: 150px;
+  z-index: 60;
+}
+
+.login-screen {
+  display: none;
+  background-color: #aa0404;
+}
+
+.loginComplete {
+  color: green;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 2rem;
+  height: 30vh;
+  width: 100vw;
+}
+
+.login-button {
+  height: auto;
+  z-index: 51;
+  background-color: #282828;
+  border: 2px solid #a3a3a3;
+  color: #ebebeb;
+  font-size: 1.2rem;
+  padding: 0.5rem 2rem;
+  width: 230px;
+
+  /* margin-top: 50px;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); */
+  height: auto;
+  z-index: 51;
+}
+
+@supports (height: 100dvh) {
+  .app {
+    height: 100dvh;
+  }
+  .icons {
+    height: 100dvh;
+  }
+}
+
+/* .appTablet {
   display: flex;
   width: 100vw;
   height: -webkit-fill-available;
   flex-direction: column-reverse;
   font-family: "Ubuntu Mono", monospace;
-}
+} */
 
 .navbar {
   display: flex;
@@ -291,11 +371,11 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 1%;
-  padding-left: 1%;
-  height: 90vh;
+  padding: var(--padding);
+  height: 100vh;
   width: auto;
 }
+
 .imageW {
   width: 500px;
 }
@@ -513,32 +593,12 @@ body {
   padding-bottom: 1.5rem;
 }
 
-.logorotate {
-  /* animation: App-logo-spin infinite 6s linear reverse; */
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px #919191, 1px 2px 1px #919191, 1px 3px 1px #919191,
-    1px 4px 1px #919191, 1px 5px 1px #919191, 1px 6px 1px #919191,
-    1px 7px 1px #919191, 1px 8px 1px #919191, 1px 9px 1px #919191,
-    1px 10px 1px #919191, 1px 18px 6px rgba(16, 16, 16, 0.4),
-    1px 22px 10px rgba(16, 16, 16, 0.2), 1px 25px 35px rgba(16, 16, 16, 0.2),
-    1px 30px 60px rgba(16, 16, 16, 0.4);
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotatey(0deg);
   }
   to {
     transform: rotatey(360deg);
-  }
-}
-
-@keyframes rotation {
-  from {
-    transform: logorotate(0deg);
-  }
-  to {
-    transform: logorotate(359deg);
   }
 }
 
@@ -930,13 +990,6 @@ body {
   float: right;
 }
 
-:root {
-  --lowlight: #111;
-  --side: #222222;
-  --side-dark: #ffffff;
-  --coin-size: 7rem;
-  --coin-face: url("./img/logoRotate.png");
-}
 .coinWrapper {
   position: absolute;
   width: 100px;
@@ -1030,7 +1083,15 @@ body {
   .app {
     flex-direction: column;
     overflow: hidden;
+    /* height: 100cqh; */
+    /* height: -webkit-fill-available;
+    height: -moz-available;
+    height: fill-available; */
     /* maximum-scale:1; */
+  }
+
+  .video-background {
+    height: stretch;
   }
 
   .nav-heading {
@@ -1064,7 +1125,7 @@ body {
     justify-content: space-evenly;
     align-items: flex-end;
     padding: 0;
-    padding-bottom: 6vh;
+    /* padding-bottom: 6vh; */
   }
 
   .iconWrapper {

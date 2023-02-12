@@ -4,11 +4,25 @@ import "./App.css";
 import ToggleButton from "./components/ToggleButton";
 import Terminal from "./components/windows/Terminal";
 import Terminal2 from "./components/windows/Terminal2";
-import { TerminalContextProvider } from "react-terminal";
+import { SpinnerCircular } from "spinners-react";
 
+import { TerminalContextProvider } from "react-terminal";
+import {
+  useWindupString,
+  WindupChildren,
+  Pause,
+  Linebreaker,
+  Pace,
+} from "windups";
 import { BsLinkedin, BsPersonCircle } from "react-icons/bs";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
-import { isSafari, isTablet, isMobile } from "react-device-detect";
+import {
+  isSafari,
+  isTablet,
+  isMobile,
+  osVersion,
+  osName,
+} from "react-device-detect";
 
 import { VscFilePdf } from "react-icons/vsc";
 import { VscGithubAlt } from "react-icons/vsc";
@@ -21,9 +35,13 @@ import About from "./components/windows/About";
 import Start from "./components/windows/Start";
 
 import DeviceInfo from "./components/windows/DeviceInfo";
+
 import Projects from "./components/windows/Projects";
 import Player from "./components/windows/Player";
 import logo_white from "./img/logo_white.png";
+import logoboot from "./img/logoboot.png";
+import logoboot1 from "./img/logoboot1.png";
+
 import logo_black from "./img/logo_black.png";
 import circuit from "./background/circuit.mp4";
 import abstract from "./background/abstract.mp4";
@@ -32,6 +50,8 @@ import board2 from "./background/board2.mp4";
 import electronic from "./background/electronic.mp4";
 import electronic2 from "./background/electronic2.mp4";
 import electronic3 from "./background/electronic3.mp4";
+import portal from "./background/portal.mp4";
+
 import IconTask from "./components/IconTask";
 import network from "./background/network.mp4";
 
@@ -39,7 +59,6 @@ import Icon from "./components/Icon";
 import PlayListProvider2 from "./components/Player";
 import Player23 from "./components/Player2";
 import github_light from "./socials/github-light.png";
-import logoRotate from "./img/logoRotate.png";
 import Draggable from "react-draggable";
 import github_dark from "./socials/github-dark.png";
 import linkedin_light from "./socials/linkedin-light.png";
@@ -56,7 +75,7 @@ const App = () => {
   const [theme, setTheme] = useState(true);
   const [terminal, setTerminal] = useState(false);
   const [about, setAbout] = useState(false);
-  const [start, setStart] = useState(true);
+  const [start, setStart] = useState(false);
   const [zIndexxx, setZindexxx] = useState(6);
   const [terminal2, setTerminal2] = useState(false);
 
@@ -69,19 +88,47 @@ const App = () => {
     console.log("Hi");
     setTheme(!theme);
   };
+
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(`Welcome, ${username}!`);
+  };
+
   const videoEl = useRef(null);
 
-  // const attemptPlay = () => {
-  //   videoEl &&
-  //     videoEl.current &&
-  //     videoEl.current.play().catch((error) => {
-  //       console.error("Error attempting to play", error);
-  //     });
-  // };
+  const buttonRef = useRef(null);
+  const [spinner, setSpinner] = useState(true);
+  const [logovis, setLogovis] = useState(false);
+  const [buttonvis, setButtonvis] = useState(false);
 
-  // useEffect(() => {
-  //   attemptPlay();
-  // }, []);
+  let spinnerId, logoId;
+
+  const attemptPlay = () => {
+    videoEl &&
+      videoEl.current &&
+      videoEl.current.play().catch((error) => {
+        console.error("Error attempting to play", error);
+      });
+  };
+
+  useEffect(() => {
+    // spinnerId = setTimeout(() => {
+    //   setSpinner(true);
+    // }, 700);
+
+    // logoId = setTimeout(() => {
+    //   setSpinner(false);
+    //   setLogovis(true);
+    // }, 1600);
+
+    return () => {
+      clearTimeout(spinnerId);
+    };
+
+    attemptPlay();
+  }, []);
 
   // const videoParentRef = useRef();
 
@@ -203,11 +250,8 @@ const App = () => {
         };
 
   return (
-    <div
-      id="app"
-      className={isTablet ? "appTablet" : "app"}
-      style={themeVars.app}
-    >
+    <div id="app" className="app" style={themeVars.app}>
+      <div id="loading"></div>
       <video
         className="video-background"
         playsInline
@@ -217,27 +261,84 @@ const App = () => {
         src={electronic3}
         ref={videoEl}
         type="video/mp4"
-      />
-
-      {/* <div
+      />{" "}
+      {/* <video
         className="video-background"
-        ref={videoParentRef}
-        dangerouslySetInnerHTML={{
-          __html: `
-        <video
-          loop
-          muted
-          autoplay
-          playsinline
-          preload="metadata"
-        >
-        <source src="${electronic3}" type="video/mp4" />
-        </video>`,
-        }}
+        playsInline
+        muted
+        src={portal}
+        ref={videoEl}
+        type="video/mp4"
       /> */}
+      <div className="boot-screen" id="bootRoot">
+        <div className="boot-screen-text" id="boot-text">
+          <WindupChildren
+            onFinished={() => {
+              setSpinner(false);
+              setLogovis(true);
+            }}
+          >
+            <Pace ms={3}>
+              Kisimoff OS v2.3.2 <br></br> <br></br>
+              Loading system components...
+              <Pause ms={300} /> OK <br></br> <br></br> <Pause ms={150} />
+              Initializing BIOS...
+              <Pause ms={500} /> OK <br></br> <br></br> <Pause ms={220} />
+              Checking hardware configuration... <br></br>
+              <br></br> <Pause ms={450} />
+              Root OS: {osName} {osVersion}...
+              <Pause ms={350} /> OK <br></br> <br></br> <Pause ms={200} />
+              Starting system services...
+              <Pause ms={750} /> OK <br></br> <br></br> <Pause ms={300} />
+              Initializing security protocols...
+              <Pause ms={400} /> OK
+              {/* System time: [insert current time here] <br></br> <br></br> */}
+            </Pace>
+          </WindupChildren>
+        </div>
+        <div className="spinner" id="spinner">
+          {spinner && <SpinnerCircular secondaryColor="#2f2f2f" />}
+        </div>
+        {logovis && (
+          <div className="loginComplete">
+            <WindupChildren onFinished={() => setButtonvis(true)}>
+              <Pace ms={25}>
+                <h2> Loading Complete... </h2>
+              </Pace>
+            </WindupChildren>{" "}
+            {buttonvis && (
+              <button
+                className="login-button"
+                onClick={() => {
+                  document.getElementById("bootRoot").style.display = "none";
+                  setLogovis(false);
+                  attemptPlay();
 
-      {/* abstract board network circuit */}
+                  setTimeout(() => {
+                    setStart(true);
+                  }, 1300);
 
+                  // setTimeout(() => {
+                  //   setStart(true);
+                  // }, 5500);
+                  // setTimeout(() => {
+                  //   setLogovis(false);
+                  // }, 5500);
+                }}
+              >
+                {" "}
+                Login{" "}
+              </button>
+            )}
+          </div>
+        )}
+        <div className="login-screen" id="login-screen"></div>
+      </div>
+      {logovis && (
+        <div className="logoBoot">
+          {/* <img alt="logoBoot" src={logoboot1} /> */}
+        </div>
+      )}
       <div
         className="navbar"
         style={
@@ -356,7 +457,6 @@ const App = () => {
           </a>
         </div>
       </div>
-
       {/* <div className="coinWrapper">
         <div className="coin copper"></div>
       </div> */}
@@ -436,6 +536,19 @@ const App = () => {
             </span>
           </a>
         </div>
+        {/* <div className="hoverIcon">
+          <a
+            className="iconWrapper"
+            href="#"
+            onClick={() => {
+              attemptPlay();
+            }}
+          >
+            {" "}
+            <VscFilePdf className="icon" />
+            <span className="caption">start</span>
+          </a>
+        </div> */}
 
         {/* <Icon icon={GiHourglass} caption="Start" elementId="start" /> */}
 
@@ -495,7 +608,6 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
       ) : null}
-
       {start ? (
         <Start theme={themeVars} setTheme={setTheme} setVisibility={setStart} />
       ) : null}

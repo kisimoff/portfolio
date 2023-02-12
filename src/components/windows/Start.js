@@ -28,7 +28,6 @@ const Start = ({ theme, setVisibility }) => {
                 document.getElementById("start").style.display = "none";
               }}
             >
-              <Pause ms={1000} />
               <Pace ms={80}>{"Hello,"}</Pace>
               <Pause ms={550} />
               <Pace ms={70}>{" friend."}</Pace> <Pause ms={600} />

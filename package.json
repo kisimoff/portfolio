@@ -1,7 +1,7 @@
 {
   "homepage": "https://kisimoff.com/",
   "name": "kisimoff2",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -29,6 +29,7 @@
     "react-webcam": "^7.0.1",
     "simple-keyboard": "^3.4.100",
     "simple-react-pdf": "^1.0.9",
+    "spinners-react": "^1.0.7",
     "web-vitals": "^2.1.4",
     "windups": "^1.2.1"
   },

@@ -111,7 +111,7 @@ const DeviceInfo = ({
             GPU: {gpu} <br></br>
             Your IP Address is {ip} <br></br>
             Your Country is {contry} <br></br>
-            Your City is {city} <br></br>
+            Your City is {city} <span>(based on ip)</span> <br></br>
             {/* <Battery
               onChange={(battery) => {
                 console.log(battery);

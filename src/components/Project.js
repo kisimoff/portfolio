@@ -4,13 +4,13 @@ import { BiWorld } from "react-icons/bi";
 function Project(props) {
   const videoEl = useRef(null);
 
-  const attemptPlay = () => {
-    videoEl &&
-      videoEl.current &&
-      videoEl.current.play().catch((error) => {
-        console.error("Error attempting to play", error);
-      });
-  };
+  // const attemptPlay = () => {
+  //   videoEl &&
+  //     videoEl.current &&
+  //     videoEl.current.play().catch((error) => {
+  //       console.error("Error attempting to play", error);
+  //     });
+  // };
 
   // useEffect(() => {
   //   attemptPlay();
@@ -28,6 +28,7 @@ function Project(props) {
         ref={videoEl}
         type="video/mp4"
       />
+
       <div class="project-title-overlay">
         <span> {props.title}</span>
       </div>

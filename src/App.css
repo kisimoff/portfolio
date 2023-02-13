@@ -54,15 +54,20 @@ clamp(min, target, max)
 
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
 
+  --fs-text-projects: clamp(0.8rem, 0.75vw + 0.25rem, 1.6rem);
+
   --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
 
-  --fs-text-mobile: clamp(0.73rem, 0.4vw + 0.6rem, 1.8rem);
+  --fs-text-mobile: clamp(0.6rem, 0.7vw + 0.55rem, 1.8rem);
 
   --f-text-color: white;
 
   --fs-window-title: clamp(1rem, 0.25vw + 0.9rem, 1.8rem);
   --fs-project-title: clamp(1rem, 0.95vw + 0.3rem, 1.8rem);
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
+
+  --padding-projects-text: clamp(0.3rem, 0.6vw + 0.3rem, 1.6rem);
+
   --padding-small: clamp(0.35rem, 0.3vw + 0.12rem, 1.5rem);
 
   --SlSocialLinkedin: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
@@ -426,10 +431,10 @@ body {
 .text {
   color: var(--f-text-color);
   position: absolute;
-  font-size: var(--fs-text);
+  font-size: var(--fs-text-projects);
   width: var(--project-width);
   height: 100%;
-  padding: var(--padding);
+  padding: var(--padding-projects-text);
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);

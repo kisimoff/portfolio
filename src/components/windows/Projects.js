@@ -25,18 +25,18 @@ import { BsJournalCode } from "react-icons/bs";
 
 const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   const [z, setZ] = useState(4);
-  const videoEl = useRef(null);
+  // const videoEl = useRef(null);
 
-  const attemptPlay = () => {
-    videoEl &&
-      videoEl.current &&
-      videoEl.current.play().catch((error) => {
-        console.error("Error attempting to play", error);
-      });
-  };
+  // const attemptPlay = () => {
+  //   videoEl &&
+  //     videoEl.current &&
+  //     videoEl.current.play().catch((error) => {
+  //       console.error("Error attempting to play", error);
+  //     });
+  // };
 
   useEffect(() => {
-    attemptPlay();
+    // attemptPlay();
     document.getElementById("projects").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
     console.log(zIndexxx);
@@ -78,7 +78,7 @@ const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
                 <Project
                   sorsa={mas}
                   title="Microgrid Energy Trading System"
-                  description="This multi-agent system simulates microgrid energy trading auctions, with each agent representing a microgrid member (household). The system allows for evaluations of trading/auction strategies, testing of architecture patterns, and finding optimal communication solutions. Two auctions were developed and compared - Dutch Auction (decentralised) and Double Auction (with a central peer)  with the latter showing better computational efficiency and scalability for efficient communication between agents."
+                  description="This system simulates microgrid energy trading auctions, where each agent represents a microgrid member (household). It  be used to evaluate trading/auction strategies and communcation portocols and test architectural patterns. Two auctions were developed and compared - Dutch Auction (decentralised) and Double Auction (with a central peer) with the latter showing better computational efficiency (6 times fewer messages exchanged)."
                   technologies="C#, ActressMAS, .NET"
                   repo="https://github.com/vtwenty3/ActressMas"
                 ></Project>

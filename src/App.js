@@ -117,17 +117,14 @@ const App = () => {
     // spinnerId = setTimeout(() => {
     //   setSpinner(true);
     // }, 700);
-
     // logoId = setTimeout(() => {
     //   setSpinner(false);
     //   setLogovis(true);
     // }, 1600);
-
-    return () => {
-      clearTimeout(spinnerId);
-    };
-
-    attemptPlay();
+    //attemptPlay();
+    // return () => {
+    //   clearTimeout(spinnerId);
+    // };
   }, []);
 
   // const videoParentRef = useRef();

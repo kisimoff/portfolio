@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import Draggable from "react-draggable";
 import Window from "./Window";
-import Battery from "react-device-battery";
 
 import {
   osVersion,
@@ -30,7 +29,6 @@ const DeviceInfo = ({
   const [gpu, setGpu] = useState("");
   const [vendor, setVendor] = useState("");
   const [model, setModel] = useState("");
-  const [batteryLevel, setBatteryLevel] = useState(0);
   const { deviceDetect } = require("react-device-detect");
   const [cameraCount, setCameraCount] = useState(0);
 
@@ -112,17 +110,6 @@ const DeviceInfo = ({
             Your IP Address is {ip} <br></br>
             Your Country is {contry} <br></br>
             Your City is {city} <span>(based on ip)</span> <br></br>
-            {/* <Battery
-              onChange={(battery) => {
-                console.log(battery);
-              }}
-              render={({ battery }) => <p>Battery Level: {battery}</p>}
-            /> */}
-            {/* Mobile Model: {mobileModel} <br></br> */}
-            {/* Mobile Vendor: {mobileVendor} <br></br> */}
-            {/* if ? isBrowser: {isBrowser} <br></br> */}
-            {/* {isMobile} ? {mobileVendor} mobileModel:{mobileModel} : {null} */}
-            {/* {isMobile ? <div>{mobileVendor} mobileModel:{mobileModel} <div/> : null} */}
             <div></div>
           </div>
         </div>

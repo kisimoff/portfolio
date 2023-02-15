@@ -1,47 +1,35 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import "./App.css";
+
+// components and windows imports
+import Projects from "./components/windows/Projects";
 import ToggleButton from "./components/ToggleButton";
-import Terminal from "./components/windows/Terminal";
 import Terminal2 from "./components/windows/Terminal2";
-import { SpinnerCircular } from "spinners-react";
-
-import { TerminalContextProvider } from "react-terminal";
-import {
-  useWindupString,
-  WindupChildren,
-  Pause,
-  Linebreaker,
-  Pace,
-} from "windups";
-import { BsLinkedin, BsPersonCircle } from "react-icons/bs";
-import { TbDeviceDesktopAnalytics } from "react-icons/tb";
-import {
-  isSafari,
-  isTablet,
-  isMobile,
-  osVersion,
-  osName,
-} from "react-device-detect";
-
-import { VscFilePdf } from "react-icons/vsc";
-import { VscGithubAlt } from "react-icons/vsc";
-import { SlSocialLinkedin } from "react-icons/sl";
-
-import { BsJournalCode } from "react-icons/bs";
-
-import { BsTerminal } from "react-icons/bs";
 import About from "./components/windows/About";
 import Start from "./components/windows/Start";
-
 import DeviceInfo from "./components/windows/DeviceInfo";
+import Icon from "./components/Icon";
+import IconTask from "./components/IconTask";
 
-import Projects from "./components/windows/Projects";
-import Player from "./components/windows/Player";
+//packages imports
+import { SpinnerCircular } from "spinners-react";
+import { WindupChildren, Pause, Pace } from "windups";
+import { isTablet, osVersion, osName } from "react-device-detect";
+
+//icons and media imports
 import logo_white from "./img/logo_white.png";
+import { TbDeviceDesktopAnalytics } from "react-icons/tb";
+import { VscFilePdf, VscGithubAlt } from "react-icons/vsc";
+import { SlSocialLinkedin } from "react-icons/sl";
+import { BsJournalCode, BsTerminal, BsPersonCircle } from "react-icons/bs";
+import electronic3 from "./background/electronic3.mp4";
+import xp from "./background/xp.jpg";
+
+//to be deleted
+import portal from "./background/portal.mp4";
 import logoboot from "./img/logoboot.png";
 import logoboot1 from "./img/logoboot1.png";
-
 import logo_black from "./img/logo_black.png";
 import circuit from "./background/circuit.mp4";
 import abstract from "./background/abstract.mp4";
@@ -49,15 +37,7 @@ import board from "./background/board.mp4";
 import board2 from "./background/board2.mp4";
 import electronic from "./background/electronic.mp4";
 import electronic2 from "./background/electronic2.mp4";
-import electronic3 from "./background/electronic3.mp4";
-import portal from "./background/portal.mp4";
-
-import IconTask from "./components/IconTask";
 import network from "./background/network.mp4";
-
-import Icon from "./components/Icon";
-import PlayListProvider2 from "./components/Player";
-import Player23 from "./components/Player2";
 import github_light from "./socials/github-light.png";
 import Draggable from "react-draggable";
 import github_dark from "./socials/github-dark.png";
@@ -67,43 +47,31 @@ import download_light from "./socials/download-light.png";
 import download_dark from "./socials/download-dark.png";
 import background_dark from "./background/dark.jpg";
 import background_light from "./background/light.jpg";
-import xp from "./background/xp.jpg";
-
 import resumePdf from "./files/valentin-kisimov-resume.pdf";
 import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
+
 const App = () => {
+  //windows states
   const [theme, setTheme] = useState(true);
-  const [terminal, setTerminal] = useState(false);
   const [about, setAbout] = useState(false);
   const [start, setStart] = useState(false);
-  const [zIndexxx, setZindexxx] = useState(6);
-  const [terminal2, setTerminal2] = useState(false);
-
   const [device, setDevice] = useState(false);
   const [projects, setProjects] = useState(false);
+  const [terminal2, setTerminal2] = useState(false);
 
-  const [active, setActive] = useState(true);
+  //boot elements visability states
+  const [spinner, setSpinner] = useState(true);
+  const [logovis, setLogovis] = useState(false);
+  const [buttonvis, setButtonvis] = useState(false);
+
+  const [zIndexxx, setZindexxx] = useState(6);
 
   const onPress = () => {
     console.log("Hi");
     setTheme(!theme);
   };
 
-  const [username, setUsername] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(`Welcome, ${username}!`);
-  };
-
   const videoEl = useRef(null);
-
-  const buttonRef = useRef(null);
-  const [spinner, setSpinner] = useState(true);
-  const [logovis, setLogovis] = useState(false);
-  const [buttonvis, setButtonvis] = useState(false);
-
-  let spinnerId, logoId;
 
   const attemptPlay = () => {
     videoEl &&
@@ -126,43 +94,6 @@ const App = () => {
     //   clearTimeout(spinnerId);
     // };
   }, []);
-
-  // const videoParentRef = useRef();
-
-  // useEffect(() => {
-  //   // check if user agent is safari and we have the ref to the container <div />
-  //   if (isSafari() && videoParentRef.current) {
-  //     // obtain reference to the video element
-  //     const player = videoParentRef.current.children[0];
-
-  //     // if the reference to video player has been obtained
-  //     if (player) {
-  //       // set the video attributes using javascript as per the
-  //       // webkit Policy
-  //       player.controls = false;
-  //       player.playsinline = true;
-  //       player.muted = true;
-  //       player.setAttribute("muted", ""); // leave no stones unturned :)
-  //       player.autoplay = true;
-
-  //       // Let's wait for an event loop tick and be async.
-  //       setTimeout(() => {
-  //         // player.play() might return a promise but it's not guaranteed crossbrowser.
-  //         const promise = player.play();
-  //         // let's play safe to ensure that if we do have a promise
-  //         if (promise.then) {
-  //           promise
-  //             .then(() => {})
-  //             .catch(() => {
-  //               // if promise fails, hide the video and fallback to <img> tag
-  //               videoParentRef.current.style.display = "none";
-  //               // setShouldUseImage(true);
-  //             });
-  //         }
-  //       }, 0);
-  //     }
-  //   }
-  // }, []);
 
   const themeVars =
     theme === true
@@ -433,11 +364,6 @@ const App = () => {
             }}
           >
             <SlSocialLinkedin className="nav-social-svg" />
-            {/* <img
-              alt="linkedin"
-              src={theme ? linkedin_light : linkedin_dark}
-              id="linkedin"
-            /> */}
           </a>
           <a
             href="#"
@@ -446,28 +372,10 @@ const App = () => {
             }}
           >
             <VscGithubAlt className="nav-social-svg" />
-            {/* <img
-              alt="github"
-              src={theme ? github_light : github_dark}
-              id="github"
-            /> */}
           </a>
         </div>
       </div>
-      {/* <div className="coinWrapper">
-        <div className="coin copper"></div>
-      </div> */}
       <div className="icons">
-        {/* <Icon
-          icon={BsTerminal}
-          caption="Terminal"
-          elementId="terminal"
-          setVisibility={setTerminal}
-          zIndexxx={zIndexxx}
-          visibility={terminal}
-          setZindexxx={setZindexxx}
-        /> */}
-
         <Icon
           icon={BsTerminal}
           caption="Terminal"
@@ -477,9 +385,6 @@ const App = () => {
           visibility={terminal2}
           setZindexxx={setZindexxx}
         />
-
-        {/* <Icon icon={BsTerminal} caption="Terminal" elementId="terminal" /> */}
-
         <Icon
           icon={BsPersonCircle}
           caption="About"
@@ -516,58 +421,13 @@ const App = () => {
                 "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
               );
             }}
-            // href={
-            //   "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
-            // }
           >
             {" "}
             <VscFilePdf className="icon" />
-            <span className="caption">
-              {/* <img
-                style={{ marginRight: "10px", marginBottom: "10px" }}
-                alt="download"
-                src={theme ? download_light : download_dark}
-                id="download"
-              /> */}
-              Resume
-            </span>
+            <span className="caption">Resume</span>
           </a>
         </div>
-        {/* <div className="hoverIcon">
-          <a
-            className="iconWrapper"
-            href="#"
-            onClick={() => {
-              attemptPlay();
-            }}
-          >
-            {" "}
-            <VscFilePdf className="icon" />
-            <span className="caption">start</span>
-          </a>
-        </div> */}
-
-        {/* <Icon icon={GiHourglass} caption="Start" elementId="start" /> */}
-
-        {/* <Icon
-          icon={BsVinyl}
-          caption="Music"
-          line2="Player"
-          elementId="player"
-        /> */}
-        {/* <Icon icon={VscFilePdf} caption="Pdf" line2="Viewer" elementId="pdf" /> */}
       </div>
-      {/* {terminal ? (
-        <Terminal
-          theme={themeVars}
-          setTheme={setTheme}
-          setVisibility={setTerminal}
-          alabala={setProjects}
-          zIndexxx={zIndexxx}
-          setZindexxx={setZindexxx}
-          elementId="terminal"
-        />
-      ) : null} */}
       {terminal2 ? (
         <Terminal2
           theme={themeVars}
@@ -608,7 +468,6 @@ const App = () => {
       {start ? (
         <Start theme={themeVars} setTheme={setTheme} setVisibility={setStart} />
       ) : null}
-      {/* <Player theme={themeVars} setTheme={setTheme}></Player> */}
     </div>
   );
 };

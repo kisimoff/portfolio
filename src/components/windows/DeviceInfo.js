@@ -23,22 +23,90 @@ const DeviceInfo = ({
   zIndexxx,
   setZindexxx,
 }) => {
-  const [ip, setIP] = useState("");
-  const [contry, setCountry] = useState("");
-  const [city, setCity] = useState("");
   const [gpu, setGpu] = useState("");
   const [vendor, setVendor] = useState("");
   const [model, setModel] = useState("");
   const { deviceDetect } = require("react-device-detect");
   const [cameraCount, setCameraCount] = useState(0);
+  const [dataStatus, setDataStatus] = useState(false);
+  const [IP, setIP] = useState("");
+  const [res, setRes] = useState({});
+
+  // const getData = async () => {
+  //   const res = await axios.get("https://geolocation-db.com/json/");
+  //   console.log(res.data);
+  //   setIP(res.data.IPv4);
+  //   setCity(res.data.city);
+  //   setCountry(res.data.country_name);
+  // };
+
+  // const getData = async () => {
+  //   try {
+  //     const apiKey = "7969|0UCnUjP39LSSMehYKDO803ff2QFbyhyOjX3obGei"; // Replace with your IPX API key
+  //     const res = await axios.get(`https://ipxapi.com/geo?api_key=${apiKey}`);
+  //     if (res.data.status === "success") {
+  //       setIpStatus(true);
+  //     }
+  //     console.log(res.data);
+  //     // setCountry(res.data.country_name);
+  //   } catch (error) {
+  //     console.error("Error fetching geolocation data:", error);
+  //   }
+  // };
+
+  // const getData = async () => {
+  //   try {
+  //     const apiKey = "7969|0UCnUjP39LSSMehYKDO803ff2QFbyhyOjX3obGei"; // Replace with your IPX API key
+  //     const res = await axios.get("https://ipxapi.com/api/ip", {
+  //       headers: {
+  //         Authorization: `Bearer ${apiKey}`,
+  //         Accept: "application/json",
+  //       },
+  //     });
+  //     console.log(res.data);
+
+  //     // setIP(res.data.ip);
+  //     // setCity(res.data.city);
+  //     // setCountry(res.data.country);
+  //   } catch (error) {
+  //     console.error("Error fetching geolocation data:", error);
+  //   }
+  // };
+
+  const getIP = async () => {
+    try {
+      const res = await axios.get("https://api.ipify.org?format=json");
+      return res.data.ip;
+    } catch (error) {
+      console.error("Error fetching IP address:", error);
+      return null;
+    }
+  };
 
   const getData = async () => {
-    const res = await axios.get("https://geolocation-db.com/json/");
-    console.log(res.data);
-    setIP(res.data.IPv4);
-    setCity(res.data.city);
-    setCountry(res.data.country_name);
+    try {
+      const ip = await getIP();
+      if (!ip) {
+        throw new Error("Unable to fetch IP address.");
+      }
+      setIP(ip);
+      const apiKey = "7969|0UCnUjP39LSSMehYKDO803ff2QFbyhyOjX3obGei"; // Replace with your IPX API key
+      const res = await axios.get(`https://ipxapi.com/api/ip?ip=${ip}`, {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: "application/json",
+        },
+      });
+      if (res.data.status === "success") {
+        setDataStatus(true);
+        setRes(res.data);
+      }
+      // console.log(res.data);
+    } catch (error) {
+      console.error("Error fetching geolocation data:", error);
+    }
   };
+
   useEffect(() => {
     document.getElementById("deviceInfo").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
@@ -51,8 +119,9 @@ const DeviceInfo = ({
       console.log(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
       setGpu(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
     }
-
-    getData();
+    if (false) {
+      getData();
+    }
   }, []);
 
   return (
@@ -107,9 +176,15 @@ const DeviceInfo = ({
             OS: {osName} {osVersion} <br></br>
             Browser: {browserName} Version: {browserVersion} <br></br>
             GPU: {gpu} <br></br>
-            Your IP Address is {ip} <br></br>
-            Your Country is {contry} <br></br>
-            Your City is {city} <span>(based on ip)</span> <br></br>
+            {dataStatus ? (
+              <span>
+                IP Address: {IP} <br></br>
+                Country: {res.country} <br></br>
+                City: {res.city} <br></br>
+                ZIP Code: {res.zip} <br></br>
+                ISP: {res.isp} <br></br>
+              </span>
+            ) : null}
             <div></div>
           </div>
         </div>

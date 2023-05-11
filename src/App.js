@@ -67,7 +67,6 @@ const App = () => {
   const [zIndexxx, setZindexxx] = useState(6);
 
   const onPress = () => {
-    console.log("Hi");
     setTheme(!theme);
   };
 

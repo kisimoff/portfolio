@@ -3,19 +3,6 @@ import { AiFillGithub } from "react-icons/ai";
 import { BiWorld } from "react-icons/bi";
 function Project(props) {
   const videoEl = useRef(null);
-
-  // const attemptPlay = () => {
-  //   videoEl &&
-  //     videoEl.current &&
-  //     videoEl.current.play().catch((error) => {
-  //       console.error("Error attempting to play", error);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   attemptPlay();
-  // }, []);
-
   return (
     <div class="container">
       <video
@@ -57,7 +44,7 @@ function Project(props) {
                   target="_blank"
                 >
                   <BiWorld className="text-bottom-row-icon" />
-                  <span>Live</span>
+                  <span>Web</span>
                 </a>
               ) : null}
             </div>

@@ -138,56 +138,94 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url("./img/23.svg");
+  background: url("./img/12svg.svg");
   background-repeat: repeat;
-  overflow: hidden;
-  background-size: 30px 30px;
+  background-size: 40px 40px;
+  z-index: 15;
 }
 
-.pattern-background::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.pattern-reveal {
   background: radial-gradient(
-    circle at center,
-    transparent 50%,
-    rgba(0, 0, 0, 1) 100%
+    circle,
+    rgba(0, 0, 0, 1) 10%,
+    rgba(0, 0, 0, 0) 100%
   );
-  mix-blend-mode: screen;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
 }
 
 .pattern-mask {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(rgb(0, 0, 0), transparent, circle at center);
-  mix-blend-mode: multiply;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 100%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  transition: opacity 4s ease-out;
+  z-index: -1;
 }
 
-/* Position the repeating image within the div */
-/* .pattern::before {
-  content: "";
+.pattern-mask.animate {
+  opacity: 0;
+}
+
+/* 
+.pattern-mask {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background-image: url("./img/23grey.svg");
-  background-repeat: repeat;
-  opacity: 1; /* Adjust the opacity as needed }*/
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 100%,
+    rgba(0, 0, 0, 0) 40%
+  );
+  z-index: 10;
+  transition: opacity 0s ease;
+}
+
+.pattern-mask.animate {
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 1;
+} */
+
+.login-button {
+  height: auto;
+  z-index: 51;
+  background-color: #282828;
+  border: 2px solid #a3a3a3;
+  color: #ebebeb;
+  font-size: 1.2rem;
+  padding: 0.5rem 2rem;
+  width: 230px;
+
+  /* margin-top: 50px;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); */
+  height: auto;
+  z-index: 51;
+}
 
 .boot-screen {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: #000000;
+  background: rgb(0, 0, 0);
   z-index: 20;
 }
 
 .boot-screen-text {
+  z-index: 22;
   color: white;
 }
 .spinner {
@@ -198,16 +236,12 @@ body {
   z-index: 50;
 }
 
-.logoBoot img {
+.logoBoot {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.logoBoot img {
-  position: absolute;
-  height: 150px;
-  z-index: 60;
+  z-index: 300;
 }
 
 .login-screen {

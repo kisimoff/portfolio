@@ -14,8 +14,17 @@ import IconTask from "./components/IconTask";
 
 //packages imports
 import { SpinnerCircular } from "spinners-react";
-import { WindupChildren, Pause, Pace } from "windups";
-import { isTablet, osVersion, osName } from "react-device-detect";
+import { WindupChildren, Pause, Pace, Effect } from "windups";
+import {
+  isTablet,
+  osVersion,
+  osName,
+  browserName,
+  browserVersion,
+  engineName,
+  engineVersion,
+  deviceType,
+} from "react-device-detect";
 
 //icons and media imports
 import logo_white from "./img/logo_white.png";
@@ -53,7 +62,7 @@ import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
 const App = () => {
   //windows states
   const [boot, setBoot] = useState(true);
-
+  const [pattern, setPattern] = useState(false);
   const [theme, setTheme] = useState(true);
   const [about, setAbout] = useState(false);
   const [start, setStart] = useState(false);
@@ -61,9 +70,13 @@ const App = () => {
   const [projects, setProjects] = useState(false);
   const [terminal2, setTerminal2] = useState(false);
 
+  const [step1, setStep1] = useState(true);
+  const [step2, setStep2] = useState(true);
+  const [step3, setStep3] = useState(true);
+  const [step4, setStep4] = useState(true);
   //boot elements visability states
   const [spinner, setSpinner] = useState(true);
-  const [logovis, setLogovis] = useState(false);
+  const [logo, setLogo] = useState(true);
   const [buttonvis, setButtonvis] = useState(false);
 
   const [zIndexxx, setZindexxx] = useState(6);
@@ -95,6 +108,17 @@ const App = () => {
     //   clearTimeout(spinnerId);
     // };
   }, []);
+
+  // useEffect(() => {
+  //   if (pattern) {
+  //     // Use requestAnimationFrame to ensure the initial render is painted before the .animate class is added
+  //     requestAnimationFrame(() => {
+  //       document.querySelector(".pattern-mask").classList.add("animate");
+  //     });
+  //   } else {
+  //     document.querySelector(".pattern-mask").classList.remove("animate");
+  //   }
+  // }, [pattern]);
 
   const themeVars =
     theme === true
@@ -181,6 +205,30 @@ const App = () => {
   return (
     <div id="app" className="app" style={themeVars.app}>
       <div id="loading"></div>
+      {logo && (
+        <div className="logoBoot">
+          <img
+            alt="logoBoot"
+            src={logoboot1}
+            onClick={() => {
+              document.getElementById("bootRoot").style.display = "none";
+              // setLogovis(false);
+              attemptPlay();
+              // setTimeout(() => {
+              //   setStart(true);
+              // }, 1300);
+
+              setTimeout(() => {
+                setStart(true);
+              }, 5500);
+              setTimeout(() => {
+                setLogo(false);
+              }, 5500);
+            }}
+          />
+        </div>
+      )}
+
       {boot ? (
         <>
           <video
@@ -191,48 +239,142 @@ const App = () => {
             ref={videoEl}
             type="video/mp4"
           />
+
           <div className="boot-screen" id="bootRoot">
             <div className="pattern-background">
-              <div className="pattern-mask">
+              <div className={`pattern-mask ${pattern ? "animate" : ""}`}></div>
+
+              <div className="pattern-reveal">
+                <div className="logoBoot"></div>
                 <div className="boot-screen-text" id="boot-text">
                   <WindupChildren
                     onFinished={() => {
-                      setSpinner(false);
-                      setLogovis(true);
+                      // setSpinner(false);
+                      // setLogovis(true);
                     }}
                   >
-                    <Pace ms={2}>
-                      Kisimoff OS v2.3.2 <br></br> <br></br>
-                      Loading system components...
-                      <Pause ms={200} /> OK <br></br> <br></br>{" "}
-                      <Pause ms={150} />
-                      Initializing BIOS...
-                      <Pause ms={300} /> OK <br></br> <br></br>{" "}
-                      <Pause ms={120} />
-                      Checking hardware configuration... <br></br>
-                      <br></br> <Pause ms={350} />
-                      Root OS: {osName} {osVersion}...
-                      <Pause ms={350} /> OK <br></br> <br></br>{" "}
-                      <Pause ms={400} />
-                      Starting system services...
-                      <Pause ms={550} /> OK <br></br> <br></br>{" "}
-                      <Pause ms={150} />
-                      Initializing security protocols...
-                      <Pause ms={400} /> OK
-                      {/* System time: [insert current time here] <br></br> <br></br> */}
-                    </Pace>
+                    {step3 && (
+                      <Pace ms={0}>
+                        Kisimoff OS v2.3.2
+                        <br />
+                        {!step2 && (
+                          <>
+                            Loading complete...
+                            <Pause ms={1400} />
+                            <Effect
+                              fn={() => {
+                                setStep3(false);
+                              }}
+                            />
+                          </>
+                        )}
+                        <Pause ms={500} />
+                        {step1 && (
+                          <>
+                            <Pause ms={50} />
+                            <br /> Checking hardware compatibility
+                            <Pace ms={200}>...</Pace>
+                            <Pause ms={400} />
+                            <br />
+                            Type:
+                            {deviceType}
+                            <br /> <Pause ms={100} /> OS:
+                            {osName} Version: {osVersion}
+                            <br />
+                            <Pause ms={100} />
+                            Browser:
+                            {browserName} Version: {browserVersion} <br />
+                            <Pause ms={100} />
+                            Engine: {engineName} Version:
+                            {engineVersion}
+                            <Pause ms={400} /> <br />
+                            Compatibility
+                            <Pace ms={200}>...</Pace>
+                            <Pause ms={200} /> OK
+                            <Pause ms={500} />
+                          </>
+                        )}
+                        <Effect
+                          fn={() => {
+                            setStep1(false);
+                          }}
+                        />
+                        {step2 && (
+                          <>
+                            <br /> Loading system drivers...
+                            <br /> Verifying system configuration...
+                            <br /> Initializing user interface...{" "}
+                            <Pause ms={100} />
+                            <br /> Loading system fonts...
+                            <br /> Configuring system preferences...
+                            <br /> Mounting files...
+                            <Pause ms={1000} />
+                            <br /> Loading system services...
+                            <br /> Initializing networking protocols...
+                            <br /> Establishing secure connections...
+                            <br /> Preparing desktop environment...
+                            <br /> Optimizing system performance...
+                            <br /> Initializing input/output devices...
+                            <br /> Loading system utilities...
+                            <Pause ms={200} />
+                            <br /> Verifying system integrity...
+                            <br /> Loading system log files...
+                            <br /> Configuring power management settings...
+                            <br /> Loading application framework...
+                            <br /> Verifying user browser settings...
+                            <br /> Loading system themes...
+                            <br /> Initializing audio subsystem...
+                            <br /> Loading system diagnostics...
+                            <br /> Scanning for available updates...
+                            <Pause ms={50} />
+                            <br /> Configuring system notifications...
+                            <br /> Loading system resources...
+                            <br /> Initializing system clock...
+                            <br /> Loading system virtualization...
+                            <br /> Establishing system backups...
+                            <br /> Loading system firewall...
+                            <br /> Initializing system database...
+                            <br /> Loading system startup scripts...
+                            <Pause ms={50} />
+                            <br /> Verifying system licenses...
+                            <br /> Initializing system multitasking...
+                            <br /> Loading system security patches...
+                            <br /> Initializing system memory...
+                            <Pause ms={80} />
+                            <br /> Loading system encryption tools...
+                            <br /> Checking system for malware...
+                            <br /> Loading system updates
+                            <Pace ms={200}>...</Pace>
+                            <Pause ms={500} />
+                          </>
+                        )}
+                        <Effect
+                          fn={() => {
+                            setPattern(!pattern);
+                            setStep2(false);
+                          }}
+                        />
+                        {/* System time: [insert current time here] <br></br> <br></br> */}
+                      </Pace>
+                    )}
                   </WindupChildren>
                 </div>
-                <div className="spinner" id="spinner">
+
+                {/* <div className="spinner" id="spinner">
                   {spinner && <SpinnerCircular secondaryColor="#2f2f2f" />}
-                </div>
-                {logovis && (
+                </div> */}
+                {/* {logovis && (
                   <div className="loginComplete">
-                    <WindupChildren onFinished={() => setButtonvis(true)}>
+                    <WindupChildren
+                      onFinished={() => {
+                        setButtonvis(true);
+                        setPattern(!pattern);
+                      }}
+                    >
                       <Pace ms={25}>
                         <h2> Loading Complete... </h2>
                       </Pace>
-                    </WindupChildren>{" "}
+                    </WindupChildren>
                     {buttonvis && (
                       <button
                         className="login-button"
@@ -258,7 +400,8 @@ const App = () => {
                       </button>
                     )}
                   </div>
-                )}
+                )} */}
+
                 <div className="login-screen" id="login-screen"></div>
               </div>
             </div>
@@ -276,11 +419,11 @@ const App = () => {
           type="video/mp4"
         />
       )}
-      {logovis && (
+      {/* {logovis && (
         <div className="logoBoot">
           <img alt="logoBoot" src={logoboot1} />
         </div>
-      )}
+      )} */}
       <div
         className="navbar"
         style={

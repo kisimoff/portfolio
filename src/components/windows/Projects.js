@@ -4,6 +4,17 @@ import Draggable from "react-draggable";
 import { BiWorld } from "react-icons/bi";
 
 // Videos
+import esc from "./../../animated/esc.mp4";
+import rockets from "./../../animated/rockets.mp4";
+import mas from "./../../animated/mas.mp4";
+import kisimoff from "./../../animated/kisimoff.mp4";
+
+// Components
+import Window from "./Window";
+import Project from "../Project";
+
+// Rest of the Videos
+
 import kwik from "./../../animated/kwik.mp4";
 import setup from "./../../animated/setup.mp4";
 import tasks from "./../../animated/tasks2.mp4";
@@ -12,24 +23,17 @@ import assembly from "./../../animated/asse.mp4";
 import connect from "./../../animated/connect.mp4";
 import labyrinth from "./../../animated/labyrinth.mp4";
 import data from "./../../animated/data.mp4";
-import kisimoff from "./../../animated/kisimoff.mp4";
-import esc from "./../../animated/esc.mp4";
-import rockets from "./../../animated/rockets.mp4";
-import mas from "./../../animated/mas.mp4";
 import track from "./../../animated/trackandtrace.mp4";
 import glass from "./../../animated/glass.mp4";
 import jazz from "./../../animated/jazz.mp4";
 import cron from "./../../animated/cron.mp4";
-
-// Components
-import Window from "./Window";
-import Project from "../Project";
 
 const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
   useEffect(() => {
     document.getElementById("projects").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
   }, []);
+
   return (
     <Draggable
       cancel=".close-window, .projectsScroll"

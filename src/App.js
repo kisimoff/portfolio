@@ -52,6 +52,8 @@ import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
 
 const App = () => {
   //windows states
+  const [boot, setBoot] = useState(true);
+
   const [theme, setTheme] = useState(true);
   const [about, setAbout] = useState(false);
   const [start, setStart] = useState(false);
@@ -179,91 +181,104 @@ const App = () => {
   return (
     <div id="app" className="app" style={themeVars.app}>
       <div id="loading"></div>
-      <video
-        className="video-background"
-        playsInline
-        loop
-        muted
-        autoPlay
-        src={electronic3}
-        ref={videoEl}
-        type="video/mp4"
-      />{" "}
-      {/* <video
-        className="video-background"
-        playsInline
-        muted
-        src={portal}
-        ref={videoEl}
-        type="video/mp4"
-      /> */}
-      <div className="boot-screen" id="bootRoot">
-        <div className="boot-screen-text" id="boot-text">
-          <WindupChildren
-            onFinished={() => {
-              setSpinner(false);
-              setLogovis(true);
-            }}
-          >
-            <Pace ms={2}>
-              Kisimoff OS v2.3.2 <br></br> <br></br>
-              Loading system components...
-              <Pause ms={200} /> OK <br></br> <br></br> <Pause ms={150} />
-              Initializing BIOS...
-              <Pause ms={300} /> OK <br></br> <br></br> <Pause ms={120} />
-              Checking hardware configuration... <br></br>
-              <br></br> <Pause ms={350} />
-              Root OS: {osName} {osVersion}...
-              <Pause ms={350} /> OK <br></br> <br></br> <Pause ms={400} />
-              Starting system services...
-              <Pause ms={550} /> OK <br></br> <br></br> <Pause ms={150} />
-              Initializing security protocols...
-              <Pause ms={400} /> OK
-              {/* System time: [insert current time here] <br></br> <br></br> */}
-            </Pace>
-          </WindupChildren>
-        </div>
-        <div className="spinner" id="spinner">
-          {spinner && <SpinnerCircular secondaryColor="#2f2f2f" />}
-        </div>
-        {logovis && (
-          <div className="loginComplete">
-            <WindupChildren onFinished={() => setButtonvis(true)}>
-              <Pace ms={25}>
-                <h2> Loading Complete... </h2>
-              </Pace>
-            </WindupChildren>{" "}
-            {buttonvis && (
-              <button
-                className="login-button"
-                onClick={() => {
-                  document.getElementById("bootRoot").style.display = "none";
-                  setLogovis(false);
-                  attemptPlay();
+      {boot ? (
+        <>
+          <video
+            className="video-background"
+            playsInline
+            muted
+            src={portal}
+            ref={videoEl}
+            type="video/mp4"
+          />
+          <div className="boot-screen" id="bootRoot">
+            <div className="pattern-background">
+              <div className="pattern-mask">
+                <div className="boot-screen-text" id="boot-text">
+                  <WindupChildren
+                    onFinished={() => {
+                      setSpinner(false);
+                      setLogovis(true);
+                    }}
+                  >
+                    <Pace ms={2}>
+                      Kisimoff OS v2.3.2 <br></br> <br></br>
+                      Loading system components...
+                      <Pause ms={200} /> OK <br></br> <br></br>{" "}
+                      <Pause ms={150} />
+                      Initializing BIOS...
+                      <Pause ms={300} /> OK <br></br> <br></br>{" "}
+                      <Pause ms={120} />
+                      Checking hardware configuration... <br></br>
+                      <br></br> <Pause ms={350} />
+                      Root OS: {osName} {osVersion}...
+                      <Pause ms={350} /> OK <br></br> <br></br>{" "}
+                      <Pause ms={400} />
+                      Starting system services...
+                      <Pause ms={550} /> OK <br></br> <br></br>{" "}
+                      <Pause ms={150} />
+                      Initializing security protocols...
+                      <Pause ms={400} /> OK
+                      {/* System time: [insert current time here] <br></br> <br></br> */}
+                    </Pace>
+                  </WindupChildren>
+                </div>
+                <div className="spinner" id="spinner">
+                  {spinner && <SpinnerCircular secondaryColor="#2f2f2f" />}
+                </div>
+                {logovis && (
+                  <div className="loginComplete">
+                    <WindupChildren onFinished={() => setButtonvis(true)}>
+                      <Pace ms={25}>
+                        <h2> Loading Complete... </h2>
+                      </Pace>
+                    </WindupChildren>{" "}
+                    {buttonvis && (
+                      <button
+                        className="login-button"
+                        onClick={() => {
+                          document.getElementById("bootRoot").style.display =
+                            "none";
+                          // setLogovis(false);
+                          attemptPlay();
+                          // setTimeout(() => {
+                          //   setStart(true);
+                          // }, 1300);
 
-                  setTimeout(() => {
-                    setStart(true);
-                  }, 1300);
-
-                  // setTimeout(() => {
-                  //   setStart(true);
-                  // }, 5500);
-                  // setTimeout(() => {
-                  //   setLogovis(false);
-                  // }, 5500);
-                }}
-              >
-                {" "}
-                Login{" "}
-              </button>
-            )}
+                          setTimeout(() => {
+                            setStart(true);
+                          }, 5500);
+                          setTimeout(() => {
+                            setLogovis(false);
+                          }, 5500);
+                        }}
+                      >
+                        {" "}
+                        Login{" "}
+                      </button>
+                    )}
+                  </div>
+                )}
+                <div className="login-screen" id="login-screen"></div>
+              </div>
+            </div>
           </div>
-        )}
-        <div className="login-screen" id="login-screen"></div>
-      </div>
+        </>
+      ) : (
+        <video
+          className="video-background"
+          playsInline
+          loop
+          muted
+          autoPlay
+          src={electronic3}
+          ref={videoEl}
+          type="video/mp4"
+        />
+      )}
       {logovis && (
         <div className="logoBoot">
-          {/* <img alt="logoBoot" src={logoboot1} /> */}
+          <img alt="logoBoot" src={logoboot1} />
         </div>
       )}
       <div

@@ -6,6 +6,18 @@ import "./App.css";
 import Projects from "./components/windows/Projects";
 import LogoBoot from "./components/logoBoot";
 import LogoBoot2 from "./components/logoBoot2";
+import mycomp from "./icons/xp/mycomp.png";
+import info from "./icons/xp/about.png";
+import cmd from "./icons/xp/cmd.png";
+import mydocs from "./icons/xp/mydocs.png";
+import resume from "./icons/xp/resume.png";
+
+import aboutme_os from "./icons/os/about.png";
+import device_os from "./icons/os/device.png";
+import terminal_os from "./icons/os/terminal.png";
+import projects_os from "./icons/os/projects.png";
+import resume_os from "./icons/os/resume.png";
+import c3po from "./icons/os/c3po.png";
 
 import ToggleButton from "./components/ToggleButton";
 import Terminal2 from "./components/windows/Terminal2";
@@ -502,7 +514,10 @@ const App = () => {
         initial={{ opacity: 0, y: 8 }}
       >
         <Icon
+          theme={theme}
           icon={BsTerminal}
+          osIcon={terminal_os}
+          xpIcon={cmd}
           caption="Terminal"
           elementId="terminal2"
           setVisibility={setTerminal2}
@@ -511,8 +526,12 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
         <Icon
+          theme={theme}
           icon={BsPersonCircle}
+          // osIcon={aboutme_os}
+          osIcon={c3po}
           caption="About"
+          xpIcon={info}
           elementId="about"
           setVisibility={setAbout}
           visibility={about}
@@ -520,8 +539,11 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
         <Icon
+          theme={theme}
+          osIcon={device_os}
           icon={TbDeviceDesktopAnalytics}
           caption="Device"
+          xpIcon={mycomp}
           elementId="deviceInfo"
           setVisibility={setDevice}
           zIndexxx={zIndexxx}
@@ -529,8 +551,11 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
         <Icon
+          theme={theme}
+          osIcon={projects_os}
           icon={BsJournalCode}
           caption="Projects"
+          xpIcon={mydocs}
           elementId="projects"
           setVisibility={setProjects}
           zIndexxx={zIndexxx}
@@ -548,7 +573,12 @@ const App = () => {
             );
           }}
         >
-          <VscFilePdf className="icon" />
+          {theme == true ? (
+            <img src={resume_os} className="icon" />
+          ) : (
+            // <VscFilePdf className="icon" />
+            <img src={resume} className="icon" />
+          )}
           <span className="caption">Resume</span>
         </motion.a>
       </motion.div>

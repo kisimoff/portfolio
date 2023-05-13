@@ -4,6 +4,8 @@ import "./App.css";
 
 // components and windows imports
 import Projects from "./components/windows/Projects";
+import LogoBoot from "./components/logoBoot";
+
 import ToggleButton from "./components/ToggleButton";
 import Terminal2 from "./components/windows/Terminal2";
 import About from "./components/windows/About";
@@ -11,6 +13,7 @@ import Start from "./components/windows/Start";
 import DeviceInfo from "./components/windows/DeviceInfo";
 import Icon from "./components/Icon";
 import IconTask from "./components/IconTask";
+import { motion, useAnimation } from "framer-motion";
 
 //packages imports
 import { SpinnerCircular } from "spinners-react";
@@ -93,6 +96,42 @@ const App = () => {
       videoEl.current.play().catch((error) => {
         console.error("Error attempting to play", error);
       });
+  };
+
+  const controlsPath = useAnimation();
+  const controlsOpacity = useAnimation();
+
+  useEffect(() => {
+    const sequence = async () => {
+      await controlsPath.start({
+        pathLength: 1,
+        pathOffset: 0,
+        stroke: "url(#linear-gradient)",
+        transition: { duration: 2, ease: "easeIn" },
+      });
+      controlsOpacity.start({
+        opacity: 1,
+        transition: { duration: 2, ease: "easeInOut" },
+      });
+    };
+
+    sequence();
+  }, [controlsPath, controlsOpacity]);
+
+  const logoClick = () => {
+    document.getElementById("bootRoot").style.display = "none";
+    // setLogovis(false);
+    attemptPlay();
+    // setTimeout(() => {
+    //   setStart(true);
+    // }, 1300);
+
+    setTimeout(() => {
+      setStart(true);
+    }, 5500);
+    setTimeout(() => {
+      setLogo(false);
+    }, 5500);
   };
 
   useEffect(() => {
@@ -205,29 +244,7 @@ const App = () => {
   return (
     <div id="app" className="app" style={themeVars.app}>
       <div id="loading"></div>
-      {logo && (
-        <div className="logoBoot">
-          <img
-            alt="logoBoot"
-            src={logoboot1}
-            onClick={() => {
-              document.getElementById("bootRoot").style.display = "none";
-              // setLogovis(false);
-              attemptPlay();
-              // setTimeout(() => {
-              //   setStart(true);
-              // }, 1300);
-
-              setTimeout(() => {
-                setStart(true);
-              }, 5500);
-              setTimeout(() => {
-                setLogo(false);
-              }, 5500);
-            }}
-          />
-        </div>
-      )}
+      {logo && <LogoBoot onLogoClick={logoClick} />}
 
       {boot ? (
         <>
@@ -243,7 +260,6 @@ const App = () => {
           <div className="boot-screen" id="bootRoot">
             <div className="pattern-background">
               <div className={`pattern-mask ${pattern ? "animate" : ""}`}></div>
-
               <div className="pattern-reveal">
                 <div className="logoBoot"></div>
                 <div className="boot-screen-text" id="boot-text">
@@ -274,7 +290,7 @@ const App = () => {
                             <Pause ms={50} />
                             <br /> Checking hardware compatibility
                             <Pace ms={200}>...</Pace>
-                            <Pause ms={400} />
+                            <Pause ms={300} />
                             <br />
                             Type:
                             {deviceType}
@@ -291,7 +307,7 @@ const App = () => {
                             Compatibility
                             <Pace ms={200}>...</Pace>
                             <Pause ms={200} /> OK
-                            <Pause ms={500} />
+                            <Pause ms={400} />
                           </>
                         )}
                         <Effect
@@ -308,7 +324,7 @@ const App = () => {
                             <br /> Loading system fonts...
                             <br /> Configuring system preferences...
                             <br /> Mounting files...
-                            <Pause ms={1000} />
+                            <Pause ms={400} />
                             <br /> Loading system services...
                             <br /> Initializing networking protocols...
                             <br /> Establishing secure connections...
@@ -316,7 +332,7 @@ const App = () => {
                             <br /> Optimizing system performance...
                             <br /> Initializing input/output devices...
                             <br /> Loading system utilities...
-                            <Pause ms={200} />
+                            <Pause ms={100} />
                             <br /> Verifying system integrity...
                             <br /> Loading system log files...
                             <br /> Configuring power management settings...
@@ -344,8 +360,8 @@ const App = () => {
                             <br /> Loading system encryption tools...
                             <br /> Checking system for malware...
                             <br /> Loading system updates
-                            <Pace ms={200}>...</Pace>
-                            <Pause ms={500} />
+                            <Pace ms={150}>...</Pace>
+                            <Pause ms={300} />
                           </>
                         )}
                         <Effect
@@ -359,49 +375,6 @@ const App = () => {
                     )}
                   </WindupChildren>
                 </div>
-
-                {/* <div className="spinner" id="spinner">
-                  {spinner && <SpinnerCircular secondaryColor="#2f2f2f" />}
-                </div> */}
-                {/* {logovis && (
-                  <div className="loginComplete">
-                    <WindupChildren
-                      onFinished={() => {
-                        setButtonvis(true);
-                        setPattern(!pattern);
-                      }}
-                    >
-                      <Pace ms={25}>
-                        <h2> Loading Complete... </h2>
-                      </Pace>
-                    </WindupChildren>
-                    {buttonvis && (
-                      <button
-                        className="login-button"
-                        onClick={() => {
-                          document.getElementById("bootRoot").style.display =
-                            "none";
-                          // setLogovis(false);
-                          attemptPlay();
-                          // setTimeout(() => {
-                          //   setStart(true);
-                          // }, 1300);
-
-                          setTimeout(() => {
-                            setStart(true);
-                          }, 5500);
-                          setTimeout(() => {
-                            setLogovis(false);
-                          }, 5500);
-                        }}
-                      >
-                        {" "}
-                        Login{" "}
-                      </button>
-                    )}
-                  </div>
-                )} */}
-
                 <div className="login-screen" id="login-screen"></div>
               </div>
             </div>

@@ -150,8 +150,8 @@ body {
     rgba(0, 0, 0, 1) 20%,
     rgba(0, 0, 0, 0.9) 40%,
     rgba(0, 0, 0, 0.81) 75%,
-    rgba(0, 0, 0, 0.72) 88%,
-    rgba(0, 0, 0, 0.45) 93%,
+    rgba(0, 0, 0, 0.72) 77%,
+    rgba(0, 0, 0, 0.35) 90%,
     rgba(0, 0, 0, 0) 100%
   );
   width: 100vw;
@@ -240,6 +240,23 @@ body {
   z-index: 50;
 }
 
+/* .logoBoot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #04aa6d7e;
+}
+.svg-logoBoot {
+  background-color: #000000;
+  width: 300px;
+  height: 300px;
+  color: #000000;
+  border-radius: 50%;
+} */
+
 .logoBoot {
   position: fixed;
   top: 50%;
@@ -248,26 +265,89 @@ body {
   z-index: 300;
   max-width: 100%;
   max-height: 100%;
-  text-align: center; /* Add text-align: center to center the image horizontally */
+  text-align: center;
+}
+
+.svg1,
+.svg2 {
+  width: 19vmin;
+  height: 19vmin;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.svg1 {
+  z-index: 5;
+}
+
+.svg2 {
+  z-index: 6;
+}
+
+.logoBoot > .motion-div {
+  position: absolute;
+}
+
+.logoBoot > .motion-div::before {
+  content: "";
+  position: absolute;
+  width: 17vmin; /* Adjust to desired size */
+  height: 17vmin; /* Adjust to desired size */
+  background-color: black;
+  border-radius: 50%; /* Makes the shape a circle */
+  z-index: 4; /* Keeps the circle behind your SVGs */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*
+ <svg
+            className="svg-logoBoot"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 353.81 360.07"
+          >
+
+              d="M238.77,177.71c13.37-3.27,30.29-17.74,30.29-40.39,0-31.12-21.83-48.58-58.13-48.58H92.11L81.47,102.65h130c26.75,0,42,12.83,42,36.58,0,18.83-16.64,33.3-32.2,33.3H141.88c-20.2.25-35.55,4.16-45.73,12.28-9.68,7.71-14.68,19.23-14.68,35v51.48H210.11c45.3,0,62.23-22.11,62.23-49.4C272.34,196,254.87,181.26,238.77,177.71Zm-28.66,80H141.88v-.11H97.17v-38c0-22.92,14.69-33.35,41.5-34.77H221c18.84,0,35.49,13.92,35.49,35.48C256.51,243.76,239,257.68,210.11,257.68ZM176.9,344.84C86,344.84,12.1,270.91,12.1,180S86,15.23,176.9,15.23,341.71,89.16,341.71,180,267.78,344.84,176.9,344.84Zm0-316.61C93.2,28.23,25.1,96.33,25.1,180S93.2,331.84,176.9,331.84,328.71,263.74,328.71,180,260.61,28.23,176.9,28.23Z"
+
+ */
+
+/* .logoBoot img {
+  height: auto;
+  max-width: 100%;
+} */
+
+/* 
+.logoBoot {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 300;
+  max-width: 100%;
+  max-height: 100%;
+  text-align: center;
 }
 
 .logoBoot img {
   height: auto;
-  max-width: 100%; /* Use max-width instead of width to maintain aspect ratio */
-}
+  max-width: 100%;
+} */
 
-.logoBoot img {
+/* .logoBoot img {
   width: 55%;
   box-shadow: 0px 0px 30px 0px #f370a2b1;
   border-radius: 50%;
   animation: glow 1.5s ease-in-out infinite alternate;
-}
+} */
 
-@keyframes glow {
+/* @keyframes glow {
   to {
     box-shadow: 0px 0px 15px 0px #8a3958b1;
   }
-}
+} */
 
 .login-screen {
   display: none;

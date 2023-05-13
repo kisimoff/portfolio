@@ -44,6 +44,7 @@ clamp(min, target, max)
 
   --project-width: clamp(30vw, 50vmin, 44vw);
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
+  --fs-instructions: clamp(1.2rem, 0.6vw + 1.3rem, 2rem);
 
   --fs-navbar: clamp(1.3rem, 1vw + 1.2rem, 2.6rem);
   --sz-logo-nav: clamp(2.5rem, 1.7vw + 2rem, 3.5rem);
@@ -100,7 +101,7 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .app {
@@ -109,6 +110,10 @@ body {
   height: 100vh;
   flex-direction: column-reverse;
   font-family: "Ubuntu Mono", monospace;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("background/xp.jpg");
 }
 
 /* .pattern {
@@ -141,12 +146,25 @@ body {
   background: url("./img/16svg.svg");
   background-repeat: repeat;
   background-size: 40px 40px;
-  z-index: 15;
+  z-index: 115;
+}
+
+.boot-screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(0, 0, 0);
+  z-index: 20;
+}
+
+.boot-screen-text {
+  z-index: 22;
+  color: white;
 }
 
 .pattern-reveal {
   background: radial-gradient(
-    circle,
+    ellipse,
     rgba(0, 0, 0, 1) 20%,
     rgba(0, 0, 0, 0.9) 40%,
     rgba(0, 0, 0, 0.81) 75%,
@@ -156,7 +174,7 @@ body {
   );
   width: 100vw;
   height: 100vh;
-  z-index: 30;
+  z-index: 130;
 }
 
 .pattern-mask {
@@ -220,18 +238,6 @@ body {
   z-index: 51;
 }
 
-.boot-screen {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  background: rgb(0, 0, 0);
-  z-index: 20;
-}
-
-.boot-screen-text {
-  z-index: 22;
-  color: white;
-}
 .spinner {
   position: absolute;
   top: 50%; /* position the top  edge of the element at the middle of the parent */
@@ -262,12 +268,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 300;
-  max-width: 100%;
-  max-height: 100%;
-  text-align: center;
+  z-index: 21;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
+.instructions {
+  margin-left: 2px;
+  position: absolute;
+  font-size: var(--fs-instructions);
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  margin-top: 25vmin;
+}
 .svg1,
 .svg2 {
   width: 19vmin;
@@ -284,23 +301,6 @@ body {
 
 .svg2 {
   z-index: 6;
-}
-
-.logoBoot > .motion-div {
-  position: absolute;
-}
-
-.logoBoot > .motion-div::before {
-  content: "";
-  position: absolute;
-  width: 17vmin; /* Adjust to desired size */
-  height: 17vmin; /* Adjust to desired size */
-  background-color: black;
-  border-radius: 50%; /* Makes the shape a circle */
-  z-index: 4; /* Keeps the circle behind your SVGs */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 /*
@@ -408,7 +408,7 @@ body {
 .navbar {
   display: flex;
   width: 100%;
-
+  overflow: hidden;
   flex-direction: row;
   padding: var(--padding-small);
   /* background-color: rgba(37, 37, 37, 0.314); */
@@ -451,11 +451,6 @@ body {
 
 .nav-socials a {
   color: white;
-}
-
-.nav-social-svg:hover {
-  transform: scale(1.07);
-  transition: all 0.1s linear;
 }
 
 /* #github {
@@ -522,7 +517,7 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   padding-left: 1rem;
-
+  overflow: hidden;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 0.5rem;
@@ -588,6 +583,7 @@ body {
   padding: var(--padding);
   height: 100vh;
   width: auto;
+  z-index: 1;
 }
 
 .imageW {
@@ -787,11 +783,6 @@ body {
   gap: 0.1rem;
 }
 
-.iconWrapper:hover {
-  transform: scale(1.07);
-  transition: all 0.1s linear;
-}
-
 .icon {
   width: 2.8rem;
   height: auto;
@@ -813,6 +804,7 @@ body {
 
 .caption {
   text-align: center;
+
   color: white;
   text-decoration: none;
   padding-bottom: 1.5rem;

@@ -13,22 +13,24 @@ export default function LogoBoot({ onLogoClick }) {
   //          transition: { duration: 7, ease: "easeIn" },
   //        });
 
+  const delay = 1.5;
+
   useEffect(() => {
     const sequence = async () => {
       controlsPath.start({
         pathLength: 0.8, //how fast it draws higher - faster
         pathOffset: 5, // how fast they dissaper
         stroke: "url(#linear-gradient)",
-        transition: { delay: 3.5, duration: 3.5, ease: "easeIn" },
+        transition: { delay: delay, duration: 3.5, ease: "easeIn" },
       });
 
       controlsOpacity.start({
         opacity: 1,
-        transition: { delay: 7.5, duration: 1, ease: "easeOut" },
+        transition: { delay: delay + 4, duration: 1, ease: "easeOut" },
       });
       controlsPath.start({
         opacity: 0, // adjust as per your requirements
-        transition: { delay: 8, duration: 2, ease: "easeOut" }, // adjust duration and easing as per your requirements
+        transition: { delay: delay + 4, duration: 2, ease: "easeOut" }, // adjust duration and easing as per your requirements
       });
     };
 

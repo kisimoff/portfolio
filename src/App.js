@@ -5,6 +5,7 @@ import "./App.css";
 // components and windows imports
 import Projects from "./components/windows/Projects";
 import LogoBoot from "./components/logoBoot";
+import LogoBoot2 from "./components/logoBoot2";
 
 import ToggleButton from "./components/ToggleButton";
 import Terminal2 from "./components/windows/Terminal2";
@@ -65,6 +66,7 @@ import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
 const App = () => {
   //windows states
   const [boot, setBoot] = useState(true);
+
   const [pattern, setPattern] = useState(false);
   const [theme, setTheme] = useState(true);
   const [about, setAbout] = useState(false);
@@ -81,11 +83,25 @@ const App = () => {
   const [spinner, setSpinner] = useState(true);
   const [logo, setLogo] = useState(true);
   const [buttonvis, setButtonvis] = useState(false);
+  const navbarAnimation = useAnimation();
+  const iconsAnimation = useAnimation();
+  const backgroundAnimation = useAnimation();
 
   const [zIndexxx, setZindexxx] = useState(6);
 
-  const onPress = () => {
+  const togglePress = () => {
     setTheme(!theme);
+    if (theme) {
+      backgroundAnimation.start({
+        opacity: 0,
+        transition: { duration: 1, ease: "easeIn" },
+      });
+    } else {
+      backgroundAnimation.start({
+        opacity: 1,
+        transition: { duration: 1, ease: "easeIn" },
+      });
+    }
   };
 
   const videoEl = useRef(null);
@@ -98,34 +114,14 @@ const App = () => {
       });
   };
 
-  const controlsPath = useAnimation();
-  const controlsOpacity = useAnimation();
-
-  useEffect(() => {
-    const sequence = async () => {
-      await controlsPath.start({
-        pathLength: 1,
-        pathOffset: 0,
-        stroke: "url(#linear-gradient)",
-        transition: { duration: 2, ease: "easeIn" },
-      });
-      controlsOpacity.start({
-        opacity: 1,
-        transition: { duration: 2, ease: "easeInOut" },
-      });
-    };
-
-    sequence();
-  }, [controlsPath, controlsOpacity]);
-
   const logoClick = () => {
+    sequence();
     document.getElementById("bootRoot").style.display = "none";
     // setLogovis(false);
     attemptPlay();
     // setTimeout(() => {
     //   setStart(true);
     // }, 1300);
-
     setTimeout(() => {
       setStart(true);
     }, 5500);
@@ -134,19 +130,17 @@ const App = () => {
     }, 5500);
   };
 
-  useEffect(() => {
-    // spinnerId = setTimeout(() => {
-    //   setSpinner(true);
-    // }, 700);
-    // logoId = setTimeout(() => {
-    //   setSpinner(false);
-    //   setLogovis(true);
-    // }, 1600);
-    //attemptPlay();
-    // return () => {
-    //   clearTimeout(spinnerId);
-    // };
-  }, []);
+  const sequence = async () => {
+    await navbarAnimation.start({
+      y: 0,
+      transition: { duration: 1.5, delay: 5 },
+    });
+    await iconsAnimation.start({
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.7, delay: 0.8 },
+    });
+  };
 
   // useEffect(() => {
   //   if (pattern) {
@@ -164,9 +158,6 @@ const App = () => {
       ? {
           app: {
             // backgroundImage: `url(${background_dark})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
             // width: "100vw",
             // height: "100vh",
             // transition: "all 1s ease-in",
@@ -192,10 +183,7 @@ const App = () => {
         }
       : {
           app: {
-            backgroundImage: `url(${xp})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
+            // backgroundImage: `url(${xp})`,
             // width: "100%",
             // height: "100%",
             // transition: "all 1s ease",
@@ -243,25 +231,25 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
-      <div id="loading"></div>
-      {logo && <LogoBoot onLogoClick={logoClick} />}
+      {/* {logo && <LogoBoot onLogoClick={logoClick} />} */}
+      {logo && <LogoBoot2 onLogoClick={logoClick} />}
 
       {boot ? (
         <>
-          <video
-            className="video-background"
-            playsInline
-            muted
-            src={portal}
-            ref={videoEl}
-            type="video/mp4"
-          />
-
+          <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
+            <video
+              className="video-background"
+              playsInline
+              muted
+              src={portal}
+              ref={videoEl}
+              type="video/mp4"
+            />
+          </motion.div>
           <div className="boot-screen" id="bootRoot">
             <div className="pattern-background">
               <div className={`pattern-mask ${pattern ? "animate" : ""}`}></div>
               <div className="pattern-reveal">
-                <div className="logoBoot"></div>
                 <div className="boot-screen-text" id="boot-text">
                   <WindupChildren
                     onFinished={() => {
@@ -273,21 +261,10 @@ const App = () => {
                       <Pace ms={0}>
                         Kisimoff OS v2.3.2
                         <br />
-                        {!step2 && (
-                          <>
-                            Loading complete...
-                            <Pause ms={1400} />
-                            <Effect
-                              fn={() => {
-                                setStep3(false);
-                              }}
-                            />
-                          </>
-                        )}
                         <Pause ms={500} />
                         {step1 && (
                           <>
-                            <Pause ms={50} />
+                            <Pause ms={20} />
                             <br /> Checking hardware compatibility
                             <Pace ms={200}>...</Pace>
                             <Pause ms={300} />
@@ -361,15 +338,21 @@ const App = () => {
                             <br /> Checking system for malware...
                             <br /> Loading system updates
                             <Pace ms={150}>...</Pace>
-                            <Pause ms={300} />
+                            OK
+                            <Pause ms={400} />
+                            <br />
+                            <br />
+                            Loading complete...
+                            <Pause ms={1300} />
+                            <Effect
+                              fn={() => {
+                                setPattern(!pattern);
+
+                                setStep3(false);
+                              }}
+                            />
                           </>
                         )}
-                        <Effect
-                          fn={() => {
-                            setPattern(!pattern);
-                            setStep2(false);
-                          }}
-                        />
                         {/* System time: [insert current time here] <br></br> <br></br> */}
                       </Pace>
                     )}
@@ -381,24 +364,28 @@ const App = () => {
           </div>
         </>
       ) : (
-        <video
-          className="video-background"
-          playsInline
-          loop
-          muted
-          autoPlay
-          src={electronic3}
-          ref={videoEl}
-          type="video/mp4"
-        />
+        <motion.div>
+          <video
+            className="video-background"
+            playsInline
+            loop
+            muted
+            autoPlay
+            src={electronic3}
+            ref={videoEl}
+            type="video/mp4"
+          />
+        </motion.div>
       )}
       {/* {logovis && (
         <div className="logoBoot">
           <img alt="logoBoot" src={logoboot1} />
         </div>
       )} */}
-      <div
+      <motion.div
         className="navbar"
+        animate={navbarAnimation}
+        initial={{ y: 100 }}
         style={
           theme
             ? { color: "white", transition: "all 1.5s ease" }
@@ -428,7 +415,7 @@ const App = () => {
 
           <span style={isTablet ? { width: "350px" } : null}>
             Kisim
-            <ToggleButton onChange={onPress} />
+            <ToggleButton onChange={togglePress} />
             {theme ? "ff" : "n"}
             &nbsp;OS
           </span>
@@ -485,8 +472,10 @@ const App = () => {
           ) : null}
         </div>
         <div className="nav-socials">
-          <a
+          <motion.a
             href="#"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => {
               window.open(
                 "https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
@@ -494,18 +483,24 @@ const App = () => {
             }}
           >
             <SlSocialLinkedin className="nav-social-svg" />
-          </a>
-          <a
+          </motion.a>
+          <motion.a
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             href="#"
             onClick={() => {
               window.open("https://github.com/vtwenty3");
             }}
           >
             <VscGithubAlt className="nav-social-svg" />
-          </a>
+          </motion.a>
         </div>
-      </div>
-      <div className="icons">
+      </motion.div>
+      <motion.div
+        className="icons"
+        animate={iconsAnimation}
+        initial={{ opacity: 0, y: 8 }}
+      >
         <Icon
           icon={BsTerminal}
           caption="Terminal"
@@ -542,22 +537,21 @@ const App = () => {
           visibility={projects}
           setZindexxx={setZindexxx}
         />
-        <div className="hoverIcon">
-          <a
-            className="iconWrapper"
-            href="#"
-            onClick={() => {
-              window.open(
-                "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
-              );
-            }}
-          >
-            {" "}
-            <VscFilePdf className="icon" />
-            <span className="caption">Resume</span>
-          </a>
-        </div>
-      </div>
+        <motion.a
+          whileHover={{ scale: 1.07 }}
+          whileTap={{ scale: 0.95 }}
+          className="iconWrapper"
+          href="#"
+          onClick={() => {
+            window.open(
+              "https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing"
+            );
+          }}
+        >
+          <VscFilePdf className="icon" />
+          <span className="caption">Resume</span>
+        </motion.a>
+      </motion.div>
       {terminal2 ? (
         <Terminal2
           theme={themeVars}

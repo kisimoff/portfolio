@@ -19,9 +19,9 @@ function Icon(props) {
         }}
       >
         {props.theme == true ? (
-          // <props.icon className="icon" />
-          <img src={props.osIcon} className="icon" />
+          <props.icon className="icon" />
         ) : (
+          // <img src={props.osIcon} className="icon" />
           <img src={props.xpIcon} className="icon" />
         )}
 

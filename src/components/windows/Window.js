@@ -16,12 +16,7 @@ function Window({ theme, title, elementId, setVisibilityWindow }) {
           href="#"
           onClick={() => {
             setVisibilityWindow(false);
-
-            // document.getElementById(elementId).style.display = "none";
-            // document.getElementById("task-" + elementId + "-icon").style.display =
-            //   "none";
           }}
-          // style={{ color: "white", marginTop: "3px" }}
         >
           <CgClose />
         </a>

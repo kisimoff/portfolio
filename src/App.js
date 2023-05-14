@@ -4,7 +4,6 @@ import "./App.css";
 
 // components and windows imports
 import Projects from "./components/windows/Projects";
-import LogoBoot from "./components/logoBoot";
 import LogoBoot2 from "./components/logoBoot2";
 import mycomp from "./icons/xp/mycomp.png";
 import info from "./icons/xp/about.png";
@@ -32,6 +31,7 @@ import { motion, useAnimation } from "framer-motion";
 import { SpinnerCircular } from "spinners-react";
 import { WindupChildren, Pause, Pace, Effect } from "windups";
 import {
+  isDesktop,
   isTablet,
   osVersion,
   osName,
@@ -52,7 +52,10 @@ import electronic3 from "./background/electronic3.mp4";
 import xp from "./background/xp.jpg";
 
 //to be deleted
-import portal from "./background/portal.mp4";
+// import portal from "./background/portal.mp4";
+import portal from "./background/cpuPortal2.mp4";
+import cpuLoop from "./background/cpuLoop.mp4";
+
 import logoboot from "./img/logoboot.png";
 import logoboot1 from "./img/logoboot1.png";
 import logo_black from "./img/logo_black.png";
@@ -98,6 +101,8 @@ const App = () => {
   const navbarAnimation = useAnimation();
   const iconsAnimation = useAnimation();
   const backgroundAnimation = useAnimation();
+  const loopAnimation = useAnimation();
+  const portalAnimation = useAnimation();
 
   const [zIndexxx, setZindexxx] = useState(6);
 
@@ -117,6 +122,21 @@ const App = () => {
   };
 
   const videoEl = useRef(null);
+  const loopVideoEl = useRef(null);
+
+  // useEffect(() => {
+  //   // const loopVideo = loopVideoEl.current;
+  //   // loopVideo.play();
+  //   // const video = videoEl.current;
+  //   // const loopVideo = loopVideoEl.current;
+  //   // const handleVideoEnd = () => {
+  //   //   loopVideo.play();
+  //   // };
+  //   // video.addEventListener("ended", handleVideoEnd);
+  //   // return () => {
+  //   //   video.removeEventListener("ended", handleVideoEnd);
+  //   // };
+  // }, []);
 
   const attemptPlay = () => {
     videoEl &&
@@ -124,13 +144,23 @@ const App = () => {
       videoEl.current.play().catch((error) => {
         console.error("Error attempting to play", error);
       });
+
+    setTimeout(() => {
+      loopVideoEl &&
+        loopVideoEl.current &&
+        loopVideoEl.current.play().catch((error) => {
+          console.error("Error attempting to play", error);
+        });
+    }, 3000);
   };
 
   const logoClick = () => {
-    sequence();
+    elementsSequenceAnimation();
+    videosSequenceAnimation();
     document.getElementById("bootRoot").style.display = "none";
     // setLogovis(false);
     attemptPlay();
+
     // setTimeout(() => {
     //   setStart(true);
     // }, 1300);
@@ -142,11 +172,33 @@ const App = () => {
     }, 5500);
   };
 
-  const sequence = async () => {
-    await navbarAnimation.start({
-      y: 0,
-      transition: { duration: 1.5, delay: 5 },
+  const videosSequenceAnimation = async () => {
+    portalAnimation.start({
+      opacity: 0,
+      transition: { duration: 0.6, delay: 5.5 },
     });
+    loopAnimation.start({
+      opacity: 1,
+      transition: { duration: 0.5, delay: 4.5 },
+    });
+  };
+
+  const elementsSequenceAnimation = async () => {
+    if (window.innerWidth > 800 && window.innerHeight > 400) {
+      navbarAnimation.set({ y: 100 });
+
+      await navbarAnimation.start({
+        y: 0,
+        transition: { duration: 1.5, delay: 5 },
+      });
+    } else {
+      navbarAnimation.set({ y: -100 });
+
+      await navbarAnimation.start({
+        y: 0,
+        transition: { duration: 1.5, delay: 5 },
+      });
+    }
     await iconsAnimation.start({
       y: 0,
       opacity: 1,
@@ -164,7 +216,16 @@ const App = () => {
   //     document.querySelector(".pattern-mask").classList.remove("animate");
   //   }
   // }, [pattern]);
-
+  // style={
+  //   theme
+  //     ? { color: "white", transition: "all 1.5s ease" }
+  //     : {
+  //         background: "rgb(23,65,163",
+  //         background:
+  //           "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
+  //         transition: "all 1.5s ease",
+  //       } //light theme
+  // }
   const themeVars =
     theme === true
       ? {
@@ -172,12 +233,11 @@ const App = () => {
             // backgroundImage: `url(${background_dark})`,
             // width: "100vw",
             // height: "100vh",
-            // transition: "all 1s ease-in",
+            transition: "none",
           },
           window: {
             backgroundColor: "#cfcfcf46",
             color: "white",
-            transition: "all 1s ease-in",
           },
           field: {
             color: "#F4F4F4",
@@ -188,7 +248,7 @@ const App = () => {
             borderRight: "1px solid #cfcfcf46",
             boxSizing: "border-box",
             boxShadow: "0 2px 5px #111",
-            transition: "all 1s ease-in",
+            transition: "all 0.2s ",
           },
           // cursor: { animation: "1.02s blink-dark step-end infinite" },
           closeBtn: { color: "white" },
@@ -198,20 +258,35 @@ const App = () => {
             // backgroundImage: `url(${xp})`,
             // width: "100%",
             // height: "100%",
-            // transition: "all 1s ease",
+            transition: "none",
           },
           window: {
             background: "rgb(19,60,156)",
             background:
-              "linear-gradient(0deg, rgba(0,59,214,1) 4%, rgba(0,102,253,1) 9%, rgba(0,100,253,1) 15%, rgba(0,88,230,1) 77%, rgba(54,143,252,1) 91%, rgba(13,96,232,1) 95%)",
+              "linear-gradient(0deg, rgba(0,59,214,1) 2%, rgba(0,102,253,1) 15%, rgba(0,100,253,1) 20%, rgba(0,88,230,1) 85%, rgba(54,143,252,1) 95%, rgba(13,96,232,1) 98%)",
             color: "#E3E3E3",
-            // transition: "all 1.5s ease",
             borderTopRightRadius: "8px",
             borderTopLeftRadius: "8px",
-            transition: "all 1s ease-in",
+            transition: "all 0.5s ease-in",
             fontFamily: "Segoe UI",
             fontWeight: "600",
             textShadow: "1px 2px 2px rgba(0, 0, 0, 0.4)",
+            boxShadow: "inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
+            boxSizing: "border-box",
+          },
+          iconTask: {
+            // backgroundColor: "#ffffff",
+            paddingRight: "1rem",
+            borderBottom: "none",
+            borderRadius: "4px",
+            boxShadow: "1px 2px 2px #33333375",
+            borderLeft: "1px solid rgba(146, 165, 187, 0.56)",
+            background:
+              "linear-gradient(0deg, rgba(97,167,240,1) 0%, rgba(48,137,241,1) 6%, rgba(48,137,241,1) 93%, rgba(52,135,241,1) 97%, rgba(97,167,240,1) 100%)",
+          },
+          iconTaskCaption: {
+            paddingRight: "1.5rem",
+            fontSize: "1.1rem",
           },
           field: {
             backgroundColor: "#E3E3E3",
@@ -220,12 +295,12 @@ const App = () => {
             // transition: "all 1.5s ease",
             boxShadow: "0 2px 5px #33333375",
             boxSizing: "border-box",
-            // borderTop: "0px solid #0528b3",
-            // borderLeft: "4px solid #1a4bbe",
             borderRight: "4px solid #003bd6",
             borderBottom: "4px solid #003bd6",
             borderLeft: "4px solid #003bd6",
-            transition: "all 1s ease-in",
+            boxShadow: "inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
+            boxSizing: "border-box",
+            transition: "all 0.5s ",
           },
           // cursor: { animation: "1.02s blink-light step-end infinite" },
           closeBtn: {
@@ -239,6 +314,11 @@ const App = () => {
             fontSize: "22px",
             transition: "all 0.8s ease-in",
           },
+          navbar: {
+            background:
+              "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
+            transition: "all 1.5s ease",
+          },
         };
 
   return (
@@ -249,13 +329,29 @@ const App = () => {
       {boot ? (
         <>
           <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
-            <video
+            <motion.video
+              animate={portalAnimation}
+              style={{ zIndex: 1 }}
+              initial={{ opacity: 1 }}
               className="video-background"
               playsInline
               muted
               src={portal}
               ref={videoEl}
               type="video/mp4"
+              // Initially, show the first video
+            />
+            <motion.video
+              animate={loopAnimation}
+              initial={{ opacity: 0 }}
+              className="video-background"
+              playsInline
+              muted
+              src={cpuLoop}
+              ref={loopVideoEl}
+              type="video/mp4"
+              loop
+              // Initially, hide the second video
             />
           </motion.div>
           <div className="boot-screen" id="bootRoot">
@@ -397,34 +493,11 @@ const App = () => {
       <motion.div
         className="navbar"
         animate={navbarAnimation}
-        initial={{ y: 100 }}
-        style={
-          theme
-            ? { color: "white", transition: "all 1.5s ease" }
-            : {
-                background: "rgb(23,65,163",
-                background:
-                  "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
-                transition: "all 1.5s ease",
-              } //light theme
-        }
+        initial={{ y: 0 }}
+        style={themeVars.navbar}
       >
-        <div
-          className="nav-heading"
-          id="test"
-          style={
-            theme
-              ? { color: "white", transition: "all 1.5s ease" }
-              : {
-                  color: "white",
-                  height: "100%",
-                  borderBottomRightRadius: "10px",
-                  borderTopRightRadius: "10px",
-                }
-          }
-        >
+        <div className="nav-heading">
           <img id="logo" alt="logo" src={logo_white} />
-
           <span style={isTablet ? { width: "350px" } : null}>
             Kisim
             <ToggleButton onChange={togglePress} />
@@ -438,8 +511,11 @@ const App = () => {
         >
           {terminal2 ? (
             <IconTask
+              themeVars={themeVars}
+              theme={theme}
               icon={BsTerminal}
               caption="Terminal"
+              xpIcon={cmd}
               elementId="terminal2"
               selfId="task-terminal-icon"
               setVisibility={setTerminal2}
@@ -449,8 +525,11 @@ const App = () => {
           ) : null}
           {about ? (
             <IconTask
+              themeVars={themeVars}
+              theme={theme}
               icon={BsPersonCircle}
               caption="About"
+              xpIcon={info}
               elementId="about"
               selfId="task-about-icon"
               setVisibility={setAbout}
@@ -460,8 +539,11 @@ const App = () => {
           ) : null}
           {device ? (
             <IconTask
+              themeVars={themeVars}
+              theme={theme}
               icon={TbDeviceDesktopAnalytics}
               caption="Device"
+              xpIcon={mycomp}
               line2="Info"
               elementId="deviceInfo"
               selfId="task-deviceInfo-icon"
@@ -473,8 +555,11 @@ const App = () => {
 
           {projects ? (
             <IconTask
+              themeVars={themeVars}
+              theme={theme}
               icon={BsJournalCode}
               caption="Projects"
+              xpIcon={mydocs}
               elementId="projects"
               selfId="task-projects-icon"
               setVisibility={setProjects}
@@ -574,9 +659,9 @@ const App = () => {
           }}
         >
           {theme == true ? (
-            <img src={resume_os} className="icon" />
+            <VscFilePdf className="icon" />
           ) : (
-            // <VscFilePdf className="icon" />
+            // <img src={resume_os} className="icon" />
             <img src={resume} className="icon" />
           )}
           <span className="caption">Resume</span>

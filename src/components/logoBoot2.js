@@ -61,15 +61,15 @@ export default function LogoBoot2({ onLogoClick }) {
         .start({
           opacity: 1,
           y: 0,
-          transition: { delay: 0.5, duration: 0.6 },
+          transition: { delay: 0.5, duration: 0.5 },
         })
         .then(() => setAnimationCompleted(true));
       // pulsing animation
       blub.start({
         scale: [1, 1.04, 1],
         transition: {
-          delay: 1.4,
-          duration: 0.55,
+          delay: 1,
+          duration: 0.4,
           repeat: 1,
           repeatDelay: 8,
         },

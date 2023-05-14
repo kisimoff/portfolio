@@ -17,6 +17,7 @@ import terminal_os from "./icons/os/terminal.png";
 import projects_os from "./icons/os/projects.png";
 import resume_os from "./icons/os/resume.png";
 import c3po from "./icons/os/c3po.png";
+import TheEye from "./components/theEye";
 
 import ToggleButton from "./components/ToggleButton";
 import Terminal2 from "./components/windows/Terminal2";
@@ -323,6 +324,7 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
+      <TheEye />
       {/* {logo && <LogoBoot onLogoClick={logoClick} />} */}
       {logo && <LogoBoot2 onLogoClick={logoClick} />}
 

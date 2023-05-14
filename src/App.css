@@ -85,6 +85,43 @@ body {
     rgba(0, 0, 0, 1) 100%
   ); */
 }
+.theEye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 5;
+  background-color: #ffffff; /* Make eyeball white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.4); /* Add some shading for depth */
+}
+
+.theEye .iris {
+  background-color: #5d009b; /* Blue iris */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iris {
+  height: 55%;
+  width: 55%;
+}
+
+.theEye img {
+  height: 70%;
+  width: 70%;
+  border-radius: 50%;
+  opacity: 0.9;
+}
 
 .video-background {
   width: 100vw;
@@ -790,7 +827,7 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
-  z-index: 3;
+  z-index: 5;
   max-width: fit-content;
   height: fit-content;
   /* box-shadow: rgba(101, 41, 141, 0.467) 0px 5px 23px 0px,

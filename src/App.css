@@ -85,43 +85,70 @@ body {
     rgba(0, 0, 0, 1) 100%
   ); */
 }
+/* .theEye .iris {
+  background-color: #5d009b; 
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
 .theEye {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 120px;
-  width: 120px;
+  height: 250px;
+  width: 250px;
   border-radius: 50%;
   overflow: hidden;
-  z-index: 5;
-  background-color: #ffffff; /* Make eyeball white */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  user-select: none;
-  box-shadow: inset 0px 0px 20px rgba(0, 0, 0, 0.4); /* Add some shading for depth */
+  z-index: 3;
 }
 
-.theEye .iris {
-  background-color: #5d009b; /* Blue iris */
+.glassOverlay {
+  position: absolute;
+  user-select: none;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #b1b1b100;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 5;
 }
 
 .iris {
-  height: 55%;
-  width: 55%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
-.theEye img {
-  height: 70%;
-  width: 70%;
-  border-radius: 50%;
-  opacity: 0.9;
+.pupil {
+  height: 100px;
+  width: 100px;
+  z-index: 20;
 }
+
+.eyeball {
+  position: absolute;
+  width: 110%;
+  height: 110%;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* .iris img {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+} */
+
+/* .iris {
+  height: 55%;
+  width: 55%;
+} */
 
 .video-background {
   width: 100vw;
@@ -439,6 +466,7 @@ body {
 .navbar {
   display: flex;
   width: 100%;
+  z-index: 10;
   overflow: hidden;
   flex-direction: row;
   /* background-color: rgba(37, 37, 37, 0.314); */

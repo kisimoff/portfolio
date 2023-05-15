@@ -1,13 +1,23 @@
 import React, { useRef, useEffect } from "react";
 import { motion, useSpring, useTransform } from "framer-motion";
 import eye from "./../img/logoEye.png";
+import eye2 from "./../img/eye.png";
+import eye3 from "./../img/eyeEditied.png";
+import eye4 from "./../img/softeeer.png";
+import eye5 from "./../img/eyenew.png";
+
+import eyeball from "./../img/eyeball3.png";
+import pupil from "./../img/pupil2.png";
+
+import glass from "./../img/glassOverlay.png";
 
 export default function TheEye() {
-  const perspectiveAngle = 60; // Maximum tilt angle for the eye
-  const movementConstraint = 2; // Larger values will limit the eye movement more
+  const perspectiveAngle = 100; // Maximum tilt angle for the eye
+  const movementConstraint = 10; // Larger values will limit the eye movement more
   const x = useSpring(0, { stiffness: 100, damping: 20 });
   const y = useSpring(0, { stiffness: 100, damping: 20 });
-
+  const x_eyeball = useTransform(x, (value) => value / 2);
+  const y_eyeball = useTransform(y, (value) => value / 2);
   const constrainRef = useRef(null);
   const constrainRect = useRef(null); // Will hold the dimensions of the div containing the eye
 
@@ -19,6 +29,17 @@ export default function TheEye() {
   );
   const rotateY = useTransform(
     x,
+    [-(constrainRect.current?.width / 2), constrainRect.current?.width / 2],
+    [-perspectiveAngle, perspectiveAngle]
+  );
+
+  const rotateX_eyeball = useTransform(
+    y_eyeball,
+    [-(constrainRect.current?.height / 2), constrainRect.current?.height / 2],
+    [perspectiveAngle, -perspectiveAngle]
+  );
+  const rotateY_eyeball = useTransform(
+    x_eyeball,
     [-(constrainRect.current?.width / 2), constrainRect.current?.width / 2],
     [-perspectiveAngle, perspectiveAngle]
   );
@@ -63,20 +84,35 @@ export default function TheEye() {
   }, [x, y]);
 
   return (
-    <div className="theEye" ref={constrainRef}>
-      <motion.div
-        className="iris"
-        style={{
-          translateX: x,
-          translateY: y,
-          rotateX,
-          rotateY,
-          perspective: 2000,
-          transformStyle: "preserve-3d",
-        }}
-      >
-        <img src={eye} />
+    <motion.div className="theEye" ref={constrainRef}>
+      <motion.div className="iris">
+        <motion.div
+          style={{
+            translateX: x,
+            translateY: y,
+            rotateX,
+            rotateY,
+            perspective: 2000,
+            transformStyle: "preserve-3d",
+          }}
+        >
+          <img src={pupil} className="pupil" />
+        </motion.div>
+
+        <motion.img
+          src={eyeball}
+          style={{
+            translateX: x_eyeball,
+            translateY: y_eyeball,
+            rotateX_eyeball,
+            rotateY_eyeball,
+            perspective: 2000,
+            transformStyle: "preserve-3d",
+          }}
+          className="eyeball"
+        />
       </motion.div>
-    </div>
+      <img src={glass} className="glassOverlay" />
+    </motion.div>
   );
 }

@@ -6,7 +6,7 @@ import glass from "./../img/glassOverlay.png";
 
 export default function TheEye() {
   const eyeSizeMultiplier = 1.35; //size of the eye
-  const perspectiveAngle = 60; // Maximum tilt angle for the eye
+  const perspectiveAngle = 40; // Maximum tilt angle for the eye
   const movementConstraint = 8; // Larger values will limit the eye movement more
   const movmentConstraintEyeballOnly = 12; // Larger values will limit the eye movement more
   const x = useSpring(0, { stiffness: 60, damping: 33 });

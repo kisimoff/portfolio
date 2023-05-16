@@ -51,7 +51,7 @@ clamp(min, target, max)
   --bottom-row-icon-size-mobile: clamp(1.8rem, 1.1vw + 1rem, 3rem);
 
   --fs-navbar: clamp(1.3rem, 0.7vw + 1.4rem, 2rem);
-  --fs-instructions: clamp(1.2rem, 0.6vw + 1.3rem, 2rem);
+  --fs-instructions: clamp(1.2rem, 0.6vh + 1.3rem, 2rem);
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
   --fs-text-projects: clamp(0.8rem, 0.75vw + 0.25rem, 1.6rem);
@@ -341,7 +341,7 @@ body {
   color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  margin-top: clamp(8rem, 20vh + 1rem, 10rem);
+  margin-top: clamp(9rem, 15vh + 4.5rem, 16rem);
 }
 .svg1,
 .svg2 {

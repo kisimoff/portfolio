@@ -299,7 +299,6 @@ const App = () => {
               src={portal}
               ref={videoEl}
               type="video/mp4"
-              // Initially, show the first video
             />
             <motion.video
               animate={loopAnimation}
@@ -311,7 +310,6 @@ const App = () => {
               ref={loopVideoEl}
               type="video/mp4"
               loop
-              // Initially, hide the second video
             />
           </motion.div>
           <div className="boot-screen" id="bootRoot">
@@ -319,7 +317,12 @@ const App = () => {
               <div className={`pattern-mask ${pattern ? "animate" : ""}`}></div>
               <div className="pattern-reveal">
                 <div className="boot-screen-text" id="boot-text">
-                  <WindupChildren>
+                  <WindupChildren
+                    onFinished={() => {
+                      // setSpinner(false);
+                      // setLogovis(true);
+                    }}
+                  >
                     {step3 && (
                       <Pace ms={0}>
                         Kisimoff OS v2.3

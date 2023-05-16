@@ -7,25 +7,25 @@ export default function LogoBoot2({ onLogoClick }) {
 
   const twentyThreePath = useAnimation();
   const circlePath = useAnimation();
-  const blub = useAnimation();
-  const dissapear = useAnimation();
+  const logoDivAnimation = useAnimation();
 
   const instructions = useAnimation();
   const [animationCompleted, setAnimationCompleted] = useState(false);
-  const sizeMultiplier = 0.8;
+  const sizeMultiplier = 1.23;
   const [divSize, setDivSize] = useState(250);
 
   const logoClick = async () => {
     if (!animationCompleted) return;
     onLogoClick();
+    setAnimationCompleted(false);
     instructions.start({
       opacity: 0,
       y: 20,
       transition: { duration: 0.2 },
     });
-    await dissapear.start({
+    await logoDivAnimation.start({
       opacity: 0,
-      transition: { duration: 3.5, delay: 3, ease: "easeOut" },
+      transition: { duration: 4.6, delay: 2.5, ease: "easeOut" },
     });
   };
 
@@ -91,6 +91,7 @@ export default function LogoBoot2({ onLogoClick }) {
       });
       await twentyThreePath.start({
         opacity: 0,
+
         transition: { delay: delay + 2.5, duration: 1.3, ease: "easeIn" }, // adjust duration and easing as per your requirements
       });
       //instructions showing up
@@ -102,7 +103,7 @@ export default function LogoBoot2({ onLogoClick }) {
         })
         .then(() => setAnimationCompleted(true));
       // pulsing animation
-      blub.start({
+      logoDivAnimation.start({
         scale: [1, 1.04, 1],
         transition: {
           delay: 1,
@@ -118,7 +119,7 @@ export default function LogoBoot2({ onLogoClick }) {
     circlePath,
     gradientFill23,
     gradientFillcircle,
-    blub,
+    logoDivAnimation,
     instructions,
   ]);
 
@@ -159,7 +160,7 @@ export default function LogoBoot2({ onLogoClick }) {
         style={{
           cursor: animationCompleted ? "pointer" : "default",
         }}
-        animate={(blub, dissapear)}
+        animate={logoDivAnimation}
         className="motion-div"
         onClick={logoClick}
         whileHover={animationCompleted ? { scale: 1.05 } : {}}

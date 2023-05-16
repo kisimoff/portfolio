@@ -6,15 +6,14 @@ import { BiWorld } from "react-icons/bi";
 // Videos
 import esc from "./../../animated/esc.mp4";
 import rockets from "./../../animated/rockets.mp4";
-import mas from "./../../animated/mas.mp4";
-import kisimoff from "./../../animated/kisimoff.mp4";
 
 // Components
 import Window from "./Window";
 import Project from "../Project";
 
 // Rest of the Videos
-
+import mas from "./../../animated/mas.mp4";
+import kisimoff from "./../../animated/kisimoff.mp4";
 import kwik from "./../../animated/kwik.mp4";
 import setup from "./../../animated/setup.mp4";
 import tasks from "./../../animated/tasks2.mp4";

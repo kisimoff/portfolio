@@ -319,12 +319,7 @@ const App = () => {
               <div className={`pattern-mask ${pattern ? "animate" : ""}`}></div>
               <div className="pattern-reveal">
                 <div className="boot-screen-text" id="boot-text">
-                  <WindupChildren
-                    onFinished={() => {
-                      // setSpinner(false);
-                      // setLogovis(true);
-                    }}
-                  >
+                  <WindupChildren>
                     {step3 && (
                       <Pace ms={0}>
                         Kisimoff OS v2.3

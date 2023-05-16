@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useSpring, useTransform, useAnimation } from "framer-motion";
-import eyeball from "./../img/eyeball3.png";
+import eyeball from "./../img/eyeball_compress_black.png";
 import pupil from "./../img/pupil2.png";
 import glass from "./../img/glassOverlay.png";
 

@@ -12,12 +12,12 @@ import pupil from "./../img/pupil2.png";
 import glass from "./../img/glassOverlay.png";
 
 export default function TheEye() {
-  const perspectiveAngle = 100; // Maximum tilt angle for the eye
-  const movementConstraint = 10; // Larger values will limit the eye movement more
+  const perspectiveAngle = 70; // Maximum tilt angle for the eye
+  const movementConstraint = 14; // Larger values will limit the eye movement more
   const x = useSpring(0, { stiffness: 100, damping: 20 });
   const y = useSpring(0, { stiffness: 100, damping: 20 });
-  const x_eyeball = useTransform(x, (value) => value / 2);
-  const y_eyeball = useTransform(y, (value) => value / 2);
+  const x_eyeball = useTransform(x, (value) => value / 6);
+  const y_eyeball = useTransform(y, (value) => value / 6);
   const constrainRef = useRef(null);
   const constrainRect = useRef(null); // Will hold the dimensions of the div containing the eye
 
@@ -104,10 +104,10 @@ export default function TheEye() {
           style={{
             translateX: x_eyeball,
             translateY: y_eyeball,
-            rotateX_eyeball,
-            rotateY_eyeball,
-            perspective: 2000,
-            transformStyle: "preserve-3d",
+            // rotateX_eyeball,
+            // rotateY_eyeball,
+            // perspective: 2000,
+            // transformStyle: "preserve-3d",
           }}
           className="eyeball"
         />

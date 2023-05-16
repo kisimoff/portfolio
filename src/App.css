@@ -113,7 +113,7 @@ body {
   top: 0;
   left: 0;
   border-radius: 50%;
-  z-index: 6;
+  z-index: 5;
 }
 
 .iris {
@@ -123,9 +123,6 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
-}
-
-.pupil {
   z-index: 4;
 }
 
@@ -134,7 +131,7 @@ body {
   width: 114%;
   height: 114%;
   opacity: 1;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* .iris img {

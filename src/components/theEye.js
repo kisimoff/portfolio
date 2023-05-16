@@ -3,7 +3,7 @@ import { motion, useSpring, useTransform, useAnimation } from "framer-motion";
 import eyeball from "./../img/eyeball_compress_black.png";
 import pupil from "./../img/pupil2.png";
 import glass from "./../img/glassOverlay.png";
-
+import { isSafari } from "react-device-detect";
 export default function TheEye() {
   const eyeSizeMultiplier = 1.35; //size of the eye
   const perspectiveAngle = 40; // Maximum tilt angle for the eye
@@ -196,12 +196,17 @@ export default function TheEye() {
     >
       <motion.div className="iris">
         <motion.div
-          style={{
-            translateX: x,
-            translateY: y,
-            rotateX: rotateX,
-            rotateY: rotateY,
-          }}
+          style={
+            isSafari
+              ? { translateX: x, translateY: y, zIndex: 4 }
+              : {
+                  translateX: x,
+                  translateY: y,
+                  rotateX: rotateX,
+                  rotateY: rotateY,
+                  zIndex: 4,
+                }
+          }
         >
           <img
             src={pupil}
@@ -215,12 +220,16 @@ export default function TheEye() {
         <motion.img
           src={eyeball}
           className="eyeball"
-          style={{
-            translateX: x_eyeball,
-            translateY: y_eyeball,
-            rotateX: rotateX_eyeball,
-            rotateY: rotateY_eyeball,
-          }}
+          style={
+            isSafari
+              ? { translateX: x_eyeball, translateY: y_eyeball }
+              : {
+                  translateX: x_eyeball,
+                  translateY: y_eyeball,
+                  rotateX: rotateX_eyeball,
+                  rotateY: rotateY_eyeball,
+                }
+          }
         />
       </motion.div>
       <img src={glass} className="glassOverlay" />

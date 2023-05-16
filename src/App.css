@@ -123,21 +123,18 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
-  z-index: 5;
 }
 
-/* .pupil {
-  height: 80px;
-  width: 80px;
-  z-index: 2;
-} */
+.pupil {
+  z-index: 4;
+}
 
 .eyeball {
   position: absolute;
   width: 114%;
   height: 114%;
   opacity: 1;
-  z-index: -1;
+  z-index: 2;
 }
 
 /* .iris img {

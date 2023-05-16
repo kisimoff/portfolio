@@ -56,11 +56,9 @@ const Start = ({ theme, setVisibility }) => {
                   {"the man behind the keyboard..."} <br></br>
                   <Pause ms={500} />
                   {"just click the About icon. "}
-                  <Pause ms={1000} />
+                  <Pause ms={1500} />
                   <br></br>
                   <br></br>
-                  {"Welcome to my world. "}
-                  <Pause ms={1300} />
                   <br></br>
                   {"I'll self destruct in..."} <br></br>
                   <Pause ms={500} />

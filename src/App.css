@@ -93,17 +93,17 @@ body {
   align-items: center;
 } */
 
-.theEye {
+/* .theEye {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  height: 250px;
   width: 250px;
+  height: 250px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
-  z-index: 3;
-}
+  z-index: 5;
+} */
 
 .glassOverlay {
   position: absolute;
@@ -112,12 +112,12 @@ body {
   width: 100%;
   top: 0;
   left: 0;
-  background-color: #b1b1b100;
   border-radius: 50%;
   z-index: 5;
 }
 
 .iris {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,18 +125,18 @@ body {
   width: 100%;
 }
 
-.pupil {
+/* .pupil {
   height: 80px;
   width: 80px;
-  z-index: 20;
-}
+  z-index: 2;
+} */
 
 .eyeball {
   position: absolute;
-  width: 112%;
-  height: 112%;
-  z-index: 1;
-  opacity: 0.7;
+  width: 114%;
+  height: 114%;
+  opacity: 1;
+  z-index: -1;
 }
 
 /* .iris img {
@@ -171,7 +171,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("background/xp.jpg");
+  background-image: url("background/background_fallback.jpg");
 }
 
 /* .pattern {
@@ -341,12 +341,10 @@ body {
   color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  margin-top: 25vmin;
+  margin-top: clamp(8rem, 20vh + 1rem, 10rem);
 }
 .svg1,
 .svg2 {
-  width: 19vmin;
-  height: 19vmin;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -451,6 +449,24 @@ body {
     height: 100dvh;
   }
   .icons {
+    height: 100dvh;
+  }
+  .video-background {
+    height: 100dvh;
+  }
+  .logoBoot {
+    height: 100dvh;
+  }
+  .pattern-background {
+    height: 100dvh;
+  }
+  .pattern-reveal {
+    height: 100dvh;
+  }
+  .pattern-mask {
+    height: 100dvh;
+  }
+  .boot-screen {
     height: 100dvh;
   }
 }

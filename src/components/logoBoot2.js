@@ -8,8 +8,45 @@ export default function LogoBoot2({ onLogoClick }) {
   const twentyThreePath = useAnimation();
   const circlePath = useAnimation();
   const blub = useAnimation();
+  const dissapear = useAnimation();
+
   const instructions = useAnimation();
   const [animationCompleted, setAnimationCompleted] = useState(false);
+  const sizeMultiplier = 0.8;
+  const [divSize, setDivSize] = useState(250);
+
+  const logoClick = async () => {
+    if (!animationCompleted) return;
+    onLogoClick();
+    instructions.start({
+      opacity: 0,
+      y: 20,
+      transition: { duration: 0.2 },
+    });
+    await dissapear.start({
+      opacity: 0,
+      transition: { duration: 3.5, delay: 3, ease: "easeOut" },
+    });
+  };
+
+  useEffect(() => {
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+    const vh = Math.max(
+      document.documentElement.clientHeight || 0,
+      window.innerHeight || 0
+    );
+    const videoWidth = vh * (16 / 9);
+    const videoHeight = vw * (9 / 16);
+
+    if (videoWidth < vw) {
+      setDivSize((vw / 14) * sizeMultiplier); // adjust the divisor for desired size
+    } else {
+      setDivSize((vh / 8) * sizeMultiplier); // adjust the divisor for desired size
+    }
+  }, []);
 
   //all the animations are controlled from here
   const delay = 2.8;
@@ -76,7 +113,6 @@ export default function LogoBoot2({ onLogoClick }) {
       });
     };
     setTimeout(sequence, 800);
-    // sequence();
   }, [
     twentyThreePath,
     circlePath,
@@ -120,23 +156,18 @@ export default function LogoBoot2({ onLogoClick }) {
         Push to Start
       </motion.h1>
       <motion.div
-        style={{ cursor: animationCompleted ? "pointer" : "default" }}
-        animate={blub}
-        className="motion-div"
-        // onClick={animationCompleted ? onLogoClick : null}
-        onClick={() => {
-          onLogoClick();
-          instructions.start({
-            opacity: 0,
-            y: 20,
-            transition: { duration: 0.2 },
-          });
+        style={{
+          cursor: animationCompleted ? "pointer" : "default",
         }}
+        animate={(blub, dissapear)}
+        className="motion-div"
+        onClick={logoClick}
         whileHover={animationCompleted ? { scale: 1.05 } : {}}
         whileTap={animationCompleted ? { scale: 0.95 } : {}}
       >
         <svg
           className="svg1"
+          style={{ width: `${divSize}px`, height: `${divSize}px` }}
           width="100"
           height="100"
           viewBox="0 0 100 100"
@@ -182,6 +213,7 @@ export default function LogoBoot2({ onLogoClick }) {
 
         <svg
           className="svg2"
+          style={{ width: `${divSize}px`, height: `${divSize}px` }}
           width="100"
           height="100"
           viewBox="0 0 100 100"

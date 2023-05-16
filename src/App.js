@@ -54,35 +54,15 @@ import xp from "./background/xp.jpg";
 
 //to be deleted
 // import portal from "./background/portal.mp4";
-import portal from "./background/cpuPortal2.mp4";
-import cpuLoop from "./background/cpuLoop.mp4";
-
-import logoboot from "./img/logoboot.png";
-import logoboot1 from "./img/logoboot1.png";
-import logo_black from "./img/logo_black.png";
-import circuit from "./background/circuit.mp4";
-import abstract from "./background/abstract.mp4";
-import board from "./background/board.mp4";
-import board2 from "./background/board2.mp4";
-import electronic from "./background/electronic.mp4";
-import electronic2 from "./background/electronic2.mp4";
-import network from "./background/network.mp4";
-import github_light from "./socials/github-light.png";
-import Draggable from "react-draggable";
-import github_dark from "./socials/github-dark.png";
-import linkedin_light from "./socials/linkedin-light.png";
-import linkedin_dark from "./socials/linkedin-dark.png";
-import download_light from "./socials/download-light.png";
-import download_dark from "./socials/download-dark.png";
-import background_dark from "./background/dark.jpg";
-import background_light from "./background/light.jpg";
-import resumePdf from "./files/valentin-kisimov-resume.pdf";
-import { AiFillLinkedin, AiOutlineLinkedin } from "react-icons/ai";
+// import portal from "./background/cpuPortal2.mp4";
+// import cpuLoop from "./background/cpuLoop.mp4";
+import cpuLoop from "./background/new/cpuLoop.mp4";
+import portal from "./background/new/cpuPortal.mp4";
 
 const App = () => {
   //windows states
   const [boot, setBoot] = useState(true);
-
+  const [logoClicked, setLogoClicked] = useState(false);
   const [pattern, setPattern] = useState(false);
   const [theme, setTheme] = useState(true);
   const [about, setAbout] = useState(false);
@@ -94,7 +74,6 @@ const App = () => {
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(true);
   const [step3, setStep3] = useState(true);
-  const [step4, setStep4] = useState(true);
   //boot elements visability states
   const [spinner, setSpinner] = useState(true);
   const [logo, setLogo] = useState(true);
@@ -102,6 +81,8 @@ const App = () => {
   const navbarAnimation = useAnimation();
   const iconsAnimation = useAnimation();
   const backgroundAnimation = useAnimation();
+  const eyeAnimation = useAnimation();
+
   const loopAnimation = useAnimation();
   const portalAnimation = useAnimation();
 
@@ -114,30 +95,24 @@ const App = () => {
         opacity: 0,
         transition: { duration: 1, ease: "easeIn" },
       });
+      eyeAnimation.start({
+        opacity: 0,
+        transition: { duration: 0.3, delay: 0.3 },
+      });
     } else {
       backgroundAnimation.start({
         opacity: 1,
         transition: { duration: 1, ease: "easeIn" },
+      });
+      eyeAnimation.start({
+        opacity: 1,
+        transition: { duration: 0.3 },
       });
     }
   };
 
   const videoEl = useRef(null);
   const loopVideoEl = useRef(null);
-
-  // useEffect(() => {
-  //   // const loopVideo = loopVideoEl.current;
-  //   // loopVideo.play();
-  //   // const video = videoEl.current;
-  //   // const loopVideo = loopVideoEl.current;
-  //   // const handleVideoEnd = () => {
-  //   //   loopVideo.play();
-  //   // };
-  //   // video.addEventListener("ended", handleVideoEnd);
-  //   // return () => {
-  //   //   video.removeEventListener("ended", handleVideoEnd);
-  //   // };
-  // }, []);
 
   const attemptPlay = () => {
     videoEl &&
@@ -156,21 +131,19 @@ const App = () => {
   };
 
   const logoClick = () => {
+    setLogoClicked(true);
     elementsSequenceAnimation();
     videosSequenceAnimation();
     document.getElementById("bootRoot").style.display = "none";
     // setLogovis(false);
     attemptPlay();
 
-    // setTimeout(() => {
-    //   setStart(true);
-    // }, 1300);
     setTimeout(() => {
       setStart(true);
-    }, 5500);
+    }, 12500);
     setTimeout(() => {
       setLogo(false);
-    }, 5500);
+    }, 7000);
   };
 
   const videosSequenceAnimation = async () => {
@@ -207,26 +180,6 @@ const App = () => {
     });
   };
 
-  // useEffect(() => {
-  //   if (pattern) {
-  //     // Use requestAnimationFrame to ensure the initial render is painted before the .animate class is added
-  //     requestAnimationFrame(() => {
-  //       document.querySelector(".pattern-mask").classList.add("animate");
-  //     });
-  //   } else {
-  //     document.querySelector(".pattern-mask").classList.remove("animate");
-  //   }
-  // }, [pattern]);
-  // style={
-  //   theme
-  //     ? { color: "white", transition: "all 1.5s ease" }
-  //     : {
-  //         background: "rgb(23,65,163",
-  //         background:
-  //           "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
-  //         transition: "all 1.5s ease",
-  //       } //light theme
-  // }
   const themeVars =
     theme === true
       ? {
@@ -256,7 +209,7 @@ const App = () => {
         }
       : {
           app: {
-            // backgroundImage: `url(${xp})`,
+            backgroundImage: `url(${xp})`,
             // width: "100%",
             // height: "100%",
             transition: "none",
@@ -324,7 +277,12 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
-      <TheEye />
+      {logoClicked && (
+        <motion.div initial={{ opacity: 1 }} animate={eyeAnimation}>
+          <TheEye />
+        </motion.div>
+      )}
+
       {/* {logo && <LogoBoot onLogoClick={logoClick} />} */}
       {logo && <LogoBoot2 onLogoClick={logoClick} />}
 
@@ -369,7 +327,7 @@ const App = () => {
                   >
                     {step3 && (
                       <Pace ms={0}>
-                        Kisimoff OS v2.3.2
+                        Kisimoff OS v2.3
                         <br />
                         <Pause ms={500} />
                         {step1 && (

@@ -113,7 +113,7 @@ export default function LogoBoot2({ onLogoClick }) {
         },
       });
     };
-    setTimeout(sequence, 800);
+    setTimeout(sequence, 1100);
   }, [
     twentyThreePath,
     circlePath,

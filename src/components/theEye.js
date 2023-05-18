@@ -155,13 +155,13 @@ export default function TheEye() {
       await x_eyeball.set(0);
       await y_eyeball.set(0);
       await new Promise((resolve) => setTimeout(resolve, 2300)); // look bottom
-      await y.set(18);
+      await y.set(14);
       await x.set(-5);
-      await y_eyeball.set(3);
+      await y_eyeball.set(2);
       await x_eyeball.set(-1);
       await new Promise((resolve) => setTimeout(resolve, 1500)); // look top left
-      await x.set(-20);
-      await y.set(-20);
+      await x.set(-14);
+      await y.set(-14);
       await y_eyeball.set(-1);
       await x_eyeball.set(-1);
       await new Promise((resolve) => setTimeout(resolve, 2000));

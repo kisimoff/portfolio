@@ -5,7 +5,6 @@ import "./App.css";
 // components and windows imports
 // import Projects from "./components/windows/Projects";
 import Projects from "./components/windows/Projs";
-
 import LogoBoot2 from "./components/logoBoot2";
 import mycomp from "./icons/xp/mycomp.png";
 import info from "./icons/xp/about.png";
@@ -52,7 +51,7 @@ import { VscFilePdf, VscGithubAlt } from "react-icons/vsc";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { BsJournalCode, BsTerminal, BsPersonCircle } from "react-icons/bs";
 import electronic3 from "./background/electronic3.mp4";
-import xp from "./background/xp.jpg";
+import xp from "./background/xpCompress.jpg";
 
 //to be deleted
 // import portal from "./background/portal.mp4";
@@ -136,7 +135,7 @@ const App = () => {
     setLogoClicked(true);
     elementsSequenceAnimation();
     videosSequenceAnimation();
-    document.getElementById("bootRoot").style.display = "none";
+    // document.getElementById("bootRoot").style.display = "none";
     // setLogovis(false);
     attemptPlay();
 

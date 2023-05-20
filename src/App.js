@@ -5,6 +5,7 @@ import "./App.css";
 // components and windows imports
 // import Projects from "./components/windows/Projects";
 import Projects from "./components/windows/Projs";
+
 import LogoBoot2 from "./components/logoBoot2";
 import mycomp from "./icons/xp/mycomp.png";
 import info from "./icons/xp/about.png";
@@ -131,20 +132,38 @@ const App = () => {
     // }, 3000);
   };
 
+  useEffect(() => {
+    if (logoClicked) {
+      setLogoClicked(true);
+      elementsSequenceAnimation();
+      videosSequenceAnimation();
+      document.getElementById("bootRoot").style.display = "none";
+      // setLogovis(false);
+      attemptPlay();
+
+      setTimeout(() => {
+        setStart(true);
+      }, 12500);
+      setTimeout(() => {
+        setLogo(false);
+      }, 7000);
+    }
+  }, [logoClicked]);
+
   const logoClick = () => {
     setLogoClicked(true);
-    elementsSequenceAnimation();
-    videosSequenceAnimation();
+    // elementsSequenceAnimation();
+    // videosSequenceAnimation();
     // document.getElementById("bootRoot").style.display = "none";
-    // setLogovis(false);
-    attemptPlay();
+    // // setLogovis(false);
+    // attemptPlay();
 
-    setTimeout(() => {
-      setStart(true);
-    }, 12500);
-    setTimeout(() => {
-      setLogo(false);
-    }, 7000);
+    // setTimeout(() => {
+    //   setStart(true);
+    // }, 12500);
+    // setTimeout(() => {
+    //   setLogo(false);
+    // }, 7000);
   };
 
   const videosSequenceAnimation = async () => {
@@ -399,6 +418,11 @@ const App = () => {
                             <br /> Loading system updates
                             <Pace ms={150}>...</Pace>
                             OK
+                            <Effect
+                              fn={() => {
+                                setPattern(!pattern);
+                              }}
+                            />
                             <Pause ms={400} />
                             <br />
                             <br />
@@ -406,8 +430,6 @@ const App = () => {
                             <Pause ms={1300} />
                             <Effect
                               fn={() => {
-                                setPattern(!pattern);
-
                                 setStep3(false);
                               }}
                             />

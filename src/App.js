@@ -3,7 +3,9 @@ import React, { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 // components and windows imports
-import Projects from "./components/windows/Projects";
+// import Projects from "./components/windows/Projects";
+import Projects from "./components/windows/Projs";
+
 import LogoBoot2 from "./components/logoBoot2";
 import mycomp from "./icons/xp/mycomp.png";
 import info from "./icons/xp/about.png";
@@ -121,13 +123,13 @@ const App = () => {
         console.error("Error attempting to play", error);
       });
 
-    setTimeout(() => {
-      loopVideoEl &&
-        loopVideoEl.current &&
-        loopVideoEl.current.play().catch((error) => {
-          console.error("Error attempting to play", error);
-        });
-    }, 3000);
+    // setTimeout(() => {
+    //   loopVideoEl &&
+    //     loopVideoEl.current &&
+    //     loopVideoEl.current.play().catch((error) => {
+    //       console.error("Error attempting to play", error);
+    //     });
+    // }, 3000);
   };
 
   const logoClick = () => {

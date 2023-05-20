@@ -27,12 +27,47 @@ import glass from "./../../animated/glass.mp4";
 import jazz from "./../../animated/jazz.mp4";
 import cron from "./../../animated/cron.mp4";
 
-const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
+const Projects = ({ theme, setVisibility, zIndexxx, setZindexxx, sorsa }) => {
+
+  const projects = [
+    {
+      sorsa:esc,
+                  title:"ESC The Loop: Mobile App (DSCT)",
+                  description:"Leveraging cutting-edge research on manipulative patterns and psychological tactics in social media, ESC the Loop is a smarter app timer designed to help users regain control over their digital habits. Upon timer expiration, the app sends customizable notifications at set intervals, offering an escape route redirecting users to their task list or an app of their choice. ESC the loop’s features are wrapped in a neo-brutalist design and are enhanced by engaging animations and tactile feedback for an immersive user experience."
+                  ,technologies:"React-native, TypeScript, Java, Headless JS, Figma"
+                 , repo:"https://github.com/vtwenty3/ESC_The_Loop"
+                 , live:"https://www.notion.so/23things/ESC-The-Loop-fccf49ea661b4752a3980300041aaa63"
+    },
+    
+    // More projects...
+  ];
+
+
+
   useEffect(() => {
     document.getElementById("projects").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVideoSrc(sorsa);
+          videoEl.current && videoEl.current.play();
+        } else {
+          videoEl.current && videoEl.current.pause();
+        }
+      },
+      { rootMargin: '2px' } // start loading video when it's within 500px of the viewport
+    );
+    observer.observe(videoEl.current);
+
+    return () => {
+      observer.unobserve(videoEl.current);
+    };
+  }, [sorsa]);
+  
   return (
     <Draggable
       cancel=".close-window, .projectsScroll"

@@ -91,7 +91,6 @@ export default function LogoBoot2({ onLogoClick }) {
       });
       await twentyThreePath.start({
         opacity: 0,
-
         transition: { delay: delay + 2.5, duration: 1.3, ease: "easeIn" }, // adjust duration and easing as per your requirements
       });
       //instructions showing up
@@ -99,14 +98,13 @@ export default function LogoBoot2({ onLogoClick }) {
         .start({
           opacity: 1,
           y: 0,
-          transition: { delay: 0.5, duration: 0.5 },
+          transition: { duration: 0.5, delay: 0.5 },
         })
         .then(() => setAnimationCompleted(true));
       // pulsing animation
       logoDivAnimation.start({
         scale: [1, 1.04, 1],
         transition: {
-          delay: 1,
           duration: 0.4,
           repeat: 1,
           repeatDelay: 8,

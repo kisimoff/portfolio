@@ -149,19 +149,19 @@ export default function TheEye() {
   }, [x, y, shouldTrackMouse]);
   useEffect(() => {
     const animateEye = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 4300)); // Look center
+      await new Promise((resolve) => setTimeout(resolve, 3800)); // Look center
       await x.set(0);
       await y.set(0);
       await x_eyeball.set(0);
       await y_eyeball.set(0);
       await new Promise((resolve) => setTimeout(resolve, 2300)); // look bottom
-      await y.set(14);
-      await x.set(-5);
+      await y.set(12);
+      await x.set(-4);
       await y_eyeball.set(2);
       await x_eyeball.set(-1);
       await new Promise((resolve) => setTimeout(resolve, 1500)); // look top left
-      await x.set(-14);
-      await y.set(-14);
+      await x.set(-12);
+      await y.set(-12);
       await y_eyeball.set(-1);
       await x_eyeball.set(-1);
       await new Promise((resolve) => setTimeout(resolve, 2000));

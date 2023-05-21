@@ -98,15 +98,16 @@ export default function LogoBoot2({ onLogoClick }) {
         .start({
           opacity: 1,
           y: 0,
-          transition: { duration: 0.5, delay: 0.5 },
+          transition: { duration: 0.5, delay: 1 },
         })
         .then(() => setAnimationCompleted(true));
       // pulsing animation
       logoDivAnimation.start({
-        scale: [1, 1.04, 1],
+        scale: [1, 1.07, 1],
         transition: {
-          duration: 0.4,
+          duration: 0.5,
           repeat: 1,
+          delay: 0.7,
           repeatDelay: 8,
         },
       });

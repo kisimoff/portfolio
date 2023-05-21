@@ -40,7 +40,7 @@ clamp(min, target, max)
 
   /* Test project-height on mobile! */
   --projects-height: clamp(12rem, 60vmin, 65vh);
-  --projects-height-mobile: clamp(20rem, 80vmin, 65vh);
+  --projects-height-mobile: clamp(20rem, 90vmin, 65vh);
 
   --project-width: clamp(23.23rem, 50vmin, 44vw);
   --project-width-mobile: clamp(80vmin, 90vw, 550px);
@@ -57,7 +57,7 @@ clamp(min, target, max)
   --fs-instructions: clamp(1.2rem, 0.6vh + 1.3rem, 2rem);
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
-  --fs-text-projects: clamp(0.8rem, 0.75vw + 0.25rem, 1.6rem);
+  --fs-text-projects: clamp(0.8rem, 0.3vw + 0.7rem, 1.6rem);
   --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
   --fs-text-mobile: clamp(0.5rem, 2.5vw + 0.18rem, 1.1rem);
   --fs-window-title: clamp(1rem, 0.25vw + 0.9rem, 1.8rem);
@@ -110,7 +110,9 @@ body {
   overflow: hidden;
   z-index: 5;
 } */
-
+.start-text{
+  line-height: 1.2rem;
+}
 .glassOverlay {
   position: absolute;
   user-select: none;
@@ -465,8 +467,9 @@ body {
   background: rgb(37, 37, 37);
   background: linear-gradient(
     0deg,
-    rgba(37, 37, 37, 0.3) 70%,
-    rgba(134, 134, 134, 0.141) 100%
+    rgba(167, 92, 92, 0.141) 20%,
+    rgba(59, 59, 59, 0.3) 70%,
+    rgba(167, 92, 92, 0.141) 100%
   );
   justify-content: space-between;
   align-items: center;

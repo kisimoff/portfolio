@@ -39,7 +39,7 @@ const Start = ({ theme, setVisibility }) => {
                 </p>
               </Pace>
               <Pause ms={1000} />
-              <p>
+              <p className="start-text">
                 <br></br>
 
                 <Pace ms={32}>
@@ -55,9 +55,8 @@ const Start = ({ theme, setVisibility }) => {
                   <br></br>
                   {"the man behind the keyboard..."} <br></br>
                   <Pause ms={500} />
-                  {"just click the About icon. "}
+                  {"just click on the About icon. "}
                   <Pause ms={1500} />
-                  <br></br>
                   <br></br>
                   <br></br>
                   {"I'll self destruct in..."} <br></br>

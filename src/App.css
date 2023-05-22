@@ -896,6 +896,19 @@ body {
   /* line-height: 1.32rem; */
 }
 
+.about-first {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-first img {
+  width: 160px;
+  height: 160px;
+  padding: var(--padding);
+}
+
 .aboutText h1 {
   font-size: var(--fs-navbar);
   padding-bottom: 1rem;

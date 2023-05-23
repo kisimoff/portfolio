@@ -63,14 +63,13 @@ const About = ({
                 <div className="about-first">
                   <img alt="logoBoot" src={about_png} />
                   <p>
-                  It all started one night in 2008                     <Pause ms={100} />
+                  It began back in 2007                     <Pause ms={100} />
 
- when I saw my father
-                    cool an overclocked GPU with dry ice,                     <Pause ms={300} />
- topping the benchmarks in the country.
+ when I saw how my father
+                    cooled down an ridiculously overclocked GPU with dry ice,                     <Pause ms={300} />
+ topping the benchmarks in the country. 
                     <Pause ms={800} />
                     <br/>                     
-
                     From that moment on, I was hooked.
                     <Pause ms={800} />
                     <br/><br/>
@@ -89,8 +88,11 @@ const About = ({
                   <br></br> <br></br>
                   Nowadays, I have a broad background in multiple tech fields: ai, front-end, back-end, mobile development, blockchain, data mining, web design, HCI, IT support... 
                   <br></br> <br></br>
-                  This allows me to tackle problems from a variety of angles and bring a unique perspective to any project. I am fueld by espresso and a strong drive for building solutions.
-                </p>
+                  This gives me great perspective, allowing me to make informed decisions and approach a task from a variety of angles. I know a few things for sure - consistency and time-efficiency are the keys to success.                   
+                  <br></br> <br></br>
+                  My latest superpower is transmuting espresso to react components.                  <br></br> <br></br>
+                  When I'm not working, my passions extend to cinema, sound, and motorsports, while my interests encompass the human body, health, and spirituality.
+                  Looking for a good movie? Here are my top suggestions.                 </p>
               </Pace>
             </WindupChildren>
           </div>

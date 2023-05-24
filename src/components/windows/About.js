@@ -59,40 +59,43 @@ const About = ({
         <div style={theme.field}>
           <div id="aboutField" className="aboutText">
             <WindupChildren>
-              <Pace ms={30}>
+              <Pace ms={35}>
                 <div className="about-first">
                   <img alt="logoBoot" src={about_png} />
                   <p>
-                  It began back in 2007                     <Pause ms={100} />
-
- when I saw how my father
-                    cooled down an ridiculously overclocked GPU with dry ice,                     <Pause ms={300} />
- topping the benchmarks in the country. 
-                    <Pause ms={800} />
-                    <br/>                     
+                  It all began one night back in 2007 <br/> <Pause ms={500} />  
+                when I saw how my father cooled down an ridiculously overclocked GPU <Pause ms={350} /> with dry ice. <Pause ms={850} /> The result? <Pause ms={400} /> The 1st benchmark score in the country.  
+                    <Pause ms={450} />
+                    <br/>                     <br/>                     
+                    
                     From that moment on, I was hooked.
-                    <Pause ms={800} />
+                    <Pause ms={700} />
                     <br/><br/>
-                    As I grew up, I spent my time tinkering<Pause ms={200} /> - modding
-                    games, flashing ROMs on Androids, building RC models,
-                    building PCs...
-                    <Pause ms={1000} />
-                    <br></br> <br></br>
+                   
                     
                   </p>
                 </div>
                 <p>
-                This hands-on experience, combined with my desire to create,
-                    led me to pursue a career as a developer. 
+                As I grew up, I spent my time tinkering <Pause ms={350} /> - modding
+                    games, <Pause ms={100} />flashing ROMs on Androids, <Pause ms={100} />building RC models, <Pause ms={100} />
+                    building PCs... 
                     <Pause ms={1000} />
+                    <br></br> <br></br>
+                This hands-on experience, combined with my desire to create, led me to pursue a career as a developer. 
+                    <Pause ms={600} />
                   <br></br> <br></br>
-                  Nowadays, I have a broad background in multiple tech fields: ai, front-end, back-end, mobile development, blockchain, data mining, web design, HCI, IT support... 
+                  Nowadays, I have a broad background in multiple tech fields: ai, front-end, back-end, mobile development, blockchain, data mining, web design, HCI, IT support...                     <Pause ms={400} />
+
                   <br></br> <br></br>
-                  This gives me great perspective, allowing me to make informed decisions and approach a task from a variety of angles. I know a few things for sure - consistency and time-efficiency are the keys to success.                   
+                  This gives me great perspective,<Pause ms={300} /> allowing me to make informed decisions and approach a task from a variety of angles. <Pause ms={400} />                    
+                  <Pause ms={400} />
                   <br></br> <br></br>
-                  My latest superpower is transmuting espresso to react components.                  <br></br> <br></br>
-                  When I'm not working, my passions extend to cinema, sound, and motorsports, while my interests encompass the human body, health, and spirituality.
-                  Looking for a good movie? Here are my top suggestions.                 </p>
+                  My latest superpower is transmuting espresso to react components.  <Pause ms={400} /> <br></br> <br></br>
+                  Outside of work, cinema, sound, and motorsports are my sources of inspiration and delight, and I have a  curiosity about the human body, health, and spirituality.
+                  <Pause ms={400} />
+                If you’re looking for a good movie to watch, these are some of my favorites.
+                <Pause ms={400} /> 
+                            </p>
               </Pace>
             </WindupChildren>
           </div>

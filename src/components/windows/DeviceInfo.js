@@ -14,6 +14,7 @@ import {
   isTablet,
   deviceDetect,
   isMobile,
+  isIOS,
 } from "react-device-detect";
 
 const DeviceInfo = ({

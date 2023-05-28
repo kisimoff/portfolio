@@ -3,7 +3,13 @@ import { motion, useSpring, useTransform, useAnimation } from "framer-motion";
 import eyeball from "./../img/eyeball_compress_black.png";
 import pupil from "./../img/pupil2.png";
 import glass from "./../img/glassOverlay.png";
-import { isSafari } from "react-device-detect";
+import {
+  isSafari,
+  isIOS,
+  isMacOs,
+  isMobile,
+  mobileVendor,
+} from "react-device-detect";
 export default function TheEye() {
   const eyeSizeMultiplier = 1.35; //size of the eye
   const perspectiveAngle = 40; // Maximum tilt angle for the eye
@@ -14,11 +20,31 @@ export default function TheEye() {
   const x_eyeball = useSpring(0, { stiffness: 70, damping: 60 }); // Modify the stiffness and damping as needed
   const y_eyeball = useSpring(0, { stiffness: 70, damping: 60 }); // Modify the stiffness and damping as needed
   const [eyeSize, setEyeSize] = useState(250);
+  const [disable3d, setDisable3d] = useState(true);
   const [shouldTrackMouse, setShouldTrackMouse] = useState(false);
 
   const eyeAnimation = useAnimation();
 
   useEffect(() => {
+    if (isSafari || isIOS || isMacOs) {
+      setDisable3d(true);
+    }
+    if (isMobile) {
+      if (mobileVendor === "Apple") {
+        setDisable3d(true);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSafari || isIOS || isMacOs) {
+      setDisable3d(true);
+    }
+    if (isMobile) {
+      if (mobileVendor === "Apple") {
+        setDisable3d(true);
+      }
+    }
     eyeAnimation.start({
       opacity: 1,
       transition: { delay: 2, duration: 2.2, ease: "easeIn" }, // adjust duration and easing as per your requirements
@@ -197,7 +223,7 @@ export default function TheEye() {
       <motion.div className="iris">
         <motion.div
           style={
-            isSafari
+            disable3d
               ? { translateX: x, translateY: y, zIndex: 4 }
               : {
                   translateX: x,
@@ -221,7 +247,7 @@ export default function TheEye() {
           src={eyeball}
           className="eyeball"
           style={
-            isSafari
+            disable3d
               ? { translateX: x_eyeball, translateY: y_eyeball }
               : {
                   translateX: x_eyeball,

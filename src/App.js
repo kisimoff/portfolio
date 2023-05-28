@@ -28,7 +28,7 @@ import Start from "./components/windows/Start";
 import DeviceInfo from "./components/windows/DeviceInfo";
 import Icon from "./components/Icon";
 import IconTask from "./components/IconTask";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimate, useAnimation } from "framer-motion";
 
 //packages imports
 import { SpinnerCircular } from "spinners-react";
@@ -53,6 +53,7 @@ import { SlSocialLinkedin } from "react-icons/sl";
 import { BsJournalCode, BsTerminal, BsPersonCircle } from "react-icons/bs";
 import electronic3 from "./background/electronic3.mp4";
 import xp from "./background/xpCompress.jpg";
+import cpu from "./background/background_fallback.jpg";
 
 //to be deleted
 // import portal from "./background/portal.mp4";
@@ -76,14 +77,10 @@ const App = () => {
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(true);
   const [step3, setStep3] = useState(true);
-  //boot elements visability states
-  const [spinner, setSpinner] = useState(true);
   const [logo, setLogo] = useState(true);
-  const [buttonvis, setButtonvis] = useState(false);
   const navbarAnimation = useAnimation();
   const iconsAnimation = useAnimation();
   const backgroundAnimation = useAnimation();
-  const eyeAnimation = useAnimation();
 
   const loopAnimation = useAnimation();
   const portalAnimation = useAnimation();
@@ -91,47 +88,22 @@ const App = () => {
   const [zIndexxx, setZindexxx] = useState(6);
 
   const togglePress = () => {
-    setTheme(!theme);
     if (theme) {
       backgroundAnimation.start({
         opacity: 0,
         transition: { duration: 1, ease: "easeIn" },
-      });
-      eyeAnimation.start({
-        opacity: 0,
-        transition: { duration: 0.3, delay: 0.3 },
       });
     } else {
       backgroundAnimation.start({
         opacity: 1,
         transition: { duration: 1, ease: "easeIn" },
       });
-      eyeAnimation.start({
-        opacity: 1,
-        transition: { duration: 0.3 },
-      });
     }
+    setTheme(!theme);
   };
 
   const videoEl = useRef(null);
   const loopVideoEl = useRef(null);
-
-  useEffect(() => {
-    if (logoClicked) {
-      setLogoClicked(true);
-      elementsSequenceAnimation();
-      videosSequenceAnimation();
-      document.getElementById("bootRoot").style.display = "none";
-      // setLogovis(false);
-      attemptPlay(videoEl);
-      setTimeout(() => {
-        setStart(true);
-      }, 12500);
-      setTimeout(() => {
-        setLogo(false);
-      }, 7000);
-    }
-  }, [logoClicked]);
 
   const attemptPlay = (refToPlay) => {
     refToPlay &&
@@ -142,16 +114,27 @@ const App = () => {
   };
 
   const logoClick = () => {
+    attemptPlay(videoEl);
     setLogoClicked(true);
+    elementsSequenceAnimation();
+    videosSequenceAnimation();
+    document.getElementById("bootRoot").style.display = "none";
+    // setLogovis(false);
+    setTimeout(() => {
+      setStart(true);
+    }, 12000);
+    setTimeout(() => {
+      setLogo(false);
+    }, 7000);
   };
 
   const videosSequenceAnimation = async () => {
     portalAnimation.start({
       opacity: 0,
-      transition: { duration: 1, delay: 5.5 },
+      transition: { duration: 1, delay: 7 },
     });
 
-    await loopAnimation
+    loopAnimation
       .start({
         opacity: 1,
         transition: { duration: 1, delay: 5.5 },
@@ -191,7 +174,11 @@ const App = () => {
             // backgroundImage: `url(${background_dark})`,
             // width: "100vw",
             // height: "100vh",
-            transition: "none",
+            // backgroundImage: `url(${cpu})`,
+            // backgroundSize: "cover",
+            // backgroundPosition: "center",
+            // backgroundRepeat: "no-repeat",
+            // transition: "none",
           },
           window: {
             backgroundColor: "#cfcfcf46",
@@ -214,9 +201,8 @@ const App = () => {
       : {
           app: {
             backgroundImage: `url(${xp})`,
-            // width: "100%",
-            // height: "100%",
-            transition: "none",
+            backgroundSize: "cover",
+            // transition: "none",
           },
           window: {
             background: "rgb(19,60,156)",
@@ -281,18 +267,12 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
-      {logoClicked && (
-        <motion.div initial={{ opacity: 1 }} animate={eyeAnimation}>
-          <TheEye />
-        </motion.div>
-      )}
-
-      {/* {logo && <LogoBoot onLogoClick={logoClick} />} */}
       {logo && <LogoBoot2 onLogoClick={logoClick} />}
 
       {boot ? (
         <>
           <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
+            {logoClicked && <TheEye />}
             <motion.video
               animate={portalAnimation}
               initial={{ opacity: 1 }}
@@ -442,11 +422,7 @@ const App = () => {
           />
         </motion.div>
       )}
-      {/* {logovis && (
-        <div className="logoBoot">
-          <img alt="logoBoot" src={logoboot1} />
-        </div>
-      )} */}
+
       <motion.div
         className="navbar"
         animate={navbarAnimation}

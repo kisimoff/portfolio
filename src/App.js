@@ -116,22 +116,6 @@ const App = () => {
   const videoEl = useRef(null);
   const loopVideoEl = useRef(null);
 
-  const attemptPlay = () => {
-    videoEl &&
-      videoEl.current &&
-      videoEl.current.play().catch((error) => {
-        console.error("Error attempting to play", error);
-      });
-
-    // setTimeout(() => {
-    //   loopVideoEl &&
-    //     loopVideoEl.current &&
-    //     loopVideoEl.current.play().catch((error) => {
-    //       console.error("Error attempting to play", error);
-    //     });
-    // }, 3000);
-  };
-
   useEffect(() => {
     if (logoClicked) {
       setLogoClicked(true);
@@ -139,8 +123,7 @@ const App = () => {
       videosSequenceAnimation();
       document.getElementById("bootRoot").style.display = "none";
       // setLogovis(false);
-      attemptPlay();
-
+      attemptPlay(videoEl);
       setTimeout(() => {
         setStart(true);
       }, 12500);
@@ -150,31 +133,32 @@ const App = () => {
     }
   }, [logoClicked]);
 
+  const attemptPlay = (refToPlay) => {
+    refToPlay &&
+      refToPlay.current &&
+      refToPlay.current.play().catch((error) => {
+        console.error("Error attempting to play", error);
+      });
+  };
+
   const logoClick = () => {
     setLogoClicked(true);
-    // elementsSequenceAnimation();
-    // videosSequenceAnimation();
-    // document.getElementById("bootRoot").style.display = "none";
-    // // setLogovis(false);
-    // attemptPlay();
-
-    // setTimeout(() => {
-    //   setStart(true);
-    // }, 12500);
-    // setTimeout(() => {
-    //   setLogo(false);
-    // }, 7000);
   };
 
   const videosSequenceAnimation = async () => {
     portalAnimation.start({
       opacity: 0,
-      transition: { duration: 0.6, delay: 5.5 },
+      transition: { duration: 1, delay: 5.5 },
     });
-    loopAnimation.start({
-      opacity: 1,
-      transition: { duration: 0.5, delay: 4.5 },
-    });
+
+    await loopAnimation
+      .start({
+        opacity: 1,
+        transition: { duration: 1, delay: 5.5 },
+      })
+      .then(() => {
+        attemptPlay(loopVideoEl);
+      });
   };
 
   const elementsSequenceAnimation = async () => {
@@ -311,7 +295,6 @@ const App = () => {
           <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
             <motion.video
               animate={portalAnimation}
-              style={{ zIndex: 1 }}
               initial={{ opacity: 1 }}
               className="video-background"
               playsInline

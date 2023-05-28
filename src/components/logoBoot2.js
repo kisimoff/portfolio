@@ -89,18 +89,19 @@ export default function LogoBoot2({ onLogoClick }) {
           ease: "easeIn",
         }, // adjust duration and easing as per your requirements
       });
-      await twentyThreePath.start({
-        opacity: 0,
-        transition: { delay: delay + 2.5, duration: 1.3, ease: "easeIn" }, // adjust duration and easing as per your requirements
-      });
-      //instructions showing up
-      instructions
+      await twentyThreePath
         .start({
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, delay: 1 },
+          opacity: 0,
+          transition: { delay: delay + 2.5, duration: 1.3, ease: "easeIn" }, // adjust duration and easing as per your requirements
         })
         .then(() => setAnimationCompleted(true));
+
+      //instructions showing up
+      instructions.start({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, delay: 1 },
+      });
       // pulsing animation
       logoDivAnimation.start({
         scale: [1, 1.07, 1],

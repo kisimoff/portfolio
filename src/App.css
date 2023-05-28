@@ -925,10 +925,12 @@ body {
 }
 
 .about-first img {
-  width: calc(var(--fs-text) * 7);
-  height: calc(var(--fs-text) * 7);
-  padding: 0.5rem;
-  padding: var(--padding-projects-text);
+  width: calc(var(--fs-text) * 6);
+  height: calc(var(--fs-text) * 6);
+  margin-right: 1ch;
+  padding-bottom: 1ch;
+  /* margin-right: calc(var(--padding-projects-text));
+  padding-bottom: calc(var(--padding-projects-text) / 2); */
 }
 
 .aboutText h1 {

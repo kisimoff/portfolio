@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import Draggable from "react-draggable";
-import about_png from "../../img/about.png";
+import about_png from "../../img/aboutCompress.png";
 import Window from "./Window";
 import {
   useWindupString,

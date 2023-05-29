@@ -308,7 +308,7 @@ const App = () => {
                   >
                     {step3 && (
                       <Pace ms={0}>
-                        Kisimoff OS v2.3
+                        Kisimoff OS v2.3.10
                         <br />
                         <Pause ms={500} />
                         {step1 && (

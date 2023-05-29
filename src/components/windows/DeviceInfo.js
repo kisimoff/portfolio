@@ -120,7 +120,7 @@ const DeviceInfo = ({
       console.log(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
       setGpu(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
     }
-    if (false) {
+    if (1) {
       getData();
     }
   }, []);
@@ -135,19 +135,6 @@ const DeviceInfo = ({
       }}
     >
       <div className="deviceInfo" id="deviceInfo">
-        {/* <div id="window" style={theme.window}>
-          <span id="title" style={{ color: theme.window.color }}>
-            Device Info
-          </span>
-          <button id="useless-btn" className="btn yellow" />
-          <button
-            className="btn red"
-            onClick={() => {
-              document.getElementById("deviceInfo").style.display = "none";
-            }}
-          />
-        </div> */}
-
         <Window
           title="Device Info"
           elementId="deviceInfo"

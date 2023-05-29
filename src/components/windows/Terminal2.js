@@ -276,7 +276,7 @@ const Terminal2 = ({
             commands={commands}
             welcomeMessage={
               <div>
-                Kisimoff OS [Version 2.3.1] \n (c) All rights reserved. \n
+                Kisimoff OS [Version 2.3.10] \n (c) All rights reserved. \n
                 <span> Type help to list commands. \n \n</span> <br></br>
               </div>
             }

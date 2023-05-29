@@ -1256,10 +1256,6 @@ body {
     /* maximum-scale:1; */
   }
 
-  .video-background {
-    height: stretch;
-  }
-
   .nav-heading {
     gap: 0.5rem;
   }

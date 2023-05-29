@@ -1092,8 +1092,7 @@ body {
 #cursor {
   display: inline-block;
 }
-#query {
-}
+
 #cursor {
   position: relative;
   bottom: -2px;

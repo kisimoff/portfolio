@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.9d72a04e.css",
-    "main.js": "/static/js/main.312d602c.js",
+    "main.css": "/static/css/main.aa8ec241.css",
+    "main.js": "/static/js/main.34b33007.js",
     "static/media/rockets.mp4": "/static/media/rockets.a9d937e730aa0b8c315f.mp4",
     "static/media/electronic3.mp4": "/static/media/electronic3.b4d6950058d83b2edac6.mp4",
     "static/media/cpuPortal.mp4": "/static/media/cpuPortal.69662ba4fa531202db70.mp4",
@@ -25,19 +25,19 @@
     "static/media/xpCompress.jpg": "/static/media/xpCompress.05f64473a1626fa0d2a1.jpg",
     "static/media/glassOverlay.png": "/static/media/glassOverlay.f341dfdb032550b5b562.png",
     "static/media/eyeball_compress_black.png": "/static/media/eyeball_compress_black.737c77d843877a56b5b3.png",
-    "static/media/pupil2.png": "/static/media/pupil2.a1414515c38956f8e684.png",
     "static/media/aboutCompress.png": "/static/media/aboutCompress.9e7e4431e7df24f86a0c.png",
+    "static/media/pupil2cs.png": "/static/media/pupil2cs.9c104063d180e025788e.png",
     "static/media/logo_white.png": "/static/media/logo_white.8f52157ef8f2aa2c816c.png",
     "static/media/app.txt": "/static/media/app.9cd0831f8898e69928ad.txt",
     "static/media/css.txt": "/static/media/css.358964a44a82e3027afd.txt",
     "index.html": "/index.html",
     "static/media/16svg.svg": "/static/media/16svg.9901ca6eee6d44103a08.svg",
     "static/media/index.txt": "/static/media/index.95dc2499edef038cecd1.txt",
-    "main.9d72a04e.css.map": "/static/css/main.9d72a04e.css.map",
-    "main.312d602c.js.map": "/static/js/main.312d602c.js.map"
+    "main.aa8ec241.css.map": "/static/css/main.aa8ec241.css.map",
+    "main.34b33007.js.map": "/static/js/main.34b33007.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d72a04e.css",
-    "static/js/main.312d602c.js"
+    "static/css/main.aa8ec241.css",
+    "static/js/main.34b33007.js"
   ]
 }

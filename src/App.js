@@ -11,8 +11,9 @@ import mycomp from "./icons/xp/mycomp.png";
 import info from "./icons/xp/about.png";
 import cmd from "./icons/xp/cmd.png";
 import mydocs from "./icons/xp/mydocs.png";
-import resume from "./icons/xp/resume.png";
+import star from "./icons/xp/credits.png";
 
+import resume from "./icons/xp/resume.png";
 import aboutme_os from "./icons/os/about.png";
 import device_os from "./icons/os/device.png";
 import terminal_os from "./icons/os/terminal.png";
@@ -21,6 +22,7 @@ import resume_os from "./icons/os/resume.png";
 import c3po from "./icons/os/c3po.png";
 import TheEye from "./components/theEye";
 
+import Credits from "./components/windows/Credits";
 import ToggleButton from "./components/ToggleButton";
 import Terminal2 from "./components/windows/Terminal2";
 import About from "./components/windows/About";
@@ -51,6 +53,7 @@ import { TbDeviceDesktopAnalytics } from "react-icons/tb";
 import { VscFilePdf, VscGithubAlt } from "react-icons/vsc";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { BsJournalCode, BsTerminal, BsPersonCircle } from "react-icons/bs";
+import { AiOutlineCopyrightCircle } from "react-icons/ai";
 import electronic3 from "./background/electronic3.mp4";
 import xp from "./background/xpCompress.jpg";
 import cpu from "./background/background_fallback.jpg";
@@ -69,10 +72,12 @@ const App = () => {
   const [pattern, setPattern] = useState(false);
   const [theme, setTheme] = useState(true);
   const [about, setAbout] = useState(false);
+
   const [start, setStart] = useState(false);
   const [device, setDevice] = useState(false);
   const [projects, setProjects] = useState(false);
   const [terminal2, setTerminal2] = useState(false);
+  const [credits, setCredits] = useState(false);
 
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(true);
@@ -112,7 +117,9 @@ const App = () => {
         console.error("Error attempting to play", error);
       });
   };
-
+  const openCredits = () => {
+    setCredits(true);
+  };
   const logoClick = () => {
     attemptPlay(videoEl);
     setLogoClicked(true);
@@ -272,7 +279,7 @@ const App = () => {
       {boot ? (
         <>
           <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
-            {logoClicked && <TheEye />}
+            {logoClicked && <TheEye onEyeClick={openCredits} />}
             <motion.video
               animate={portalAnimation}
               initial={{ opacity: 1 }}
@@ -308,7 +315,7 @@ const App = () => {
                   >
                     {step3 && (
                       <Pace ms={0}>
-                        Kisimoff OS v2.3.10
+                        Kisimoff OS v2.3.11
                         <br />
                         <Pause ms={500} />
                         {step1 && (
@@ -485,7 +492,6 @@ const App = () => {
               setZindexxx={setZindexxx}
             />
           ) : null}
-
           {projects ? (
             <IconTask
               themeVars={themeVars}
@@ -496,6 +502,20 @@ const App = () => {
               elementId="projects"
               selfId="task-projects-icon"
               setVisibility={setProjects}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null}
+          {credits ? (
+            <IconTask
+              themeVars={themeVars}
+              theme={theme}
+              icon={AiOutlineCopyrightCircle}
+              caption="Credits"
+              xpIcon={star}
+              elementId="credits"
+              selfId="task-credits-icon"
+              setVisibility={setCredits}
               zIndexxx={zIndexxx}
               setZindexxx={setZindexxx}
             />
@@ -637,6 +657,16 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
       ) : null}
+      {credits ? (
+        <Credits
+          theme={themeVars}
+          setTheme={setTheme}
+          setVisibility={setCredits}
+          zIndexxx={zIndexxx}
+          setZindexxx={setZindexxx}
+        />
+      ) : null}
+
       {start ? (
         <Start theme={themeVars} setTheme={setTheme} setVisibility={setStart} />
       ) : null}

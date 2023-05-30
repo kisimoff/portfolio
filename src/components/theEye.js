@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useSpring, useTransform, useAnimation } from "framer-motion";
 import eyeball from "./../img/eyeball_compress_black.png";
-import pupil from "./../img/pupil2.png";
+import pupil from "./../img/pupil2cs.png";
 import glass from "./../img/glassOverlay.png";
 import {
   isSafari,
@@ -10,7 +10,7 @@ import {
   isMobile,
   mobileVendor,
 } from "react-device-detect";
-export default function TheEye() {
+export default function TheEye({ onEyeClick }) {
   const eyeSizeMultiplier = 1.35; //size of the eye
   const perspectiveAngle = 40; // Maximum tilt angle for the eye
   const movementConstraint = 8; // Larger values will limit the eye movement more
@@ -22,7 +22,15 @@ export default function TheEye() {
   const [eyeSize, setEyeSize] = useState(250);
   const [disable3d, setDisable3d] = useState(true);
   const [shouldTrackMouse, setShouldTrackMouse] = useState(false);
-
+  const pupilAnimation = useAnimation();
+  const eyeHoverAnimation = {
+    scale: 1.23,
+    transition: { duration: 0.6, ease: "easeInOut" },
+  };
+  const eyeRestAnimation = {
+    scale: 1,
+    transition: { duration: 1, ease: "easeInOut" },
+  };
   const eyeAnimation = useAnimation();
 
   useEffect(() => {
@@ -204,9 +212,12 @@ export default function TheEye() {
   return (
     <motion.div
       className="theEye"
+      onClick={onEyeClick} // Triggers the passed click handler on click
       ref={constrainRef}
       initial={{ opacity: 0 }}
       animate={eyeAnimation}
+      onHoverStart={() => pupilAnimation.start(eyeHoverAnimation)}
+      onHoverEnd={() => pupilAnimation.start(eyeRestAnimation)}
       style={{
         width: `${eyeSize}px`,
         height: `${eyeSize}px`,
@@ -218,6 +229,7 @@ export default function TheEye() {
         overflow: "hidden",
         padding: "5px",
         zIndex: 5,
+        cursor: "pointer",
       }}
     >
       <motion.div className="iris">
@@ -234,13 +246,14 @@ export default function TheEye() {
                 }
           }
         >
-          <img
+          <motion.img
             src={pupil}
             style={{
-              width: `${eyeSize / 3}px`,
-              height: `${eyeSize / 3}px`,
+              width: `${eyeSize / 3.5}px`,
+              height: `${eyeSize / 3.5}px`,
             }}
             className="pupil"
+            animate={pupilAnimation}
           />
         </motion.div>
         <motion.img

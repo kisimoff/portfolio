@@ -56,7 +56,7 @@ clamp(min, target, max)
   --fs-navbar: clamp(1.3rem, 0.7vw + 1.4rem, 2rem);
   --fs-instructions: clamp(1.2rem, 0.6vh + 1.3rem, 2rem);
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
-  --fs-text: clamp(0.8rem, 0.4vw + 0.6rem, 1.6rem);
+  --fs-text: clamp(0.8rem, 0.4vw + 0.75rem, 1.1em);
   --fs-text-projects: clamp(0.8rem, 0.3vw + 0.7rem, 1.6rem);
   --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
   --fs-text-mobile: clamp(0.5rem, 2.5vw + 0.18rem, 1.1rem);
@@ -66,7 +66,7 @@ clamp(min, target, max)
   --fs-icon-task-caption: clamp(0.8rem, 0.3vw + 1rem, 2rem);
   --fs-icon-caption: clamp(0.6rem, 0.1vw + 0.8rem, 1.5rem);
   --f-text-color: white;
-
+  --accent-color: #ff1a75;
   --padding: clamp(0.2rem, 1.4vw + 0.4rem, 2.5rem);
 
   --padding-projects-text: clamp(0.3rem, 0.6vw + 0.3rem, 1.6rem);
@@ -920,6 +920,29 @@ body {
 
 .aboutText p {
   font-size: var(--fs-text);
+}
+
+.credits {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 3;
+  max-width: fit-content;
+  height: fit-content;
+  box-shadow: var(--window-shadow);
+}
+.creditsText {
+  max-width: 70ch;
+  padding: 1rem;
+  font-size: var(--fs-text);
+  /* line-height: 1.32rem; */
+}
+
+.credits a {
+  color: var(--accent-color);
 }
 
 #terminal {

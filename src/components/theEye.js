@@ -204,7 +204,10 @@ export default function TheEye({ onEyeClick }) {
       await x_eyeball.set(0);
       await y_eyeball.set(0);
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      setShouldTrackMouse(true); // Start tracking mouse movement
+      setTimeout(() => {
+        setShouldTrackMouse(true);
+      }, 1500);
+      // Start tracking mouse movement
     };
 
     animateEye();
@@ -212,12 +215,16 @@ export default function TheEye({ onEyeClick }) {
   return (
     <motion.div
       className="theEye"
-      onClick={onEyeClick} // Triggers the passed click handler on click
+      onClick={shouldTrackMouse ? onEyeClick : null} // Triggers the passed click handler on click
       ref={constrainRef}
       initial={{ opacity: 0 }}
       animate={eyeAnimation}
-      onHoverStart={() => pupilAnimation.start(eyeHoverAnimation)}
-      onHoverEnd={() => pupilAnimation.start(eyeRestAnimation)}
+      onHoverStart={() =>
+        shouldTrackMouse ? pupilAnimation.start(eyeHoverAnimation) : null
+      }
+      onHoverEnd={() =>
+        shouldTrackMouse ? pupilAnimation.start(eyeRestAnimation) : null
+      }
       style={{
         width: `${eyeSize}px`,
         height: `${eyeSize}px`,
@@ -229,7 +236,7 @@ export default function TheEye({ onEyeClick }) {
         overflow: "hidden",
         padding: "5px",
         zIndex: 5,
-        cursor: "pointer",
+        cursor: shouldTrackMouse ? "pointer" : "default",
       }}
     >
       <motion.div className="iris">

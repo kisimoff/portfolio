@@ -114,7 +114,8 @@ const About = ({
                   an audiophile <Pause ms={200} />
                   and a motorhead at hearth. <Pause ms={200} />
                   I'm also deeply fascinated by the human body, health, and
-                  spirituality.
+                  spirituality. <Pause ms={400} />
+                  <br></br>
                   {/* <Pause ms={400} /> */}
                   {/* My latest superpower is transmuting espresso to react
                   components. <Pause ms={400} />

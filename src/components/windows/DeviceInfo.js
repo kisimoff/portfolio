@@ -91,18 +91,13 @@ const DeviceInfo = ({
         throw new Error("Unable to fetch IP address.");
       }
       setIP(ip);
-      const apiKey = "7969|0UCnUjP39LSSMehYKDO803ff2QFbyhyOjX3obGei"; // Replace with your IPX API key
-      const res = await axios.get(`https://ipxapi.com/api/ip?ip=${ip}`, {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          Accept: "application/json",
-        },
-      });
+      console.log(ip);
+      const res = await axios.get(`http://ip-api.com/json/${ip}`);
       if (res.data.status === "success") {
         setDataStatus(true);
         setRes(res.data);
       }
-      // console.log(res.data);
+      console.log(res.data);
     } catch (error) {
       console.error("Error fetching geolocation data:", error);
     }
@@ -169,7 +164,7 @@ const DeviceInfo = ({
                 IP Address: {IP} <br></br>
                 Country: {res.country} <br></br>
                 City: {res.city} <br></br>
-                ZIP Code: {res.zip} <br></br>
+                Region: {res.regionName} <br></br>
                 ISP: {res.isp} <br></br>
               </span>
             ) : null}

@@ -29,7 +29,7 @@ function Proj({ onLoad, ...props }) {
     <div class="project-container" ref={videoRef}>
       {isVideoVisible && (
         <video
-          className="project-animation"
+          class="project-animation"
           playsInline
           loop
           muted

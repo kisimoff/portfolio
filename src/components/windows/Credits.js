@@ -55,9 +55,9 @@ const Credits = ({ theme, setVisibility, zIndexxx, setZindexxx }) => {
                     animation
                   </a>{" "}
                   and explore more of their remarkable work on{" "}
-                  <a href="https://hivalmotion.cargo.site/" target="_blank">
+                  <a href="https://www.hivaldesign.com/" target="_blank">
                     {" "}
-                    HiValMotion
+                    HiValDesign
                   </a>
                   .
                   <br />

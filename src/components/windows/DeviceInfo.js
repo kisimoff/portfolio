@@ -25,6 +25,8 @@ const DeviceInfo = ({
   setZindexxx,
 }) => {
   const [gpu, setGpu] = useState("");
+  const [cpuCores, setCpuCores] = useState("");
+
   const [vendor, setVendor] = useState("");
   const [model, setModel] = useState("");
   const { deviceDetect } = require("react-device-detect");
@@ -32,11 +34,11 @@ const DeviceInfo = ({
   const [dataStatus, setDataStatus] = useState(false);
   const [IP, setIP] = useState("");
   const [res, setRes] = useState({});
-
+  const [displayRes, setDisplayRes] = useState('');
   async function getGeoData() {
     try {
       const response = await axios.get("https://ipapi.co/json/");
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         setRes(response.data);
         setDataStatus(true);
@@ -46,49 +48,27 @@ const DeviceInfo = ({
     }
   }
 
-  // const getIP = async () => {
-  //   try {
-  //     const res = await axios.get("https://api.ipify.org?format=json");
-  //     return res.data.ip;
-  //   } catch (error) {
-  //     console.error("Error fetching IP address:", error);
-  //     return null;
-  //   }
-  // };
 
-  // const getData = async () => {
-  //   console.log("Getting data...");
-  //   try {
-  //     const ip = await getIP();
-  //     if (!ip) {
-  //       console.log("Unable to fetch IP address.");
-  //       throw new Error("Unable to fetch IP address.");
-  //     }
-  //     setIP(ip);
-  //     console.log(ip);
-  //     const res = await axios.get(`http://ip-api.com/json/${ip}`);
-  //     if (res.data.status === "success") {
-  //       setDataStatus(true);
-  //       setRes(res.data);
-  //     }
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.error("Error fetching geolocation data:", error);
-  //   }
-  // };
 
   useEffect(() => {
     document.getElementById("deviceInfo").style.zIndex = zIndexxx;
     setZindexxx(zIndexxx + 1);
-    console.log(zIndexxx);
+    // console.log(zIndexxx);
     const gl = document.createElement("canvas").getContext("webgl");
     // try to get the extensions
     const ext = gl.getExtension("WEBGL_debug_renderer_info");
     // if the extension exists, find out the info.
     if (ext) {
-      console.log(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
+      // console.log(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
       setGpu(gl.getParameter(ext.UNMASKED_RENDERER_WEBGL));
     }
+    setCpuCores(navigator.hardwareConcurrency.toString());
+    const screenWidth = window.screen.width;
+    const screenHeight = window.screen.height;
+    setDisplayRes(`Screen Resolution: ${screenWidth} x ${screenHeight}`)
+
+    // console.log(`CPU Cores: ${cpuCores}`);
+
     setRes(getGeoData());
   }, []);
 
@@ -98,7 +78,7 @@ const DeviceInfo = ({
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("deviceInfo").style.zIndex = zIndexxx;
-        console.log(zIndexxx);
+        // console.log(zIndexxx);
       }}
     >
       <div className="deviceInfo" id="deviceInfo">
@@ -110,20 +90,20 @@ const DeviceInfo = ({
           onStart={() => {
             setZindexxx(zIndexxx + 1);
             document.getElementById("deviceinfo").style.zIndex = zIndexxx;
-            console.log(zIndexxx);
+            // console.log(zIndexxx);
           }}
         />
         <div style={theme.field}>
           <div className="aboutText">
             Viewing from: {deviceType} <br></br>
             {isMobile ? (
-              <span>
+                <span>
                 Device: {mobileVendor} {mobileModel}
-                <br></br>
+                  <br></br>
               </span>
             ) : null}{" "}
             {isTablet ? (
-              <span>
+                <span>
                 Tablet: true
                 <br></br>
               </span>
@@ -131,16 +111,18 @@ const DeviceInfo = ({
             OS: {osName} {osVersion} <br></br>
             Browser: {browserName} Version: {browserVersion} <br></br>
             GPU: {gpu} <br></br>
+            {displayRes} <br></br>
+            CPU Cores: {cpuCores}
             {dataStatus ? (
-              <span>
+                <span>
                 <br></br>
                 IP Address: {res.ip} <br></br>
                 Location:{" "}
-                {res.city + ", " + res.region + ", " + res.country_name}
-                <br></br>
+                  {res.city + ", " + res.region + ", " + res.country_name}
+                  <br></br>
                 ISP: {res.org} <br></br>
                 Coordinates: {res.latitude + " N, " + res.longitude + " W"}{" "}
-                <br></br>
+                  <br></br>
               </span>
             ) : null}
             <div></div>

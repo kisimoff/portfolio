@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 
 import "./App.css";
 
-// components and windows imports
-// import Projects from "./components/windows/Projects";
 import Projects from "./components/windows/Projs";
 
 import LogoBoot2 from "./components/logoBoot2";
@@ -212,7 +210,7 @@ const App = () => {
             // transition: "none",
           },
           window: {
-            background: "rgb(19,60,156)",
+            // background: "rgb(19,60,156)",
             background:
               "linear-gradient(0deg, rgba(0,59,214,1) 2%, rgba(0,102,253,1) 15%, rgba(0,100,253,1) 20%, rgba(0,88,230,1) 85%, rgba(54,143,252,1) 95%, rgba(13,96,232,1) 98%)",
             color: "#E3E3E3",
@@ -249,8 +247,8 @@ const App = () => {
             borderRight: "4px solid #003bd6",
             borderBottom: "4px solid #003bd6",
             borderLeft: "4px solid #003bd6",
-            boxShadow: "inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
-            boxSizing: "border-box",
+            // boxShadow: "inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2)",
+            // boxSizing: "border-box",
             transition: "all 0.5s ",
           },
           // cursor: { animation: "1.02s blink-light step-end infinite" },
@@ -276,7 +274,7 @@ const App = () => {
     <div id="app" className="app" style={themeVars.app}>
       {logo && <LogoBoot2 onLogoClick={logoClick} />}
 
-      {boot ? (
+
         <>
           <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
             {logoClicked && <TheEye onEyeClick={openCredits} />}
@@ -415,20 +413,7 @@ const App = () => {
             </div>
           </div>
         </>
-      ) : (
-        <motion.div>
-          <video
-            className="video-background"
-            playsInline
-            loop
-            muted
-            autoPlay
-            src={electronic3}
-            ref={videoEl}
-            type="video/mp4"
-          />
-        </motion.div>
-      )}
+
 
       <motion.div
         className="navbar"
@@ -539,7 +524,7 @@ const App = () => {
             whileTap={{ scale: 0.9 }}
             href="#"
             onClick={() => {
-              window.open("https://github.com/vtwenty3");
+              window.open("https://github.com/kisimoff");
             }}
           >
             <VscGithubAlt className="nav-social-svg" />
@@ -601,8 +586,8 @@ const App = () => {
           setZindexxx={setZindexxx}
         />
         <motion.a
-          whileHover={{ scale: 1.07 }}
-          whileTap={{ scale: 0.95 }}
+          // whileHover={{ scale: 1.07 }}
+          // whileTap={{ scale: 0.95 }}
           className="iconWrapper"
           href="#"
           onClick={() => {

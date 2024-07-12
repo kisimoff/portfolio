@@ -112,9 +112,10 @@ const About = ({
                   <br></br> <br></br>
                   Outside of work, im a movie lover, <Pause ms={200} />a bit of
                   an audiophile <Pause ms={200} />
-                  and a motorhead at hearth. <Pause ms={200} />
-                  I'm also deeply fascinated by the human body, health, and
-                  spirituality. <Pause ms={400} />
+                  and a motorhead at hearth.
+                  {/*<Pause ms={200} />*/}
+                  {/*I'm also deeply fascinated by the human body, health, and*/}
+                  {/*spirituality. <Pause ms={400} />*/}
                   <br></br>
                   {/* <Pause ms={400} /> */}
                   {/* My latest superpower is transmuting espresso to react

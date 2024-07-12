@@ -4,7 +4,7 @@ import { TbDeviceDesktopAnalytics } from "react-icons/tb";
 
 function Icon(props) {
   return (
-    <motion.div whileHover={{ scale: 1.07 }} whileTap={{ scale: 0.95 }}>
+    <div>
       <a
         href="#"
         className="iconWrapper"
@@ -30,7 +30,7 @@ function Icon(props) {
           <span> {props.line2}</span>
         </span>
       </a>
-    </motion.div>
+    </div>
   );
 }
 

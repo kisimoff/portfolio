@@ -180,7 +180,7 @@ export default function Projs({
       onStart={() => {
         setZindexxx(zIndexxx + 1);
         document.getElementById("projects").style.zIndex = zIndexxx;
-        console.log(zIndexxx);
+        // console.log(zIndexxx);
       }}
     >
       <div className="projects" id="projects">

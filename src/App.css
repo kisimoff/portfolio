@@ -586,10 +586,42 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  gap: var(--padding-small);
   padding: var(--padding);
   height: 100vh;
   width: auto;
   z-index: 1;
+  /*background-color: #04aa6d;*/
+}
+
+/*TODO: fix the mobile*/
+
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  color: white;
+}
+
+.iconWrapper {
+  width: 5rem;
+  padding: 1rem var(--padding-small);
+  border-radius: 0.1rem;
+  color: white;
+  display: flex;
+  gap: var(--padding-small);
+  flex-direction: column;
+  align-items: center;
+  /*border-width: 5px;*/
+  /*border-color:   rgba(165, 165, 165, 1);*/
+  justify-content: center;
+}
+
+
+.iconWrapper:hover {
+  transition: background-color 0.2s linear;
+  box-sizing: border-box;
+  outline: rgba(165, 165, 165, 0.23) solid 2px;
+  background-color: rgba(165, 165, 165, 0.14);
 }
 
 .imageW {
@@ -776,26 +808,19 @@ body {
   align-items: start;
 }
 
-.iconWrapper {
-  width: 5rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.1rem;
-}
 
-.icon {
-  width: 2.8rem;
-  height: auto;
+
+
+
+.caption {
+  text-align: center;
+  /* font-family: "Montserrat", sans-serif; */
+  font-family: "Ubuntu Mono", monospace;
+  /* font-weight: 400; */
+  /* font-size: var(--fs-icon-caption); */
   color: white;
+  text-decoration: none;
 }
-/* 
-.iconWrapper:hover {
-  transform: scale(1.08);
-  transition: all 0.2s linear;
-} */
 
 /* .caption {
   display: block;
@@ -805,17 +830,7 @@ body {
   padding-top: 4px;
 } */
 
-.caption {
-  text-align: center;
-  /* font-family: "Montserrat", sans-serif; */
-  font-family: "Ubuntu Mono", monospace;
 
-  /* font-weight: 400; */
-  /* font-size: var(--fs-icon-caption); */
-  color: white;
-  text-decoration: none;
-  padding-bottom: 1.5rem;
-}
 
 @keyframes App-logo-spin {
   from {
@@ -897,7 +912,7 @@ body {
 .aboutText {
   max-width: 70ch;
   padding: 1rem;
-  /* line-height: 1.32rem; */
+   line-height: 1.52rem;
 }
 
 .about-first {
@@ -1308,15 +1323,41 @@ body {
 
   .icons {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: flex-end;
-    padding: 0;
-    padding-bottom: 0.5rem;
+    padding: 0 0 0.5rem;
+    gap: 0;
   }
 
   .iconWrapper {
+    padding: 0;
     width: fit-content;
   }
+
+
+
+  /*.icon {*/
+  /*  width: 2.4rem;*/
+  /*  height: 2.4rem;*/
+  /*  color: white;*/
+  /*}*/
+
+  /*.iconWrapper {*/
+  /*  width: 5rem;*/
+  /*  padding: 1rem var(--padding-small);*/
+  /*  border-radius: 0.1rem;*/
+  /*  color: white;*/
+  /*  display: flex;*/
+  /*  gap: var(--padding-small);*/
+  /*  flex-direction: column;*/
+  /*  align-items: center;*/
+  /*  !*border-width: 5px;*!*/
+  /*  !*border-color:   rgba(165, 165, 165, 1);*!*/
+  /*  justify-content: center;*/
+  /*}*/
+
+
+
 
   .caption {
     padding: 0.5rem;

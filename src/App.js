@@ -49,6 +49,9 @@ import {
 import logo_white from "./img/logo_white.png";
 import { TbDeviceDesktopAnalytics } from "react-icons/tb";
 import { VscFilePdf, VscGithubAlt } from "react-icons/vsc";
+// import { LiaGitlab } from "react-icons/lia";
+import { IoLogoGitlab } from "react-icons/io5";
+
 import { SlSocialLinkedin } from "react-icons/sl";
 import { BsJournalCode, BsTerminal, BsPersonCircle } from "react-icons/bs";
 import { AiOutlineCopyrightCircle } from "react-icons/ai";
@@ -268,6 +271,7 @@ const App = () => {
               "linear-gradient(0deg, rgba(23,65,163,1) 0%, rgba(34,88,214,1) 9%, rgba(35,99,223,1) 22%, rgba(34,88,214,1) 82%, rgba(54,120,206,1) 93%, rgba(34,88,214,1) 100%)",
             transition: "all 1.5s ease",
           },
+
         };
 
   return (
@@ -508,41 +512,54 @@ const App = () => {
         </div>
         <div className="nav-socials">
           <motion.a
-            href="#"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => {
-              window.open(
-                "https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
-              );
-            }}
+              href="#"
+              whileHover={{scale: 1.1}}
+              whileTap={{scale: 0.9}}
+              onClick={() => {
+                window.open(
+                    "https://www.linkedin.com/in/valentin-kisimov-2719b41a1/"
+                );
+              }}
           >
-            <SlSocialLinkedin className="nav-social-svg" />
+            <SlSocialLinkedin className="nav-social-svg"/>
           </motion.a>
           <motion.a
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            href="#"
-            onClick={() => {
-              window.open("https://github.com/kisimoff");
-            }}
+              whileHover={{scale: 1.1}}
+              whileTap={{scale: 0.9}}
+              href="#"
+              onClick={() => {
+                window.open("https://github.com/kisimoff");
+              }}
           >
-            <VscGithubAlt className="nav-social-svg" />
+
+            <VscGithubAlt className="nav-social-svg"/>
           </motion.a>
+          <motion.a
+              whileHover={{scale: 1.1}}
+              whileTap={{scale: 0.9}}
+              href="#"
+              onClick={() => {
+                window.open("https://gitlab.com/vkisimov");
+              }}
+          >
+            <IoLogoGitlab className="nav-social-svg"/>
+          </motion.a>
+
+
         </div>
       </motion.div>
       <motion.div
-        className="icons"
-        animate={iconsAnimation}
-        initial={{ opacity: 0, y: 8 }}
+          className="icons"
+          animate={iconsAnimation}
+          initial={{opacity: 0, y: 8}}
       >
         <Icon
-          theme={theme}
-          icon={BsTerminal}
-          osIcon={terminal_os}
-          xpIcon={cmd}
-          caption="Terminal"
-          elementId="terminal2"
+            theme={theme}
+            icon={BsTerminal}
+            osIcon={terminal_os}
+            xpIcon={cmd}
+            caption="Terminal"
+            elementId="terminal2"
           setVisibility={setTerminal2}
           zIndexxx={zIndexxx}
           visibility={terminal2}

@@ -543,6 +543,7 @@ body {
 }
 
 .icon-task:hover {
+
   background-color: rgba(255, 255, 255, 0.192);
 }
 
@@ -552,6 +553,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+
 }
 .caption-task {
   color: white;
@@ -572,9 +574,11 @@ body {
   color: white;
   font-weight: 900;
   font-size: 1.25rem;
-  margin-top: 0.07rem;
-  margin: 0.2rem;
+  /*margin-top: 0.07rem;*/
+  margin: 0.2rem 0.2rem 0.2rem 0.2rem;
   padding: 0.15rem;
+  background-color: rgba(210, 46, 46, 0);
+
 }
 
 .close-window-task:hover {
@@ -618,10 +622,10 @@ body {
 
 
 .iconWrapper:hover {
-  transition: background-color 0.2s linear;
   box-sizing: border-box;
   outline: rgba(165, 165, 165, 0.23) solid 2px;
   background-color: rgba(165, 165, 165, 0.14);
+  transition: background-color 0.2s linear;
 }
 
 .imageW {
@@ -682,7 +686,7 @@ body {
   padding: var(--padding-projects-text);
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
+  /*-webkit-transform: translate(-50%, -50%);*/
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   display: flex;
@@ -1151,7 +1155,7 @@ body {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /*-webkit-tap-highlight-color: rgba(0, 0, 0, 0);*/
   -webkit-tap-highlight-color: transparent;
   margin-left: 3px;
   margin-right: 3px;
@@ -1218,7 +1222,7 @@ body {
   border-radius: 50%;
   background-color: #fafafa;
   box-sizing: border-box;
-  transition: all 0.25s ease;
+  /*transition: all 0.25s ease;*/
 }
 
 .virtualKey {
@@ -1284,6 +1288,14 @@ body {
   }
 }
 @media only screen and (max-width: 800px), (max-height: 400px) {
+
+  .iconWrapper:hover {
+    /*box-sizing: border-box;*/
+    outline: none;
+    background-color: transparent;
+    /*transition: background-color;*/
+  }
+
   .app {
     flex-direction: column;
     overflow: hidden;
@@ -1293,6 +1305,7 @@ body {
     height: fill-available; */
     /* maximum-scale:1; */
   }
+
 
   .nav-heading {
     gap: 0.5rem;

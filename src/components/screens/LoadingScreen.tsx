@@ -20,15 +20,13 @@ interface LoadingScreenProps {
   openCredits: () => void;
 }
 
-const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLogoClick, openCredits }) => {
+const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
   const [logoClicked, setLogoClicked] = useState(false)
   const [pattern, setPattern] = useState(false)
   const [step1, setStep1] = useState(true)
   const [step3, setStep3] = useState(true)
   const [logo, setLogo] = useState(true)
 
-  const navbarAnimation = useAnimation()
-  const iconsAnimation = useAnimation()
   const backgroundAnimation = useAnimation()
   const loopAnimation = useAnimation()
   const portalAnimation = useAnimation()
@@ -46,11 +44,8 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLogoClick, openCredits 
     attemptPlay(videoEl)
     setLogoClicked(true)
     onLogoClick()
-    // elementsSequenceAnimation()
     videosSequenceAnimation()
     document.getElementById('bootRoot')!.style.display = 'none'
-    // setTimeout(() => {
-    // }, 12000)
     setTimeout(() => {
       setLogo(false)
     }, 7000)
@@ -71,29 +66,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLogoClick, openCredits 
         attemptPlay(loopVideoEl)
       })
   }
-
-  //   const elementsSequenceAnimation = async () => {
-  //     if (window.innerWidth > 800 && window.innerHeight > 400) {
-  //       navbarAnimation.set({ y: 100 })
-
-  //       await navbarAnimation.start({
-  //         y: 0,
-  //         transition: { duration: 1.5, delay: 5 },
-  //       })
-  //     } else {
-  //       navbarAnimation.set({ y: -100 })
-
-  //       await navbarAnimation.start({
-  //         y: 0,
-  //         transition: { duration: 1.5, delay: 5 },
-  //       })
-  //     }
-  //     await iconsAnimation.start({
-  //       y: 0,
-  //       opacity: 1,
-  //       transition: { duration: 0.7, delay: 0.8 },
-  //     })
-  //   }
 
   return (
     <>
@@ -125,12 +97,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLogoClick, openCredits 
           <div className={`pattern-mask ${pattern ? 'animate' : ''}`}></div>
           <div className="pattern-reveal">
             <div className="boot-screen-text" id="boot-text">
-              <WindupChildren
-                onFinished={() => {
-                  // setSpinner(false);
-                  // setLogovis(true);
-                }}
-              >
+              <WindupChildren>
                 {step3 && (
                   <Pace ms={0}>
                     Kisimoff OS v2.3.11
@@ -219,7 +186,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLogoClick, openCredits 
                         />
                       </>
                     )}
-                    {/* System time: [insert current time here] <br></br> <br></br> */}
                   </Pace>
                 )}
               </WindupChildren>

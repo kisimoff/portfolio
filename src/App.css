@@ -895,8 +895,7 @@ body {
 }
 /* #field  */
 
-#window {
-  
+/* #window {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -906,7 +905,7 @@ body {
   cursor: move;
   backdrop-filter: blur(23px);
   margin-bottom: -1px;
-}
+} */
 
 #field {
   height: calc(100% - 40px);

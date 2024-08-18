@@ -1,10 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 import './App.css'
 
 import Projects from './components/windows/Projs'
 
-import LogoBoot2 from './components/logoBoot2'
 import mycomp from './icons/xp/mycomp.png'
 import info from './icons/xp/about.png'
 import cmd from './icons/xp/cmd.png'
@@ -16,7 +15,6 @@ import device_os from './icons/os/device.png'
 import terminal_os from './icons/os/terminal.png'
 import projects_os from './icons/os/projects.png'
 import c3po from './icons/os/c3po.png'
-import TheEye from './components/theEye'
  
 import Credits from './components/windows/Credits'
 import ToggleButton from './components/ToggleButton'
@@ -26,18 +24,11 @@ import DeviceInfo from './components/windows/DeviceInfo'
 import Icon from './components/Icon'
 import IconTask from './components/IconTask'
 import { motion, useAnimation } from 'framer-motion'
+import LoadingScreen from '@components/screens/LoadingScreen'
 
 //packages imports
-import { WindupChildren, Pause, Pace, Effect } from 'windups'
 import {
   isTablet,
-  osVersion,
-  osName,
-  browserName,
-  browserVersion,
-  engineName,
-  engineVersion,
-  deviceType,
 } from 'react-device-detect'
 
 //icons and media imports
@@ -52,31 +43,21 @@ import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { AiOutlineCopyrightCircle } from 'react-icons/ai'
 import xp from './background/xpCompress.jpg'
 
-import cpuLoop from './background/new/cpuLoop.mp4'
-import portal from './background/new/cpuPortal.mp4'
 
 const App = () => {
   //windows states
-  const [logoClicked, setLogoClicked] = useState(false)
-  const [pattern, setPattern] = useState(false)
   const [theme, setTheme] = useState(true)
   const [about, setAbout] = useState(false)
-
   const [start, setStart] = useState(false)
   const [device, setDevice] = useState(false)
   const [projects, setProjects] = useState(false)
   const [terminal2, setTerminal2] = useState(false)
   const [credits, setCredits] = useState(false)
 
-  const [step1, setStep1] = useState(true)
-  const [step3, setStep3] = useState(true)
-  const [logo, setLogo] = useState(true)
   const navbarAnimation = useAnimation()
   const iconsAnimation = useAnimation()
   const backgroundAnimation = useAnimation()
 
-  const loopAnimation = useAnimation()
-  const portalAnimation = useAnimation()
 
   const [zIndexxx, setZindexxx] = useState(6)
 
@@ -95,49 +76,16 @@ const App = () => {
     setTheme(!theme)
   }
 
-  const videoEl = useRef(null)
-  const loopVideoEl = useRef(null)
-
-  const attemptPlay = (refToPlay) => {
-    refToPlay &&
-      refToPlay.current &&
-      refToPlay.current.play().catch((error) => {
-        console.error('Error attempting to play', error)
-      })
-  }
   const openCredits = () => {
     setCredits(true)
   }
   const logoClick = () => {
-    attemptPlay(videoEl)
-    setLogoClicked(true)
     elementsSequenceAnimation()
-    videosSequenceAnimation()
-    document.getElementById('bootRoot').style.display = 'none'
-    // setLogovis(false);
     setTimeout(() => {
       setStart(true)
     }, 12000)
-    setTimeout(() => {
-      setLogo(false)
-    }, 7000)
   }
 
-  const videosSequenceAnimation = async () => {
-    portalAnimation.start({
-      opacity: 0,
-      transition: { duration: 1, delay: 7 },
-    })
-
-    loopAnimation
-      .start({
-        opacity: 1,
-        transition: { duration: 1, delay: 5.5 },
-      })
-      .then(() => {
-        attemptPlay(loopVideoEl)
-      })
-  }
 
   const elementsSequenceAnimation = async () => {
     if (window.innerWidth > 800 && window.innerHeight > 400) {
@@ -253,148 +201,11 @@ const App = () => {
 
   return (
     <div id="app" className="app" style={themeVars.app}>
-      {logo && <LogoBoot2 onLogoClick={logoClick} />}
-
-
-      <>
-        <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
-          {logoClicked && <TheEye onEyeClick={openCredits} />}
-          <motion.video
-            animate={portalAnimation}
-            initial={{ opacity: 1 }}
-            className="video-background"
-            playsInline
-            muted
-            src={portal}
-            ref={videoEl}
-            type="video/mp4"
-          />
-          <motion.video
-            animate={loopAnimation}
-            initial={{ opacity: 0 }}
-            className="video-background"
-            playsInline
-            muted
-            src={cpuLoop}
-            ref={loopVideoEl}
-            type="video/mp4"
-            loop
-          />
-        </motion.div>
-        <div className="boot-screen" id="bootRoot">
-          <div className="pattern-background">
-            <div className={`pattern-mask ${pattern ? 'animate' : ''}`}></div>
-            <div className="pattern-reveal">
-              <div className="boot-screen-text" id="boot-text">
-                <WindupChildren
-                  onFinished={() => {
-                    // setSpinner(false);
-                    // setLogovis(true);
-                  }}
-                >
-                  {step3 && (
-                    <Pace ms={0}>
-                        Kisimoff OS v2.3.11
-                      <br />
-                      <Pause ms={500} />
-                      {step1 && (
-                        <>
-                          <Pause ms={20} />
-                          <br /> Checking hardware compatibility
-                          <Pace ms={200}>...</Pace>
-                          <Pause ms={300} />
-                          <br />
-                            Type:
-                          {deviceType}
-                          <br /> <Pause ms={100} /> OS:
-                          {osName} Version: {osVersion}
-                          <br />
-                          <Pause ms={100} />
-                            Browser:
-                          {browserName} Version: {browserVersion} <br />
-                          <Pause ms={100} />
-                            Engine: {engineName} Version:
-                          {engineVersion}
-                          <Pause ms={400} /> <br />
-                            Compatibility
-                          <Pace ms={200}>...</Pace>
-                          <Pause ms={200} /> OK
-                          <Pause ms={400} />
-                        </>
-                      )}
-                      <Effect
-                        fn={() => {
-                          setStep1(false)
-                        }}
-                      />
-                      { (
-                        <>
-                          <br /> Loading system drivers...
-                          <br /> Loading system startup scripts...
-                          <br /> Verifying system configuration...
-                          <br /> Initializing user interface...{' '}
-                          <Pause ms={100} />
-                          <br /> Loading system fonts...
-                          <br /> Configuring system preferences...
-                          <br /> Mounting files...
-                          <Pause ms={400} />
-                          <br /> Loading system services...
-                          <br /> Initializing networking protocols...
-                          <br /> Establishing secure connections...
-                          <br /> Preparing desktop environment...
-                          <br /> Optimizing system performance...
-                          <Pause ms={100} />
-                          <br /> Verifying system integrity...
-                          <br /> Loading system log files...
-                          <br /> Loading application framework...
-                          <br /> Verifying user browser settings...
-                          <br /> Loading system themes...
-                          <br /> Scanning for available updates...
-                          <Pause ms={50} />
-                          <br /> Loading system resources...
-                          <br /> Initializing system clock...
-                          <br /> Loading system virtualization...
-                          <br /> Establishing system backups...
-                          <br /> Initializing system database...
-                          <Pause ms={50} />
-                          <br /> Verifying system licenses...
-                          <br /> Initializing system multitasking...
-                          <br /> Loading system security patches...
-                          <br /> Initializing system memory...
-                          <Pause ms={80} />
-                          <br /> Loading system encryption tools...
-                          <br /> Checking system for malware...
-                          <br /> Loading system updates
-                          <Pace ms={150}>...</Pace>
-                            OK
-                          <Effect
-                            fn={() => {
-                              setPattern(!pattern)
-                            }}
-                          />
-                          <Pause ms={400} />
-                          <br />
-                          <br />
-                            Loading complete...
-                          <Pause ms={1300} />
-                          <Effect
-                            fn={() => {
-                              setStep3(false)
-                            }}
-                          />
-                        </>
-                      )}
-                      {/* System time: [insert current time here] <br></br> <br></br> */}
-                    </Pace>
-                  )}
-                </WindupChildren>
-              </div>
-              <div className="login-screen" id="login-screen"></div>
-            </div>
-          </div>
-        </div>
-      </>
-
+      <LoadingScreen
+        themeVars={themeVars}
+        openCredits={openCredits}
+        onLogoClick={logoClick}
+      />
 
       <motion.div
         className="navbar"

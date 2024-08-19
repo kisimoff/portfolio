@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { WindupChildren, Pause, Pace, Effect } from 'windups'
 import { motion, useAnimation } from 'framer-motion'
 import LogoBoot2 from '@components/logoBoot2'
@@ -14,6 +14,9 @@ import {
   engineName,
   engineVersion,
 } from 'react-device-detect'
+
+import { useTheme } from '@contexts/ThemeContext'
+
 
 interface LoadingScreenProps {
   onLogoClick: () => void;
@@ -34,11 +37,28 @@ const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
   const videoEl = useRef<HTMLVideoElement>(null)
   const loopVideoEl = useRef<HTMLVideoElement>(null)
 
+  const { themeState } = useTheme()
+
+
   const attemptPlay = (refToPlay: React.RefObject<HTMLVideoElement>) => {
     refToPlay.current?.play().catch((error) => {
       console.error('Error attempting to play', error)
     })
   }
+
+  useEffect(()=>{
+    if (themeState === 'xp') {
+      backgroundAnimation.start({
+        opacity: 0,
+        transition: { duration: 1, ease: 'easeIn' },
+      })
+    } else {
+      backgroundAnimation.start({
+        opacity: 1,
+        transition: { duration: 1, ease: 'easeIn' },
+      })
+    }
+  },[themeState, backgroundAnimation])
 
   const logoClick = () => {
     attemptPlay(videoEl)

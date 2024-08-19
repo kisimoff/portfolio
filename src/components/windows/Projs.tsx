@@ -32,8 +32,9 @@ export default function Projs({
   setVisibility,
   zIndexxx,
   setZindexxx,
-  sorsa,
-}) {
+}) 
+
+{
   const projects = [
     {
       sorsa: esc,

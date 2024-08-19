@@ -1,6 +1,8 @@
-import React from 'react'
+import { useTheme } from '@contexts/ThemeContext'
 
 function Icon(props) {
+  const { themeState } = useTheme()
+
   return (
     <div>
       <a
@@ -16,10 +18,9 @@ function Icon(props) {
           }
         }}
       >
-        {props.theme == true ? (
+        {themeState === 'dark' ? (
           <props.icon className="icon" />
         ) : (
-          // <img src={props.osIcon} className="icon" />
           <img src={props.xpIcon} className="icon" />
         )}
 

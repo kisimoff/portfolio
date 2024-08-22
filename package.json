@@ -17,7 +17,7 @@
     "react-console-emulator": "^5.0.2",
     "react-device-detect": "^2.2.2",
     "react-dom": "^18.3.1",
-    "react-draggable": "^4.4.5",
+    "react-draggable": "^4.4.6",
     "react-icons": "^4.7.1",
     "spinners-react": "^1.0.7",
     "windups": "^1.2.1"

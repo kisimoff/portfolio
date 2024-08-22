@@ -1,8 +1,7 @@
-import React, { useState,  useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Draggable from 'react-draggable'
 import Window from './Window'
- 
+
 import {
   osVersion,
   osName,
@@ -14,13 +13,12 @@ import {
   isTablet,
   isMobile,
 } from 'react-device-detect'
+import { useWindows } from '@contexts/WindowsContext'
 
-const DeviceInfo = ({
-  theme,
-  setVisibility,
-  zIndexxx,
-  setZindexxx,
-}) => {
+const DeviceInfo = () => {
+  const { deviceInfoWindow } = useWindows()
+
+
   const [gpu, setGpu] = useState('')
   const [cpuCores, setCpuCores] = useState('')
 
@@ -42,8 +40,8 @@ const DeviceInfo = ({
 
 
   useEffect(() => {
-    document.getElementById('deviceInfo').style.zIndex = zIndexxx
-    setZindexxx(zIndexxx + 1)
+    // document.getElementById('deviceInfo').style.zIndex = zIndexxx
+    // setZindexxx(zIndexxx + 1)
     const gl = document.createElement('canvas').getContext('webgl')
     const ext = gl.getExtension('WEBGL_debug_renderer_info')
     if (ext) {
@@ -54,67 +52,47 @@ const DeviceInfo = ({
     const screenWidth = window.screen.width
     const screenHeight = window.screen.height
     setDisplayRes(`Screen Resolution: ${screenWidth} x ${screenHeight}`)
-
-
     setRes(getGeoData())
   }, [])
 
   return (
-    <Draggable
-      cancel=".close-window"
-      onStart={() => {
-        setZindexxx(zIndexxx + 1)
-        document.getElementById('deviceInfo').style.zIndex = zIndexxx
-      }}
-    >
-      <div className="deviceInfo" id="deviceInfo">
-        <Window
-          title="Device Info"
-          elementId="deviceInfo"
-          theme={theme}
-          setVisibilityWindow={setVisibility}
-          onStart={() => {
-            setZindexxx(zIndexxx + 1)
-            document.getElementById('deviceinfo').style.zIndex = zIndexxx
-          }}
-        />
-        <div style={theme.field}>
-          <div className="aboutText">
-            Viewing from: {deviceType} <br></br>
-            {isMobile ? (
-              <span>
-                Device: {mobileVendor} {mobileModel}
-                <br></br>
-              </span>
-            ) : null}{' '}
-            {isTablet ? (
-              <span>
-                Tablet: true
-                <br></br>
-              </span>
-            ) : null}{' '}
-            OS: {osName} {osVersion} <br></br>
-            Browser: {browserName} Version: {browserVersion} <br></br>
-            GPU: {gpu} <br></br>
-            {displayRes} <br></br>
-            CPU Cores: {cpuCores}
-            {dataStatus ? (
-              <span>
-                <br></br>
-                IP Address: {res.ip} <br></br>
-                Location:{' '}
-                {res.city + ', ' + res.region + ', ' + res.country_name}
-                <br></br>
-                ISP: {res.org} <br></br>
-                Coordinates: {res.latitude + ' N, ' + res.longitude + ' W'}{' '}
-                <br></br>
-              </span>
-            ) : null}
-            <div></div>
-          </div>
+
+    <div className="deviceInfo" id="deviceInfo">
+      <Window window={deviceInfoWindow}>
+        <div className="aboutText">
+          Viewing from: {deviceType} <br></br>
+          {isMobile ? (
+            <span>
+              Device: {mobileVendor} {mobileModel}
+              <br></br>
+            </span>
+          ) : null}{' '}
+          {isTablet ? (
+            <span>
+              Tablet: true
+              <br></br>
+            </span>
+          ) : null}{' '}
+          OS: {osName} {osVersion} <br></br>
+          Browser: {browserName} Version: {browserVersion} <br></br>
+          GPU: {gpu} <br></br>
+          {displayRes} <br></br>
+          CPU Cores: {cpuCores}
+          {dataStatus ? (
+            <span>
+              <br></br>
+              IP Address: {res.ip} <br></br>
+              Location:{' '}
+              {res.city + ', ' + res.region + ', ' + res.country_name}
+              <br></br>
+              ISP: {res.org} <br></br>
+              Coordinates: {res.latitude + ' N, ' + res.longitude + ' W'}{' '}
+              <br></br>
+            </span>
+          ) : null}
         </div>
-      </div>
-    </Draggable>
+      </Window>
+    </div>
   )
 }
 

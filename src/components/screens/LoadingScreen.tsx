@@ -16,19 +16,18 @@ import {
 } from 'react-device-detect'
 
 import { useTheme } from '@contexts/ThemeContext'
+import { useWindows } from '@contexts/WindowsContext'
+import { useAnimations } from '@contexts/AnimationsContext'
 
 
-interface LoadingScreenProps {
-  onLogoClick: () => void;
-  openCredits: () => void;
-}
-
-const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
+const LoadingScreen = () => {
   const [logoClicked, setLogoClicked] = useState(false)
   const [pattern, setPattern] = useState(false)
   const [step1, setStep1] = useState(true)
   const [step3, setStep3] = useState(true)
   const [logo, setLogo] = useState(true)
+  const { startWindow, creditsWindow } = useWindows()
+  const { elementsSequenceAnimation } = useAnimations()
 
   const backgroundAnimation = useAnimation()
   const loopAnimation = useAnimation()
@@ -39,6 +38,9 @@ const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
 
   const { themeState } = useTheme()
 
+  function openCredits() {
+    creditsWindow.setVisibility(true)
+  }
 
   const attemptPlay = (refToPlay: React.RefObject<HTMLVideoElement>) => {
     refToPlay.current?.play().catch((error) => {
@@ -46,7 +48,7 @@ const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (themeState === 'xp') {
       backgroundAnimation.start({
         opacity: 0,
@@ -58,18 +60,46 @@ const LoadingScreen = ({ onLogoClick, openCredits }:LoadingScreenProps) => {
         transition: { duration: 1, ease: 'easeIn' },
       })
     }
-  },[themeState, backgroundAnimation])
+  }, [themeState, backgroundAnimation])
 
   const logoClick = () => {
     attemptPlay(videoEl)
     setLogoClicked(true)
-    onLogoClick()
+    elementsSequenceAnimation()
     videosSequenceAnimation()
     document.getElementById('bootRoot')!.style.display = 'none'
     setTimeout(() => {
       setLogo(false)
     }, 7000)
+    setTimeout(() => {
+      startWindow.setVisibility(true)
+    }, 12000)
   }
+
+
+
+  function skipLoading() {
+    document.getElementById('bootRoot')!.style.display = 'none'
+    elementsSequenceAnimation()
+    setLogo(false)
+    setLogoClicked(true)
+    startWindow.setVisibility(true)
+    loopAnimation
+      .start({
+        opacity: 1,
+        transition: { duration: 1 },
+      })
+      .then(() => {
+        attemptPlay(loopVideoEl)
+      })
+  }
+
+  useEffect(() => {
+    skipLoading()
+  }, [])
+
+
+
 
   const videosSequenceAnimation = async () => {
     portalAnimation.start({

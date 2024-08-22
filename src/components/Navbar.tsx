@@ -9,55 +9,78 @@ import { AiOutlineCopyrightCircle } from 'react-icons/ai'
 import ToggleButton from './ToggleButton'
 import IconTask from './IconTask'
 import logo_white from '../img/logo_white.png'
-import cmd from '../icons/xp/cmd.png'
-import info from '../icons/xp/about.png'
-import mycomp from '../icons/xp/mycomp.png'
-import mydocs from '../icons/xp/mydocs.png'
-import star from '../icons/xp/credits.png'
+import cmd from '@assets/icons/xp/cmd.png'
+import info from '@assets/icons/xp/about.png'
+import mycomp from '@assets/icons/xp/mycomp.png'
+import mydocs from '@assets/icons/xp/mydocs.png'
+import star from '@assets/icons/xp/credits.png'
 
 import { useTheme } from '@contexts/ThemeContext'
 import { useAnimations } from '@contexts/AnimationsContext'
-
-
+import { useWindows } from '@contexts/WindowsContext'
 
 interface NavbarProps {
-  // theme: boolean;
-  // themeValues: any;
   isTablet: boolean;
-  terminal2: boolean;
-  about: boolean;
-  device: boolean;
-  projects: boolean;
-  credits: boolean;
-  setTerminal2: React.Dispatch<React.SetStateAction<boolean>>;
-  setAbout: React.Dispatch<React.SetStateAction<boolean>>;
-  setDevice: React.Dispatch<React.SetStateAction<boolean>>;
-  setProjects: React.Dispatch<React.SetStateAction<boolean>>;
-  setCredits: React.Dispatch<React.SetStateAction<boolean>>;
   zIndexxx: number;
   setZindexxx: React.Dispatch<React.SetStateAction<number>>;
-  // navbarAnimation: AnimationControls;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
   isTablet,
-  terminal2,
-  about,
-  device,
-  projects,
-  credits,
-  setTerminal2,
-  setAbout,
-  setDevice,
-  setProjects,
-  setCredits,
   zIndexxx,
   setZindexxx,
-  // navbarAnimation
 }) => {
   const { themeState, themeValues, toggleTheme } = useTheme()
   const { navbarAnimation } = useAnimations()
+  const { terminal2, setTerminal2, about, setAbout, device, setDevice, projects, setProjects, credits, setCredits } = useWindows()
 
+  const iconTasksConfig = [
+    {
+      condition: terminal2,
+      icon: BsTerminal,
+      caption: 'Terminal',
+      xpIcon: cmd,
+      elementId: 'terminal2',
+      selfId: 'task-terminal-icon',
+      setVisibility: setTerminal2,
+    },
+    {
+      condition: about,
+      icon: BsPersonCircle,
+      caption: 'About',
+      xpIcon: info,
+      elementId: 'about',
+      selfId: 'task-about-icon',
+      setVisibility: setAbout,
+    },
+    {
+      condition: device,
+      icon: TbDeviceDesktopAnalytics,
+      caption: 'Device',
+      xpIcon: mycomp,
+      elementId: 'deviceInfo',
+      selfId: 'task-deviceInfo-icon',
+      setVisibility: setDevice,
+    },
+    {
+      condition: projects,
+      icon: BsJournalCode,
+      caption: 'Projects',
+      xpIcon: mydocs,
+      elementId: 'projects',
+      selfId: 'task-projects-icon',
+      setVisibility: setProjects,
+    },
+    {
+      condition: credits,
+      icon: AiOutlineCopyrightCircle,
+      caption: 'Credits',
+      xpIcon: star,
+      elementId: 'credits',
+      selfId: 'task-credits-icon',
+      setVisibility: setCredits,
+    },
+  ]
 
   return (
     <motion.div
@@ -79,67 +102,21 @@ const Navbar: React.FC<NavbarProps> = ({
         className="nav-icon-task"
         style={isTablet ? { display: 'none' } : null}
       >
-        {terminal2 ? (
-          <IconTask
-            icon={BsTerminal}
-            caption="Terminal"
-            xpIcon={cmd}
-            elementId="terminal2"
-            selfId="task-terminal-icon"
-            setVisibility={setTerminal2}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-          />
-        ) : null}
-        {about ? (
-          <IconTask
-            icon={BsPersonCircle}
-            caption="About"
-            xpIcon={info}
-            elementId="about"
-            selfId="task-about-icon"
-            setVisibility={setAbout}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-          />
-        ) : null}
-        {device ? (
-          <IconTask
-            icon={TbDeviceDesktopAnalytics}
-            caption="Device"
-            xpIcon={mycomp}
-            line2="Info"
-            elementId="deviceInfo"
-            selfId="task-deviceInfo-icon"
-            setVisibility={setDevice}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-          />
-        ) : null}
-        {projects ? (
-          <IconTask
-            icon={BsJournalCode}
-            caption="Projects"
-            xpIcon={mydocs}
-            elementId="projects"
-            selfId="task-projects-icon"
-            setVisibility={setProjects}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-          />
-        ) : null}
-        {credits ? (
-          <IconTask
-            icon={AiOutlineCopyrightCircle}
-            caption="Credits"
-            xpIcon={star}
-            elementId="credits"
-            selfId="task-credits-icon"
-            setVisibility={setCredits}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
-          />
-        ) : null}
+        {iconTasksConfig.map((config, index) => (
+          config.condition ? (
+            <IconTask
+              key={index}
+              icon={config.icon}
+              caption={config.caption}
+              xpIcon={config.xpIcon}
+              elementId={config.elementId}
+              selfId={config.selfId}
+              setVisibility={config.setVisibility}
+              zIndexxx={zIndexxx}
+              setZindexxx={setZindexxx}
+            />
+          ) : null
+        ))}
       </div>
       <div className="nav-socials">
         <motion.a

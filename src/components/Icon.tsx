@@ -5,9 +5,8 @@ function Icon(props) {
 
   return (
     <div>
-      <a
-        href="#"
-        className="iconWrapper"
+      <button
+        className="iconWrapper unstyledButton"
         onClick={() => {
           if (props.visibility == true) {
             props.setZindexxx(props.zIndexxx + 1)
@@ -28,7 +27,7 @@ function Icon(props) {
           {props.caption}
           <span> {props.line2}</span>
         </span>
-      </a>
+      </button>
     </div>
   )
 }

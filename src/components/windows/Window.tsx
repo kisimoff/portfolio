@@ -13,10 +13,11 @@ function Window({ window, children }: Window) {
   const { themeValues } = useTheme()
   return (
     <Draggable
+      handle='.handle'
       cancel=".close-window"
     >
-      <div style={themeValues.field}>
-        <div className=" handle flex flex-row items-center justify-between pl-4 cursor-move backdrop-blur-[23px] mb-[-1px]" style={themeValues.window}>
+      <div className="absolute inset-0 z-30 m-auto max-w-fit h-fit max-h-[70vh] shadow-window-shadow">
+        <div className="handle flex flex-row items-center justify-between pl-4 cursor-move backdrop-blur-[23px] mb-[-1px]" style={themeValues.window}>
           <span id="title" className='text-fs-window-title' style={{ color: themeValues.window.color }}>
             {window.caption}
           </span>
@@ -32,7 +33,9 @@ function Window({ window, children }: Window) {
             </a>
           </div>
         </div>
-        <div>{children}</div>
+        <div style={themeValues.field}>
+          <div>{children}</div>
+        </div>
       </div>
     </Draggable>
   )

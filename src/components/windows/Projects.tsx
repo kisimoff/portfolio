@@ -170,28 +170,26 @@ export default function Projs() {
     setCurrentLoadingIndex((prevIndex) => prevIndex + 1)
   }
   return (
-    <div className="projects" id="projects">
-      <Window window={projectsWindow}>
-        <div className="projectsScroll">
-          <div className="projectsExplain">
+    <Window window={projectsWindow}>
+      <div className="projectsScroll">
+        <div className="projectsExplain">
             Tap or hover on a project to learn more. Some projects are live
             and can be accessed by clicking the <BiWorld /> icon. Each
             repository has a README with more detailed information about the
             project.
-          </div>
-          <div className="projectsField">
-            {projects.map((project, index) => (
-              <ProjectShowcase
-                key={project.sorsa}
-                {...project}
-                onLoad={handleVideoLoad}
-                // Only pass the src to the Project if it's the current loading index
-                sorsa={index === currentLoadingIndex ? project.sorsa : null}
-              />
-            ))}
-          </div>
         </div>
-      </Window>
-    </div>
+        <div className="projectsField">
+          {projects.map((project, index) => (
+            <ProjectShowcase
+              key={project.sorsa}
+              {...project}
+              onLoad={handleVideoLoad}
+              // Only pass the src to the Project if it's the current loading index
+              sorsa={index === currentLoadingIndex ? project.sorsa : null}
+            />
+          ))}
+        </div>
+      </div>
+    </Window>
   )
 }

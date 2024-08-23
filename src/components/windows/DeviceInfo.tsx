@@ -57,42 +57,40 @@ const DeviceInfo = () => {
 
   return (
 
-    <div className="deviceInfo" id="deviceInfo">
-      <Window window={deviceInfoWindow}>
-        <div className="aboutText">
+    <Window window={deviceInfoWindow}>
+      <div className="aboutText">
           Viewing from: {deviceType} <br></br>
-          {isMobile ? (
-            <span>
+        {isMobile ? (
+          <span>
               Device: {mobileVendor} {mobileModel}
-              <br></br>
-            </span>
-          ) : null}{' '}
-          {isTablet ? (
-            <span>
+            <br></br>
+          </span>
+        ) : null}{' '}
+        {isTablet ? (
+          <span>
               Tablet: true
-              <br></br>
-            </span>
-          ) : null}{' '}
+            <br></br>
+          </span>
+        ) : null}{' '}
           OS: {osName} {osVersion} <br></br>
           Browser: {browserName} Version: {browserVersion} <br></br>
           GPU: {gpu} <br></br>
-          {displayRes} <br></br>
+        {displayRes} <br></br>
           CPU Cores: {cpuCores}
-          {dataStatus ? (
-            <span>
-              <br></br>
+        {dataStatus ? (
+          <span>
+            <br></br>
               IP Address: {res.ip} <br></br>
               Location:{' '}
-              {res.city + ', ' + res.region + ', ' + res.country_name}
-              <br></br>
+            {res.city + ', ' + res.region + ', ' + res.country_name}
+            <br></br>
               ISP: {res.org} <br></br>
               Coordinates: {res.latitude + ' N, ' + res.longitude + ' W'}{' '}
-              <br></br>
-            </span>
-          ) : null}
-        </div>
-      </Window>
-    </div>
+            <br></br>
+          </span>
+        ) : null}
+      </div>
+    </Window>
   )
 }
 

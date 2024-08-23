@@ -7,6 +7,7 @@ export type WindowProps = {
     elementId: string;
     setVisibility: React.Dispatch<React.SetStateAction<boolean>>;
     visibility: boolean;
+    zIndex: number
   }
   
   

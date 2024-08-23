@@ -27,7 +27,7 @@ import {
 
 import { useTheme } from '@contexts/ThemeContext'
 import { useAnimations } from '@contexts/AnimationsContext'
-import { useWindows } from '@contexts/WindowsContext'
+import { useWindows, WindowKey } from '@contexts/WindowsContext'
 
 
 import { VscFilePdf } from 'react-icons/vsc'
@@ -36,7 +36,7 @@ import { VscFilePdf } from 'react-icons/vsc'
 
 const App = () => {
   //windows states
-  const { iconsConfig } = useWindows()
+  const { iconsConfig, increaseZIndex } = useWindows()
   const { themeState, themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
   const [zIndexxx, setZindexxx] = useState(6)
@@ -66,8 +66,9 @@ const App = () => {
             elementId={iconConfig.elementId}
             setVisibility={iconConfig.setVisibility}
             visibility={iconConfig.visibility}
-            zIndexxx={zIndexxx}
-            setZindexxx={setZindexxx}
+            increaseZIndex={()=>increaseZIndex(key as WindowKey)}
+            // zIndexxx={zIndexxx}
+            // setZindexxx={setZindexxx}
           />
         ))}
         <motion.a

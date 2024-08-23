@@ -8,17 +8,19 @@ import mydocs from '@assets/icons/xp/mydocs.png'
 import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { WindowProps } from '@/types'
+import { IconType } from 'react-icons'
 
-type IconKeys = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
+export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
 
 interface WindowsContextType {
-  iconsConfig: Record<IconKeys, WindowProps>;
+  iconsConfig: Record<WindowKey, WindowProps>;
   startWindow: WindowProps;
   terminalWindow: WindowProps;
   aboutWindow: WindowProps;
   deviceInfoWindow: WindowProps;
   projectsWindow: WindowProps;
   creditsWindow: WindowProps;
+increaseZIndex: (windowKey: WindowKey) => void;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
@@ -28,65 +30,46 @@ interface WindowsProviderProps {
 }
 
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
-  const [about, setAbout] = useState(false)
-  const [start, setStart] = useState(false)
-  const [device, setDevice] = useState(false)
-  const [projects, setProjects] = useState(false)
-  const [terminal2, setTerminal2] = useState(false)
-  const [credits, setCredits] = useState(false)
 
+  const defaultZIndex = 4
+  // const [about, setAbout] = useState(false)
+  // const [start, setStart] = useState(false)
+  // const [device, setDevice] = useState(false)
+  // const [projects, setProjects] = useState(false)
+  // const [terminal2, setTerminal2] = useState(false)
+  // const [credits, setCredits] = useState(false)
+
+  const [openWindows, setOpenWindows] = useState<WindowKey[]>([])
+  const [zIndexes, setZIndexes] = useState<Record<WindowKey, number>>({})
+
+  const createWindowConfig = (windowKey: WindowKey, osIcon: IconType, xpIcon: string, caption: string): WindowProps => ({
+    osIcon,
+    xpIcon,
+    caption,
+    elementId: windowKey,
+    setVisibility: () => setOpenWindows(prevWindows => [...prevWindows, windowKey]),
+    visibility: openWindows?.includes(windowKey) ?? false,
+    zIndex: zIndexes[windowKey] || defaultZIndex,
+  })
 
   const iconsConfig = {
-    start: {
-      osIcon: BsTerminal,
-      xpIcon: cmd,
-      caption: 'Start',
-      elementId: 'start',
-      setVisibility: setStart,
-      visibility: start,
-    },
-    terminal2: {
-      osIcon: BsTerminal,
-      xpIcon: cmd,
-      caption: 'Terminal',
-      elementId: 'terminal2',
-      setVisibility: setTerminal2,
-      visibility: terminal2,
-    },
-    about: {
-      osIcon: BsPersonCircle,
-      caption: 'About',
-      xpIcon: info,
-      elementId: 'about',
-      setVisibility: setAbout,
-      visibility: about,
-    },
-    deviceInfo: {
-      osIcon: TbDeviceDesktopAnalytics,
-      caption: 'Device',
-      xpIcon: mycomp,
-      elementId: 'deviceInfo',
-      setVisibility: setDevice,
-      visibility: device,
-    },
-    projects: {
-      osIcon: BsJournalCode,
-      caption: 'Projects',
-      xpIcon: mydocs,
-      elementId: 'projects',
-      setVisibility: setProjects,
-      visibility: projects,
-    },
-    credits: {
-      osIcon: BsJournalCode,
-      caption: 'Credits',
-      xpIcon: mydocs,
-      elementId: 'credits',
-      setVisibility: setCredits,
-      visibility: credits,
-    },
+    start: createWindowConfig('start', BsTerminal, cmd, 'Start'),
+    terminal2: createWindowConfig('terminal2', BsTerminal, cmd, 'Terminal'),
+    about: createWindowConfig('about', BsPersonCircle, info, 'About'),
+    deviceInfo: createWindowConfig('deviceInfo', TbDeviceDesktopAnalytics, mycomp, 'Device'),
+    projects: createWindowConfig('projects', BsJournalCode, mydocs, 'Projects'),
+    credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
   }
 
+  const increaseZIndex = (windowKey: WindowKey) => {
+    //TODO: Figure out how to dyanamically increase the z-index once clicked or focused.
+    console.log('increase index')
+    setZIndexes(prevZIndexes => ({
+      ...prevZIndexes,
+      [windowKey]: (prevZIndexes[windowKey] || defaultZIndex) + 1,
+    }))
+  }
+  
   return (
     <WindowsContext.Provider
       value={{
@@ -96,7 +79,10 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         aboutWindow: iconsConfig.about,
         deviceInfoWindow: iconsConfig.deviceInfo,
         projectsWindow: iconsConfig.projects,
-        creditsWindow: iconsConfig.credits
+        creditsWindow: iconsConfig.credits,
+        increaseZIndex
+        // windowQueue,
+        // bringWindowToFront,
       }}
     >
       {children}
@@ -104,7 +90,6 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
   )
 }
 
-// Create a custom hook to use the windows visibility context
 // eslint-disable-next-line react-refresh/only-export-components
 export const useWindows = () => {
   const context = useContext(WindowsContext)

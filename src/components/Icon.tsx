@@ -1,17 +1,17 @@
 import { useTheme } from '@contexts/ThemeContext'
+import { useWindows } from '@contexts/WindowsContext'
 
 function Icon(props) {
   const { themeState } = useTheme()
+  // const { iconsConfig, windowQueue, bringWindowToFront } = useWindows()
 
   return (
     <div>
       <button
         className="iconWrapper unstyledButton"
         onClick={() => {
-          if (props.visibility == true) {
-            props.setZindexxx(props.zIndexxx + 1)
-            document.getElementById(props.elementId).style.zIndex =
-              props.zIndexxx
+          if (props.visibility) {
+            props.increaseZIndex()
           } else {
             props.setVisibility(true) 
           }

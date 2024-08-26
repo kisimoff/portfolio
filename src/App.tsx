@@ -1,6 +1,6 @@
 import '@/App.css'
 
-import Projects from '@/components/windows/Projects'
+import Projects from '@components/windows/Projects'
 import resume from '@assets/icons/xp/resume.png'
 import Credits from '@components/windows/Credits'
 import About from '@components/windows/About'

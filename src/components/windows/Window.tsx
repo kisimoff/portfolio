@@ -11,16 +11,16 @@ interface Window {
 }
 
 function Window({ window, children }: Window) {
-  const { increaseZIndex} = useWindows()
+  const { openOrFocusWindow, closeWindow } = useWindows()
 
   const { themeValues } = useTheme()
   return (
     <Draggable
       handle='.handle'
       cancel=".close-window"
-      onDrag={()=>increaseZIndex(window.elementId as WindowKey)}
+      onMouseDown={()=>openOrFocusWindow(window.elementId as WindowKey)}
     >
-      <div className="absolute inset-0 z-30 m-auto max-w-fit h-fit max-h-[70vh] shadow-window-shadow">
+      <div style={{zIndex: window.zIndex }} className="absolute inset-0 z-30 m-auto max-w-fit h-fit max-h-[70vh] shadow-window-shadow">
         <div className="handle flex flex-row items-center justify-between pl-4 cursor-move backdrop-blur-[23px] mb-[-1px]" style={themeValues.window}>
           <span id="title" className='text-fs-window-title' style={{ color: themeValues.window.color }}>
             {window.caption}
@@ -31,7 +31,7 @@ function Window({ window, children }: Window) {
               style={themeValues.closeBtn}
               href="#"
               onClick={() => {
-                window.setVisibility(false)
+                closeWindow(window.elementId as WindowKey)
               }} >
               <CgClose />
             </a>

@@ -20,7 +20,8 @@ interface WindowsContextType {
   deviceInfoWindow: WindowProps;
   projectsWindow: WindowProps;
   creditsWindow: WindowProps;
-increaseZIndex: (windowKey: WindowKey) => void;
+  openOrFocusWindow: (windowKey: WindowKey) => void;
+  closeWindow: (windowKey: WindowKey) => void;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
@@ -31,25 +32,33 @@ interface WindowsProviderProps {
 
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
-  const defaultZIndex = 4
-  // const [about, setAbout] = useState(false)
-  // const [start, setStart] = useState(false)
-  // const [device, setDevice] = useState(false)
-  // const [projects, setProjects] = useState(false)
-  // const [terminal2, setTerminal2] = useState(false)
-  // const [credits, setCredits] = useState(false)
+  const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
 
-  const [openWindows, setOpenWindows] = useState<WindowKey[]>([])
-  const [zIndexes, setZIndexes] = useState<Record<WindowKey, number>>({})
+  const openOrFocusWindow = (windowKey: WindowKey) => {
+    setOpenWindowsQueue(prevWindows => {
+      const newOrder = [...prevWindows]
+      const index = newOrder.indexOf(windowKey)
+      if (index !== -1) {
+        newOrder.splice(index, 1)
+      }
+      newOrder.push(windowKey)
+      return newOrder
+    })
+  }
 
+  const closeWindow = (windowKey: WindowKey) => {
+    setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
+  }
+
+  
   const createWindowConfig = (windowKey: WindowKey, osIcon: IconType, xpIcon: string, caption: string): WindowProps => ({
     osIcon,
     xpIcon,
     caption,
     elementId: windowKey,
-    setVisibility: () => setOpenWindows(prevWindows => [...prevWindows, windowKey]),
-    visibility: openWindows?.includes(windowKey) ?? false,
-    zIndex: zIndexes[windowKey] || defaultZIndex,
+    setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
+    visibility: openWindowsQueue?.includes(windowKey) ?? false,
+    zIndex: (openWindowsQueue.indexOf(windowKey) + 5)
   })
 
   const iconsConfig = {
@@ -61,14 +70,6 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
   }
 
-  const increaseZIndex = (windowKey: WindowKey) => {
-    //TODO: Figure out how to dyanamically increase the z-index once clicked or focused.
-    console.log('increase index')
-    setZIndexes(prevZIndexes => ({
-      ...prevZIndexes,
-      [windowKey]: (prevZIndexes[windowKey] || defaultZIndex) + 1,
-    }))
-  }
   
   return (
     <WindowsContext.Provider
@@ -80,9 +81,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         deviceInfoWindow: iconsConfig.deviceInfo,
         projectsWindow: iconsConfig.projects,
         creditsWindow: iconsConfig.credits,
-        increaseZIndex
-        // windowQueue,
-        // bringWindowToFront,
+        openOrFocusWindow,
+        closeWindow
       }}
     >
       {children}

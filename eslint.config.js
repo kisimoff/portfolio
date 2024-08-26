@@ -22,7 +22,7 @@ export default tseslint.config(
           'no-unused-vars': 'warn',
           'quotes': ['error', 'single'],
           'semi': ['error', 'never'],
-          'no-use-before-define': ['error', { 'variables': false }],
+          // 'no-use-before-define': ['error', { 'variables': false }],
           ...reactHooks.configs.recommended.rules,
           'react-refresh/only-export-components': [
               'warn',

@@ -1,47 +1,39 @@
-import React from 'react'
-import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { CgClose } from 'react-icons/cg'
 import { useTheme } from '@contexts/ThemeContext'
+import { WindowProps } from '@/types'
 
-function IconTask(props) {
+function IconTask(props: { window: WindowProps }) {
   const { themeState, themeValues } = useTheme()
 
   return (
-    <div id={props.selfId}>
+    <div id={props.window.elementId}>
       <div className="icon-task" style={themeValues.iconTask}>
-        <a
-          href="#"
-          onClick={() => { 
-            props.setZindexxx(props.zIndexxx + 1)
-            document.getElementById(props.elementId).style.zIndex =
-              props.zIndexxx
-          }}
+        <button
+          className="unstyledButton"
+          onClick={props.window.openOrFocus}
         >
           <div className="icon-task-wrapper">
             {themeState === 'dark' ? (
-              <props.icon className="icon-task-icon" />
+              <props.window.osIcon className="icon-task-icon" />
             ) : (
-              <img src={props.xpIcon} className="icon-task-icon" />
+              <img src={props.window.xpIcon} className="icon-task-icon" />
             )}
 
             <span
               className="caption-task"
               style={themeValues.iconTaskCaption}
             >
-              {props.caption}
+              {props.window.caption}
             </span>
           </div>
-        </a>
-        <a
-          href="#"
+        </button>
+        <button
           style={themeState === 'dark'? {} : { display: 'none' }}
-          className="close-window-task"
-          onClick={() => {
-            props.setVisibility(false)
-          }}
+          className="close-window-task unstyledButton"
+          onClick={() => props.window.close()}
         >
           <CgClose />
-        </a>
+        </button>
       </div>
     </div>
   )

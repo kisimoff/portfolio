@@ -1,75 +1,41 @@
-import React, { useState } from 'react'
+import '@/App.css'
 
-import './App.css'
-
-import Projects from './components/windows/Projects'
-
-
-
+import Projects from '@/components/windows/Projects'
 import resume from '@assets/icons/xp/resume.png'
-
-
-import Credits from './components/windows/Credits'
-import About from './components/windows/About'
-import Start from './components/windows/Start'
-import DeviceInfo from './components/windows/DeviceInfo'
-import Icon from './components/Icon'
-import { motion } from 'framer-motion'
+import Credits from '@components/windows/Credits'
+import About from '@components/windows/About'
+import Start from '@components/windows/Start'
+import DeviceInfo from '@components/windows/DeviceInfo'
+import Icon from '@components/Icon'
 import LoadingScreen from '@components/screens/LoadingScreen'
 import Navbar from '@components/Navbar'
-//packages imports
-import {
-  isTablet,
-} from 'react-device-detect'
-
-//icons and media imports
-
 
 import { useTheme } from '@contexts/ThemeContext'
 import { useAnimations } from '@contexts/AnimationsContext'
-import { useWindows, WindowKey } from '@contexts/WindowsContext'
+import { useWindows } from '@contexts/WindowsContext'
 
+import { motion } from 'framer-motion'
 
 import { VscFilePdf } from 'react-icons/vsc'
-// import xp from './background/xpCompress.jpg'
 
 
 const App = () => {
-  //windows states
-  const { iconsConfig, increaseZIndex } = useWindows()
+  const { windows } = useWindows()
   const { themeState, themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
-  const [zIndexxx, setZindexxx] = useState(6)
-
-
-
 
   return (
     <div id="app" className="app" style={themeValues.app}>
       <LoadingScreen />
-      <Navbar
-        isTablet={isTablet}
-        zIndexxx={zIndexxx}
-        setZindexxx={setZindexxx}
-      />
+      <Navbar />
       <motion.div
         className="icons"
         animate={iconsAnimation}
         initial={{ opacity: 0, y: 8 }}
       >
-        {Object.entries(iconsConfig).map(([key, iconConfig]) => (
-          <Icon
-            key={key}
-            icon={iconConfig.osIcon}
-            xpIcon={iconConfig.xpIcon}
-            caption={iconConfig.caption}
-            elementId={iconConfig.elementId}
-            setVisibility={iconConfig.setVisibility}
-            visibility={iconConfig.visibility}
-            increaseZIndex={()=>increaseZIndex(key as WindowKey)}
-            // zIndexxx={zIndexxx}
-            // setZindexxx={setZindexxx}
-          />
+
+        {Object.entries(windows).map(([key, window]) => (
+          <Icon key={key} window={window} />
         ))}
         <motion.a
           className="iconWrapper"
@@ -83,7 +49,6 @@ const App = () => {
           {themeState === 'dark' ? (
             <VscFilePdf className="icon" />
           ) : (
-            // <img src={resume_os} className="icon" />
             <img src={resume} className="icon" />
           )}
           <span className="caption">Resume</span>
@@ -100,11 +65,11 @@ const App = () => {
           elementId="terminal2"
         />
       ) : null} */}
-      {iconsConfig.about.visibility && <About />}
-      {iconsConfig.projects.visibility && <Projects />}
-      {iconsConfig.deviceInfo.visibility && <DeviceInfo />}
-      {iconsConfig.credits.visibility && <Credits />}
-      {iconsConfig.start.visibility && <Start />}
+      {windows.about.visibility && <About />}
+      {windows.projects.visibility && <Projects />}
+      {windows.deviceInfo.visibility && <DeviceInfo />}
+      {windows.credits.visibility && <Credits />}
+      {windows.start.visibility && <Start />}
     </div>
   )
 }

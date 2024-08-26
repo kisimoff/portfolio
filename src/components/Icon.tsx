@@ -1,31 +1,24 @@
+import { WindowProps } from '@/types'
 import { useTheme } from '@contexts/ThemeContext'
-import { useWindows } from '@contexts/WindowsContext'
 
-function Icon(props) {
+function Icon(props: { window: WindowProps }) {
+
   const { themeState } = useTheme()
-  // const { iconsConfig, windowQueue, bringWindowToFront } = useWindows()
 
   return (
     <div>
       <button
         className="iconWrapper unstyledButton"
-        onClick={() => {
-          if (props.visibility) {
-            props.increaseZIndex()
-          } else {
-            props.setVisibility(true) 
-          }
-        }}
+        onClick={props.window.openOrFocus}
       >
         {themeState === 'dark' ? (
-          <props.icon className="icon" />
+          <props.window.osIcon className="icon" />
         ) : (
-          <img src={props.xpIcon} className="icon" />
+          <img src={props.window.xpIcon} className="icon" />
         )}
 
         <span className="caption">
-          {props.caption}
-          <span> {props.line2}</span>
+          {props.window.caption}
         </span>
       </button>
     </div>

@@ -13,7 +13,7 @@ import { IconType } from 'react-icons'
 export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
 
 interface WindowsContextType {
-  iconsConfig: Record<WindowKey, WindowProps>;
+  windows: Record<WindowKey, WindowProps>;
   startWindow: WindowProps;
   terminalWindow: WindowProps;
   aboutWindow: WindowProps;
@@ -56,12 +56,14 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     xpIcon,
     caption,
     elementId: windowKey,
-    setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
+    close: () => closeWindow(windowKey),
+    openOrFocus: () => openOrFocusWindow(windowKey),
+    // setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
     visibility: openWindowsQueue?.includes(windowKey) ?? false,
     zIndex: (openWindowsQueue.indexOf(windowKey) + 5)
   })
 
-  const iconsConfig = {
+  const windows = {
     start: createWindowConfig('start', BsTerminal, cmd, 'Start'),
     terminal2: createWindowConfig('terminal2', BsTerminal, cmd, 'Terminal'),
     about: createWindowConfig('about', BsPersonCircle, info, 'About'),
@@ -74,13 +76,13 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
   return (
     <WindowsContext.Provider
       value={{
-        iconsConfig,
-        startWindow: iconsConfig.start,
-        terminalWindow: iconsConfig.terminal2,
-        aboutWindow: iconsConfig.about,
-        deviceInfoWindow: iconsConfig.deviceInfo,
-        projectsWindow: iconsConfig.projects,
-        creditsWindow: iconsConfig.credits,
+        windows,
+        startWindow: windows.start,
+        terminalWindow: windows.terminal2,
+        aboutWindow: windows.about,
+        deviceInfoWindow: windows.deviceInfo,
+        projectsWindow: windows.projects,
+        creditsWindow: windows.credits,
         openOrFocusWindow,
         closeWindow
       }}

@@ -39,7 +39,7 @@ const LoadingScreen = () => {
   const { themeState } = useTheme()
 
   function openCredits() {
-    creditsWindow.setVisibility(true)
+    creditsWindow.openOrFocus()
   }
 
   const attemptPlay = (refToPlay: React.RefObject<HTMLVideoElement>) => {
@@ -72,7 +72,7 @@ const LoadingScreen = () => {
       setLogo(false)
     }, 7000)
     setTimeout(() => {
-      startWindow.setVisibility(true)
+      startWindow.openOrFocus()
     }, 12000)
   }
 
@@ -83,7 +83,7 @@ const LoadingScreen = () => {
     elementsSequenceAnimation()
     setLogo(false)
     setLogoClicked(true)
-    startWindow.setVisibility(true)
+    startWindow.openOrFocus()
     loopAnimation
       .start({
         opacity: 1,

@@ -22,6 +22,7 @@ interface WindowsContextType {
   creditsWindow: WindowProps;
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
+  updateIconPosition: (windowKey: WindowKey, x: number, y: number) => void;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
@@ -33,7 +34,16 @@ interface WindowsProviderProps {
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
   const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
+  const [iconPositions, setIconPositions] = useState<Record<WindowKey, { x: number, y: number }>>({
+    terminal2: { x: 0, y: 0 },
+    about: { x: 0, y: 1 },
+    deviceInfo: { x: 0, y: 2 },
+    projects: { x: 0, y: 3 },
+    start: { x: 0, y: 4 },
+    credits: { x: 0, y: 5 },
+  })
 
+  
   const openOrFocusWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => {
       const newOrder = [...prevWindows]
@@ -44,6 +54,12 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       newOrder.push(windowKey)
       return newOrder
     })
+  }
+  const updateIconPosition = (windowKey: WindowKey, x: number, y: number) => {
+    setIconPositions(prevPositions => ({
+      ...prevPositions,
+      [windowKey]: { x, y }
+    }))
   }
 
   const closeWindow = (windowKey: WindowKey) => {
@@ -60,7 +76,9 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     openOrFocus: () => openOrFocusWindow(windowKey),
     // setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
     visibility: openWindowsQueue?.includes(windowKey) ?? false,
-    zIndex: (openWindowsQueue.indexOf(windowKey) + 5)
+    zIndex: (openWindowsQueue.indexOf(windowKey) + 5),
+    iconPositionX: iconPositions[windowKey].x,
+    iconPositionY: iconPositions[windowKey].y
   })
 
   const windows = {
@@ -84,7 +102,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         projectsWindow: windows.projects,
         creditsWindow: windows.credits,
         openOrFocusWindow,
-        closeWindow
+        closeWindow,
+        updateIconPosition
       }}
     >
       {children}

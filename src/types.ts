@@ -9,7 +9,9 @@ export type WindowProps = {
     close: () => void;
     openOrFocus: () => void;
     visibility: boolean;
-    zIndex: number
+    zIndex: number;
+    iconPositionX: number;
+    iconPositionY: number;
   }
   
   

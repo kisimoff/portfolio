@@ -423,7 +423,6 @@ body {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-
 }
 .caption-task {
   color: white;
@@ -455,7 +454,7 @@ body {
   background-color: rgba(210, 46, 46, 0.423);
 }
 
-.icons {
+/* .icons {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -466,6 +465,25 @@ body {
   width: auto;
   z-index: 1;
   /*background-color: #04aa6d;*/
+
+
+/* .icons {
+    display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+            grid-auto-rows: 2rem;
+            gap: 0.5rem;
+            width: 90%;
+            max-width: 1000px;
+} */
+
+.icons {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-template-rows: repeat(auto-fill, 100px);
+  height: 100vh;
+  width: auto;
+  z-index: 1;
 }
 
 /*TODO: fix the mobile*/
@@ -477,17 +495,15 @@ body {
 }
 
 .iconWrapper {
-  width: 5rem;
-  padding: 1rem var(--padding-small);
   border-radius: 0.1rem;
   color: white;
   display: flex;
   gap: var(--padding-small);
   flex-direction: column;
   align-items: center;
-  /*border-width: 5px;*/
-  /*border-color:   rgba(165, 165, 165, 1);*/
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 

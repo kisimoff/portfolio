@@ -28,7 +28,7 @@ const App = () => {
     <div id="app" className="app" style={themeValues.app}>
       <LoadingScreen />
       <Navbar />
-      <motion.div
+      <motion.ol
         className="icons"
         animate={iconsAnimation}
         initial={{ opacity: 0, y: 8 }}
@@ -37,7 +37,7 @@ const App = () => {
         {Object.entries(windows).map(([key, window]) => (
           <Icon key={key} window={window} />
         ))}
-        <motion.a
+        {/* <motion.a
           className="iconWrapper"
           href="#"
           onClick={() => {
@@ -52,8 +52,8 @@ const App = () => {
             <img src={resume} className="icon" />
           )}
           <span className="caption">Resume</span>
-        </motion.a>
-      </motion.div>
+        </motion.a> */}
+      </motion.ol>
 
       {/* {terminal2 ? (
         <Terminal2

@@ -34,7 +34,7 @@ export default function Projs() {
       sorsa: esc,
       title: 'ESC The Loop: Mobile App (DSCT)',
       description:
-        'Leveraging cutting-edge research on manipulative patterns and psychological tactics in social media, ESC the Loop is a smarter app timer designed to help users regain control over their digital habits. Upon timer expiration, the app sends customizable notifications at set intervals, offering an escape route redirecting users to their task list or an app of their choice. ESC the loop’s features are wrapped in a neo-brutalist design and are enhanced by engaging animations and tactile feedback for an immersive user experience.',
+        'Leveraging cutting-edge research on manipulative patterns and psychological tactics in social media, ESC the Loop is a smarter app timer designed to help users regain control over their digital habits. Upon timer expiration, the app sends customizable notifications at set intervals, offering an escape route redirecting users to their task list or an app of their choice.',
       technologies: 'React-native, TypeScript, Java, Headless JS, Figma',
       repo: 'https://github.com/vtwenty3/ESC_The_Loop',
       live: 'https://www.notion.so/23things/ESC-The-Loop-fccf49ea661b4752a3980300041aaa63',
@@ -43,7 +43,7 @@ export default function Projs() {
       sorsa: rockets,
       title: 'Lunar Lander: Evolutionary Algorithm',
       description:
-        'The algorithm integrates an adaptive mutation rate, two crossover methods, and multiple activation and initialization functions, which are tunable as hyperparameters. This design creates a large search space that can be explored using techniques such as random and grid search. Each search-cycle generates a dataset which can be analyzed to uncover valuable insights used for tuning the parameters. The implemented strategy sheds light on the algorithm\'s dynamics and performance, resulting in an EA that achieves excellent fitness values.',
+        'The algorithm integrates an adaptive mutation rate, two crossover methods, and multiple activation and initialization functions, which are tunable as hyperparameters. This design creates a large search space that can be explored using techniques such as random and grid search. Each search-cycle generates a dataset which can be analyzed to uncover valuable insights used for tuning the parameters.',
       technologies: 'Java, Math3, R, OpenRefine',
       repo: 'https://github.com/vtwenty3/Lunar_Lander',
     },
@@ -51,7 +51,7 @@ export default function Projs() {
       sorsa: mas,
       title: 'Microgrid Market Maker: Multi-Agent System',
       description:
-        'Peer-to-peer multi-agent system, where each agent represents a household in a microgrid. This enables testing of architectural patterns and evaluation of auction and communication protocols. Two auction protocols were compared: a decentralized Dutch Auction and a Double Auction with a central peer. The Double Auction demonstrated six times greater computational efficiency with 20 agents, revealing the potential drawbacks and cost of decentralization.',
+        'P2P multi-agent system, where each agent represents a household in a microgrid. This enables testing of architectural patterns and evaluation of auction and communication protocols. Two auction protocols were compared: a decentralized Dutch Auction and a Double Auction with a central peer. The Double Auction demonstrated six times greater computational efficiency with 20 agents, revealing the potential drawbacks and cost of decentralization.',
       technologies: 'C#, ActressMAS, .NET',
       repo: 'https://github.com/vtwenty3/ActressMas',
     },
@@ -84,7 +84,7 @@ export default function Projs() {
       sorsa: jazz,
       title: 'Jazzdap',
       description:
-        'As the lead front-end developer for JazzDap, an AI-powered music search engine, I collaborated closely with a designer to create a visually appealing, intuitive, and responsive interface using React. The project aimed to revolutionize music search by allowing users to input melodies to search a vast database of songs. My work had to integrate seamlessly with the backend functionality developed by a co-developer. This project showcases my proficiency in React and my ability to collaborate effectively within a creative team.',
+        'As the lead front-end developer for JazzDap, an AI-powered music search engine, I collaborated closely with a designer to create a the front-end using React. The project aimed to revolutionize music search by allowing users to input melodies to search a vast database of songs. This project showcases my proficiency in React and my ability to collaborate effectively within a creative team.',
       technologies: 'React, Vite, Tailwind',
       live: 'https://vtwenty3.github.io/jazzdap/',
       repo: 'https://github.com/vtwenty3/jazzdap',
@@ -93,7 +93,7 @@ export default function Projs() {
       sorsa: labyrinth,
       title: 'From The Labyrinth',
       description:
-        'As the sole designer and developer for the From the Labyrinth band\'s website, I used Figma, HTML, and JavaScript to create a fully responsive, user-friendly site. The platform keeps fans updated with the latest news, events, and multimedia content from the band. Strong client communication was essential in this project to ensure the band\'s needs were met effectively. This endeavor showcases my capabilities in both design and development and my commitment to tailored client solutions.',
+        'As the sole designer and developer for the From the Labyrinth band\'s website, I used Figma, HTML, and JavaScript to create a fully responsive, user-friendly site. The platform keeps fans updated with the latest news, events, and multimedia content from the band. Strong client communication was essential in this project to ensure the band\'s needs were met effectively.',
       technologies: 'HTML, CSS, JavaScript, Figma',
       repo: 'https://github.com/vtwenty3/labyrinth',
       live: 'http://fromthelabyrinth-music.com/',
@@ -127,7 +127,7 @@ export default function Projs() {
       sorsa: track,
       title: 'Track and Trace System',
       description:
-        'This track-and-trace system tracks contacts and visits associated with each user. A contact occurs when two users come into contact. A visit occurs when a user checks in at a particular location. Each contact or visit is recorded with the user/s involved, location date and time of the event. The program can then generate a list of all the telephone numbers of individuals who visited a specified place or contacted a specified individual within a specified time-period.',
+        'This track-and-trace system tracks contacts and visits associated with each user. A contact occurs when two users come into contact. A visit occurs when a user checks in at a particular location. Each contact or visit is recorded with the user/s involved, location date and time of the event. The program can then generate a list of all the telephone numbers of individuals who visited a specified place or contacted a specified individual for a time-period.',
       technologies: 'C#',
       repo: 'https://github.com/vtwenty3/Track_And_Trace_Prototype',
     },

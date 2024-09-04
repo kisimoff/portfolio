@@ -1,5 +1,6 @@
 import '@/App.css'
-
+import '/node_modules/react-grid-layout/css/styles.css'
+import '/node_modules/react-resizable/css/styles.css'
 import Projects from '@components/windows/Projects'
 import resume from '@assets/icons/xp/resume.png'
 import Credits from '@components/windows/Credits'
@@ -9,6 +10,7 @@ import DeviceInfo from '@components/windows/DeviceInfo'
 import Icon from '@components/Icon'
 import LoadingScreen from '@components/screens/LoadingScreen'
 import Navbar from '@components/Navbar'
+import GridLayout from 'react-grid-layout'
 
 import { useTheme } from '@contexts/ThemeContext'
 import { useAnimations } from '@contexts/AnimationsContext'
@@ -16,14 +18,32 @@ import { useWindows } from '@contexts/WindowsContext'
 
 import { motion } from 'framer-motion'
 
-import { VscFilePdf } from 'react-icons/vsc'
 
 
 const App = () => {
   const { windows } = useWindows()
-  const { themeState, themeValues } = useTheme()
+  const {  themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
-
+  const iconLayout = Object.entries(windows).map(([key, window]) => ({
+    i: key,
+    x: window.iconPositionX,
+    y: window.iconPositionY,
+    w: 1,
+    h: 2
+  }))
+  const updatedIconLayout = iconLayout.map(item => {
+    if (item.i === 'about') {
+      return {
+        ...item,
+        x: 3,
+        y: 5
+      }
+    }
+    return item
+  })
+  
+  
+ 
   return (
     <div id="app" className="app" style={themeValues.app}>
       <LoadingScreen />
@@ -34,9 +54,22 @@ const App = () => {
         initial={{ opacity: 0, y: 8 }}
       >
 
-        {Object.entries(windows).map(([key, window]) => (
+        {/* {Object.entries(windows).map(([key, window]) => (
           <Icon key={key} window={window} />
-        ))}
+        ))} */}
+        <GridLayout
+          className="layout"
+          layout={updatedIconLayout}
+          cols={12}
+          rowHeight={40}
+          width={1200}
+        >
+          {Object.entries(windows).map(([key, window]) => (
+            <div key={key}>
+              <Icon window={window} />
+            </div>
+          ))}
+        </GridLayout>
         {/* <motion.a
           className="iconWrapper"
           href="#"

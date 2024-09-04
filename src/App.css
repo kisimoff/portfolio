@@ -477,10 +477,10 @@ body {
 } */
 
 .icons {
-  padding: 8px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
-  grid-template-rows: repeat(auto-fill, 100px);
+  /* padding: 8px; */
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, 100px); */
+  /* grid-template-rows: repeat(auto-fill, 100px); */
   height: 100vh;
   width: auto;
   z-index: 1;

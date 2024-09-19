@@ -37,7 +37,9 @@ const App = () => {
         {Object.entries(windows).map(([key, window]) => (
           <Icon key={key} window={window} />
         ))}
-        {/* <motion.a
+      </motion.ol>
+
+      {/* <motion.a
           className="iconWrapper"
           href="#"
           onClick={() => {
@@ -53,7 +55,6 @@ const App = () => {
           )}
           <span className="caption">Resume</span>
         </motion.a> */}
-      </motion.ol>
 
       {/* {terminal2 ? (
         <Terminal2

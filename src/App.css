@@ -483,15 +483,25 @@ body {
   grid-template-rows: repeat(auto-fill, 100px);
   height: 100vh;
   width: auto;
-  z-index: 1;
+  z-index: 5;
+  position: relative; /* Ensure the grid container is relative for absolute positioning */
+  pointer-events: none; 
 }
 
-/*TODO: fix the mobile*/
 
 .icon {
   width: 2.4rem;
   height: 2.4rem;
   color: white;
+}
+
+.placeholder {
+  position: absolute; /* Position absolutely within the grid container */
+  width: 100px; /* Adjust based on your grid cell size */
+  height: 100px; /* Adjust based on your grid cell size */
+  outline: rgba(165, 165, 165, 0.23) solid 2px;
+  background-color: rgba(165, 165, 165, 0.14);
+  pointer-events: none; /* Ensure it doesn't interfere with drag events */
 }
 
 .iconWrapper {
@@ -504,6 +514,8 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 
@@ -731,6 +743,12 @@ body {
   cursor: pointer;
   outline: inherit;
 }
+
+.unstyledButton:focus {
+  outline: none;
+}
+
+
 
 .start {
   position: absolute;
@@ -1183,6 +1201,7 @@ body {
   }
 
   .icons {
+    position: relative;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-end;

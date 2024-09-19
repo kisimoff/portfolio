@@ -499,9 +499,11 @@ body {
   position: absolute; /* Position absolutely within the grid container */
   width: 100px; /* Adjust based on your grid cell size */
   height: 100px; /* Adjust based on your grid cell size */
-  outline: rgba(165, 165, 165, 0.23) solid 2px;
-  background-color: rgba(165, 165, 165, 0.14);
+  /* outline: rgba(165, 165, 165, 0.23) solid 2px; */
+  /* background-color: rgba(165, 165, 165, 0.14); */
   pointer-events: none; /* Ensure it doesn't interfere with drag events */
+  border-radius: 0.1rem;
+
 }
 
 .iconWrapper {
@@ -521,6 +523,7 @@ body {
 
 .iconWrapper:hover {
   box-sizing: border-box;
+  border-radius: 0.1rem;
   outline: rgba(165, 165, 165, 0.23) solid 2px;
   background-color: rgba(165, 165, 165, 0.14);
   transition: background-color 0.2s linear;

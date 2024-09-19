@@ -22,27 +22,42 @@ interface WindowsContextType {
   creditsWindow: WindowProps;
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
-  updateIconPosition: (windowKey: WindowKey, x: number, y: number) => void;
+  updateIconPosition: (windowKey: WindowKey, position: IconPosition) => void;
+  isPositionFree: (position:IconPosition) => boolean;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
 
 interface WindowsProviderProps {
   children: ReactNode;
+
 }
+
+type IconPosition = {
+  gridColumnStart: number;
+  gridRowStart: number;
+};
 
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
   const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
-  const [iconPositions, setIconPositions] = useState<Record<WindowKey, { x: number, y: number }>>({
-    terminal2: { x: 0, y: 0 },
-    about: { x: 0, y: 1 },
-    deviceInfo: { x: 0, y: 2 },
-    projects: { x: 0, y: 3 },
-    start: { x: 0, y: 4 },
-    credits: { x: 0, y: 5 },
+  const [iconPositions, setIconPositions] = useState<Record<WindowKey,IconPosition>>({
+    terminal2: { gridColumnStart: 1, gridRowStart: 1 },
+    about: { gridColumnStart: 1, gridRowStart: 2 },
+    deviceInfo: { gridColumnStart: 1, gridRowStart: 3 },
+    projects: { gridColumnStart: 1, gridRowStart: 4 },
+    start: { gridColumnStart: 1, gridRowStart: 5 },
+    credits: { gridColumnStart: 1, gridRowStart: 6 },
   })
 
+  const isPositionFree = (position:IconPosition): boolean => {
+    for (const key in iconPositions) {
+      if (iconPositions[key as WindowKey].gridColumnStart === position.gridColumnStart && iconPositions[key as WindowKey].gridRowStart === position.gridRowStart) {
+        return false // Position is already taken
+      }
+    }
+    return true // Position is free
+  }
   
   const openOrFocusWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => {
@@ -55,10 +70,13 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       return newOrder
     })
   }
-  const updateIconPosition = (windowKey: WindowKey, x: number, y: number) => {
+  const updateIconPosition = (windowKey: WindowKey, position:IconPosition) => {
+    if(position.gridColumnStart < 1 || position.gridRowStart < 1) {
+      return
+    }
     setIconPositions(prevPositions => ({
       ...prevPositions,
-      [windowKey]: { x, y }
+      [windowKey]: position
     }))
   }
 
@@ -77,8 +95,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     // setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
     visibility: openWindowsQueue?.includes(windowKey) ?? false,
     zIndex: (openWindowsQueue.indexOf(windowKey) + 5),
-    iconPositionX: iconPositions[windowKey].x,
-    iconPositionY: iconPositions[windowKey].y
+    gridColumnStart: iconPositions[windowKey].gridColumnStart,
+    gridRowStart: iconPositions[windowKey].gridRowStart
   })
 
   const windows = {
@@ -103,7 +121,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         creditsWindow: windows.credits,
         openOrFocusWindow,
         closeWindow,
-        updateIconPosition
+        updateIconPosition,
+        isPositionFree
       }}
     >
       {children}

@@ -2,12 +2,14 @@ import { WindowProps } from '@/types'
 import { useTheme } from '@contexts/ThemeContext'
 import { DraggableCore } from 'react-draggable'
 import { useWindows } from '@contexts/WindowsContext'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 type DragPosition = {
   x?: number;
   y?: number;
 };
+
+//TODO: small bug where the icon's border dissapear aftger drop. ;(
 
 type IconPosition = {
   gridColumnStart: number;
@@ -20,15 +22,20 @@ function Icon(props: { window: WindowProps }) {
   const placeholderAnimation = useAnimation()
 
   const { themeState } = useTheme()
-  const { updateIconPosition } = useWindows()
+  const { updateIconPosition, isPositionFree } = useWindows()
   
+
+
   const gridElementRef = useRef<HTMLDivElement | null>(null)
   
+  const [preventDrop, setPreventDrop] = useState(false)
+
+
   const [isDragging, setIsDragging] = useState(false)
   const [preventClick, setPreventClick] = useState(false)
   const [placeholderPosition, setPlaceholderPosition] = useState<IconPosition | null>(null)
 
-  const calcGridDropPosition = useCallback((
+  const calcGridDropPosition = useMemo(() => (
     gridElement: HTMLElement | null,
     { x = 0, y = 0 }: DragPosition
   ): IconPosition => {
@@ -72,7 +79,7 @@ function Icon(props: { window: WindowProps }) {
       transition: { duration: 0.2 },
     })
 
-    updateIconPosition(props.window.elementId, gridDropPosition.gridColumnStart, gridDropPosition.gridRowStart )
+    updateIconPosition(props.window.elementId, gridDropPosition )
 
     await dragAnimation.start({
       opacity: 1,
@@ -82,26 +89,32 @@ function Icon(props: { window: WindowProps }) {
   }
 
   const handleDrop = (e: any, ui: any) => {
-    if (!isDragging) {
+    if (!isDragging || preventDrop) { //preventing triggering the rest of the code onclick
+      setIsDragging(false)
+      setPlaceholderPosition(null)
+      dragAnimation.set({opacity: 1})
       return
     }
-    setIsDragging(false)
-    setTimeout(() => {
+
+
+
+    setTimeout(() => { //preventing unintentional click event on drop
       setPreventClick(false)
     }, 100)
 
-    setTimeout(() => {
+    setTimeout(() => { //used for animations
       setPlaceholderPosition(null) 
     }, 500)
 
+    setIsDragging(false)
 
     const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
     
     handleIconMove(gridDropPosition)
-
-    setIsDragging(false)
   }
 
+
+  
   const handleDrag = useCallback((e: any, ui: any) => {
     if (!isDragging) {
       setPreventClick(true)
@@ -110,11 +123,8 @@ function Icon(props: { window: WindowProps }) {
     dragAnimation.set({opacity: 0.6})
     const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
     setPlaceholderPosition(gridDropPosition)
-
-    // run a check for the gridDropPosition where it looks if the position is taken, if it is, show a red placeholder
-    // indicating that the drop will fail and the item won't be moved.
-
-  }, [calcGridDropPosition, isDragging, dragAnimation])
+    setPreventDrop(!isPositionFree(gridDropPosition))
+  }, [calcGridDropPosition, isDragging, dragAnimation, isPositionFree])
   
 
   return (
@@ -124,9 +134,8 @@ function Icon(props: { window: WindowProps }) {
           ref={gridElementRef}
           animate={dragAnimation}
           style={{
-            gridColumnStart: props.window.iconPositionX,
-            gridRowStart: props.window.iconPositionY,
-            opacity: isDragging ? 0.5 : 1,
+            gridColumnStart: props.window.gridColumnStart,
+            gridRowStart: props.window.gridRowStart,
           }}>
           <button
             className="iconWrapper unstyledButton"
@@ -147,8 +156,9 @@ function Icon(props: { window: WindowProps }) {
       {placeholderPosition && (
         <motion.div
           className="placeholder"
-          animate={placeholderAnimation}
+          animate={placeholderAnimation} 
           style={{
+            backgroundColor: preventDrop ? 'rgba(155, 0, 0, 0.15)' : 'rgba(165, 165, 165, 0.14)',
             gridColumnStart: placeholderPosition.gridColumnStart,
             gridRowStart: placeholderPosition.gridRowStart,
           }}

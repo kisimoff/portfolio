@@ -9,7 +9,6 @@ type DragPosition = {
   y?: number;
 };
 
-//TODO: small bug where the icon's border dissapear aftger drop. ;(
 
 type IconPosition = {
   gridColumnStart: number;

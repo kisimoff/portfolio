@@ -503,11 +503,13 @@ body {
   /* background-color: rgba(165, 165, 165, 0.14); */
   pointer-events: none; /* Ensure it doesn't interfere with drag events */
   border-radius: 0.1rem;
+  /* outline: rgba(165, 165, 165, 0.23) solid 2px; */
+
 
 }
 
 .iconWrapper {
-  border-radius: 0.1rem;
+  border-radius: 0.2rem;
   color: white;
   display: flex;
   gap: var(--padding-small);
@@ -523,8 +525,7 @@ body {
 
 .iconWrapper:hover {
   box-sizing: border-box;
-  border-radius: 0.1rem;
-  outline: rgba(165, 165, 165, 0.23) solid 2px;
+  border: rgba(165, 165, 165, 0.23) solid 2px;
   background-color: rgba(165, 165, 165, 0.14);
   transition: background-color 0.2s linear;
 }

@@ -1,10 +1,9 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
 
 import mycomp from '@assets/icons/xp/mycomp.png'
 import info from '@assets/icons/xp/about.png'
 import cmd from '@assets/icons/xp/cmd.png'
 import mydocs from '@assets/icons/xp/mydocs.png'
-
 import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { WindowProps } from '@/types'
@@ -23,7 +22,7 @@ interface WindowsContextType {
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
   updateIconPosition: (windowKey: WindowKey, position: IconPosition) => void;
-  isPositionFree: (position:IconPosition) => boolean;
+  isPositionFree: (position: IconPosition) => boolean;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
@@ -41,7 +40,7 @@ type IconPosition = {
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
   const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
-  const [iconPositions, setIconPositions] = useState<Record<WindowKey,IconPosition>>({
+  const [iconPositions, setIconPositions] = useState<Record<WindowKey, IconPosition>>({
     terminal2: { gridColumnStart: 1, gridRowStart: 1 },
     about: { gridColumnStart: 1, gridRowStart: 2 },
     deviceInfo: { gridColumnStart: 1, gridRowStart: 3 },
@@ -50,7 +49,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     credits: { gridColumnStart: 1, gridRowStart: 6 },
   })
 
-  const isPositionFree = (position:IconPosition): boolean => {
+  const isPositionFree = (position: IconPosition): boolean => {
     for (const key in iconPositions) {
       if (iconPositions[key as WindowKey].gridColumnStart === position.gridColumnStart && iconPositions[key as WindowKey].gridRowStart === position.gridRowStart) {
         return false // Position is already taken
@@ -58,7 +57,37 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     }
     return true // Position is free
   }
-  
+
+  // // Save the icon positions to ZenFS
+  // const saveIconPositions = async (data: Record<WindowKey, IconPosition>) => {
+  //   fs.writeFileSync('/iconPositions.json', JSON.stringify(data))
+  //   loadIconPositions()
+  // }
+
+  // Load icon positions from ZenFS
+  // const loadIconPositions = async () => {
+  //   const fileExists = await fs.existsSync('/iconPositions.json')
+  //   console.log(fileExists)
+  //   if (fileExists) {
+  //     const data = await fs.readFileSync('/iconPositions.json')
+  //     const parsedData: Record<WindowKey, IconPosition> = JSON.parse(data.toString())
+  //     console.log(parsedData)
+  //     // setIconPositions(parsedData)
+  //   }
+
+
+  // }
+
+  // Load the saved icon positions when the component mounts
+  // useEffect(() => {
+  //   loadIconPositions()
+  // }, [])
+
+  // Save icon positions when they change
+  // useEffect(() => {
+  //   saveIconPositions(iconPositions)
+  // }, [iconPositions])
+
   const openOrFocusWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => {
       const newOrder = [...prevWindows]
@@ -70,8 +99,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       return newOrder
     })
   }
-  const updateIconPosition = (windowKey: WindowKey, position:IconPosition) => {
-    if(position.gridColumnStart < 1 || position.gridRowStart < 1) {
+  const updateIconPosition = (windowKey: WindowKey, position: IconPosition) => {
+    if (position.gridColumnStart < 1 || position.gridRowStart < 1) {
       return
     }
     setIconPositions(prevPositions => ({
@@ -84,7 +113,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
   }
 
-  
+
   const createWindowConfig = (windowKey: WindowKey, osIcon: IconType, xpIcon: string, caption: string): WindowProps => ({
     osIcon,
     xpIcon,
@@ -108,7 +137,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
   }
 
-  
+
   return (
     <WindowsContext.Provider
       value={{

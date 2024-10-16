@@ -4,6 +4,8 @@ import Projects from '@components/windows/Projects'
 import resume from '@assets/icons/xp/resume.png'
 import Credits from '@components/windows/Credits'
 import About from '@components/windows/About'
+import Xterm from '@components/windows/Xterm'
+
 import Start from '@components/windows/Start'
 import DeviceInfo from '@components/windows/DeviceInfo'
 import Icon from '@components/Icon'
@@ -71,6 +73,8 @@ const App = () => {
       {windows.deviceInfo.visibility && <DeviceInfo />}
       {windows.credits.visibility && <Credits />}
       {windows.start.visibility && <Start />}
+      {windows.terminal2.visibility && <Xterm />}
+
     </div>
   )
 }

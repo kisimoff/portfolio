@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+// import * as BrowserFS from 'browserfs'
 
 import mycomp from '@assets/icons/xp/mycomp.png'
 import info from '@assets/icons/xp/about.png'
@@ -8,6 +9,9 @@ import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { WindowProps } from '@/types'
 import { IconType } from 'react-icons'
+// import { configureBrowserFS, loadIconPositions, saveIconPositions } from '@/utils/browserFs'
+import { loadIconPositions, saveIconPositions, defaultIconPositions } from '@/utils/zenFs'
+
 
 export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
 
@@ -21,8 +25,8 @@ interface WindowsContextType {
   creditsWindow: WindowProps;
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
-  updateIconPosition: (windowKey: WindowKey, position: IconPosition) => void;
-  isPositionFree: (position: IconPosition) => boolean;
+  updateIconPosition: (windowKey: WindowKey, position: IconCoordinates) => void;
+  isPositionFree: (position: IconCoordinates) => boolean;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
@@ -32,24 +36,20 @@ interface WindowsProviderProps {
 
 }
 
-type IconPosition = {
+type IconCoordinates = {
   gridColumnStart: number;
   gridRowStart: number;
 };
 
+export type IconPositions = Record<WindowKey, IconCoordinates>
+
+
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
   const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
-  const [iconPositions, setIconPositions] = useState<Record<WindowKey, IconPosition>>({
-    terminal2: { gridColumnStart: 1, gridRowStart: 1 },
-    about: { gridColumnStart: 1, gridRowStart: 2 },
-    deviceInfo: { gridColumnStart: 1, gridRowStart: 3 },
-    projects: { gridColumnStart: 1, gridRowStart: 4 },
-    start: { gridColumnStart: 1, gridRowStart: 5 },
-    credits: { gridColumnStart: 1, gridRowStart: 6 },
-  })
+  const [iconPositions, setIconPositions] = useState<IconPositions>(defaultIconPositions)
 
-  const isPositionFree = (position: IconPosition): boolean => {
+  const isPositionFree = (position: IconCoordinates): boolean => {
     for (const key in iconPositions) {
       if (iconPositions[key as WindowKey].gridColumnStart === position.gridColumnStart && iconPositions[key as WindowKey].gridRowStart === position.gridRowStart) {
         return false // Position is already taken
@@ -57,36 +57,6 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     }
     return true // Position is free
   }
-
-  // // Save the icon positions to ZenFS
-  // const saveIconPositions = async (data: Record<WindowKey, IconPosition>) => {
-  //   fs.writeFileSync('/iconPositions.json', JSON.stringify(data))
-  //   loadIconPositions()
-  // }
-
-  // Load icon positions from ZenFS
-  // const loadIconPositions = async () => {
-  //   const fileExists = await fs.existsSync('/iconPositions.json')
-  //   console.log(fileExists)
-  //   if (fileExists) {
-  //     const data = await fs.readFileSync('/iconPositions.json')
-  //     const parsedData: Record<WindowKey, IconPosition> = JSON.parse(data.toString())
-  //     console.log(parsedData)
-  //     // setIconPositions(parsedData)
-  //   }
-
-
-  // }
-
-  // Load the saved icon positions when the component mounts
-  // useEffect(() => {
-  //   loadIconPositions()
-  // }, [])
-
-  // Save icon positions when they change
-  // useEffect(() => {
-  //   saveIconPositions(iconPositions)
-  // }, [iconPositions])
 
   const openOrFocusWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => {
@@ -99,7 +69,9 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       return newOrder
     })
   }
-  const updateIconPosition = (windowKey: WindowKey, position: IconPosition) => {
+
+
+  const updateIconPosition = (windowKey: WindowKey, position: IconCoordinates) => {
     if (position.gridColumnStart < 1 || position.gridRowStart < 1) {
       return
     }
@@ -108,6 +80,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       [windowKey]: position
     }))
   }
+
 
   const closeWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
@@ -137,6 +110,17 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
   }
 
+  useEffect(() => {
+    loadIconPositions((positions) => {
+      if (positions) {
+        setIconPositions(positions)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    saveIconPositions(iconPositions)
+  }, [iconPositions])
 
   return (
     <WindowsContext.Provider

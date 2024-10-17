@@ -13,7 +13,7 @@ import { IconType } from 'react-icons'
 import { loadIconPositions, saveIconPositions, defaultIconPositions } from '@/utils/zenFs'
 
 
-export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
+export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits' | 'winamp'
 
 interface WindowsContextType {
   windows: Record<WindowKey, WindowProps>;
@@ -23,6 +23,7 @@ interface WindowsContextType {
   deviceInfoWindow: WindowProps;
   projectsWindow: WindowProps;
   creditsWindow: WindowProps;
+  winampWindow: WindowProps;
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
   updateIconPosition: (windowKey: WindowKey, position: IconCoordinates) => void;
@@ -108,6 +109,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     deviceInfo: createWindowConfig('deviceInfo', TbDeviceDesktopAnalytics, mycomp, 'Device'),
     projects: createWindowConfig('projects', BsJournalCode, mydocs, 'Projects'),
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
+    winamp: createWindowConfig('winamp', BsJournalCode, mydocs, 'Winamp'),
   }
 
   useEffect(() => {
@@ -132,6 +134,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         deviceInfoWindow: windows.deviceInfo,
         projectsWindow: windows.projects,
         creditsWindow: windows.credits,
+        winampWindow: windows.winamp,
         openOrFocusWindow,
         closeWindow,
         updateIconPosition,

@@ -3,8 +3,21 @@ import { Terminal } from 'xterm'
 import { fs } from '@zenfs/core'
 
 import { type ITerminalOptions } from 'xterm'
-// import processDirectory from 'contexts/process/directory'
 let currentDirectory = '/'
+
+
+// Make user and machine configurable and save them in a file like bashrc or something this could
+// potentiallye evolve to a settings menu.
+
+//ipconfig -> get ip
+//mv and cp
+//code / nano
+//whoami
+//date
+//history + up and down
+//tail / head
+//htop
+//neofetch
 
 const user = 'vincent'
 const machine = 'HAL9000'
@@ -16,7 +29,6 @@ export const getPrompt = (): string => {
   return `\x1b[1;92m${user}@${machine}\x1b[0m:\x1b[1;94m${path}\x1b[0m$ `
 }
 
-//investigate a bug after cat terminal stops to update for some rason
 
 export const processCommand = (terminalString: string, terminal: Terminal): void => {
   const [ command, ...args] = terminalString.trim().split(' ')
@@ -97,6 +109,7 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
   case 'pwd':
     terminal.write(`${currentDirectory}\r\n`)
     break
+  case 'less':
   case 'cat':
     if (args.length === 0) {
       terminal.write('Usage: cat <file>\r\n')

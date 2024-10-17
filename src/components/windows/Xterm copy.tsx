@@ -7,8 +7,6 @@ import 'xterm/css/xterm.css'
 import { useWindows } from '@contexts/WindowsContext'
 import { processCommand, config, getPrompt } from '@/utils/terminalCommandProcessor'
 
-// Make them configurable and save them in a file like bashrc or something this could
-// potentiallye evolve to a settings menu.
 
 const TerminalWindow = () => {
   const { terminalWindow } = useWindows()

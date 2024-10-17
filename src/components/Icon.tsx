@@ -22,11 +22,11 @@ function Icon(props: { window: WindowProps }) {
 
   const { themeState } = useTheme()
   const { updateIconPosition, isPositionFree } = useWindows()
-  
+
 
 
   const gridElementRef = useRef<HTMLDivElement | null>(null)
-  
+
   const [preventDrop, setPreventDrop] = useState(false)
 
 
@@ -58,7 +58,7 @@ function Icon(props: { window: WindowProps }) {
 
 
   const handleClick = () => {
-    if (preventClick){
+    if (preventClick) {
       return
     }
     props.window.openOrFocus()
@@ -66,10 +66,10 @@ function Icon(props: { window: WindowProps }) {
 
 
   async function handleIconMove(gridDropPosition: IconPosition) {
-    
+
     placeholderAnimation.start({
       opacity: 0,
-      transition: {delay:0.3, duration: 0.5 },
+      transition: { delay: 0.3, duration: 0.5 },
     })
 
     await dragAnimation.start({
@@ -78,12 +78,12 @@ function Icon(props: { window: WindowProps }) {
       transition: { duration: 0.2 },
     })
 
-    updateIconPosition(props.window.elementId, gridDropPosition )
+    updateIconPosition(props.window.elementId, gridDropPosition)
 
     await dragAnimation.start({
       opacity: 1,
       scale: 1,
-      transition: {  duration: 0.2 },
+      transition: { duration: 0.2 },
     })
   }
 
@@ -91,7 +91,7 @@ function Icon(props: { window: WindowProps }) {
     if (!isDragging || preventDrop) { //preventing triggering the rest of the code onclick
       setIsDragging(false)
       setPlaceholderPosition(null)
-      dragAnimation.set({opacity: 1})
+      dragAnimation.set({ opacity: 1 })
       return
     }
 
@@ -102,29 +102,29 @@ function Icon(props: { window: WindowProps }) {
     }, 100)
 
     setTimeout(() => { //used for animations
-      setPlaceholderPosition(null) 
+      setPlaceholderPosition(null)
     }, 500)
 
     setIsDragging(false)
 
     const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
-    
+
     handleIconMove(gridDropPosition)
   }
 
 
-  
+
   const handleDrag = useCallback((e: any, ui: any) => {
     if (!isDragging) {
       setPreventClick(true)
       setIsDragging(true)
     }
-    dragAnimation.set({opacity: 0.6})
+    dragAnimation.set({ opacity: 0.6 })
     const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
     setPlaceholderPosition(gridDropPosition)
     setPreventDrop(!isPositionFree(gridDropPosition))
   }, [calcGridDropPosition, isDragging, dragAnimation, isPositionFree])
-  
+
 
   return (
     <>
@@ -155,7 +155,7 @@ function Icon(props: { window: WindowProps }) {
       {placeholderPosition && (
         <motion.div
           className="placeholder"
-          animate={placeholderAnimation} 
+          animate={placeholderAnimation}
           style={{
             backgroundColor: preventDrop ? 'rgba(155, 0, 0, 0.15)' : 'rgba(165, 165, 165, 0.14)',
             gridColumnStart: placeholderPosition.gridColumnStart,

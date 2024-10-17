@@ -9,7 +9,8 @@ export const defaultIconPositions: IconPositions = {
   deviceInfo: { gridColumnStart: 1, gridRowStart: 3 },
   projects: { gridColumnStart: 1, gridRowStart: 4 },
   start: { gridColumnStart: 1, gridRowStart: 5 },
-  credits: { gridColumnStart: 1, gridRowStart: 6 }
+  credits: { gridColumnStart: 1, gridRowStart: 6 },
+  winamp: { gridColumnStart: 1, gridRowStart: 7 },
 }
 
 // Configure ZenFS with IndexedDB backend

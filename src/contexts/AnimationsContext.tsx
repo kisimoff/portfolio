@@ -18,6 +18,7 @@ export const AnimationsProvider = ({ children }: AnimationsProviderProps) => {
   const navbarAnimation = useAnimation()
   const iconsAnimation = useAnimation()
   const backgroundAnimation = useAnimation()
+  // const placeholderAnimation = useAnimation()
 
   const elementsSequenceAnimation = async () => {
     if (window.innerWidth > 800 && window.innerHeight > 400) {

@@ -1,16 +1,19 @@
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react'
+// import * as BrowserFS from 'browserfs'
 
 import mycomp from '@assets/icons/xp/mycomp.png'
 import info from '@assets/icons/xp/about.png'
 import cmd from '@assets/icons/xp/cmd.png'
 import mydocs from '@assets/icons/xp/mydocs.png'
-
 import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { WindowProps } from '@/types'
 import { IconType } from 'react-icons'
+// import { configureBrowserFS, loadIconPositions, saveIconPositions } from '@/utils/browserFs'
+import { loadIconPositions, saveIconPositions, defaultIconPositions } from '@/utils/zenFs'
 
-export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits'
+
+export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits' | 'winamp'
 
 interface WindowsContextType {
   windows: Record<WindowKey, WindowProps>;
@@ -20,31 +23,46 @@ interface WindowsContextType {
   deviceInfoWindow: WindowProps;
   projectsWindow: WindowProps;
   creditsWindow: WindowProps;
+  winampWindow: WindowProps;
   openOrFocusWindow: (windowKey: WindowKey) => void;
   closeWindow: (windowKey: WindowKey) => void;
-  updateIconPosition: (windowKey: WindowKey, x: number, y: number) => void;
+  updateIconPosition: (windowKey: WindowKey, position: IconCoordinates) => void;
+  isPositionFree: (position: IconCoordinates) => boolean;
 }
 
 const WindowsContext = createContext<WindowsContextType | undefined>(undefined)
 
 interface WindowsProviderProps {
   children: ReactNode;
+
 }
+
+type IconCoordinates = {
+  gridColumnStart: number;
+  gridRowStart: number;
+};
+
+export type IconPositions = Record<WindowKey, IconCoordinates>
+
 
 export const WindowsProvider = ({ children }: WindowsProviderProps) => {
 
   const [openWindowsQueue, setOpenWindowsQueue] = useState<WindowKey[]>([])
-  const [iconPositions, setIconPositions] = useState<Record<WindowKey, { x: number, y: number }>>({
-    terminal2: { x: 0, y: 0 },
-    about: { x: 0, y: 1 },
-    deviceInfo: { x: 0, y: 2 },
-    projects: { x: 0, y: 3 },
-    start: { x: 0, y: 4 },
-    credits: { x: 0, y: 5 },
-  })
+  const [iconPositions, setIconPositions] = useState<IconPositions>(defaultIconPositions)
 
-  
+  const isPositionFree = (position: IconCoordinates): boolean => {
+    for (const key in iconPositions) {
+      if (iconPositions[key as WindowKey].gridColumnStart === position.gridColumnStart && iconPositions[key as WindowKey].gridRowStart === position.gridRowStart) {
+        return false // Position is already taken
+      }
+    }
+    return true // Position is free
+  }
+
   const openOrFocusWindow = (windowKey: WindowKey) => {
+    console.log(windowKey)
+    console.log(openWindowsQueue)
+
     setOpenWindowsQueue(prevWindows => {
       const newOrder = [...prevWindows]
       const index = newOrder.indexOf(windowKey)
@@ -55,18 +73,24 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
       return newOrder
     })
   }
-  const updateIconPosition = (windowKey: WindowKey, x: number, y: number) => {
+
+
+  const updateIconPosition = (windowKey: WindowKey, position: IconCoordinates) => {
+    if (position.gridColumnStart < 1 || position.gridRowStart < 1) {
+      return
+    }
     setIconPositions(prevPositions => ({
       ...prevPositions,
-      [windowKey]: { x, y }
+      [windowKey]: position
     }))
   }
+
 
   const closeWindow = (windowKey: WindowKey) => {
     setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
   }
 
-  
+
   const createWindowConfig = (windowKey: WindowKey, osIcon: IconType, xpIcon: string, caption: string): WindowProps => ({
     osIcon,
     xpIcon,
@@ -77,8 +101,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     // setVisibility: () => setOpenWindowsQueue(prevWindows => [...prevWindows, windowKey]),
     visibility: openWindowsQueue?.includes(windowKey) ?? false,
     zIndex: (openWindowsQueue.indexOf(windowKey) + 5),
-    iconPositionX: iconPositions[windowKey].x,
-    iconPositionY: iconPositions[windowKey].y
+    gridColumnStart: iconPositions[windowKey].gridColumnStart,
+    gridRowStart: iconPositions[windowKey].gridRowStart
   })
 
   const windows = {
@@ -88,9 +112,21 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     deviceInfo: createWindowConfig('deviceInfo', TbDeviceDesktopAnalytics, mycomp, 'Device'),
     projects: createWindowConfig('projects', BsJournalCode, mydocs, 'Projects'),
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
+    winamp: createWindowConfig('winamp', BsJournalCode, mydocs, 'Winamp'),
   }
 
-  
+  useEffect(() => {
+    loadIconPositions((positions) => {
+      if (positions) {
+        setIconPositions(positions)
+      }
+    })
+  }, [])
+
+  useEffect(() => {
+    saveIconPositions(iconPositions)
+  }, [iconPositions])
+
   return (
     <WindowsContext.Provider
       value={{
@@ -101,9 +137,11 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
         deviceInfoWindow: windows.deviceInfo,
         projectsWindow: windows.projects,
         creditsWindow: windows.credits,
+        winampWindow: windows.winamp,
         openOrFocusWindow,
         closeWindow,
-        updateIconPosition
+        updateIconPosition,
+        isPositionFree
       }}
     >
       {children}

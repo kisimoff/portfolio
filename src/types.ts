@@ -10,8 +10,8 @@ export type WindowProps = {
     openOrFocus: () => void;
     visibility: boolean;
     zIndex: number;
-    iconPositionX: number;
-    iconPositionY: number;
+    gridColumnStart: number;
+    gridRowStart: number;
   }
   
   

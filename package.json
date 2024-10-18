@@ -22,7 +22,7 @@
     "react-draggable": "^4.4.6",
     "react-icons": "^4.7.1",
     "spinners-react": "^1.0.7",
-    "webamp": "^0.0.0-next-bd2022a8",
+    "webamp": "1.5.0",
     "windups": "^1.2.1",
     "xterm": "^5.3.0",
     "xterm-addon-fit": "^0.8.0"

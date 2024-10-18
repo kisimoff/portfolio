@@ -60,6 +60,9 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
   }
 
   const openOrFocusWindow = (windowKey: WindowKey) => {
+    console.log(windowKey)
+    console.log(openWindowsQueue)
+
     setOpenWindowsQueue(prevWindows => {
       const newOrder = [...prevWindows]
       const index = newOrder.indexOf(windowKey)

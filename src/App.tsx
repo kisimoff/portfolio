@@ -59,16 +59,7 @@ const App = () => {
           <span className="caption">Resume</span>
         </motion.a> */}
 
-      {/* {terminal2 ? (
-        <Terminal2
-          theme={themeValues}
-          setTheme={setTheme}
-          setVisibility={setTerminal2}
-          zIndexxx={zIndexxx}
-          setZindexxx={setZindexxx}
-          elementId="terminal2"
-        />
-      ) : null} */}
+
       {windows.about.visibility && <About />}
       {windows.projects.visibility && <Projects />}
       {windows.deviceInfo.visibility && <DeviceInfo />}

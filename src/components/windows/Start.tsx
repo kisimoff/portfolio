@@ -1,4 +1,4 @@
-import Window from './Window'
+import Window from '@components/windows/Window'
 import {
   WindupChildren,
   Pause,

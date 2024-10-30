@@ -11,6 +11,7 @@ export const defaultIconPositions: IconPositions = {
   start: { gridColumnStart: 1, gridRowStart: 5 },
   credits: { gridColumnStart: 1, gridRowStart: 6 },
   winamp: { gridColumnStart: 1, gridRowStart: 7 },
+  resume: { gridColumnStart: 2, gridRowStart: 1 },
 }
 
 // Configure ZenFS with IndexedDB backend

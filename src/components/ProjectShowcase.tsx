@@ -20,30 +20,29 @@ function Proj({ onLoad, ...props }) {
       observer.disconnect()
     }
   }, [])
- 
+
   const handleCanPlayThrough = () => {
     onLoad()
   }
 
   return (
-    <div class="project-container" ref={videoRef}>
+    <div className="project-container" ref={videoRef}>
       {isVideoVisible && (
         <video
-          class="project-animation"
+          className="project-animation"
           playsInline
           loop
           muted
           autoPlay
           src={props.sorsa}
           onCanPlayThrough={handleCanPlayThrough}
-          type="video/mp4"
         />
       )}
-      <div class="project-title-overlay">
+      <div className="project-title-overlay">
         <span> {props.title}</span>
       </div>
-      <div class="project-description-overlay">
-        <div class="project-text-wrapper">
+      <div className="project-description-overlay">
+        <div className="project-text-wrapper">
           <p>{props.description}</p>
           <div className="text-bottom-row">
             <p>

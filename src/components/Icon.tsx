@@ -128,7 +128,7 @@ function Icon(props: { window: WindowProps }) {
 
   return (
     <>
-      <DraggableCore nodeRef={gridElementRef} onDrag={handleDrag} onStop={handleDrop}>
+      <DraggableCore onDrag={handleDrag} onStop={handleDrop}>
         <motion.div
           ref={gridElementRef}
           animate={dragAnimation}

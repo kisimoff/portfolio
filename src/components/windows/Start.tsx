@@ -7,14 +7,12 @@ import {
 import { useWindows } from '@contexts/WindowsContext'
 
 const Start = () => {
-  const { startWindow } = useWindows()
+  const { startWindow, closeWindow } = useWindows()
   return (
     <Window window={startWindow}>
       <div className="startText">
         <WindupChildren
-          onFinished={() => {
-            startWindow.setVisibility(false)
-          }}
+          onFinished={() => closeWindow('start')}
         >
           <Pace ms={80}>{'Hello,'}</Pace>
           <Pause ms={550} />

@@ -1,34 +1,32 @@
 import { useState } from 'react';
-import { Document, Page } from 'react-pdf';
-import { useWindows } from '@contexts/WindowsContext'
-import Window from '@components/windows/Window'
-import { pdfjs } from 'react-pdf';
+import { useWindows } from '@contexts/WindowsContext';
+import Window from '@components/windows/Window';
+import ActionButton from '@components/ActionButton';
 
-import file from '@assets/Valentin-Kisimov-Resume.pdf'
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
-    import.meta.url,
-).toString();
+const pdfUrl = 'https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing';
 
 const Resume = () => {
+    const { resumeWindow, closeWindow } = useWindows();
 
-    const [numPages, setNumPages] = useState<number>();
-    const [pageNumber, setPageNumber] = useState<number>(1);
-    const { resumeWindow } = useWindows()
+    const handleOpenPdf = () => {
+        window.open(pdfUrl, '_blank');
+    };
 
-    function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-        setNumPages(numPages);
-    }
+    const handleCancel = () => {
+        closeWindow('resume')
+    };
 
     return (
         <Window window={resumeWindow}>
-            <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
-                <Page pageNumber={pageNumber} />
-            </Document>
+            <div className='p-4'>
+                <p className='max-w-sm pb-4' >This would open the PDF in a new tab.</p>
+                <div className='flex justify-center gap-2'>
+                    <ActionButton onClick={handleOpenPdf} buttonText="OK" />
+                    <ActionButton onClick={handleCancel} buttonText="Cancel" />
+                </div>
+            </div>
         </Window>
     );
-}
-export default Resume
+};
+
+export default Resume;

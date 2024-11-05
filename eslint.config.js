@@ -18,7 +18,6 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
     },
       rules: {
-          'indent': ['error', 2],
           'no-unused-vars': 'warn',
           'quotes': ['error', 'single'],
           'semi': ['error', 'never'],

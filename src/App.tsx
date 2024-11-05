@@ -6,7 +6,6 @@ import Credits from '@components/windows/Credits'
 import About from '@components/windows/About'
 import Xterm from '@/components/windows/Xterm'
 import Winamp from '@/components/windows/Winamp'
-import Resume from '@/components/windows/Resume'
 
 import Start from '@components/windows/Start'
 import DeviceInfo from '@components/windows/DeviceInfo'
@@ -20,13 +19,23 @@ import { useWindows } from '@contexts/WindowsContext'
 
 import { motion } from 'framer-motion'
 
-import { VscFilePdf } from 'react-icons/vsc'
+import { useEffect } from 'react'
 
 
 const App = () => {
   const { windows } = useWindows()
   const { themeState, themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
+
+  const { closeWindow } = useWindows()
+  const pdfUrl = 'https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing'
+
+  useEffect(() => {
+    if (windows.resume.visibility) {
+      window.open(pdfUrl, '_blank')
+      closeWindow('resume')
+    }
+  }, [closeWindow, windows.resume.visibility])
 
   return (
     <div id="app" className="app" style={themeValues.app}>
@@ -43,22 +52,6 @@ const App = () => {
         ))}
       </motion.ol>
 
-      {/* <motion.a
-          className="iconWrapper"
-          href="#"
-          onClick={() => {
-            window.open(
-              'https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing'
-            )
-          }}
-        >
-          {themeState === 'dark' ? (
-            <VscFilePdf className="icon" />
-          ) : (
-            <img src={resume} className="icon" />
-          )}
-          <span className="caption">Resume</span>
-        </motion.a> */}
 
 
       {windows.about.visibility && <About />}
@@ -68,7 +61,6 @@ const App = () => {
       {windows.start.visibility && <Start />}
       {windows.terminal2.visibility && <Xterm />}
       {windows.winamp.visibility && <Winamp />}
-      {windows.resume.visibility && <Resume />}
 
     </div>
   )

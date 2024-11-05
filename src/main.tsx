@@ -4,7 +4,8 @@ import App from './App.tsx'
 import './index.css'
 import { ThemeProvider } from '@contexts/ThemeContext.tsx'
 import { AnimationsProvider } from '@contexts/AnimationsContext.tsx'
-import {  WindowsProvider } from '@contexts/WindowsContext.tsx'
+import { WindowsProvider } from '@contexts/WindowsContext.tsx'
+import { ClientProvider } from '@contexts/ClientContext.tsx'
 
 
 createRoot(document.getElementById('root')!).render(
@@ -12,7 +13,9 @@ createRoot(document.getElementById('root')!).render(
   <WindowsProvider>
     <AnimationsProvider>
       <ThemeProvider>
-        <App />
+        <ClientProvider>
+          <App />
+        </ClientProvider>
       </ThemeProvider>
     </AnimationsProvider>
   </WindowsProvider>

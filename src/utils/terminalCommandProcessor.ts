@@ -17,23 +17,10 @@ import { ClientInfo } from '@contexts/types'
 //history + up and down
 //tail / head
 //htop
-//neofetch
 
 const user = 'vincent'
 const machine = 'HAL9000'
-const ascii = `
-     ##########     
-   ##          ###  
- ## ##########   ## 
-##            ##  ##
-#             ##   #
-#    ##########    #
-#   ##         #   #
-##  #         ##  ##
- ## ###########  ## 
-   ##          ###  
-     ##########     
-`
+
 
 export const getPrompt = (): string => {
   const homeDir = '/'
@@ -139,17 +126,54 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
       try {
         if (fs.existsSync('/tmp/clientInfo.json') && fs.statSync('/tmp/clientInfo.json').size > 0) {
           const clientInfo:ClientInfo = JSON.parse(fs.readFileSync('/tmp/clientInfo.json', 'utf-8'))
-          terminal.write(`      #########       Device Type: ${clientInfo.deviceType}\r\n`)
-          terminal.write(`    ##          ###   Host OS: ${clientInfo.osName} ${clientInfo.osVersion}\r\n`)
-          terminal.write(`  ## ##########   ##  Browser: ${clientInfo.browserName} ${clientInfo.browserVersion}\r\n`)
-          terminal.write(` ##            ##  ## GPU: ${clientInfo.gpu.slice(0,41 )}\r\n`)
-          terminal.write(` #             ##   # Display: ${clientInfo.displayRes}\r\n`)
-          terminal.write(` #    ##########    # CPU Cores: ${clientInfo.cpuCores}\r\n`)
-          terminal.write(` #   ##         #   # IP Address: ${clientInfo.ip || 'N/A'}\r\n`)
-          terminal.write(` ##  #         ##  ## Location: ${clientInfo.location || 'N/A'}\r\n`)
-          terminal.write(`  ## ###########  ##  Coordinates: ${clientInfo.coordinates || 'N/A'}\r\n`)
-          terminal.write(`    ##          ###   ISP: ${clientInfo.isp || 'N/A'}\r\n`)
-          terminal.write('      ##########  \r\n')
+          const colorsA = [
+            '\x1b[40m \x1b[0m', // Black
+            '\x1b[41m \x1b[0m', // Red
+            '\x1b[42m \x1b[0m', // Green
+            '\x1b[43m \x1b[0m', // Yellow
+            '\x1b[44m \x1b[0m', // Blue
+            '\x1b[45m \x1b[0m', // Magenta
+            '\x1b[46m \x1b[0m', // Cyan
+            '\x1b[47m \x1b[0m', // White
+
+          ]
+
+          const colorsB = [
+            '\x1b[100m \x1b[0m', // Bright Black
+            '\x1b[101m \x1b[0m', // Bright Red
+            '\x1b[102m \x1b[0m', // Bright Green
+            '\x1b[103m \x1b[0m', // Bright Yellow
+            '\x1b[104m \x1b[0m', // Bright Blue
+            '\x1b[105m \x1b[0m', // Bright Magenta
+            '\x1b[106m \x1b[0m', // Bright Cyan
+            '\x1b[107m \x1b[0m', // Bright White
+          ]
+          terminal.write(`     #########       \x1b[1;31mOS:\x1b[0m ${clientInfo.osName} ${clientInfo.osVersion}\r\n`)
+          terminal.write(`   ##          ###   \x1b[1;31mDevice Type:\x1b[0m ${clientInfo.deviceType}\r\n`)
+          terminal.write(` ## ##########   ##  \x1b[1;31mBrowser:\x1b[0m ${clientInfo.browserName} ${clientInfo.browserVersion}\r\n`)
+          terminal.write(`##            ##  ## \x1b[1;31mLocation:\x1b[0m ${clientInfo.location || 'N/A'}\r\n` )
+          terminal.write(`#             ##   # \x1b[1;31mCoordinates:\x1b[0m ${clientInfo.coordinates || 'N/A'}\r\n`)
+          terminal.write(`#    ##########    # \x1b[1;31mResolution:\x1b[0m ${clientInfo.displayRes}\r\n`)
+          terminal.write(`#   ##         #   # \x1b[1;31mIP Address:\x1b[0m ${clientInfo.ip || 'N/A'}\r\n`)
+          terminal.write(`##  #         ##  ## \x1b[1;31mCPU Cores:\x1b[0m ${clientInfo.cpuCores}\r\n`)
+          terminal.write(` ## ###########  ##  \x1b[1;31mGPU:\x1b[0m ${clientInfo.gpu.slice(0,41 )}\r\n` )
+          terminal.write(`   ##          ###   \x1b[1;31mISP:\x1b[0m ${clientInfo.isp || 'N/A'}\r\n`)
+          terminal.write('     ##########      ')
+          colorsA.forEach(function(color){
+            terminal.write(color + color + color)
+          })
+          terminal.write('\r\n')
+
+          terminal.write('                     ')
+          colorsB.forEach(function(color){
+            terminal.write(color + color + color)
+          })
+          terminal.write('\r\n')
+
+       
+
+          
+          // terminal.write(colors.join('') + '\r\n')
         } else {
           terminal.write('Error: Client information not available\r\n')
         }
@@ -174,44 +198,6 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
           terminal.write(`Coordinates: ${clientInfo.coordinates || 'N/A'}\r\n`)
           terminal.write(`ISP: ${clientInfo.isp || 'N/A'}\r\n`)
 
-          // terminal.write(`Device Type: ${clientInfo.deviceType}\r\n`)
-          // terminal.write(`Host OS: ${clientInfo.osName} ${clientInfo.osVersion}\r\n`)
-          // terminal.write(`Browser: ${clientInfo.browserName} ${clientInfo.browserVersion}\r\n`)
-          // terminal.write(`GPU: ${clientInfo.gpu}\r\n`)
-          // terminal.write(`Display: ${clientInfo.displayRes}\r\n`)
-          // terminal.write(`CPU Cores: ${clientInfo.cpuCores}\r\n`)
-          // terminal.write(`IP Address: ${clientInfo.ip || 'N/A'}\r\n`)
-          // terminal.write(`Location: ${clientInfo.location || 'N/A'}\r\n`)
-          // terminal.write(`Coordinates: ${clientInfo.coordinates || 'N/A'}\r\n`)
-          // terminal.write(`ISP: ${clientInfo.isp || 'N/A'}\r\n`)
-
-          // terminal.write('       #########     \r\n')
-          // terminal.write('     ##          ###  \r\n')
-          // terminal.write('   ## ##########   ## \r\n')
-          // terminal.write('  ##            ##  ##\r\n')
-          // terminal.write('  #             ##   #\r\n')
-          // terminal.write('  #    ##########    #\r\n')
-          // terminal.write('  #   ##         #   #\r\n')
-          // terminal.write('  ##  #         ##  ##\r\n')
-          // terminal.write('   ## ###########  ## \r\n')
-          // terminal.write('     ##          ###  \r\n')
-          // terminal.write('       ##########  \r\n')
-          terminal.paste(ascii)
-
-      //       #########     
-      //     ##          ###  
-      //   ## ##########   ## 
-      //  ##            ##  ##
-      //  #             ##   #
-      //  #    ##########    #
-      //  #   ##         #   #
-      //  ##  #         ##  ##
-      //   ## ###########  ## 
-      //     ##          ###  
-      //       ##########  
-
-          
-
         } else {
           terminal.write('Error: Client information not available\r\n')
         }
@@ -224,31 +210,12 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
   }
 }
 
-// const colorAsciiArt = (ascii: string): string => {
-//   const lines = ascii.split('\n')
-//   const coloredLines = lines.map((line, index) => {
-//     const halfLength = Math.floor(line.length / 2)
-//     const leftSide = line.slice(0, halfLength)
-//     const rightSide = line.slice(halfLength)
-
-//     // Define the colors
-//     const redColor = '\x1b[31m' // Red color
-//     const tealColor = '\x1b[36m' // Light teal color
-//     const resetColor = '\x1b[0m' // Reset color
-
-//     // Apply the colors
-//     const coloredLine = `${redColor}${leftSide}${resetColor}${tealColor}${rightSide}${resetColor}`
-//     terminal.write(coloredLine)
-//   })
-
-//   return coloredLines.join('\n')
-// }
 
 
 export const config: ITerminalOptions & { cols: number; rows: number } = {
   cols: 70,
   lineHeight: 1.3,
-  letterSpacing: 1.23,
+  letterSpacing: 1.3,
   cursorBlink: true,
   cursorInactiveStyle: 'none',
   cursorStyle: 'block',

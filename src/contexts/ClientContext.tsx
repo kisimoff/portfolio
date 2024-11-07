@@ -75,7 +75,7 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
         const screenHeight = window.screen.height
         setClientInfo((prevInfo) => ({
             ...prevInfo,
-            displayRes: `Screen Resolution: ${screenWidth} x ${screenHeight}`,
+            displayRes: `${screenWidth} x ${screenHeight}`,
         }))
         getGeoData()
     }, [])

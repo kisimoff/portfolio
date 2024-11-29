@@ -77,12 +77,12 @@ const xpTheme = {
   closeBtn: {
     color: 'white',
     backgroundColor: '#ee6247',
-    height: '25px',
-    width: '25px',
-    margin: '6px',
+    height: '1.5rem',
+    width: '1.5rem',
+    margin: '0.4rem',
     border: '2px solid #ffffff85',
     borderRadius: '4px',
-    fontSize: '22px',
+    fontSize: '1.3rem',
     transition: 'all 0.8s ease-in',
   },
   navbar: {
@@ -97,13 +97,7 @@ const darkTheme = {
     backgroundColor: '#cfcfcf46',
     color: 'white',
   },
-  button: {
-    WebkitFontSmoothing: 'antialiased',
-    boxSizing: 'border-box',
-    background: 'white',
-    color: 'black',
-    borderRadius: '0px'
-  },
+
   field: {
     color: '#F4F4F4',
     fontWeight: 'normal',
@@ -113,7 +107,11 @@ const darkTheme = {
     transition: 'all 0.2s ',
   },
   // cursor: { animation: "1.02s blink-dark step-end infinite" },
-  closeBtn: { color: 'white' },
+  closeBtn: {
+    color: 'white',
+    borderRadius: '0px',
+    border: '0px',
+  },
 }
 
 interface ThemeContextType {

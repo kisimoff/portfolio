@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import Webamp from 'webamp'
+import { useWindows } from '@contexts/WindowsContext'
 
 
 const Winamp = () => {
+  const { closeWindow } = useWindows()
+
 
   useEffect(() => {
     // Create a new Webamp instance when the component is mounted
@@ -59,6 +62,7 @@ const Winamp = () => {
           duration: 0,
         },
       ],
+
       // Optionally, you can enable visualizations, playlists, etc.
       zIndex: 10, // Set custom zIndex for the player window
     })
@@ -68,14 +72,17 @@ const Winamp = () => {
       webamp.renderWhenReady(document.getElementById('webamp-container'))
     }
 
+    // Register the onClose callback
+    const unsubscribe = webamp.onClose(() => {
+      // Code to execute when Webamp is closed
+      closeWindow('winamp')
+      // You can perform additional actions here
+    })
+
     return () => {
       webamp.dispose()
     }
   }, [])
-
-
-
-
 
   return <div id="webamp-container" />
 

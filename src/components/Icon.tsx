@@ -4,17 +4,17 @@ import { DraggableCore } from 'react-draggable'
 import { useWindows } from '@contexts/WindowsContext'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
-type DragPosition = {
-  x?: number;
-  y?: number;
-};
+import { isMobile } from 'react-device-detect'
 
+type DragPosition = {
+  x?: number
+  y?: number
+}
 
 type IconPosition = {
-  gridColumnStart: number;
-  gridRowStart: number;
-};
-
+  gridColumnStart: number
+  gridRowStart: number
+}
 
 function Icon(props: { window: WindowProps }) {
   const dragAnimation = useAnimation()
@@ -23,39 +23,57 @@ function Icon(props: { window: WindowProps }) {
   const { themeState } = useTheme()
   const { updateIconPosition, isPositionFree } = useWindows()
 
-
-
   const gridElementRef = useRef<HTMLDivElement | null>(null)
 
   const [preventDrop, setPreventDrop] = useState(false)
-
-
   const [isDragging, setIsDragging] = useState(false)
   const [preventClick, setPreventClick] = useState(false)
   const [placeholderPosition, setPlaceholderPosition] = useState<IconPosition | null>(null)
 
-  const calcGridDropPosition = useMemo(() => (
-    gridElement: HTMLElement | null,
-    { x = 0, y = 0 }: DragPosition
-  ): IconPosition => {
-    if (!gridElement) return { gridColumnStart: 0, gridRowStart: 0 }
+  // export type WindowKey = 'terminal2' | 'about' | 'deviceInfo' | 'projects' | 'start' | 'credits' | 'winamp' | 'resume'
 
-    const gridRowHeight = 100
-    const gridColumnWidth = 100
-    const gridColumnGap = 0
-    const gridRowGap = 0
-    const paddingTop = 8
+  // Define mobile positions for icons
+  const mobilePositions: { [key: string]: IconPosition } = {
+    winamp: { gridRowStart: 3, gridColumnStart: 1 },
+    terminal2: { gridRowStart: 3, gridColumnStart: 2 },
+    deviceInfo: { gridRowStart: 3, gridColumnStart: 3 },
+    projects: { gridRowStart: 2, gridColumnStart: 3 },
+    resume: { gridRowStart: 2, gridColumnStart: 2 },
+    about: { gridRowStart: 3, gridColumnStart: 4 },
+    // Add more icons as needed
+  }
 
-    return {
-      gridColumnStart: Math.min(
-        Math.ceil(x / (gridColumnWidth + gridColumnGap)),
-      ),
-      gridRowStart: Math.min(
-        Math.ceil((y - paddingTop) / (gridRowHeight + gridRowGap)),
-      ),
+
+  // Calculate icon position based on device type
+  const iconPosition = useMemo(() => {
+    if (isMobile) {
+      const mobilePosition = mobilePositions[props.window.elementId]
+      return mobilePosition || { gridRowStart: 1, gridColumnStart: 1 } // Default position
+    } else {
+      return {
+        gridRowStart: props.window.gridRowStart,
+        gridColumnStart: props.window.gridColumnStart,
+      }
     }
-  }, [])
+  }, [isMobile, props.window])
 
+  const calcGridDropPosition = useMemo(
+    () => (gridElement: HTMLElement | null, { x = 0, y = 0 }: DragPosition): IconPosition => {
+      if (!gridElement) return { gridColumnStart: 0, gridRowStart: 0 }
+
+      const gridRowHeight = 100
+      const gridColumnWidth = 100
+      const gridColumnGap = 0
+      const gridRowGap = 0
+      const paddingTop = 8
+
+      return {
+        gridColumnStart: Math.min(Math.ceil(x / (gridColumnWidth + gridColumnGap))),
+        gridRowStart: Math.min(Math.ceil((y - paddingTop) / (gridRowHeight + gridRowGap))),
+      }
+    },
+    []
+  )
 
   const handleClick = () => {
     if (preventClick) {
@@ -64,9 +82,7 @@ function Icon(props: { window: WindowProps }) {
     props.window.openOrFocus()
   }
 
-
   async function handleIconMove(gridDropPosition: IconPosition) {
-
     placeholderAnimation.start({
       opacity: 0,
       transition: { delay: 0.3, duration: 0.5 },
@@ -88,20 +104,21 @@ function Icon(props: { window: WindowProps }) {
   }
 
   const handleDrop = (e: any, ui: any) => {
-    if (!isDragging || preventDrop) { //preventing triggering the rest of the code onclick
+    if (!isDragging || preventDrop) {
+      // Preventing triggering the rest of the code on click
       setIsDragging(false)
       setPlaceholderPosition(null)
       dragAnimation.set({ opacity: 1 })
       return
     }
 
-
-
-    setTimeout(() => { //preventing unintentional click event on drop
+    setTimeout(() => {
+      // Preventing unintentional click event on drop
       setPreventClick(false)
     }, 100)
 
-    setTimeout(() => { //used for animations
+    setTimeout(() => {
+      // Used for animations
       setPlaceholderPosition(null)
     }, 500)
 
@@ -112,51 +129,71 @@ function Icon(props: { window: WindowProps }) {
     handleIconMove(gridDropPosition)
   }
 
-
-
-  const handleDrag = useCallback((e: any, ui: any) => {
-    if (!isDragging) {
-      setPreventClick(true)
-      setIsDragging(true)
-    }
-    dragAnimation.set({ opacity: 0.6 })
-    const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
-    setPlaceholderPosition(gridDropPosition)
-    setPreventDrop(!isPositionFree(gridDropPosition))
-  }, [calcGridDropPosition, isDragging, dragAnimation, isPositionFree])
-
+  const handleDrag = useCallback(
+    (e: any, ui: any) => {
+      if (!isDragging) {
+        // setPreventClick(true)
+        setIsDragging(true)
+      }
+      dragAnimation.set({ opacity: 0.6 })
+      const gridDropPosition = calcGridDropPosition(gridElementRef.current, { x: ui.x, y: ui.y })
+      setPlaceholderPosition(gridDropPosition)
+      setPreventDrop(!isPositionFree(gridDropPosition))
+    },
+    [calcGridDropPosition, isDragging, dragAnimation, isPositionFree]
+  )
 
   return (
     <>
-      <DraggableCore onDrag={handleDrag} onStop={handleDrop}>
+      {isMobile ? (
         <motion.div
           ref={gridElementRef}
           animate={dragAnimation}
           style={{
-            gridColumnStart: props.window.gridColumnStart,
-            gridRowStart: props.window.gridRowStart,
-          }}>
-          <button
-            className="iconWrapper unstyledButton"
-            onClick={handleClick}
-          >
+            gridColumnStart: iconPosition.gridColumnStart,
+            gridRowStart: iconPosition.gridRowStart,
+          }}
+          className='gridElement-mobile'
+        >
+          <button className="iconWrapper-mobile unstyledButton" onClick={handleClick}>
             {themeState === 'dark' ? (
-              // Dynamically render osIcon based on its type
-              typeof props.window.osIcon === 'function' ? (
+              props.window.elementId !== 'winamp' ? (
                 <props.window.osIcon className="pointer-events-none icon" />
               ) : (
-                props.window.osIcon
+                <img src={props.window.osIcon} className="pointer-events-none icon" />
               )
             ) : (
               <img src={props.window.xpIcon} className="pointer-events-none icon" />
             )}
-            <span className="caption">
-              {props.window.caption}
-            </span>
+            <span className="caption">{props.window.caption}</span>
           </button>
         </motion.div>
-      </DraggableCore>
-      {placeholderPosition && (
+      ) : (
+        <DraggableCore onDrag={handleDrag} onStop={handleDrop}>
+          <motion.div
+            ref={gridElementRef}
+            animate={dragAnimation}
+            style={{
+              gridColumnStart: iconPosition.gridColumnStart,
+              gridRowStart: iconPosition.gridRowStart,
+            }}
+          >
+            <button className="iconWrapper unstyledButton" onClick={handleClick}>
+              {themeState === 'dark' ? (
+                props.window.elementId !== 'winamp' ? (
+                  <props.window.osIcon className="pointer-events-none icon" />
+                ) : (
+                  <img src={props.window.osIcon} className="pointer-events-none icon" />
+                )
+              ) : (
+                <img src={props.window.xpIcon} className="pointer-events-none icon" />
+              )}
+              <span className="caption">{props.window.caption}</span>
+            </button>
+          </motion.div>
+        </DraggableCore>
+      )}
+      {!isMobile && placeholderPosition && (
         <motion.div
           className="placeholder"
           animate={placeholderAnimation}

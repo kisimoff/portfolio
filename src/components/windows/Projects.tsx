@@ -34,7 +34,7 @@ export default function Projs() {
       sorsa: esc,
       title: 'ESC The Loop: Mobile App (DSCT)',
       description:
-        'Leveraging cutting-edge research on manipulative patterns and psychological tactics in social media, ESC the Loop is a smarter app timer designed to help users regain control over their digital habits. Upon timer expiration, the app sends customizable notifications at set intervals, offering an escape route redirecting users to their task list or an app of their choice.',
+        'Leveraging research on manipulative patterns and psychological tactics in social media, ESC the Loop is a smarter app timer designed to help users regain control over their digital habits. Upon timer expiration, the app sends customizable notifications at set intervals, offering an escape route redirecting users to their task list or an app of their choice.',
       technologies: 'React-native, TypeScript, Java, Headless JS, Figma',
       repo: 'https://github.com/vtwenty3/ESC_The_Loop',
       live: 'https://www.notion.so/23things/ESC-The-Loop-fccf49ea661b4752a3980300041aaa63',
@@ -43,7 +43,7 @@ export default function Projs() {
       sorsa: rockets,
       title: 'Lunar Lander: Evolutionary Algorithm',
       description:
-        'The algorithm integrates an adaptive mutation rate, two crossover methods, and multiple activation and initialization functions, which are tunable as hyperparameters. This design creates a large search space that can be explored using techniques such as random and grid search. Each search-cycle generates a dataset which can be analyzed to uncover valuable insights used for tuning the parameters.',
+        'The algorithm uses an adaptive mutation rate, two crossover methods, and multiple activation and initialization functions adjustable by hyperparameters. This design creates a large search space that can be explored using automated search techniques. Each search-cycle generates a dataset which can be analyzed to uncover patterns and insights.',
       technologies: 'Java, Math3, R, OpenRefine',
       repo: 'https://github.com/vtwenty3/Lunar_Lander',
     },
@@ -51,7 +51,7 @@ export default function Projs() {
       sorsa: mas,
       title: 'Microgrid Market Maker: Multi-Agent System',
       description:
-        'P2P multi-agent system, where each agent represents a household in a microgrid. This enables testing of architectural patterns and evaluation of auction and communication protocols. Two auction protocols were compared: a decentralized Dutch Auction and a Double Auction with a central peer. The Double Auction demonstrated six times greater computational efficiency with 20 agents, revealing the potential drawbacks and cost of decentralization.',
+        'P2P multi-agent system, where each agent represents a household in a microgrid. This enables testing of architectural patterns and evaluation of auction and communication protocols. Two protocols were compared: decentralised Dutch Auction and a Double Auction with a central peer. The Double Auction demonstrated six times greater efficiency revealing the potential cost of decentralization.',
       technologies: 'C#, ActressMAS, .NET',
       repo: 'https://github.com/vtwenty3/ActressMas',
     },
@@ -107,14 +107,14 @@ export default function Projs() {
       repo: 'https://github.com/vtwenty3/Kwik',
       live: 'https://vtwenty3.github.io/Kwik/',
     },
-    {
-      sorsa: tasks,
-      title: '23 Tasks',
-      description:
-        '23 Tasks Cloud-Based productivity app designed to help users quickly organize their tasks and ideas. Many existing apps are either too complex, too simple or full of ads. This app aims to bridge the gap by providing an easy-to-use solution with a tag sorting system and task prioritization, inspired by the Kanban board, a popular workflow visualization tool used by Agile teams. The APK is available for testing on GitHub.',
-      technologies: 'React-Native, Firebase, Figma, Android Studio',
-      repo: 'https://github.com/vtwenty3/23_Tasks',
-    },
+    // {
+    //   sorsa: tasks,
+    //   title: '23 Tasks',
+    //   description:
+    //     '23 Tasks Cloud-Based productivity app designed to help users quickly organize their tasks and ideas. Many existing apps are either too complex, too simple or full of ads. This app aims to bridge the gap by providing an easy-to-use solution with a tag sorting system and task prioritization, inspired by the Kanban board, a popular workflow visualization tool used by Agile teams. The APK is available for testing on GitHub.',
+    //   technologies: 'React-Native, Firebase, Figma, Android Studio',
+    //   repo: 'https://github.com/vtwenty3/23_Tasks',
+    // },
     {
       sorsa: ai,
       title: 'Deep Learning NLP Model',
@@ -147,22 +147,22 @@ export default function Projs() {
       technologies: 'ARM32 Assembly, AQA Simulator',
       repo: 'https://github.com/vtwenty3/Assembly_Game',
     },
-    {
-      sorsa: cron,
-      title: 'Crontab UI',
-      description:
-        'Bash script providing UI for cron jobs management. Add, edit, and remove jobs with ease: choose from - display all jobs, insert a new job, edit existing jobs, remove specific jobs, or remove all jobs.',
-      technologies: 'Bash',
-      repo: 'https://github.com/vtwenty3/Crontab_UI',
-    },
-    {
-      sorsa: data,
-      title: 'Data Mining R-Studio',
-      description:
-        'This data mining project sought to identify and visualize outliers, relationships, and patterns in a synthetic dataset of historic vehicle accidents that occurred on UK roads over five years. The dataset was pre-processed with OpenRefine and the results were then plotted and visualized using R-Studio.',
-      technologies: 'R, R-Studio',
-      repo: 'https://github.com/vtwenty3/Data_Mining_R',
-    },
+    // {
+    //   sorsa: cron,
+    //   title: 'Crontab UI',
+    //   description:
+    //     'Bash script providing UI for cron jobs management. Add, edit, and remove jobs with ease: choose from - display all jobs, insert a new job, edit existing jobs, remove specific jobs, or remove all jobs.',
+    //   technologies: 'Bash',
+    //   repo: 'https://github.com/vtwenty3/Crontab_UI',
+    // },
+    // {
+    //   sorsa: data,
+    //   title: 'Data Mining R-Studio',
+    //   description:
+    //     'This data mining project sought to identify and visualize outliers, relationships, and patterns in a synthetic dataset of historic vehicle accidents that occurred on UK roads over five years. The dataset was pre-processed with OpenRefine and the results were then plotted and visualized using R-Studio.',
+    //   technologies: 'R, R-Studio',
+    //   repo: 'https://github.com/vtwenty3/Data_Mining_R',
+    // },
   ]
   const [currentLoadingIndex, setCurrentLoadingIndex] = useState(0)
 
@@ -173,10 +173,9 @@ export default function Projs() {
     <Window window={projectsWindow}>
       <div className="projectsScroll">
         <div className="projectsExplain">
-            Tap or hover on a project to learn more. Some projects are live
-            and can be accessed by clicking the <BiWorld /> icon. Each
-            repository has a README with more detailed information about the
-            project.
+          Tap or hover on a project to learn more. Each
+          repository has a README with more detailed information about the
+          project.
         </div>
         <div className="projectsField">
           {projects.map((project, index) => (

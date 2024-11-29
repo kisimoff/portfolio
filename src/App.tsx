@@ -20,6 +20,7 @@ import { useWindows } from '@contexts/WindowsContext'
 import { motion } from 'framer-motion'
 
 import { useEffect } from 'react'
+import { isMobile } from 'react-device-detect'
 
 
 const App = () => {
@@ -42,7 +43,7 @@ const App = () => {
       <LoadingScreen />
       <Navbar />
       <motion.ol
-        className="icons"
+        className={isMobile ? 'mobile-icons' : 'icons'}
         animate={iconsAnimation}
         initial={{ opacity: 0, y: 8 }}
       >
@@ -52,6 +53,7 @@ const App = () => {
           .map(([key, window]) => (
             <Icon key={key} window={window} />
           ))}
+
       </motion.ol>
 
 

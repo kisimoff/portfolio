@@ -83,7 +83,7 @@ const LoadingScreen = () => {
     elementsSequenceAnimation()
     setLogo(false)
     setLogoClicked(true)
-    startWindow.openOrFocus()
+    // startWindow.openOrFocus()
     loopAnimation
       .start({
         opacity: 1,
@@ -94,9 +94,9 @@ const LoadingScreen = () => {
       })
   }
 
-  useEffect(() => {
-    skipLoading()
-  }, [])
+  // useEffect(() => {
+  //   skipLoading()
+  // }, [])
 
 
 

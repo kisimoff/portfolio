@@ -12,7 +12,7 @@ import { useTheme } from '@contexts/ThemeContext'
 import { useAnimations } from '@contexts/AnimationsContext'
 import { useWindows } from '@contexts/WindowsContext'
 
-function Navbar () {
+function Navbar() {
   const { themeState, themeValues, toggleTheme } = useTheme()
   const { navbarAnimation } = useAnimations()
   const { windows } = useWindows()
@@ -21,8 +21,9 @@ function Navbar () {
     <motion.div
       className="navbar"
       animate={navbarAnimation}
-      initial={{ y: 0 }}
       style={themeValues.navbar}
+      initial={{ opacity: 0 }}
+
     >
       <div className="nav-heading">
         <img id="logo" alt="logo" src={logo_white} />
@@ -38,7 +39,7 @@ function Navbar () {
         style={isTablet ? { display: 'none' } : null}
       >
         {Object.entries(windows).map(([key, window]) => (
-          window.visibility && (<IconTask key={key} window={window}/> ) 
+          window.visibility && (<IconTask key={key} window={window} />)
         ))}
       </div>
       <div className="nav-socials">

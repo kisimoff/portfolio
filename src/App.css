@@ -29,12 +29,20 @@ a:active {
   outline: none;
 }
 
+*:focus {
+  outline: 0 !important;
+}
+
+button {  outline: none;}
+
+
+
 :root {
   /* Test project-height on mobile! */
   --projects-height: clamp(12rem, 60vmin, 65vh);
   --projects-height-mobile: clamp(20rem, 90vmin, 65vh);
 
-  --project-width: clamp(23.23rem, 50vmin, 44vw);
+  --project-width: clamp(23.23rem, 55vmin, 46vw);
   --project-width-mobile: clamp(80vmin, 90vw, 550px);
 
   --window-shadow: rgba(126, 126, 126, 0) 0px 0px 2px 1px;
@@ -48,12 +56,12 @@ a:active {
   --fs-navbar: clamp(1.3rem, 0.7vw + 1.4rem, 2rem);
   --fs-instructions: clamp(1.2rem, 0.6vh + 1.3rem, 2rem);
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
-  --fs-text: clamp(0.8rem, 0.4vw + 0.75rem, 1.1em);
-  --fs-text-projects: clamp(0.8rem, 0.3vw + 0.7rem, 1.6rem);
+  --fs-text: 0.9rem;
+  --fs-text-projects: 0.75rem;
   --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
   --fs-text-mobile: clamp(0.5rem, 2.5vw + 0.18rem, 1.1rem);
   --fs-window-title: clamp(1rem, 0.25vw + 0.9rem, 1.8rem);
-  --fs-project-title: clamp(1rem, 0.95vw + 0.3rem, 1.4rem);
+  --fs-project-title: 0.9rem;
   --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-task-caption: clamp(0.8rem, 0.3vw + 1rem, 2rem);
   --fs-icon-caption: clamp(0.6rem, 0.1vw + 0.8rem, 1.5rem);
@@ -136,7 +144,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background: black;
+  background-color: black;
   /* background-image: url("background/background_fallback.jpg"); */
 }
 
@@ -436,6 +444,7 @@ body {
   max-width: 1.7rem;
 }
 .close-window-task {
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -444,10 +453,8 @@ body {
   text-align: center;
   color: white;
   font-weight: 900;
-  font-size: 1.25rem;
-  /*margin-top: 0.07rem;*/
-  margin: 0.2rem 0.2rem 0.2rem 0.2rem;
-  padding: 0.15rem;
+  font-size: 1rem;
+  margin: 0.3rem;
   background-color: rgba(210, 46, 46, 0);
 
 }
@@ -477,6 +484,76 @@ body {
             width: 90%;
             max-width: 1000px;
 } */
+
+
+
+/* .mobile-icons {
+  position: relative;
+} */
+
+
+/* .mobile-icons {
+  position: relative;
+  display: grid;
+  height: 100dvh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+  z-index: 1;
+  background-color: #04aa6d;
+} */
+
+.mobile-icons {
+  display: grid;
+  height: 95svh;
+  grid-template-columns: repeat(4, auto);
+  grid-auto-rows: auto;
+  justify-content: center;
+  gap: 0.5rem;
+  align-content: end;
+  z-index: 1;
+}
+
+/* .mobile-icons {
+  position: relative;
+  display: grid;
+  background-color: #04aa6d;
+} */
+
+.gridElement-mobile {
+ width: 5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.iconWrapper-mobile {
+  color: white;
+  display: flex;
+  gap: var(--padding-small);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+
+.iconWrapper {
+  border-radius: 0.2rem;
+  color: white;
+  display: flex;
+  gap: var(--padding-small);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  pointer-events: auto;
+}
+
 
 .icons {
   padding: 8px;
@@ -687,7 +764,7 @@ body {
 .projectsExplain {
   padding: 1rem;
   font-size: var(--fs-text);
-  max-width: 60vw;
+  max-width: 60ch;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -925,7 +1002,6 @@ body {
   align-items: center;
   justify-content: center;
   /* height: var(--fs-navbar); */
-  width: 3em;
   text-align: center;
   color: white;
   font-weight: 900;
@@ -1192,6 +1268,8 @@ body {
   }
 
   .navbar {
+    position: absolute;
+    top: 0px;
     justify-content: space-between;
     align-items: center;
   }
@@ -1206,19 +1284,9 @@ body {
     justify-content: center;
   }
 
-  .icons {
-    position: relative;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-end;
-    padding: 0 0 0.5rem;
-    gap: 0;
-  }
 
-  .iconWrapper {
-    padding: 0;
-    width: fit-content;
-  }
+
+ 
 
   .caption {
     padding: 0.5rem;

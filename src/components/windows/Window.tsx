@@ -27,13 +27,16 @@ function Window({ window, children }: Window) {
             {window.caption}
           </span>
           <div>
-            <a
-              className="flex items-center justify-center w-[3em] text-center text-white font-black text-fs-window-title pt-2 pb-2 hover:bg-close-window-hover"
-              style={themeValues.closeBtn}
-              href="#"
-              onClick={() => { closeWindow(window.elementId) }} >
+            <button
+              style={{
+                ...themeValues.closeBtn,
+              }}
+              className="bg-transparent close-window hover:bg-close-window-hover"
+              onClick={() => closeWindow(window.elementId)}
+              aria-label="Close Window"
+            >
               <CgClose />
-            </a>
+            </button>
           </div>
         </div>
         <div style={themeValues.field}>

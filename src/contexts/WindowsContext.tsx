@@ -66,9 +66,6 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
   }
 
   const openOrFocusWindow = (windowKey: WindowKey) => {
-    console.log(windowKey)
-    console.log(openWindowsQueue)
-
     setOpenWindowsQueue(prevWindows => {
       const newOrder = [...prevWindows]
       const index = newOrder.indexOf(windowKey)
@@ -96,10 +93,9 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
   }
 
-  const ImageIcon = ({ src }: { src: string }) => <img src={src} alt="" className='icon' />
 
 
-  const createWindowConfig = (windowKey: WindowKey, osIcon: IconType | JSX.Element, xpIcon: string, caption: string): WindowProps => ({
+  const createWindowConfig = (windowKey: WindowKey, osIcon: IconType | string, xpIcon: string, caption: string): WindowProps => ({
     osIcon,
     xpIcon,
     caption,
@@ -120,7 +116,7 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     deviceInfo: createWindowConfig('deviceInfo', TbDeviceDesktopAnalytics, mycomp, 'Device'),
     projects: createWindowConfig('projects', BsJournalCode, mydocs, 'Projects'),
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
-    winamp: createWindowConfig('winamp', <ImageIcon src={winampDark} />, winampXp, 'Winamp'),
+    winamp: createWindowConfig('winamp', winampDark, winampXp, 'Winamp'),
     resume: createWindowConfig('resume', BsJournalCode, textDoc, 'Resume'),
   }
 

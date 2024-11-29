@@ -4,6 +4,10 @@ import path from 'path'
 
 
 export default defineConfig({
+  server: {
+    host: true, // Expose the server on your local network
+    port: 3000, // Optional: Specify a custom port (default is 5173)
+  },
   plugins: [react()],
   resolve: {
     alias: {

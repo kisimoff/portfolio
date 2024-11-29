@@ -14,8 +14,11 @@ function IconTask(props: { window: WindowProps }) {
         >
           <div className="icon-task-wrapper">
             {themeState === 'dark' ? (
-              <props.window.osIcon className="icon-task-icon" />
-            ) : (
+              props.window.elementId !== 'winamp' ? (
+                <props.window.osIcon className="pointer-events-none icon" />
+              ) : (
+                <img src={props.window.osIcon} className="pointer-events-none icon" />
+              )) : (
               <img src={props.window.xpIcon} className="icon-task-icon" />
             )}
 
@@ -28,11 +31,11 @@ function IconTask(props: { window: WindowProps }) {
           </div>
         </button>
         <button
-          style={themeState === 'dark'? {} : { display: 'none' }}
+          style={themeState === 'dark' ? {} : { display: 'none' }}
           className="close-window-task unstyledButton"
           onClick={() => props.window.close()}
         >
-          <CgClose />
+          <CgClose className='' />
         </button>
       </div>
     </div>

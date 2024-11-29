@@ -25,8 +25,11 @@ const TerminalWindow = () => {
       terminal.current.open(terminalRef.current)
       fitAddon.current.fit()
 
-      terminal.current.write(getPrompt())
+      if (terminal.current) {
+        processCommand('neofetch', terminal.current)
+      }
 
+      terminal.current.write(getPrompt())
       terminal.current.onData(handleTerminalData)
     }
   }

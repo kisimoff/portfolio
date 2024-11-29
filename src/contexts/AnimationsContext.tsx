@@ -3,7 +3,7 @@ import { useAnimation } from 'framer-motion'
 
 interface AnimationsContextType {
   navbarAnimation: any;
- iconsAnimation: any;
+  iconsAnimation: any;
   backgroundAnimation: any;
   elementsSequenceAnimation: () => Promise<void>;
 }
@@ -25,20 +25,30 @@ export const AnimationsProvider = ({ children }: AnimationsProviderProps) => {
       navbarAnimation.set({ y: 100 })
       await navbarAnimation.start({
         y: 0,
+        opacity: 1,
+
         transition: { duration: 1.5, delay: 5 },
+      })
+      await iconsAnimation.start({
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.7, delay: 0.8 },
       })
     } else {
       navbarAnimation.set({ y: -100 })
+      await iconsAnimation.start({
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.7, delay: 6.5 },
+      })
       await navbarAnimation.start({
         y: 0,
-        transition: { duration: 1.5, delay: 5 },
+        opacity: 1,
+
+        transition: { duration: 1.5, delay: 0.8 },
       })
     }
-    await iconsAnimation.start({
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.7, delay: 0.8 },
-    })
+
   }
 
   return (

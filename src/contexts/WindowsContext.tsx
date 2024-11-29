@@ -5,6 +5,11 @@ import mycomp from '@assets/icons/xp/mycomp.png'
 import info from '@assets/icons/xp/about.png'
 import cmd from '@assets/icons/xp/cmd.png'
 import mydocs from '@assets/icons/xp/mydocs.png'
+import textDoc from '@assets/icons/xp/text-doc.png'
+import winampDark from '@assets/icons/xp/winamp-dark.png'
+import winampXp from '@assets/icons/xp/winamp-xp.png'
+
+
 import { TbDeviceDesktopAnalytics } from 'react-icons/tb'
 import { BsJournalCode, BsTerminal, BsPersonCircle } from 'react-icons/bs'
 import { WindowProps } from '@/types'
@@ -91,8 +96,10 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     setOpenWindowsQueue(prevWindows => prevWindows.filter(key => key !== windowKey))
   }
 
+  const ImageIcon = ({ src }: { src: string }) => <img src={src} alt="" className='icon' />
 
-  const createWindowConfig = (windowKey: WindowKey, osIcon: IconType, xpIcon: string, caption: string): WindowProps => ({
+
+  const createWindowConfig = (windowKey: WindowKey, osIcon: IconType | JSX.Element, xpIcon: string, caption: string): WindowProps => ({
     osIcon,
     xpIcon,
     caption,
@@ -113,8 +120,8 @@ export const WindowsProvider = ({ children }: WindowsProviderProps) => {
     deviceInfo: createWindowConfig('deviceInfo', TbDeviceDesktopAnalytics, mycomp, 'Device'),
     projects: createWindowConfig('projects', BsJournalCode, mydocs, 'Projects'),
     credits: createWindowConfig('credits', BsJournalCode, mydocs, 'Credits'),
-    winamp: createWindowConfig('winamp', BsJournalCode, mydocs, 'Winamp'),
-    resume: createWindowConfig('resume', BsJournalCode, mydocs, 'Resume'),
+    winamp: createWindowConfig('winamp', <ImageIcon src={winampDark} />, winampXp, 'Winamp'),
+    resume: createWindowConfig('resume', BsJournalCode, textDoc, 'Resume'),
   }
 
   useEffect(() => {

@@ -2,7 +2,7 @@ import { IconType } from 'react-icons'
 import { WindowKey } from './contexts/WindowsContext'
 
 export type WindowProps = {
-    osIcon: IconType;
+    osIcon: IconType | JSX.Element;
     xpIcon: string;
     caption: string;
     elementId: WindowKey;

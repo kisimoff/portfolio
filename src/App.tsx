@@ -47,9 +47,11 @@ const App = () => {
         initial={{ opacity: 0, y: 8 }}
       >
 
-        {Object.entries(windows).map(([key, window]) => (
-          <Icon key={key} window={window} />
-        ))}
+        {Object.entries(windows)
+          .filter(([key]) => !['start', 'credits'].includes(key)) // Exclude 'start' and 'credits'
+          .map(([key, window]) => (
+            <Icon key={key} window={window} />
+          ))}
       </motion.ol>
 
 

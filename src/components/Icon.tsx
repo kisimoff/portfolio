@@ -141,11 +141,15 @@ function Icon(props: { window: WindowProps }) {
             onClick={handleClick}
           >
             {themeState === 'dark' ? (
-              <props.window.osIcon className="pointer-events-none icon" />
+              // Dynamically render osIcon based on its type
+              typeof props.window.osIcon === 'function' ? (
+                <props.window.osIcon className="pointer-events-none icon" />
+              ) : (
+                props.window.osIcon
+              )
             ) : (
               <img src={props.window.xpIcon} className="pointer-events-none icon" />
             )}
-
             <span className="caption">
               {props.window.caption}
             </span>

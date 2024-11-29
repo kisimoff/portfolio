@@ -4,14 +4,14 @@ import { IndexedDB } from '@zenfs/dom'
 import { IconPositions } from '@contexts/WindowsContext'
 
 export const defaultIconPositions: IconPositions = {
-  terminal2: { gridColumnStart: 1, gridRowStart: 1 },
-  about: { gridColumnStart: 1, gridRowStart: 2 },
-  deviceInfo: { gridColumnStart: 1, gridRowStart: 3 },
-  projects: { gridColumnStart: 1, gridRowStart: 4 },
-  start: { gridColumnStart: 1, gridRowStart: 5 },
-  credits: { gridColumnStart: 1, gridRowStart: 6 },
-  winamp: { gridColumnStart: 1, gridRowStart: 7 },
-  resume: { gridColumnStart: 2, gridRowStart: 1 },
+  deviceInfo: { gridColumnStart: 1, gridRowStart: 1 },
+  projects: { gridColumnStart: 2, gridRowStart: 1 },
+  winamp: { gridColumnStart: 1, gridRowStart: 2 },
+  terminal2: { gridColumnStart: 2, gridRowStart: 2 },
+  about: { gridColumnStart: 1, gridRowStart: 3 },
+  resume: { gridColumnStart: 2, gridRowStart: 3 },
+  start: { gridColumnStart: 99, gridRowStart: 99 },
+  credits: { gridColumnStart: 99, gridRowStart: 99 },
 }
 
 // Configure ZenFS with IndexedDB backend

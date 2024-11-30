@@ -18,6 +18,10 @@ export const AnimationsProvider = ({ children }: AnimationsProviderProps) => {
   const navbarAnimation = useAnimation()
   const iconsAnimation = useAnimation()
   const backgroundAnimation = useAnimation()
+  const eyeAnimation = useAnimation()
+
+
+
   // const placeholderAnimation = useAnimation()
 
   const elementsSequenceAnimation = async () => {

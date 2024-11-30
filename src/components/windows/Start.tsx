@@ -5,14 +5,19 @@ import {
   Pace,
 } from 'windups'
 import { useWindows } from '@contexts/WindowsContext'
+import { saveFastBootFlag } from '@/utils/zenFs'
 
 const Start = () => {
   const { startWindow, closeWindow } = useWindows()
+  function handleFinish() {
+    closeWindow('start')
+    saveFastBootFlag(true)
+  }
   return (
     <Window window={startWindow}>
       <div className="startText">
         <WindupChildren
-          onFinished={() => closeWindow('start')}
+          onFinished={handleFinish}
         >
           <Pace ms={80}>{'Hello,'}</Pace>
           <Pause ms={550} />
@@ -42,6 +47,10 @@ const Start = () => {
               {'the man behind the keyboard...'} <br></br>
               <Pause ms={500} />
               {'just click on the About icon. '}
+              <Pause ms={500} />
+              {'Next time you come here, fastboot would be enabled.'}
+              {'If you want to see the loading screen agian'}
+              {'Open the terminal and execute: \'fastboot off\''}
               <Pause ms={1500} />
               <br></br>
               <br></br>

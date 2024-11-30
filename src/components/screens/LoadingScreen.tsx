@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { WindupChildren, Pause, Pace, Effect } from 'windups'
-import { motion, useAnimation } from 'framer-motion'
-import LogoBoot2 from '@components/logoBoot2'
+import { delay, motion, useAnimation } from 'framer-motion'
+import LogoBoot2 from '@/components/logoBootAnimation'
 import TheEye from '@components/theEye'
 import portal from '@assets/videos/cpuPortal.mp4'
 import cpuLoop from '@assets/videos/cpuLoop.mp4'
@@ -18,6 +18,7 @@ import {
 import { useTheme } from '@contexts/ThemeContext'
 import { useWindows } from '@contexts/WindowsContext'
 import { useAnimations } from '@contexts/AnimationsContext'
+import { loadFastBootFlag } from '@/utils/zenFs'
 
 
 const LoadingScreen = () => {
@@ -25,11 +26,13 @@ const LoadingScreen = () => {
   const [pattern, setPattern] = useState(false)
   const [step1, setStep1] = useState(true)
   const [step3, setStep3] = useState(true)
-  const [logo, setLogo] = useState(true)
+  const [logoAnimation, setLogoAnimation] = useState(false)
   const { startWindow, creditsWindow } = useWindows()
-  const { elementsSequenceAnimation } = useAnimations()
+  const { elementsSequenceAnimation, navbarAnimation, iconsAnimation, backgroundAnimation } = useAnimations()
 
-  const backgroundAnimation = useAnimation()
+  const [fastBoot, setFastBoot] = useState(false)
+
+
   const loopAnimation = useAnimation()
   const portalAnimation = useAnimation()
 
@@ -69,7 +72,7 @@ const LoadingScreen = () => {
     videosSequenceAnimation()
     document.getElementById('bootRoot')!.style.display = 'none'
     setTimeout(() => {
-      setLogo(false)
+      setLogoAnimation(false)
     }, 7000)
     setTimeout(() => {
       startWindow.openOrFocus()
@@ -78,13 +81,11 @@ const LoadingScreen = () => {
 
 
 
-  function skipLoading() {
-    document.getElementById('bootRoot')!.style.display = 'none'
-    elementsSequenceAnimation()
-    setLogo(false)
-    setLogoClicked(true)
-    // startWindow.openOrFocus()
-    loopAnimation
+  async function skipLoading() {
+    setLogoAnimation(false) // skips the logo animation
+    setFastBoot(true)
+    document.getElementById('bootRoot')!.style.display = 'none' //Disables the loading screen
+    loopAnimation //starts the background video
       .start({
         opacity: 1,
         transition: { duration: 1 },
@@ -92,10 +93,56 @@ const LoadingScreen = () => {
       .then(() => {
         attemptPlay(loopVideoEl)
       })
+
+
+
+    setTimeout(() => {
+      navbarAnimation.start(
+        {
+          y: 0,
+          opacity: 1,
+          transition: { duration: 1.5, delay: 0.5 },
+        })
+      iconsAnimation.start({
+        y: 0,
+        opacity: 1,
+        transition: { duration: 0.5, delay: 0.5 },
+      })
+    }, 500)
+
+
+
+
+    setLogoClicked(true) //enables the eye and starts looking around
+
+
+    // elementsSequenceAnimation()
+    // // startWindow.openOrFocus()
+    // loopAnimation
+    //   .start({
+    //     opacity: 1,
+    //     transition: { duration: 1 },
+    //   })
+    //   .then(() => {
+    //     attemptPlay(loopVideoEl)
+    //   })
   }
 
+
+  useEffect(() => {
+    loadFastBootFlag((isFastboot) => {
+      setFastBoot(isFastboot)
+      if (isFastboot) {
+        skipLoading()
+      } else {
+        setLogoAnimation(true)
+      }
+    })
+  }, [])
+
   // useEffect(() => {
-  //   skipLoading()
+  //   setLogoAnimation(true)
+  //   // skipLoading()
   // }, [])
 
 
@@ -119,9 +166,9 @@ const LoadingScreen = () => {
 
   return (
     <>
-      {logo && <LogoBoot2 onLogoClick={logoClick} />}
+      {logoAnimation && <LogoBoot2 onLogoClick={logoClick} />}
       <motion.div initial={{ opacity: 1 }} animate={backgroundAnimation}>
-        {logoClicked && <TheEye onEyeClick={openCredits} />}
+        {logoClicked && <TheEye fastBoot={fastBoot} onEyeClick={openCredits} />}
         <motion.video
           animate={portalAnimation}
           initial={{ opacity: 1 }}
@@ -142,7 +189,8 @@ const LoadingScreen = () => {
           loop
         />
       </motion.div>
-      <div className="boot-screen" id="bootRoot">
+
+      {!fastBoot && <div className="boot-screen" id="bootRoot">
         <div className="pattern-background">
           <div className={`pattern-mask ${pattern ? 'animate' : ''}`}></div>
           <div className="pattern-reveal">
@@ -240,10 +288,9 @@ const LoadingScreen = () => {
                 )}
               </WindupChildren>
             </div>
-            <div className="login-screen" id="login-screen"></div>
           </div>
         </div>
-      </div>
+      </div>}
     </>
   )
 }

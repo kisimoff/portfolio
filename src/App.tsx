@@ -25,7 +25,7 @@ import { isMobile } from 'react-device-detect'
 
 const App = () => {
   const { windows } = useWindows()
-  const { themeState, themeValues } = useTheme()
+  const { themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
 
   const { closeWindow } = useWindows()

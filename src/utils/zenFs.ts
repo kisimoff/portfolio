@@ -45,3 +45,33 @@ export const saveIconPositions = (positions: IconPositions) => {
     console.error('Error saving icon positions:', error)
   }
 }
+
+export const defaultFastBootFlag = false
+
+export const loadFastBootFlag = (callback: (flag: boolean) => void) => {
+  try {
+    if (fs.existsSync('/fastBootFlag.json')) {
+      const data = fs.readFileSync('/fastBootFlag.json', 'utf-8')
+      const flag = JSON.parse(data)
+      console.log('fastboot:', flag)
+      callback(flag as boolean)
+    } else {
+      callback(defaultFastBootFlag)
+    }
+  } catch (error) {
+    console.error('Error loading fast boot flag:', error)
+    callback(defaultFastBootFlag)
+  }
+}
+
+export const saveFastBootFlag = (flag: boolean) => {
+  try {
+    fs.writeFileSync('/fastBootFlag.json', JSON.stringify(flag))
+    console.log('fastboot saved:', flag)
+
+  } catch (error) {
+    console.error('Error saving fast boot flag:', error)
+  }
+}
+
+

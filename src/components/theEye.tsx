@@ -8,9 +8,9 @@ import {
   isIOS,
   isMacOs,
   isMobile,
-  mobileVendor, 
+  mobileVendor,
 } from 'react-device-detect'
-export default function TheEye({ onEyeClick }) {
+export default function TheEye({ onEyeClick, fastBoot }) {
   const eyeSizeMultiplier = 1.35 //size of the eye
   const perspectiveAngle = 40 // Maximum tilt angle for the eye
   const movementConstraint = 8 // Larger values will limit the eye movement more
@@ -53,6 +53,14 @@ export default function TheEye({ onEyeClick }) {
         setDisable3d(true)
       }
     }
+    if (fastBoot) {
+      eyeAnimation.start({
+        opacity: 1,
+        transition: { duration: 0.5, ease: 'easeIn' }, // adjust duration and easing as per your requirements
+      })
+      return
+    }
+
     eyeAnimation.start({
       opacity: 1,
       transition: { delay: 2, duration: 2.2, ease: 'easeIn' }, // adjust duration and easing as per your requirements
@@ -121,7 +129,7 @@ export default function TheEye({ onEyeClick }) {
     [-perspectiveAngle / 3, perspectiveAngle / 3]
   )
 
-  const updateSpringValues = ( 
+  const updateSpringValues = (
     springX,
     springY,
     distance,
@@ -181,7 +189,12 @@ export default function TheEye({ onEyeClick }) {
       }
     }
   }, [x, y, shouldTrackMouse])
+
   useEffect(() => {
+    if (fastBoot) {
+      setShouldTrackMouse(true)
+      return
+    }
     const animateEye = async () => {
       await new Promise((resolve) => setTimeout(resolve, 3800)) // Look center
       await x.set(0)
@@ -212,6 +225,7 @@ export default function TheEye({ onEyeClick }) {
 
     animateEye()
   }, [])
+
   return (
     <motion.div
       className="theEye"

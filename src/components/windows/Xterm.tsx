@@ -6,6 +6,7 @@ import { FitAddon } from 'xterm-addon-fit'
 import 'xterm/css/xterm.css'
 import { useWindows } from '@contexts/WindowsContext'
 import { processCommand, config, getPrompt } from '@/utils/terminalCommandProcessor'
+import { isMobile } from 'react-device-detect'
 
 // Make them configurable and save them in a file like bashrc or something this could
 // potentiallye evolve to a settings menu.
@@ -26,6 +27,9 @@ const TerminalWindow = () => {
       fitAddon.current.fit()
 
       if (terminal.current) {
+        if (isMobile) {
+          processCommand('ipconfig', terminal.current)
+        }
         processCommand('neofetch', terminal.current)
       }
 

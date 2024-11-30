@@ -5,6 +5,8 @@ import { fs } from '@zenfs/core'
 import { type ITerminalOptions } from 'xterm'
 let currentDirectory = '/'
 import { ClientInfo } from '@contexts/types'
+import { isMobile } from 'react-device-detect'
+import { saveFastBootFlag } from '@/utils/zenFs'
 
 // Make user and machine configurable and save them in a file like bashrc or something this could
 // potentiallye evolve to a settings menu.
@@ -121,11 +123,35 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
       }
     }
     break
+    case 'fastboot':
+      if (args[0] === 'on') {
+        saveFastBootFlag(true)
+        terminal.write('Fastboot enabled\r\n')
+      } else if (args[0] === 'off') {
+        saveFastBootFlag(false)
+        terminal.write('Fastboot disabled\r\n')
+        terminal.write('Execute restart or refresh the page to see the loading screen\r\n')
 
+      } else {
+        terminal.write('Usage: fastboot [on|off]\r\n')
+      }
+      break
+
+    case 'restart':
+  if (typeof window !== 'undefined' && window.location) {
+    window.location.reload()
+  }
+  break
     case 'neofetch':
       try {
         if (fs.existsSync('/tmp/clientInfo.json') && fs.statSync('/tmp/clientInfo.json').size > 0) {
           const clientInfo:ClientInfo = JSON.parse(fs.readFileSync('/tmp/clientInfo.json', 'utf-8'))
+                    const deviceWidth = parseInt(clientInfo.displayRes.split(' ')[0], 10)
+
+          if (deviceWidth < 500) {
+            processCommand('deviceinfo', terminal)
+            break
+          };
           const colorsA = [
             '\x1b[40m \x1b[0m', // Black
             '\x1b[41m \x1b[0m', // Red
@@ -169,11 +195,6 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
             terminal.write(color + color + color)
           })
           terminal.write('\r\n')
-
-       
-
-          
-          // terminal.write(colors.join('') + '\r\n')
         } else {
           terminal.write('Error: Client information not available\r\n')
         }
@@ -184,6 +205,8 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
     case 'ipconfig':
       case 'ifconfig':
         case 'deviceInfo':
+          case 'deviceinfo':
+
       try {
         if (fs.existsSync('/tmp/clientInfo.json') && fs.statSync('/tmp/clientInfo.json').size > 0) {
           const clientInfo:ClientInfo = JSON.parse(fs.readFileSync('/tmp/clientInfo.json', 'utf-8'))

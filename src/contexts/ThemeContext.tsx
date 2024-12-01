@@ -18,21 +18,21 @@ const xpTheme = {
     background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(236, 235, 229, 1) 86%, rgba(216, 208, 196, 1) 100%)',
     boxShadow: 'none',
     borderRadius: '3px',
-    ':not(:disabled)': {
-      ':active': {
-        boxShadow: 'none',
-        background: 'linear-gradient(180deg, rgba(205, 202, 195, 1) 0%, rgba(227, 227, 219, 1) 8%, rgba(229, 229, 222, 1) 94%, rgba(242, 242, 241, 1) 100%)'
-      },
-      ':hover': {
-        boxShadow: 'inset -1px 1px #fff0cf, inset 1px 2px #fdd889, inset -2px 2px #fbc761, inset 2px -2px #e5a01a'
-      }
-    },
-    ':focus': {
-      boxShadow: 'inset -1px 1px #cee7ff, inset 1px 2px #98b8ea, inset -2px 2px #bcd4f6, inset 1px -1px #89ade4, inset 2px -2px #89ade4'
-    },
-    '::-moz-focus-inner': {
-      border: '0'
-    }
+    // ':not(:disabled)': {
+    //   ':active': {
+    //     boxShadow: 'none',
+    //     background: 'linear-gradient(180deg, rgba(205, 202, 195, 1) 0%, rgba(227, 227, 219, 1) 8%, rgba(229, 229, 222, 1) 94%, rgba(242, 242, 241, 1) 100%)'
+    //   },
+    //   ':hover': {
+    //     boxShadow: 'inset -1px 1px #fff0cf, inset 1px 2px #fdd889, inset -2px 2px #fbc761, inset 2px -2px #e5a01a'
+    //   }
+    // },
+    // ':focus': {
+    //   boxShadow: 'inset -1px 1px #cee7ff, inset 1px 2px #98b8ea, inset -2px 2px #bcd4f6, inset 1px -1px #89ade4, inset 2px -2px #89ade4'
+    // },
+    // '::-moz-focus-inner': {
+    //   border: '0'
+    // }
   },
   window: {
     // background: "rgb(19,60,156)",
@@ -42,9 +42,9 @@ const xpTheme = {
     borderTopRightRadius: '8px',
     borderTopLeftRadius: '8px',
     transition: 'all 0.5s ease-in',
-    fontFamily: 'Segoe UI',
+    fontFamily: 'Trebuchet, sans-serif',
     fontWeight: '600',
-    textShadow: '1px 2px 2px rgba(0, 0, 0, 0.4)',
+    textShadow: '1px 1px #0f1089',
     boxShadow: 'inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2)',
     boxSizing: 'border-box',
   },
@@ -53,6 +53,7 @@ const xpTheme = {
     paddingRight: '1rem',
     borderBottom: 'none',
     borderRadius: '4px',
+    fontFamily: 'Trebuchet, sans-serif',
     boxShadow: '1px 2px 2px #33333375',
     borderLeft: '1px solid rgba(146, 165, 187, 0.56)',
     background:
@@ -65,6 +66,7 @@ const xpTheme = {
   field: {
     backgroundColor: '#E3E3E3',
     color: '#474554',
+    marginTop: '-2px',
     fontWeight: 'normal',
     boxShadow: '0 2px 5px #33333375',
     boxSizing: 'border-box',
@@ -77,13 +79,17 @@ const xpTheme = {
   closeBtn: {
     color: 'white',
     backgroundColor: '#ee6247',
-    height: '1.5rem',
-    width: '1.5rem',
     margin: '0.4rem',
     border: '2px solid #ffffff85',
     borderRadius: '4px',
-    fontSize: '1.3rem',
+    fontSize: '1.6rem',
+    padding: '0.05rem',
     transition: 'all 0.8s ease-in',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontWeight: 900,
   },
   navbar: {
     background:
@@ -108,9 +114,15 @@ const darkTheme = {
   },
   // cursor: { animation: "1.02s blink-dark step-end infinite" },
   closeBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
     color: 'white',
-    borderRadius: '0px',
-    border: '0px',
+    fontWeight: 900,
+    padding: '0.6rem 1.2rem',
+    fontSize: '1.2rem',
+    borderRadius: '0px'
   },
 }
 

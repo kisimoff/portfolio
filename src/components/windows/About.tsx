@@ -18,8 +18,8 @@ const About = () => {
         <WindupChildren>
           <Pace ms={38}>
             <div className="about-first">
-              <img alt="me" src={about_png} />
-              <p>
+              <img alt="me" className='w-20 h-20 ' src={about_png} />
+              <p className='pl-2'>
                 Hi! <Pause ms={500} />
                 I'm Val! <Pause ms={500} />
                 Let me tell you a bit about me. <Pause ms={600} />
@@ -27,16 +27,14 @@ const About = () => {
                 when I saw how my father cooled an extremely overclocked GPU
                 with dry ice. <Pause ms={1000} /> The result?{' '}
                 <Pause ms={400} /> The 1st benchmark score in the country.
-                <Pause ms={450} />
-                <br />
-                From that moment on, I was hooked.
+                <Pause ms={450} /> From that moment on, I was hooked.
                 <Pause ms={700} />
                 <br />
                 <br />
               </p>
             </div>
             <p>
-              As I grew up, I spent my time tinkering <Pause ms={500} /> -
+              As a kid, I spent my time tinkering <Pause ms={500} /> -
               modding games, <Pause ms={150} />
               flashing ROMs on Androids, <Pause ms={150} />
               building RC models, <Pause ms={150} />
@@ -48,13 +46,13 @@ const About = () => {
               <Pause ms={600} />
               <br></br> <br></br>
               Nowadays, I have a broad background in multiple tech fields:
-              ai, <Pause ms={150} /> front-end,
-              <Pause ms={150} /> back-end,
-              <Pause ms={150} /> mobile development,
-              <Pause ms={150} /> blockchain, <Pause ms={150} />
-              data mining,
-              <Pause ms={150} /> web design,
-              <Pause ms={150} /> HCI, IT support... <Pause ms={200} />
+              front-end, <Pause ms={150} />
+              back-end,  <Pause ms={150} />
+              web design, <Pause ms={150} />
+              mobile development, <Pause ms={150} />
+              data mining, <Pause ms={150} />
+              blockchain, <Pause ms={150} />
+              ai... <Pause ms={150} />
               <br></br> <br></br>
               This gives me great perspective,
               <Pause ms={100} /> allowing me to make informed decisions and

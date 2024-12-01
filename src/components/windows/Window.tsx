@@ -26,18 +26,16 @@ function Window({ window, children }: Window) {
           <span id="title" className='text-fs-window-title' style={{ color: themeValues.window.color }}>
             {window.caption}
           </span>
-          <div>
-            <button
-              style={{
-                ...themeValues.closeBtn,
-              }}
-              className="bg-transparent close-window hover:bg-close-window-hover"
-              onClick={() => closeWindow(window.elementId)}
-              aria-label="Close Window"
-            >
-              <CgClose />
-            </button>
-          </div>
+          <button
+            style={{
+              ...themeValues.closeBtn,
+            }}
+            className="bg-transparent close-window hover:bg-close-window-hover hover:outline-none "
+            onClick={() => closeWindow(window.elementId)}
+            aria-label="Close Window"
+          >
+            <CgClose />
+          </button>
         </div>
         <div style={themeValues.field}>
           <div>{children}</div>

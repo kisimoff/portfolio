@@ -113,6 +113,7 @@ const LoadingScreen = () => {
 
 
 
+
     setLogoClicked(true) //enables the eye and starts looking around
 
 
@@ -137,7 +138,24 @@ const LoadingScreen = () => {
       } else {
         setLogoAnimation(true)
       }
+      console.log(
+        '%c👋 Welcome to KisimoffOS!',
+        'color: white; background: linear-gradient(90deg, rgba(224,24,52,1) 0%, rgba(32,225,200,1) 100%); font-size: 16px; font-weight: bold; padding: 8px 16px; border-radius: 5px;'
+      )
+      console.log(
+        `%c🚀 Fastboot: %c${isFastboot ? 'On' : 'Off'}`,
+        'color: #FF9800; font-size: 14px; font-weight: bold;',
+        `color: ${isFastboot ? '#4CAF50' : '#F44336'}; font-size: 14px; font-weight: bold;`
+      )
+      console.log(
+        '%c💡 Tip: %cTo disable fastboot and see the loading screen, execute %cfastboot off%c in the terminal.',
+        'color: #FF9800; font-size: 13px; font-weight: bold;',
+        ' font-size: 13px;',
+        'color: #4CAF50; font-size: 12px; font-weight: bold; background: black; padding: 2px 4px; border-radius: 3px;',
+        ' font-size: 13px;'
+      )
     })
+
   }, [])
 
   // useEffect(() => {

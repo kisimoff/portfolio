@@ -21,12 +21,14 @@ import { motion } from 'framer-motion'
 
 import { useEffect } from 'react'
 import { isMobile } from 'react-device-detect'
+import { useMediaQuery } from 'react-responsive'
 
 
 const App = () => {
   const { windows } = useWindows()
   const { themeValues } = useTheme()
   const { iconsAnimation } = useAnimations()
+  const isSmallScreen = useMediaQuery({ maxWidth: 768 })
 
   const { closeWindow } = useWindows()
   const pdfUrl = 'https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing'
@@ -38,12 +40,16 @@ const App = () => {
     }
   }, [closeWindow, windows.resume.visibility])
 
+  useEffect(() => {
+
+  }, [])
+
   return (
     <div id="app" className="app" style={themeValues.app}>
       <LoadingScreen />
       <Navbar />
       <motion.ol
-        className={isMobile ? 'mobile-icons' : 'icons'}
+        className={isMobile || isSmallScreen ? 'mobile-icons' : 'icons'}
         animate={iconsAnimation}
         initial={{ opacity: 0, y: 8 }}
       >

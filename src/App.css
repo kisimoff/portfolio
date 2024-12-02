@@ -68,9 +68,15 @@ button:hover {  outline: none;}
   --fs-heading: clamp(1.2rem, 1.2vw + 1.2rem, 3.5rem);
   --fs-text: 0.9rem;
   --fs-text-projects: 0.75rem;
+  --fs-text-projects-mobile: 0.68rem;
+
   --fs-bigger-text-mobile: clamp(0.84rem, 0.4vw + 0.7rem, 2rem);
   --fs-text-mobile: clamp(0.5rem, 2.5vw + 0.18rem, 1.1rem);
+  --fs-text-mobile-projects: 0.65rem;
+
   --fs-window-title: 1.2rem;
+  --fs-window-title-mobile:1.1rem;
+
   --fs-project-title: 0.9rem;
   --fs-icon-task: clamp(1rem, 2vw + 1rem, 2rem);
   --fs-icon-task-caption: 1.2rem;
@@ -264,7 +270,7 @@ body {
   color: white;
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
-  margin-top: clamp(9rem, 15vh + 4.5rem, 16rem);
+  margin-top: clamp(9rem, 14vh + 6rem, 16rem);
 }
 .svg1,
 .svg2 {
@@ -1244,7 +1250,7 @@ body {
     background-color: transparent;
   }
 }
-@media only screen and (max-width: 800px), (max-height: 400px) {
+@media only screen and (max-width: 768px), (max-height: 400px) {
 
   .iconWrapper:hover {
     /*box-sizing: border-box;*/
@@ -1278,9 +1284,9 @@ body {
     align-items: center;
   }
 
-  .nav-icon-task {
+  /* .nav-icon-task {
     display: none;
-  }
+  } */
 
   .nav-socials {
     display: flex;
@@ -1323,7 +1329,7 @@ body {
 
   .project-text-wrapper {
     width: 100%;
-    font-size: var(--fs-text-mobile);
+    font-size: var(--fs-text-mobile-projects);
   }
   .text-bottom-row {
     font-size: var(--fs-bigger-text-mobile);
@@ -1336,4 +1342,9 @@ body {
   .text-bottom-row-icons-wrapper {
     gap: 1.5rem;
   }
+
+  #title {
+    font-size: var(--fs-window-title-mobile);
+  }
+
 }

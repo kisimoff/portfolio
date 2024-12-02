@@ -23,14 +23,14 @@ function Window({ window, children }: Window) {
     >
       <div ref={nodeRef} style={{ zIndex: window.zIndex }} className="absolute inset-0 z-30 m-auto max-w-fit h-fit max-h-[70vh] shadow-window-shadow">
         <div className="handle flex flex-row items-center justify-between pl-4 cursor-move backdrop-blur-[23px] mb-[-1px]" style={themeValues.window}>
-          <span id="title" className='text-fs-window-title' style={{ color: themeValues.window.color }}>
+          <span id="title" style={{ color: themeValues.window.color }}>
             {window.caption}
           </span>
           <button
             style={{
               ...themeValues.closeBtn,
             }}
-            className="bg-transparent unstyledButton hover:bg-close-window-hover "
+            className="bg-transparent close-window unstyledButton hover:bg-close-window-hover "
             onClick={() => closeWindow(window.elementId)}
             aria-label="Close Window"
           >

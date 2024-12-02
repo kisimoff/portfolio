@@ -11,7 +11,7 @@ export default function LogoBoot2({ onLogoClick }) {
 
   const instructions = useAnimation()
   const [animationCompleted, setAnimationCompleted] = useState(false)
-  const sizeMultiplier = 1.23
+  const sizeMultiplier = 1.1
   const [divSize, setDivSize] = useState(250)
 
   const logoClick = async () => {

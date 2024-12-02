@@ -5,6 +5,7 @@ import { useWindows } from '@contexts/WindowsContext'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { isMobile } from 'react-device-detect'
+import { useMediaQuery } from 'react-responsive'
 
 type DragPosition = {
   x?: number
@@ -19,6 +20,7 @@ type IconPosition = {
 function Icon(props: { window: WindowProps }) {
   const dragAnimation = useAnimation()
   const placeholderAnimation = useAnimation()
+  const isSmallScreen = useMediaQuery({ maxWidth: 768 })
 
   const { themeState } = useTheme()
   const { updateIconPosition, isPositionFree } = useWindows()
@@ -46,7 +48,7 @@ function Icon(props: { window: WindowProps }) {
 
   // Calculate icon position based on device type
   const iconPosition = useMemo(() => {
-    if (isMobile) {
+    if (isMobile || isSmallScreen) {
       const mobilePosition = mobilePositions[props.window.elementId]
       return mobilePosition || { gridRowStart: 1, gridColumnStart: 1 } // Default position
     } else {
@@ -55,7 +57,7 @@ function Icon(props: { window: WindowProps }) {
         gridColumnStart: props.window.gridColumnStart,
       }
     }
-  }, [isMobile, props.window])
+  }, [isMobile, isSmallScreen, props.window])
 
   const calcGridDropPosition = useMemo(
     () => (gridElement: HTMLElement | null, { x = 0, y = 0 }: DragPosition): IconPosition => {
@@ -145,7 +147,7 @@ function Icon(props: { window: WindowProps }) {
 
   return (
     <>
-      {isMobile ? (
+      {isMobile || isSmallScreen ? (
         <motion.div
           ref={gridElementRef}
           animate={dragAnimation}

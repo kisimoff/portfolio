@@ -1,10 +1,11 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Webamp from 'webamp'
 import { useWindows } from '@contexts/WindowsContext'
 
 
 const Winamp = () => {
   const { winampWindow, closeWindow } = useWindows()
+  const webampRef = useRef<Webamp | null>(null) // To store the Webamp instance
 
 
   useEffect(() => {
@@ -77,12 +78,14 @@ const Winamp = () => {
     }
 
     // Register the onClose callback
+    webampRef.current = webamp
+    webampRef.current?.onClose(() => closeWindow('winamp'))
 
 
     return () => {
       webamp.dispose()
     }
-  }, [closeWindow, winampWindow.zIndex])
+  }, [])
 
   return <div id="webamp-container" />
 

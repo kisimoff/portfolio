@@ -53,7 +53,6 @@ export const loadFastBootFlag = (callback: (flag: boolean) => void) => {
     if (fs.existsSync('/fastBootFlag.json')) {
       const data = fs.readFileSync('/fastBootFlag.json', 'utf-8')
       const flag = JSON.parse(data)
-      console.log('fastboot:', flag)
       callback(flag as boolean)
     } else {
       callback(defaultFastBootFlag)
@@ -67,7 +66,6 @@ export const loadFastBootFlag = (callback: (flag: boolean) => void) => {
 export const saveFastBootFlag = (flag: boolean) => {
   try {
     fs.writeFileSync('/fastBootFlag.json', JSON.stringify(flag))
-    console.log('fastboot saved:', flag)
 
   } catch (error) {
     console.error('Error saving fast boot flag:', error)

@@ -27,7 +27,7 @@ function Navbar() {
     >
       <div className="nav-heading">
         <img id="logo" alt="logo" src={logo_white} />
-        <span style={isTablet ? { width: '350px' } : null}>
+        <span style={isTablet ? { width: '350px' } : undefined}>
           Kisim
           <ToggleButton onChange={toggleTheme} />
           {themeState === 'dark' ? 'ff' : 'n'}
@@ -35,8 +35,8 @@ function Navbar() {
         </span>
       </div>
       <div
-        className="nav-icon-task"
-        style={isTablet ? { display: 'none' } : null}
+        className="nav-icon-task "
+        style={isTablet ? { display: 'none' } : undefined}
       >
         {Object.entries(windows).map(([key, window]) => (
           window.visibility && (<IconTask key={key} window={window} />)

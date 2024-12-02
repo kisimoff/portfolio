@@ -15,11 +15,11 @@ function IconTask(props: { window: WindowProps }) {
           <div className="icon-task-wrapper">
             {themeState === 'dark' ? (
               props.window.elementId !== 'winamp' ? (
-                <props.window.osIcon className="pointer-events-none w-7 icon" />
+                <props.window.osIcon className="pointer-events-none w-7 h-7 icon" />
               ) : (
-                <img src={props.window.osIcon} className="pointer-events-none w-7 icon" />
+                <img src={props.window.osIcon} className="pointer-events-none w-7 h-7 icon" />
               )) : (
-              <img src={props.window.xpIcon} className="icon-task-icon" />
+              <img src={props.window.xpIcon} className="icon-task-icon w-7 h-7" />
             )}
 
             <span

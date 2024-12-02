@@ -4,7 +4,7 @@ import { useWindows } from '@contexts/WindowsContext'
 
 
 const Winamp = () => {
-  const { closeWindow } = useWindows()
+  const { winampWindow, closeWindow } = useWindows()
 
 
   useEffect(() => {
@@ -63,26 +63,26 @@ const Winamp = () => {
         },
       ],
 
-      // Optionally, you can enable visualizations, playlists, etc.
-      zIndex: 10, // Set custom zIndex for the player window
+      zIndex: winampWindow.zIndex, // Set custom zIndex for the player window
     })
 
     // Open Webamp
     if (Webamp.browserIsSupported()) {
-      webamp.renderWhenReady(document.getElementById('webamp-container'))
+      const container = document.getElementById('webamp-container')
+      if (container) {
+        webamp.renderWhenReady(container)
+      } else {
+        console.error('Element with ID "webamp-container" not found')
+      }
     }
 
     // Register the onClose callback
-    const unsubscribe = webamp.onClose(() => {
-      // Code to execute when Webamp is closed
-      closeWindow('winamp')
-      // You can perform additional actions here
-    })
+
 
     return () => {
       webamp.dispose()
     }
-  }, [])
+  }, [closeWindow, winampWindow.zIndex])
 
   return <div id="webamp-container" />
 

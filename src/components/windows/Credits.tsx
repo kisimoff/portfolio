@@ -18,29 +18,29 @@ const Credits = () => {
           <Pace ms={1}>
             <p>
               <strong>Logo and Animation Design:</strong> Special thanks
-                goes to
+              goes to
               <a
-                href="https://www.linkedin.com/in/valentin-ivanov-a4b96b197/"
+                href="https://www.linkedin.com/in/hivaluedesign/"
                 target="_blank"
               >
                 {' '}
-                  Valentin Ivanov{' '}
+                Valentin Ivanov{' '}
               </a>
-                the creative force behind the CPU Portal intro animation and
-                KisimoffOS logo. Watch the full RSA Award winning{' '}
+              the creative force behind the CPU Portal intro animation and
+              KisimoffOS logo. Watch the full RSA Award winning{' '}
               <a
-                href="https://hivalmotion.cargo.site/RSA-Moving-Pictures-2023"
+                href="https://www.youtube.com/watch?v=6k12O1iADwc"
                 target="_blank"
               >
                 {' '}
-                  animation
+                animation
               </a>{' '}
-                and explore more of their remarkable work on{' '}
+              and explore more of their remarkable work on{' '}
               <a href="https://www.hivaldesign.com/" target="_blank">
                 {' '}
-                  HiValDesign
+                HiValDesign
               </a>
-                .
+              .
               <br />
               <br />
               <strong>Eye Design:</strong> Inspired by the iconic
@@ -49,23 +49,23 @@ const Credits = () => {
                 target="_blank"
               >
                 {' '}
-                  HAL-9000
+                HAL-9000
               </a>
-                , TheEye was brought into life with the help of Midjourney and
-                Framer Motion.
+              , TheEye was brought into life with the help of Midjourney and
+              Framer Motion.
               <br />
               <br />
               <strong>Inspiration: </strong>
-                The concept of KisimoffOS was inspired by
+              The concept of KisimoffOS was inspired by
               <a href="https://poolsuite.net/" target="_blank">
                 {' '}
-                  Poolside FM
+                Poolside FM
               </a>
-                , revealing the boundless potential of web apps.
+              , revealing the boundless potential of web apps.
               <br />
-                Replicating WindowsXP posed an exciting challange and a deep
-                dive in the early 2000s nostalgia - an era which motivated me
-                to become a developer.
+              Replicating WindowsXP posed an exciting challange and a deep
+              dive in the early 2000s nostalgia - an era which motivated me
+              to become a developer.
               <br />
               <br />
               <strong>Feautred Libraries:</strong>
@@ -74,11 +74,29 @@ const Credits = () => {
               <ul>
                 <li>
                   <a
-                    href="https://www.npmjs.com/package/react-console-emulator"
+                    href="https://xtermjs.org/"
                     target="_blank"
                   >
                     {' '}
-                      react-console-emulator
+                    Xterm.js
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://zenfs.dev/core/"
+                    target="_blank"
+                  >
+                    {' '}
+                    ZenFS
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://github.com/captbaritone/webamp"
+                    target="_blank"
+                  >
+                    {' '}
+                    Webamp
                   </a>
                 </li>
                 <li>
@@ -87,7 +105,7 @@ const Credits = () => {
                     target="_blank"
                   >
                     {' '}
-                      react-device-detect
+                    react-device-detect
                   </a>
                 </li>
                 <li>
@@ -96,7 +114,7 @@ const Credits = () => {
                     target="_blank"
                   >
                     {' '}
-                      react-draggable
+                    react-draggable
                   </a>
                 </li>
                 <li>
@@ -105,7 +123,7 @@ const Credits = () => {
                     target="_blank"
                   >
                     {' '}
-                      react-ip-details
+                    react-ip-details
                   </a>
                 </li>
                 <li>
@@ -114,13 +132,13 @@ const Credits = () => {
                     target="_blank"
                   >
                     {' '}
-                      framer-motion
+                    framer-motion
                   </a>
                 </li>
               </ul>
               <br />
-                These invaluable tools played a significant role in the
-                successful development and execution of the KisimoffOS.
+              These invaluable tools played a significant role in the
+              successful development and execution of the KisimoffOS.
             </p>
           </Pace>
         </WindupChildren>

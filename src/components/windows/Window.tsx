@@ -30,7 +30,7 @@ function Window({ window, children }: Window) {
             style={{
               ...themeValues.closeBtn,
             }}
-            className="bg-transparent close-window hover:bg-close-window-hover hover:outline-none "
+            className="bg-transparent unstyledButton hover:bg-close-window-hover "
             onClick={() => closeWindow(window.elementId)}
             aria-label="Close Window"
           >

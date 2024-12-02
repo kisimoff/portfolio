@@ -31,7 +31,7 @@ const App = () => {
   const isSmallScreen = useMediaQuery({ maxWidth: 768 })
 
   const { closeWindow } = useWindows()
-  const pdfUrl = 'https://drive.google.com/file/d/194vwPBZOhUi4D4KlQjOLlAt3p-syLLo-/view?usp=sharing'
+  const pdfUrl = 'https://drive.google.com/file/d/1qv-fNXQAV5xmuy5GU506WDbn_2xmBgcQ/view?usp=sharing'
 
   useEffect(() => {
     if (windows.resume.visibility) {

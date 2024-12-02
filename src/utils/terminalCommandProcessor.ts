@@ -29,7 +29,25 @@ export const getPrompt = (): string => {
   const path = currentDirectory === homeDir ? '~' : '~' + currentDirectory.slice(1)
   return `\x1b[1;92m${user}@${machine}\x1b[0m:\x1b[1;94m${path}\x1b[0m$ `
 }
-
+const commandList = [
+  { commands: ['echo'], description: 'Display a line of text' },
+  { commands: ['clear', 'cls'], description: 'Clear the terminal screen' },
+  { commands: ['help'], description: 'Display this help message' },
+  { commands: ['ls'], description: 'List files and directories' },
+  { commands: ['mkdir'], description: 'Create a new directory' },
+  { commands: ['touch'], description: 'Create a new file' },
+  { commands: ['rm'], description: 'Remove a file' },
+  { commands: ['cd'], description: 'Change the current directory' },
+  { commands: ['pwd'], description: 'Print working directory' },
+  { commands: ['cat', 'less'], description: 'Display file contents' },
+  { commands: ['fastboot'], description: 'Enable or disable fast boot' },
+  { commands: ['restart'], description: 'Restart the terminal' },
+  { commands: ['neofetch'], description: 'Display system information' },
+  {
+    commands: ['ipconfig', 'ifconfig', 'deviceInfo', 'deviceinfo'],
+    description: 'Display device information',
+  },
+]
 
 export const processCommand = (terminalString: string, terminal: Terminal): void => {
   const [ command, ...args] = terminalString.trim().split(' ')
@@ -37,15 +55,19 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
     return
   }
   switch (command) {
+    case 'help':
+      terminal.write('Available commands:\r\n')
+      commandList.forEach((item) => {
+        const cmds = item.commands.join(', ')
+        terminal.write(`  ${cmds} - ${item.description}\r\n`)
+      })
+      break
   case 'echo':
     terminal.write(`${args.join(' ')}\r\n`)
     break
   case 'cls':
   case 'clear':
     terminal.clear()
-    break
-  case 'help':
-    terminal.write('Available commands: echo, clear, help, ls, mkdir, touch, rm, cd, pwd, cat\r\n')
     break
   case 'ls':
     try {

@@ -48,14 +48,14 @@ export const saveIconPositions = (positions: IconPositions) => {
 
 export const defaultFastBootFlag = false
 
-export const loadFastBootFlag = (callback: (flag: boolean) => void) => {
+export const loadFastBootFlag = (callback: (flag: boolean, flagExists?: boolean) => void) => {
   try {
     if (fs.existsSync('/fastBootFlag.json')) {
       const data = fs.readFileSync('/fastBootFlag.json', 'utf-8')
       const flag = JSON.parse(data)
-      callback(flag as boolean)
+      callback(flag as boolean, true)
     } else {
-      callback(defaultFastBootFlag)
+      callback(defaultFastBootFlag, false)
     }
   } catch (error) {
     console.error('Error loading fast boot flag:', error)

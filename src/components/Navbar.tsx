@@ -35,7 +35,7 @@ function Navbar() {
         </span>
       </div>
       <div
-        className="nav-icon-task "
+        className="nav-icon-task"
         style={isTablet ? { display: 'none' } : undefined}
       >
         {Object.entries(windows).map(([key, window]) => (

@@ -160,6 +160,7 @@ export const processCommand = (terminalString: string, terminal: Terminal): void
       break
 
     case 'restart':
+      case 'refresh':
   if (typeof window !== 'undefined' && window.location) {
     window.location.reload()
   }

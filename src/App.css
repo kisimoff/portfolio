@@ -1284,19 +1284,15 @@ body {
     align-items: center;
   }
 
-  /* .nav-icon-task {
+  .nav-icon-task {
     display: none;
-  } */
+  }
 
   .nav-socials {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
-
-
- 
 
   .caption {
     padding: 0.5rem;

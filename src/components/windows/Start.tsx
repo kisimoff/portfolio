@@ -5,13 +5,19 @@ import {
   Pace,
 } from 'windups'
 import { useWindows } from '@contexts/WindowsContext'
-import { saveFastBootFlag } from '@/utils/zenFs'
+import { saveFastBootFlag, loadFastBootFlag } from '@/utils/zenFs'
 
 const Start = () => {
   const { startWindow, closeWindow } = useWindows()
   function handleFinish() {
     closeWindow('start')
-    saveFastBootFlag(true)
+    loadFastBootFlag((flag, flagExists) => {
+      if (flagExists) {
+        return
+      } else {
+        saveFastBootFlag(true)
+      }
+    })
   }
   return (
     <Window window={startWindow}>
@@ -20,7 +26,7 @@ const Start = () => {
           onFinished={handleFinish}
         >
           <Pace ms={80}>{'Hello,'}</Pace>
-          <Pause ms={550} />
+          <Pause ms={250} />
           <Pace ms={70}>{' friend.'}</Pace> <Pause ms={600} />
           <Pause ms={900} />
           <Pace ms={32}>
@@ -46,18 +52,21 @@ const Start = () => {
               <br></br>
               {'the man behind the keyboard...'} <br></br>
               <Pause ms={500} />
-              {'just click on the About icon. '}
-              <Pause ms={500} />
-              {'Next time you come here, fastboot would be enabled.'}
-              {'If you want to see the loading screen agian'}
-              {'Open the terminal and execute: \'fastboot off\''}
+              {'just click on the About icon. '} <br /> <br />
+              <Pause ms={550} />
+              {'Next time you come here,'}<br />
+              {'fastboot would be enabled.'}<br />
+              <Pause ms={550} />
+              {'If you want to see'} <br />
+              {'the loading screen agian'}<br />
+              <Pause ms={250} />
+              {'Open the terminal and execute:'} <br />
+              {'\'fastboot off\''}
               <Pause ms={1500} />
               <br></br>
               <br></br>
               {'I\'ll self destruct in...'} <br></br>
               <Pause ms={500} />
-              {'4 '}
-              <Pause ms={1000} />
               {'3 '}
               <Pause ms={1000} />
               {'2 '}
